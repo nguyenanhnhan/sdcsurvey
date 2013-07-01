@@ -64,7 +64,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array();
+$autoload['helper'] = array('url','asset');
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array();
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('asset');
 
 
 /*
@@ -111,6 +111,18 @@ $autoload['language'] = array();
 
 $autoload['model'] = array();
 
+
+/*
+| -------------------------------------------------------------------
+|  Auto-load Sparks
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	$autoload['sparks'] = array('sparks1', 'sparks1');
+|
+*/
+
+$autoload['sparks'] = array('sk-asset/1.2.7');
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
