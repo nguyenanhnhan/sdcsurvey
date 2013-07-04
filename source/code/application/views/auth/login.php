@@ -58,10 +58,10 @@
 		<h1><a href="#"><img src="<?php echo img_url() ?>sdc-logo-big.png" alt="" class='retina-ready' width="59" height="49">SDC Panel</a></h1>
 		<div class="login-body">
 			<h2><?php echo lang('login_heading');?></h2>
-			<form action="auth/login" method='post' class='form-validate' id="form_login">
+			<form action="<?php echo base_url('auth/login') ?>" method='post' class='form-validate' id="form_login">
 				<div class="control-group">
 					<div class="email controls">
-						<input type="text" name='identity' id='identity' placeholder="<?php echo lang('login_identity_label');?>" class='input-block-level' data-rule-required="true" data-rule-email="true">
+						<input type="text" name='identity' id='identity' placeholder="<?php echo lang('login_identity_label');?>" class='input-block-level' data-rule-required="true">
 					</div>
 				</div>
 				<div class="control-group">

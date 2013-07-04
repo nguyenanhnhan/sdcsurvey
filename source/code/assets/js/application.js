@@ -383,7 +383,7 @@ $('body').on("click", '.update-input', function(e){
     e.preventDefault();
     var $el = $(this);
     var $parent = $el.parent();
-	alert ($('.form-button > :text').val());
+	/* alert ($('.form-button > :text').val()); */
     $el.after('<span><i class="icon-spinner icon-spin"></i>Đang cập nhật...</span>');
     setTimeout(function(){
         $parent.find("span").remove();

@@ -103,17 +103,22 @@
 	<!-- complexify -->
 	<script src="<?php echo js_url() ?>plugins/complexify/jquery.complexify-banlist.min.js"></script>
 	<script src="<?php echo js_url() ?>plugins/complexify/jquery.complexify.min.js"></script>
+	<!-- Validation -->
+	<script src="<?php echo js_url() ?>plugins/validation/jquery.validate.min.js"></script>
+	<script src="<?php echo js_url() ?>plugins/validation/additional-methods.min.js"></script>
+	
+	<script src="<?php echo js_url() ?>plugins/form/jquery.form.min.js"></script>
 
 
 	<!-- Theme framework -->
 	<!-- <script src="<?php echo js_url() ?>eakroko.min.js"></script> -->
-		<script src="<?php echo js_url() ?>eakroko.js"></script>
+		<script src="<?php echo js_url() ?>eakroko.js?updated=1"></script>
 	<!-- Theme scripts -->
 	<!-- <script src="<?php echo js_url() ?>application.min.js"></script> -->
-	<script src="<?php echo js_url() ?>application.js"></script>
+	<script src="<?php echo js_url() ?>application.js?updated=1"></script>
 	<!-- Just for demonstration -->
 	<!-- <script src="<?php echo js_url() ?>demonstration.min.js"></script> -->
-	<script src="<?php echo js_url() ?>demonstration.js"></script>
+	<script src="<?php echo js_url() ?>demonstration.js?updated=1"></script>
 	
 	<!--[if lte IE 9]>
 		<script src="<?php echo js_url() ?>plugins/placeholder/jquery.placeholder.min.js"></script>
@@ -137,7 +142,7 @@
 			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Bat/Tat bang dieu khien"><i class="icon-reorder"></i></a>
 			<ul class='main-nav'>
 				<li class='active'>
-					<a href="dashboard.html">
+					<a href="<?php echo base_url('admin')?>">
 						<span>Dashboard</span>
 					</a>
 				</li>
@@ -154,7 +159,7 @@
 									<a href="<?php echo base_url('admin/groups') ?>">Nhóm tài khoản</a>
 								</li>
 								<li>
-									<a href="#">Tài khoản</a>
+									<a href="<?php echo base_url('admin/users') ?>">Tài khoản</a>
 								</li>
 							</ul>
 						</li>
@@ -214,7 +219,7 @@
 				</div>
 				<ul class="subnav-menu">
 					<li>
-						<a href="#">Phiếu khảo sát</a>
+						<a href="<?php echo base_url('survey_type') ?>">Phiếu khảo sát</a>
 					</li>
 					<li>
 						<a href="#">Thông báo</a>
