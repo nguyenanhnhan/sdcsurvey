@@ -33,7 +33,7 @@
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">Tạo phiếu khảo sát</a>
+							<a href="#"><?php echo $survey['survey_name']; ?></a>
 						</li>
 					</ul>
 					<div class="close-bread">
@@ -55,23 +55,29 @@
 								</div>
 							</div>
 							<div class="box-content nopadding">
-								<form action="<?php echo base_url('survey/add'); ?>" method="post" class="form-horizontal form-bordered" id="myform">
+								<form action="<?php echo base_url('survey/update_step_1/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']); ?>" method="post" class="form-horizontal form-bordered" id="myform">
 									<div class="control-group">
 										<label class="control-label">Tên phiếu khảo sát</label>
 										<div class="controls">
-											<input type="text" class="input-xxlarge" name="survey_name" id="survey_name">
+											<input type="text" class="input-xxlarge" name="survey_name" id="survey_name" value="<?php echo $survey['survey_name']; ?>">
 										</div>
 									</div>
 									<div class="control-group">
-										<label class="control-label">Sử dụng lại</label>
+										<label class="control-label">Bậc học  <?php print (bool)$survey['is_graduated'];?></label>
 										<div class="controls">
-											<div class="input-xxlarge">
-												<select name="reuse" id="reuse" class='chosen-select'>
+											<div class="input-xlarge">
+												<select name="is_vocation" id="is_vocation" class='chosen-select'>
 													<?php
-														// Mau khao sat dung de sao chep
-														foreach ($surveys as $survey_item)
+														// Hien thi phan biet giua cap bac dao tao
+														if ($survey['is_vocation'] == '1')
 														{
-															echo "<option value='".$survey_item['survey_id']."'>".$survey_item['survey_name']."</option>";
+															echo "<option value='0'>Đại học</option>";
+															echo "<option value='1' selected='true'>Trung cấp chuyên nghiệp</option>";
+														}
+														else
+														{
+															echo "<option value='0' selected='true'>Đại học</option>";
+															echo "<option value='1'>Trung cấp chuyên nghiệp</option>";
 														}
 													?>
 												</select>
@@ -79,20 +85,10 @@
 										</div>
 									</div>
 									<div class="control-group">
-										<label class="control-label">Bậc học</label>
-										<div class="controls">
-											<div class="input-xlarge">
-												<select name="is_vocation" id="is_vocation" class='chosen-select'>
-													<option value="0">Đại học</option>
-													<option value="1">Trung cấp chuyên nghiệp</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="control-group">
 										<label class="control-label">Đã tốt nghiệp</label>
 										<div class="controls">
-											<input id="is_graduated" name="is_graduated" type="checkbox" class="icheck-me" data-skin="square" data-color="blue" />
+											<input id="is_graduated" name="is_graduated" type="checkbox" class="icheck-me" 
+											data-skin="square" data-color="blue" <?php if ($survey['is_graduated']=='1') echo 'checked' ?> />
 										</div>
 									</div>
 									<div class="control-group" id="div_course">
@@ -103,7 +99,14 @@
 													<?php
 														// Cac khoa hoc chua tot nghiep
 														foreach ($courses_learning as $course_item){
-															echo "<option value='".$course_item."'>".$course_item."</option>";
+															if ($course_item == $survey['course'])
+															{
+																echo "<option value='".$course_item."' selected='true'>".$course_item."</option>";
+															}
+															else
+															{
+																echo "<option value='".$course_item."'>".$course_item."</option>";
+															}
 														}
 													?>
 												</select>
@@ -118,7 +121,14 @@
 													<?php 
 														// Nam tot nghiep
 														foreach ($graduated_years as $graduated_year) {
-															echo "<option value='".$graduated_year."'>".$graduated_year."</option>";
+															if ($graduated_year == $survey['graduated_year'])
+															{
+																echo "<option value='".$graduated_year."' selected='true'>".$graduated_year."</option>";
+															}
+															else
+															{
+																echo "<option value='".$graduated_year."'>".$graduated_year."</option>";
+															}
 														}
 													?>
 												</select>
@@ -128,19 +138,22 @@
 									<div class="control-group">
 										<label for="textfield" class="control-label">Áp dụng từ ngày</label>
 										<div class="controls">
-											<input type="text" name="start_date" id="start_date" class="input-medium datepick">
+											<input type="text" name="start_date" id="start_date" class="input-medium datepick" 
+											value="<?php echo date('d/m/Y',strtotime($survey['start_date'])); ?>">
 										</div>
 									</div>
 									<div class="control-group">
 										<label for="textfield" class="control-label">Áp dụng đến ngày</label>
 										<div class="controls">
-											<input type="text" name="end_date" id="end_date" class="input-medium datepick">
+											<input type="text" name="end_date" id="end_date" class="input-medium datepick"
+											value="<?php echo date('d/m/Y', strtotime($survey['end_date'])); ?>">
 										</div>
 									</div>
 									<div class="control-group">
 										<label for="" class="control-label">Phiếu khảo sát cần được đánh giá</label>
 										<div class="controls">
-											<input type="checkbox" name="is_evaluated" id="is_evaluated" class="icheck-me" data-skin="square" data-color="blue" />
+											<input type="checkbox" name="is_evaluated" id="is_evaluated" class="icheck-me" data-skin="square" 
+											data-color="blue" <?php if ($survey['is_evaluated'] == '1') echo 'checked'; ?> />
 										</div>
 									</div>
 									<div class="form-actions">
