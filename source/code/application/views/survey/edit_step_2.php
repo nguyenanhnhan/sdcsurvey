@@ -33,7 +33,13 @@
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
-							<a href="#"><?php echo $survey['survey_name']; ?></a>
+							<a href="<?php echo base_url('survey/index/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']); ?>">
+								<?php echo $survey['survey_name']; ?>
+							</a>
+							<i class="icon-angle-right"></i>
+						</li>
+						<li>
+							<a href="#">Sửa phiếu khảo sát</a>
 						</li>
 					</ul>
 					<div class="close-bread">
@@ -74,7 +80,7 @@
 										<div class="control_group">
 											<label class="control-label">Mô tả nội dung</label>
 											<div class="controls">
-												<img id="img-present" style="height: 50%" />
+												<img id="img_present" style="height:50%; width:50%" alt="" />
 											</div>
 										</div>
 									</div>
@@ -97,11 +103,11 @@
 			 
 			 	var img = $('#design_template option:selected').attr('img');
 			 	
-			 	$('#img-present').attr('src', img);
-			 	
+			 	$('#img_present').attr('src', img);
+			 				 	
 				$('#design_template').change(function(){
 					var img = $('#design_template option:selected').attr('img');
-					$('#img-present').attr('src', img);
+					$('#img_present').attr('src', img);
 				});
 			 });
 		</script>

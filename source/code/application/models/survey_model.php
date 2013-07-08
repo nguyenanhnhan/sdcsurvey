@@ -5,7 +5,7 @@ class Survey_model extends CI_Model
 	{
 		parent::__construct();
 		$this->load->helper('date');
-		$this->load->library('uuid');
+		/* $this->load->library('uuid'); */
 	}
 	
 	// get all row
@@ -24,15 +24,15 @@ class Survey_model extends CI_Model
 	// delete row
 	function delete($survey_id)
 	{
-		return $this->db->delete('sur_survey',array('survey_id'=>$survey_id));
+		$this->db->delete('sur_survey_faculty', array('survey_id'=>$survey_id));
+		$this->db->delete('sur_survey',array('survey_id'=>$survey_id));
 	}
 	
 	// add row
 	
-	function add($uid, $stype_id, $reused_survey_id, $survey_name, $course, $graduated_year,$is_graduated, $start_date, $end_date, 
+	function add($uid, $survey_id, $stype_id, $reused_survey_id, $survey_name, $course, $graduated_year,$is_graduated, $start_date, $end_date, 
 				$is_vocation, $is_evaluated)
 	{
-		
 		
 		/**
 		 * data
@@ -54,7 +54,7 @@ class Survey_model extends CI_Model
 		 *
 		 */
 		$data = array(
-		'survey_id'          => $this->uuid->v4(),
+		'survey_id'          => $survey_id,
 		'survey_type_id'     => $stype_id,
 		'reused_survey_id'   => $reused_survey_id,
 		'survey_name'        => $survey_name,

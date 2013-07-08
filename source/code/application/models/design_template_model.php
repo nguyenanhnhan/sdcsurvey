@@ -27,4 +27,10 @@ class Design_template_model extends CI_Model
 	{
 		
 	}
+	
+	// update row
+	function update()
+	{
+		
+	}
 }

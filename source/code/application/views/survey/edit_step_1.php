@@ -135,6 +135,38 @@
 											</div>
 										</div>
 									</div>
+									<div class="control-group" id="div_faculty">
+										<label class="control-label">Áp dụng cho Khoa</label>
+										<div class="controls">
+											<div class="input-xxxlarge">
+												<select name="survey_faculty[]" id="survey_faculty" multiple="true" class="chosen-select">
+													<?php foreach ($faculties as $faculty):
+														if ($faculty['is_vocation']==0){?>
+														<option value="<?php echo $faculty['faculty_id'] ?>" 
+														<?php foreach ($survey_faculties as $survey_faculty_item){ if ($faculty['faculty_id'] == $survey_faculty_item['faculty_id']) echo "selected";} ?> >
+														<?php echo $faculty['faculty_name'] ?> <!-- option name -->
+														</option>
+													<?php } endforeach ?>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="control-group" id="div_vocation">
+										<label class="control-label">Áp dụng cho Ban TCCN</label>
+										<div class="controls">
+											<div class="input-xxxlarge">
+												<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select">
+													<?php foreach ($faculties as $faculty):
+														if ($faculty['is_vocation']==1){?>
+														<option value="<?php echo $faculty['faculty_id'] ?>"
+														<?php foreach ($survey_faculties as $survey_faculty_item){ if ($faculty['faculty_id'] == $survey_faculty_item['faculty_id']) echo "selected";} ?>>
+														<?php echo $faculty['faculty_name']?>
+														</option>
+													<?php } endforeach?>
+												</select>
+											</div>
+										</div>
+									</div>
 									<div class="control-group">
 										<label for="textfield" class="control-label">Áp dụng từ ngày</label>
 										<div class="controls">
@@ -196,5 +228,15 @@
 						$('#div_graduated_year').hide();
 					}
 				});
+				
+				// Khoi tao du lieu Khoa/Ban
+				if ($('#is_vocation option:selected').val()==1){
+					$('#div_faculty').hide();
+					$('#div_vocation').show();
+				}
+				else{
+					$('#div_faculty').show();
+					$('#div_vocation').hide();
+				}
 			 });
 		</script>
