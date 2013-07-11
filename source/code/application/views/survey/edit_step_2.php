@@ -80,7 +80,7 @@
 										<div class="control_group">
 											<label class="control-label">Mô tả nội dung</label>
 											<div class="controls">
-												<img id="img_present" style="height:50%; width:50%" alt="" />
+												<img id="img_present" style="width: 50%; height: 50%" alt="" />
 											</div>
 										</div>
 									</div>

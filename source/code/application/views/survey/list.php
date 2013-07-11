@@ -61,7 +61,7 @@
 											<td>
 												<a href="<?php echo base_url('survey/delete/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn btn-danger"><i class="icon-remove"></i></a>
 												<a href="<?php echo base_url('survey/edit_step_1/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn"><i class="icon-edit"></i></a>
-												<a href="<?php echo base_url('survey/index/'.$survey_item['survey_id']); ?>" class="btn btn-success"><i class="icon-eye-open"></i></a>
+												<a href="<?php echo base_url('survey/create_summary/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn btn-success"><i class="icon-eye-open"></i></a>
 											</td>
 											<td><?php echo $survey_item['survey_name']; ?></td>
 										</tr>

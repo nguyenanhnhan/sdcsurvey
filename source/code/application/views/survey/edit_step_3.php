@@ -80,18 +80,19 @@
 											<input id="is_hide" name="is_hide" type="checkbox" data-skin="square" data-color="blue" class="icheck-me"/>
 										</div>
 									</div>
-									<!--
-<div class="control-group">
+									<div class="control-group">
 										<label class="control-label">Thứ tự sắp xếp</label>
 										<div class="controls">
 											<div class="input-medium">
-												<select class="chosen-select">
-													<option>Sau cuối</option>
+												<select class="chosen-select" name='view_order'>
+													<?php for($i=0,$len=count($survey_question);$i<$len;$i++){ ?>
+														<option value="<?php echo $i+1 ?>">Vị trí <?php echo $i+1 ?></option>
+													<?php } ?>
+													<option value="<?php echo $max_view_order['view_order']+1 ?>" selected>Cuối cùng</option>
 												</select>
 											</div>
 										</div>
 									</div>
--->
 									<div class="control-group">
 										<label class="control-label">Dạng câu trả lời</label>
 										<div class="controls">
@@ -133,8 +134,8 @@
 									</div>
 									<div class="form-actions">
 										<button class="btn btn-primary" type="submit">Lưu</button>
-										<a href="#" class="btn">Tiếp bước 4</a>
-										<a href="<?php echo base_url('survey/index/'.$survey_type['survey_type_id'])?>" class="btn">Quay lại bước 2</a>
+										<a href="<?php echo base_url('survey/edit_step_4/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'])?>" class="btn">Tiếp bước 4</a>
+										<a href="<?php echo base_url('survey/edit_step_2/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'])?>" class="btn">Quay lại bước 2</a>
 									</div>
 								</form>
 							</div>
@@ -143,56 +144,133 @@
 				</div>
 				
 				<!-- Bảng câu hỏi -->
+				<?php
+					for ($i=0, $len_q=count($survey_question); $i<$len_q; $i++)
+					{
+						$q_count = $i+1;
+				?>
 				<div class="row-fluid">
 					<div class="span12">
-						<div class="box box-color box-bordered red">
+						<div class="box box-color box-bordered <?php if ($survey_question[$i]['required']==1) echo 'red'; else echo 'green'; ?>">
 							<div class="box-title">
 								<h3>
-									#1
+									<?php echo '#'.$q_count.' '.$survey_question[$i]['content']; ?>
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
 								</div>
 							</div>
 							<div class="box-content">
-								<?php print_r($survey_question); ?>
+								<!-- Ma noi dung tra loi cau hoi -->
+								<?php
+									// Chu thich Array
+									// $survey_answer_template[$survey_question[$i]['question_id']: Array cau tra loi theo question_id
+									// [$j]: vi tri trong Array cau tra loi
+									// ['label']: ten field tuong ung can lay data
+									$answer_template = $survey_answer_template[$survey_question[$i]['question_id']];
+									for ($j=0, $len_a=count($answer_template); $j<$len_a; $j++)
+									{
+									?>
+										<div class="control-group">
+											<div class="controls">
+									<?php
+										switch ($answer_template[$j]['option_type'])
+										{
+											case 'r': // radio button
+										?>
+												<label class='radio'>
+													<input type="radio" name="<?php echo $survey_question[$i]['question_id'].'_a' ?>" value="<?php echo $answer_template[$j]['answer_template_id'] ?>"><?php echo $answer_template[$j]['label']?>
+												</label>
+										<?php
+												break;
+											case 'c': // checkbox
+										?>
+												<label class='checkbox'>
+													<input type="checkbox" name="?php echo $survey_question[$i]['question_id'].'_a' ?>" value="<?php echo $answer_template[$j]['answer_template_id'] ?>"><?php echo $answer_template[$j]['label']?>
+												</label>
+										<?php
+												break; // text
+											case 't':
+												if ($answer_template[$j]['sub_answer']==0)
+												{
+										?>
+												<div class="row-fluid">
+													<div class="span12"
+														<label class="control-label"><?php echo $answer_template[$j]['label']?></label>
+														<div class="controls controls-row">
+															<input type="text" class="input-xxlarge" name="<?php echo $answer_template[$j]['answer_template_id']?>">
+														</div>
+													</div>
+												</div>
+										<?php
+												}
+												else
+												{
+										?>
+												<div class="row-fluid">
+													<div class="span7">
+														<label class="control-label"><?php echo $answer_template[$j]['label']?></label>
+														<div class="controls controls-row">
+															<input type="text" class="input-xxlarge" name="<?php echo $answer_template[$j]['answer_template_id']?>">
+														</div>
+													</div>
+													<div class="span3">
+														<label class="control-label">Tỉnh/Thành</label>
+														<div class="controls controls-row">
+															<select class="chosen-select" id='<?php echo $survey_answer_template_sub[$answer_template[$j]['answer_template_id']][0]['answer_template_id'] ?>'>
+																<?php foreach ($provinces as $province_item):?>
+																<option value='<?php echo $province_item['province_id']; ?>'><?php echo $province_item['province_name']; ?></option>
+																<?php endforeach ?>
+															</select>
+														</div>
+													</div>
+												</div>
+										<?php
+												
+												} /* print_r($survey_answer_template_sub); */
+												break;
+											case 'rt': // radio button + textbox
+										?>
+												<div class="row-fluid">
+													<label class="radio">
+														<input type="radio"><?php echo $answer_template[$j]['label']?>
+													</label>
+													<input type="text" style="input-medium">
+												</div>
+										<?php	
+												break;
+												
+											case 'ct': // checkbox + textbox
+										?>
+												<div class="row-fluid">
+													<label class="checkbox">
+														<input type="checkbox"><?php echo $answer_template[$j]['label']?>
+													</label>
+													<input type="text" style="input-medium">
+												</div>
+										<?php
+												break;
+										}
+										?>
+											</div>
+										</div>
+										<?php
+									} 
+								?>
+								<div style="form-actions">
+									<a href="<?php echo base_url('survey/edit_question/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'].'/'.$survey_question[$i]['question_id']) ?>" class="btn btn-info">Chỉnh sửa</a>
+									<a href="<?php echo base_url('survey/delete_question/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'].'/'.$survey_question[$i]['question_id']) ?>" class="btn btn-danger">Xoá</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="box box-color box-bordered green">
-							<div class="box-title">
-								<h3>
-									#2. Sau mấy tháng tốt nghiệp Anh/Chị có việc làm đầu tiên?(không kể việc làm thêm khi đang đi học)
-								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
-							</div>
-							<div class="box-content">
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="box box-color box-bordered red">
-							<div class="box-title">
-								<h3>
-									#3. Những nơi anh chị đã từng làm việc ?
-								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
-							</div>
-							<div class="box-content">
-								
-							</div>
-						</div>
-					</div>
+				<?php
+					} // end for loop
+				?>
+				<!-- Fix loi footer tran len tren khi thu nho -->
+				<div class="row-fluid" style="height: 50px">
+
 				</div>
 			</div>
 		</div>
@@ -241,13 +319,13 @@
 				
 				if($('#answer_type option:selected').val() == 'r')
 				{
-					$node = "<p><input type='radio' class='icheck-me' data-skin='square' data-color='blue'/>&nbsp;<input type='text' name='dyn_other_control[]' id='dyn_other_control_"+c_count+"' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+					$node = "<p><input type='radio'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
 					$('#dyn_zone').append($node);
 				}
 				else
 					if($('#answer_type option:selected').val() == 'c')
 					{
-						$node = "<p><input type='checkbox' style='icheck-me' data-color='blue' data-skin='square'/>&nbsp;<input type='text' name='dyn_other_control[]' id='dyn_other_control_"+c_count+"' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+						$node = "<p><input type='checkbox'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
 						$('#dyn_zone').append($node);
 					}
 			});
@@ -256,7 +334,7 @@
 			$('#add_province').on('click',function(){
 				if ($('#answer_type option:selected').val() == 't')
 				{
-					$node = "<p><input type='text' placeholder='Tiêu đề' name='dyn_other_control[]' id='dyn_other_control_"+c_count+"' class='input-xxlarge' />&nbsp;<span class='uneditable-input' >Tỉnh/Thành</span><span class='btn removeVar'>Xoá</span></p>";
+					$node = "<p><input type='text' placeholder='Tiêu đề' name='dyn_other_control[]' class='input-xxlarge' />&nbsp;<span class='uneditable-input' >Tỉnh/Thành</span><span class='btn removeVar'>Xoá</span></p>";
 					$('#dyn_zone').append($node);
 				}
 			});

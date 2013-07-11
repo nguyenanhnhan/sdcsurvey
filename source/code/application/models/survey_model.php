@@ -9,11 +9,11 @@ class Survey_model extends CI_Model
 	}
 	
 	// get all row
-	function get($stype_id, $survey_id = FALSE)
+	function get($suvey_type_id, $survey_id = FALSE)
 	{
 		if ($survey_id === FALSE)
 		{
-			$query = $this->db->get_where('sur_survey', array('survey_type_id'=>$stype_id));
+			$query = $this->db->get_where('sur_survey', array('survey_type_id'=>$survey_type_id));
 			return $query->result_array();
 		}
 		

@@ -8,14 +8,21 @@ class Survey_answer_template_model extends CI_Model
 	}
 	
 	// get
-	function get($question_id, $template_id = FALSE)
+	function get($question_id, $answer_template_id = FALSE)
 	{
-		if($template_id===FALSE)
+		if($answer_template_id===FALSE)
 		{
+			$this->db->order_by('view_order','ASC');
 			$query = $this->db->get_where('sur_answer_template', array('question_id'=>$question_id));
 			return $query->result_array();
 		}
-		$query = $this->db->get_where('sur_answer_template',array('question_id'=>$question_id, 'template_id'=>$template_id));
+		$query = $this->db->get_where('sur_answer_template',array('question_id'=>$question_id, 'template_id'=>$answer_template_id));
+		return $query->row_array();
+	}
+	
+	function get_answer_template($answer_template_id)
+	{
+		$query = $this->db->get_where('sur_answer_template', array('answer_template_id'=>$answer_template_id));
 		return $query->row_array();
 	}
 	
@@ -31,10 +38,22 @@ class Survey_answer_template_model extends CI_Model
 			'exception'          => $exception,
 			'sub_answer'         => $sub_answer,
 			'created_by_user_id' => $uid,
-			'created_on_date'    => mdate('%Y/%m/%d %H:%m:%s', now())
+			'created_on_date'    => mdate('%Y/%m/%d %H:%i:%s', now())
 		);
 		
 		return $this->db->insert('sur_answer_template', $data);
+	}
+	
+	// update
+	function update_effect($uid, $answer_template_id, $is_effect)
+	{
+		$data=array(
+			'is_effect'                => $is_effect,
+			'last_modified_by_user_id' => $uid,
+			'last_modified_on_date'    => mdate('%Y/%m/%d %H:%i:%s', now())
+		);
+		
+		return $this->db->update('sur_answer_template', $data);
 	}
 	
 }
