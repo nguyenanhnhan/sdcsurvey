@@ -777,7 +777,7 @@ class Survey extends CI_Controller
 			
 			if(!empty($data['hide_control']))
 			{
-				$this->survey_answer_template->update_effect($uid, $answer_template_id,1);
+				$this->survey_answer_template_model->update_effect($uid, $answer_template_id,1);
 				for ($i=0,$len=count($data['hide_control']);$i<$len;$i++)
 				{
 					$this->survey_answer_relation_model->insert($uid, $answer_template_id, $data['hide_control'][$i], 0, 1);
@@ -785,11 +785,11 @@ class Survey extends CI_Controller
 			}
 			else
 			{
-				$this->survey_answer_template->update_effect($uid, $answer_template_id,0);
+				$this->survey_answer_template_model->update_effect($uid, $answer_template_id,0);
 			}
 			if(!empty($data['show_control']))
 			{
-				$this->survey_answer_template->update_effect($uid, $answer_template_id,1);
+				$this->survey_answer_template_model->update_effect($uid, $answer_template_id,1);
 				for ($i=0,$len=count($data['show_control']);$i<$len;$i++)
 				{
 					$this->survey_answer_relation_model->insert($uid, $answer_template_id, $data['show_control'][$i], 1, 1);
@@ -797,7 +797,7 @@ class Survey extends CI_Controller
 			}
 			else
 			{
-				$this->survey_answer_template->update_effect($uid, $answer_template_id,0);
+				$this->survey_answer_template_model->update_effect($uid, $answer_template_id,0);
 			}
 			
 			redirect ('survey/edit_step_4/'.$survey_type_id.'/'.$survey_id);
