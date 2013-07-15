@@ -438,7 +438,7 @@ createSubNav();
             var prevSpanWidth = parseInt(previousElement.attr("class").replace("span", ""));
         }
         bootbox.animate(false);
-        bootbox.confirm("Do you really want to remove the widget <strong>" + $el.parents(".box-title").find("h3").text() + "</strong>?", "Cancel", "Yes, remove", function (r) {
+        bootbox.confirm("Bạn có thực sự muốn loại bỏ widget <strong>" + $el.parents(".box-title").find("h3").text() + "</strong>?", "Không", "Vâng, hãy loại bỏ", function (r) {
             if (r){
                 $el.parents('[class*=span]').remove();
                 if(previousElement.length > 0){

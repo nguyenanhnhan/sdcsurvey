@@ -25,10 +25,23 @@ class Survey_faculty_model extends CI_Model
 		// Khong co ca 2 bien tham so
 		else
 		{
-			$query = $this->db->get('survey_survey_faculty');
+			$query = $this->db->get('sur_survey_faculty');
 			return $query->result_array();
 		}
 		
+	}
+	
+	// Lay danh sach phieu khao sat theo khoa
+	function get_survey($faculty_id)
+	{	
+		$this->db->select(array('sur_survey_faculty.survey_id', 'survey_name'));
+		$this->db->from('sur_survey_faculty');
+		$this->db->join('sur_survey', 'sur_survey.survey_id = sur_survey_faculty.survey_id');
+		$this->db->where('sur_survey_faculty.faculty_id',$faculty_id);
+		
+		$query = $this->db->get();
+		
+		return $query->result_array();
 	}
 	
 	// delete row

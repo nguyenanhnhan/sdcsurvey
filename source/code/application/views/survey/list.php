@@ -23,7 +23,7 @@
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
-							<a href="<?php echo base_url('survey_types') ?>">Loại khảo sát</a>
+							<a href="<?php echo base_url('survey_type') ?>">Loại khảo sát</a>
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>

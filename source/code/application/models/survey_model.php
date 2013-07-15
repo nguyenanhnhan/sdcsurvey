@@ -9,7 +9,7 @@ class Survey_model extends CI_Model
 	}
 	
 	// get all row
-	function get($suvey_type_id, $survey_id = FALSE)
+	function get($survey_type_id=FALSE, $survey_id=FALSE)
 	{
 		if ($survey_id === FALSE)
 		{

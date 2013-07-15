@@ -1,21 +1,21 @@
 	<h2>Thông tin về Cựu sinh viên</h2>
 	<p class="explain">Anh/Chị vui lòng nhập thông tin vào chỗ trống (cần điền đầy đủ thông tin những chỗ có đánh dấu *), gõ Tiếng Việt có dấu, font Unicode. </p>
-	<form class="form">
 	<p>
-	 Mã sinh viên: <input type="text" name="svID" id="svID"  title="Mã sinh viên" />
-	 <span class="submit"><input type="submit" value="Kiểm tra" /></span>
+	 Mã sinh viên: <input type="text" name="student_id" id="student_id"  title="Mã sinh viên" required />
+	 <span class="submit"><input type="button" id="check_student_id" value="Kiểm tra" /></span>
 	 <span class="explain2"> (Nhập mã SV rồi nhấn vào nút kiểm tra để hiển thị thông tin cá nhân)</span>
 	</p>
 	<table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
-		<td> Họ và tên <span class="star">*</span></td>
-	    <td> Chuyên ngành tốt nghiệp <span class="star">*</span></td>
+		<td>Họ và tên <span class="star">*</span></td>
+	    <td>Chuyên ngành tốt nghiệp <span class="star">*</span></td>
 	    <td>Lớp </td>
 	    <td>Năm tốt nghiệp </td>
 	</tr>
 	<tr>
-		<td class="name"> <input type="text" name="name" id="name" title="Họ và tên" /></td>
-	    <td class="major"><select id="major"> 
+		<td class="name"> <input type="text" name="name" id="name" title="Họ và tên" required/></td>
+	    <td class="major">
+	    <select id="faculty" name="faculty"> 
 	    	<option selected="selected" value="-1"></option>
 			<option value="M">Công nghệ môi trường</option>
 			<option value="S">Công nghệ sinh học</option>
@@ -34,13 +34,13 @@
 	        </select>
 	    </td>
 	    <td><input type="text" name="class" id="class"  title="Lớp" /></td>
-	    <td><input type="text" name="gradYear" id="gradYear"  title="Năm tốt nghiệp" /></td>
+	    <td><input type="text" name="graduated_year" id="graduated_year"  title="Năm tốt nghiệp" required/></td>
 	</tr>
 	</table>
 	
 	<p class="text">
 		Địa chỉ liên hệ: <br/><br/>
-			<textarea name="text"></textarea>
+			<textarea name="address" id="address"></textarea>
 	</p>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
@@ -49,9 +49,8 @@
 	    	<td class="email">Địa chỉ email: </td>
 	    </tr>
 	    <tr>
-	    	<td class="homephone"> <input type="text" name="homephone" id="homephone" title="Điện thoại bàn" /></td>
-	        <td class="mobile"> <input type="text" name="mobile" id="mobile" title="Điện thoại di động" /></td>
-	        <td class="email"> <input type="text" name="email" id="email" title="Email" /></td>
+	    	<td class="homephone"> <input type="text" name="home_phone" id="home_phone" title="Điện thoại bàn"/></td>
+	        <td class="mobile"> <input type="text" name="hand_phone" id="hand_phone" title="Điện thoại di động" /></td>
+	        <td class="email"> <input type="text" name="email_address" id="email_address" title="Email" /></td>
 	    </tr>
 	</table>
-	</form>

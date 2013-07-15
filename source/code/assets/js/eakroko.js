@@ -399,7 +399,7 @@ $(document).ready(function() {
 					        "sNext":     "Tiếp",
 					        "sLast":     "Cuối"
 					    }
-					}
+					},
 				};
 				if($(this).hasClass("dataTable-noheader")){
 					opt.bFilter = false;

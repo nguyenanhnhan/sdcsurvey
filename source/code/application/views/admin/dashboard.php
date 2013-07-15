@@ -23,7 +23,7 @@
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
-							<a href="<?php echo base_url()?>admin">Dashboard</a>
+							<a href="<?php echo base_url('admin')?>">Dashboard</a>
 						</li>
 					</ul>
 					<div class="close-bread">
@@ -46,25 +46,100 @@
 							</div>
 							<div class="box-content nopadding">
 								<ul class="tabs tabs-inline tabs-top">
-									<li class="active">
+									<li>
 										<a href="#t1" data-toggle="tab">Thông tin đăng nhập</a>
 									</li>
 									<li>
 										<a href="#t2" data-toggle="tab">Thông tin máy chủ</a>
 									</li>
-									<li>
+									<li class="active">
 										<a href="#t3" data-toggle="tab">Phiên bản ứng dụng</a>
 									</li>
 								</ul>
 								<div class="tab-content padding tab-content-inline tab-content-bottom">
-									<div class="tab-pane active" id="t1">
+									<div class="tab-pane" id="t1">
 										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum voluptatibus velit tempora numquam ipsa consequuntur esse et dolores aliquam sit sunt illo recusandae amet officiis dolorem debitis facilis! Quia dolore facere commodi numquam id quo aperiam inventore ratione reiciendis in unde sequi soluta. Obcaecati hic molestias deleniti aliquid optio fugiat repellat ab modi maiores minus eius quasi exercitationem officia reiciendis molestiae in dignissimos aspernatur eveniet voluptas consequuntur corporis. Magni itaque quod doloremque quas ad incidunt accusamus libero. Id praesentium veniam beatae est in excepturi atque consequuntur odio! Iste maiores exercitationem temporibus optio nostrum doloremque commodi vero accusamus dolorem aut voluptatem tempora maxime tenetur labore nesciunt quis fugit aliquid amet quasi expedita sed delectus voluptatum deserunt illum ad provident suscipit ex consequatur repellat similique qui nemo accusantium distinctio eveniet porro animi obcaecati voluptates quo consequuntur dolores saepe sit. Maxime numquam earum quidem iure a at temporibus minima natus? Impedit quo architecto nobis deserunt cupiditate ex provident consectetur! Obcaecati corrupti tempore adipisci voluptatum vitae perferendis quidem soluta a officia possimus modi nobis velit facere repellendus quia fugiat assumenda? Non magni at nesciunt officia perferendis fuga inventore quis veritatis voluptas laudantium aliquid iusto omnis eaque vitae commodi repellat voluptatibus cupiditate minus ut a.
 									</div>
 									<div class="tab-pane" id="t2">
 										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto vel labore sed odio laudantium in eum aliquid reiciendis blanditiis consequatur excepturi dicta quisquam soluta quis neque nostrum expedita temporibus illum aliquam voluptatibus a cumque sit nulla et consectetur ex maiores sequi culpa suscipit. Voluptate quae id consequatur consequuntur exercitationem cumque beatae obcaecati laudantium? Ea tenetur animi itaque eos aperiam molestiae reprehenderit eaque perferendis iusto beatae sapiente fuga ex ab fugit excepturi nesciunt blanditiis nostrum ipsa. Facere repellendus tempore deleniti neque nihil commodi nemo recusandae eveniet error eligendi tenetur quia et consequuntur cupiditate facilis esse aspernatur praesentium reprehenderit dolorum accusantium ipsum cum voluptas quisquam ea atque aliquid omnis at quam magnam rem cumque repellat maxime mollitia nulla architecto sequi saepe veritatis optio amet culpa consectetur ducimus sapiente doloribus corporis odit adipisci. Commodi ab culpa accusamus maxime amet dolore at necessitatibus fugit beatae id asperiores doloribus perspiciatis expedita quisquam itaque iusto eos ad quibusdam rem fuga ipsum ut quasi. Unde explicabo quae quod saepe maxime nulla ut. Aperiam possimus repellendus deleniti quasi quaerat aliquam veniam numquam doloremque sequi perspiciatis eligendi provident nam voluptates nihil earum saepe maxime mollitia maiores porro animi nulla odit sapiente atque totam illo! Accusantium quis corporis omnis et.
 									</div>
-									<div class="tab-pane" id="t3">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque ipsum ab odio accusamus similique dicta ipsam dolor magni nemo? Laudantium numquam consectetur maiores quaerat totam cupiditate error repellendus eos quibusdam dolore ipsum sequi illo blanditiis voluptatibus veniam dicta alias tempore consequuntur reprehenderit dignissimos iste sit perferendis possimus quisquam id voluptatum explicabo ut ad accusamus neque. Commodi ipsam quia aperiam nisi id unde sapiente magnam reiciendis voluptate placeat in optio consequuntur culpa magni repudiandae veniam aut. Magni sed asperiores omnis error nemo cum minima illum rerum assumenda ipsa excepturi odit laborum doloremque iure temporibus consectetur in culpa libero iusto repellendus. Culpa perspiciatis nesciunt explicabo officiis beatae ipsam qui odio architecto asperiores ad amet aspernatur veniam ex voluptates cumque expedita reiciendis nobis incidunt harum praesentium a totam ut cum corrupti quia rem provident delectus fuga deserunt itaque aut fugiat veritatis necessitatibus inventore nisi enim aliquid quibusdam! Nihil ratione laboriosam accusamus. Iure sapiente iste odit voluptas sit reiciendis. Cum voluptatibus quia cupiditate cumque eveniet mollitia unde adipisci vel itaque ipsa est iste ducimus sed consequuntur ratione eaque voluptates et odit quod nemo quis aut repudiandae ipsum nostrum deserunt! Excepturi cum eos ut labore debitis facilis ipsum! Fugit eos dicta amet neque qui deserunt!
+									<div class="tab-pane active" id="t3">
+										<ul class="timeline">
+											<li>
+												<div class="timeline-content">
+													<div class="left">
+														<div class="icon">
+															<i class="icon-info-sign"></i>
+														</div>
+														<div class="date">15 / 7</div>
+													</div>
+													<div class="activity">
+														<div class="user"><a href="#">Nguyễn Ảnh Nhân</a> 
+														<span>Phiên bản 4.0.5.0, </span></div>
+														<ul class="timeline-images">
+															<p>Phiên bản 4.0.5.0 Cập nhật</p>
+															<p>- Khảo sát sinh viên theo khoa</p>
+															<p>- Cập nhật khảo sát</p>
+															<p>- Validate trên phiếu khảo sát</p>
+															<p>- Send mail (đang fix bug lỗi send mail trên server mail.vanlanguni.edu.vn)</p>
+															<p>- Import danh sách 2 khoa CNSH và khoa CNMT để test</p>
+															<p>- Thay đổi một số cấu trúc trong CSDL để đáp ứng nhu cầu khảo sát nhiều khoa, nhiều phiếu</p>
+														</ul>
+													</div>
+												</div>
+												<div class="line"></div>
+											</li>
+											<li>
+												<div class="timeline-content">
+													<div class="left">
+														<div class="icon">
+															<i class="icon-info-sign"></i>
+														</div>
+														<div class="date">12 / 7</div>
+													</div>
+													<div class="activity">
+														<div class="user"><a href="#">Nguyễn Ảnh Nhân</a> 
+														<span>Phiên bản 4.0.2.1, </span></div>
+														<ul class="timeline-images">
+															<p>Phiên bản 4.0.2.1 Cập nhật</p>
+															<p>- Lọc danh sách sinh viên tham gia khảo sát</p>
+															<p>- Hiện danh sách sinh viên tham gia khảo sát</p>
+															<p>- Fixbug lỗi không dùng được hàm date_format trên CentOS</p>
+														</ul>
+													</div>
+												</div>
+												<div class="line"></div>
+											</li>
+											<li>
+												<div class="timeline-content">
+													<div class="left">
+														<div class="icon">
+															<i class="icon-info-sign"></i>
+														</div>
+														<div class="date">11 / 7</div>
+													</div>
+													<div class="activity">
+														<div class="user"><a href="#">Nguyễn Ảnh Nhân</a> 
+														<span>Khởi tạo Ứng dụng khảo sát phiên bản 4.0.0.0 lên server 172.16.3.68</span></div>
+														<ul class="timeline-images">
+															<p>Phiên bản 4.0.0.0 preview chú trọng việc tạo phiếu khảo sát và thể hiện đúng kết quả do người dùng tạo. Chi tiết các tính năng:</p>
+															<p>- Tạo loại khảo sát</p>
+															<p>- Tạo phiếu khảo sát</p>
+															<p>--- Tạo phiếu khảo sát có thể áp dụng riêng cho một Khoa/Ban hay nhiều Khoa/Ban thực hiện cùng lúc</p>
+															<p>--- Hỗ trợ các control trong câu trả lời: <strong>Một lựa chọn</strong>, <strong>Nhiều lựa chọn</strong>, <strong>Văn bản</strong>, <strong>Một lựa chọn đính kèm văn bản</strong>, <strong>Nhiều lựa chọn đính kèm văn bản</strong>, <strong>Văn bản đính kèm Tỉnh/Thành.</strong></p>
+															<p>--- Hỗ trợ dựng Thông tin đối tượng khảo sát theo template dựng trước</p>
+															<p>- Chỉnh sửa phiếu khảo sát</p>
+															<p>- Tạo hiệu ứng Ẩn/Hiện cho Câu hỏi tương ứng với câu trả lời.</p>
+															<p>- Xem kết quả sau khi tạo</p>
+															<p>- Đăng nhập
+															<p>- Chỉnh sửa thông tin cá nhân</p>
+															<p>- <strong>Coming Soon:</strong> Quản lý sinh viên khảo sát, Gửi mail mời khảo sát</p>
+														</ul>
+													</div>
+												</div>
+												<div class="line"></div>
+											</li>
+										</ul> <!-- End Timeline -->
 									</div>
 								</div>
 							</div>

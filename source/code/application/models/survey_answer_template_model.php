@@ -27,7 +27,7 @@ class Survey_answer_template_model extends CI_Model
 	}
 	
 	// insert row
-	function insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $sub_answer)
+	function insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $answ_required, $sub_answer)
 	{
 		$data = array(
 			'answer_template_id' => $answer_template_id,
@@ -36,6 +36,7 @@ class Survey_answer_template_model extends CI_Model
 			'view_order'         => $view_order,
 			'label'              => $label,
 			'exception'          => $exception,
+			'required'           => $answ_required,
 			'sub_answer'         => $sub_answer,
 			'created_by_user_id' => $uid,
 			'created_on_date'    => mdate('%Y/%m/%d %H:%i:%s', now())

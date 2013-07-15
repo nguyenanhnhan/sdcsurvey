@@ -123,7 +123,8 @@ class Survey extends CI_Controller
 					$this->survey_faculty_model->insert($uid, $survey_id, $survey_faculties['data'][$i]);
 				}
 			}
-			redirect ('survey/index/'.$survey_type_id);
+/* 			redirect ('survey/index/'.$survey_type_id); */
+			redirect ('survey/edit_step_2/'.$survey_type_id.'/'.$survey_id);
 		}
 		else
 		{
@@ -409,8 +410,9 @@ class Survey extends CI_Controller
 					$label              = $control['dyn_control'][$i];
 					$view_order         = $c_count;
 					$exception          = 0;
+					$answ_required      = $required;
 					$sub_answer         = 0;
-					$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $sub_answer);
+					$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception,$answ_required, $sub_answer);
 				}
 				
 				// Them lua chon khac chuan
@@ -434,8 +436,9 @@ class Survey extends CI_Controller
 							$label              = $control['dyn_other_control'][$i];
 							$view_order         = $c_count;
 							$exception          = 0;
+							$answ_required      = $required;
 							$sub_answer         = 0;
-							$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $other_option_type, $view_order, $label, $exception, $sub_answer);
+							$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $other_option_type, $view_order, $label, $exception, $answ_required, $sub_answer);
 						}
 						else
 						{
@@ -444,16 +447,18 @@ class Survey extends CI_Controller
 							$label              = $control['dyn_other_control'][$i];
 							$view_order         = $c_count;
 							$exception          = 0;
+							$answ_required      = $required;
 							$sub_answer         = 1;
 							// Chen truoc 1 cau tra loi dang van ban
-							$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $sub_answer);
+							$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $answ_required, $sub_answer);
 							
 							// Chen cau tra loi Tinh/Thanh di chung voi cau tra loi van ban
 							$question_sub_id    = $answer_template_id;
 							$answer_template_id = $this->uuid->v4();
 							$label              = "Tỉnh/Thành";
 							$sub_answer         = 0;
-							$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_sub_id, $other_option_type, $view_order, $label, $exception, $sub_answer);
+							$answ_required      = 0;
+							$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_sub_id, $other_option_type, $view_order, $label, $exception, $answ_required, $sub_answer);
 						}
 					}
 				}
@@ -566,8 +571,9 @@ class Survey extends CI_Controller
 				$label              = $control['dyn_control'][$i];
 				$view_order         = $c_count;
 				$exception          = 0;
+				$answ_required      = $required;
 				$sub_answer         = 0;
-				$result = $this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $sub_answer);
+				$result = $this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $answ_required, $sub_answer);
 			}
 			// Them lua chon khac chuan
 			if(!empty($control['dyn_other_control']))
@@ -590,8 +596,9 @@ class Survey extends CI_Controller
 						$label              = $control['dyn_other_control'][$i];
 						$view_order         = $c_count;
 						$exception          = 0;
+						$answ_required      = $required;
 						$sub_answer         = 0;
-						$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $other_option_type, $view_order, $label, $exception, $sub_answer);
+						$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $other_option_type, $view_order, $label, $exception, $answ_required, $sub_answer);
 					}
 					else
 					{
@@ -600,16 +607,18 @@ class Survey extends CI_Controller
 						$label              = $control['dyn_other_control'][$i];
 						$view_order         = $c_count;
 						$exception          = 0;
+						$answ_required      = $required;
 						$sub_answer         = 1;
 						// Chen truoc 1 cau tra loi dang van ban
-						$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $sub_answer);
+						$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_id, $option_type, $view_order, $label, $exception, $answ_required, $sub_answer);
 						
 						// Chen cau tra loi Tinh/Thanh di chung voi cau tra loi van ban
 						$question_sub_id    = $answer_template_id;
 						$answer_template_id = $this->uuid->v4();
 						$label              = "Tỉnh/Thành";
 						$sub_answer         = 0;
-						$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_sub_id, $other_option_type, $view_order, $label, $exception, $sub_answer);
+						$answ_required      = 0;
+						$this->survey_answer_template_model->insert($uid, $answer_template_id, $question_sub_id, $other_option_type, $view_order, $label, $exception, $answ_required, $sub_answer);
 					}
 				}
 			}

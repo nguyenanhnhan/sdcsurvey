@@ -46,7 +46,7 @@
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-info"></i>
+									<i class="icon-pencil"></i>
 									Thông tin chung của phiếu khảo sát
 								</h3>
 								<div class="actions">
@@ -56,23 +56,23 @@
 								</div>
 							</div>
 							<div class="box-content nopadding">
-								<table id="user" class="table table-bordered table-striped table-force-topborder" style="clear: both">
-									<tbody> 
-										<tr>         
+								<table class="table table-bordered table-striped table-force-topborder" style="clear: both">
+									<tbody>
+										<tr>
 											<td width="15%">Tên phiếu khảo sát</td>
 											<td width="50%">
 												<a href="<?php echo base_url('survey/preview/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" target="_blank"><?php echo $survey['survey_name']?></a>
 											</td>
 										</tr>
-										<tr>         
+										<tr>
 											<td>Thuộc loại</td>
 											<td><?php echo $survey_type['survey_type_name'] ?></td>
-										</tr>  
-										<tr>         
+										</tr>
+										<tr>
 											<td>Áp dụng cho bậc</td>
 											<td><?php if ($survey['is_vocation']==0) echo 'Đại học'; else echo 'Trung cấp chuyên nghiệp'; ?></td>
 										</tr>
-										<tr>         
+										<tr>
 											<td>Dành cho các khoa</td>
 											<td>
 												<?php foreach ($faculties as $faculty): 
@@ -86,27 +86,27 @@
 												?>
 												<?php endforeach ?>
 											</td>
-										</tr> 
-										<tr>         
+										</tr>
+										<tr>
 											<td><?php if ($survey['is_graduated'] == 1) echo 'Năm tốt nghiệp'; else 'Đang học khoá'; ?></td>
 											<td>
 												<?php if ($survey['is_graduated'] == 1) echo $survey['graduated_year']; else echo $survey['course']; ?>
 											</td>
-										</tr>       
-										<tr>         
+										</tr>
+										<tr>
 											<td>Thời gian áp dụng</td>
 											<td>
 												<?php 
-													echo 'Từ <strong style="text-decoration:underline;">'.date_format(new DateTime($survey['start_date']), 'd/m/Y').'</strong> đến <strong style="text-decoration:underline;">'.date_format(new DateTime($survey['end_date']), 'd/m/Y').'</strong>'; 
+													echo 'Từ <strong style="text-decoration:underline;">'.mdate('%d/%m/%Y',strtotime($survey['start_date'])).'</strong> đến <strong style="text-decoration:underline">'.mdate('%d/%m/%Y',strtotime($survey['end_date'])).'</strong>'; 
 												?>
 											</td>
 										</tr>
-										<tr>         
+										<tr>
 											<td>Đang khảo sát</td>
 											<td>
 												<input type="checkbox" data-skin="square" data-color="blue" class="icheck-me" <?php if ($survey['status']==1) echo 'checked'; ?>>
 											</td>
-										</tr> 
+										</tr>
 										<tr>
 											<td></td>
 											<td>
@@ -122,12 +122,10 @@
 						</div>
 					</div>
 				</div>
-				<div style="height: 90px;">
-					&nbsp;
+				<!-- Fix loi footer tran len tren khi thu nho -->
+				<div class="row-fluid" style="height: 50px">
+
 				</div>
 			</div>
 		</div>
-		<!--- Javascript -->
-		<script type="text/javascript">
 		
-		</script>

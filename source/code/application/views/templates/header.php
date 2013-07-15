@@ -51,6 +51,12 @@
 	<!-- jQuery -->
 	<script src="<?php echo js_url() ?>jquery.min.js"></script>
 	
+	<!-- Flot -->
+	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.min.js"></script>
+	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.bar.order.min.js"></script>
+	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.pie.min.js"></script>
+	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.resize.min.js"></script>
+	
 	<!-- Nice Scroll -->
 	<script src="<?php echo js_url() ?>plugins/nicescroll/jquery.nicescroll.min.js"></script>
 	<!-- imagesLoaded -->
@@ -108,6 +114,9 @@
 	<script src="<?php echo js_url() ?>plugins/validation/additional-methods.min.js"></script>
 	
 	<script src="<?php echo js_url() ?>plugins/form/jquery.form.min.js"></script>
+	
+	<!-- TinyMCE -->
+	<script src="<?php echo js_url() ?>plugins/tinymce/tinymce.min.js"></script>
 
 
 	<!-- Theme framework -->
@@ -222,10 +231,10 @@
 						<a href="<?php echo base_url('survey_type') ?>">Phiếu khảo sát</a>
 					</li>
 					<li>
-						<a href="#">Thông báo</a>
+						<a href="<?php echo base_url('inform')?>">Thông báo</a>
 					</li>
 					<li>
-						<a href="#">Kết quả khảo sát</a>
+						<a href="<?php echo base_url('survey_result') ?>">Kết quả khảo sát</a>
 					</li>
 					<li>
 						<a href="#">Đánh giá</a>

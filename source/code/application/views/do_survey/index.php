@@ -1,0 +1,617 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+		<title>Phiếu khảo sát</title>
+		<link href="<?php echo css_url() ?>StyleSheet.css" rel="stylesheet" type="text/css" />
+		<!-- jQuery -->
+		<script src="<?php echo js_url() ?>jquery.min.js"></script>
+		<script src="<?php echo js_url() ?>plugins/validation/jquery.validate.min.js"></script>
+		
+		<style>
+			#my_form input.error {border: 1px dotted red;}
+			/*
+div.error { display: none; }
+			input.checkbox { border: none }
+			input:focus { border: 1px dotted black; }
+			input.error { border: 1px dotted red; }
+*/
+		</style>
+	</head>
+<body>
+	<form id="my_form" method="post" action="<?php echo base_url('do_survey/save/'.$survey['survey_id']) ?>">
+	<input type="hidden" id="hiden_update_value" name="hiden_update_value" value="<?php echo $flag_update ?>" />
+	<div id="form_wrapper">
+		<div class="top">
+			<div id="logo_holder"> <a href="/"><img src="<?php echo img_url() ?>do_survey/logo.png" /></a> </div>
+		<div class="clear"></div>
+	</div>
+	<div class="title_bg">
+		<!-- TEN PHIEU KHAO SAT -->
+		<div class="title" style="text-transform: uppercase;"> <?php echo $survey['survey_name'] ?> </div>
+	</div>
+	<div class="roundcont">
+		<div class="roundtop" style="background: url(<?php echo img_url();?>do_survey/tr.gif) no-repeat top right;"> 
+			<img src="<?php echo img_url() ?>do_survey/tl.gif" alt="" width="15" height="15" class="corner"> 
+		</div>
+		
+		<div class="Container">
+		<!-- THONG TIN SINH VIEN -->
+		<?php echo $read_content; ?>
+		</div>
+
+		<div class="roundbottom" style="background: url(<?php echo img_url();?>do_survey/br.gif) no-repeat top right;">
+			<img src="<?php echo img_url();?>do_survey/bl.gif" alt="" width="15" height="15" class="corner"/>
+		</div>
+	</div>
+
+	<div class="roundcont">
+		<div class="roundtop" style="background: url(<?php echo img_url();?>do_survey/tr.gif) no-repeat top right;"> 
+			<img src="<?php echo img_url() ?>do_survey/tl.gif" alt="" width="15" height="15" class="corner"> 
+		</div>
+		<div class="Container"> 
+			<h2><?php if($survey['is_graduated']==1) echo 'Phần Cựu sinh viên trả lời'; else echo 'Phần Sinh viên trả lời'; ?></h2>
+			<p class="explain">Anh/Chị vui lòng trả lời các câu hỏi dưới đây bằng cách click chọn vào phương án trả lời hoặc điền thông tin vào chỗ trống: </p>
+			<?php 
+			// in cau hoi
+			for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)
+			{
+				$question_num=$i+1;
+			?>
+			<div id="<?php echo $survey_question[$i]['question_id'] ?>">
+				<p class="question"><?php echo $question_num ?>. <?php echo $survey_question[$i]['content'] ?><?php if ($survey_question[$i]['required']==1) echo '<span class="star">*</span>'; ?></p>
+				<?php
+				// Chu thich Array
+				// $survey_answer_template[$survey_question[$i]['question_id']: Array cau tra loi theo question_id
+				// [$j]: vi tri trong Array cau tra loi
+				// ['label']: ten field tuong ung can lay data
+				$answer_template = $survey_answer_template[$survey_question[$i]['question_id']];
+				for ($j=0, $len_a=count($answer_template); $j<$len_a; $j++)
+				{
+					switch ($answer_template[$j]['option_type'])
+					{
+						case 'r': // radio button
+				?>
+						<input 
+							type="radio" 
+							name="<?php echo $survey_question[$i]['question_id'].'_ar' ?>" 
+							id="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							value="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							<?php if ($survey_question[$i]['required']==1) echo 'required'; ?> 
+							title="Câu <?php echo $question_num ?>"
+							<?php
+								if ($flag_update==1)
+								{
+									foreach($survey_answers as $survey_answer_item)
+									{
+										if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+										{
+											echo 'checked';
+										}
+									}
+								}
+							?>
+						>
+						<?php echo $answer_template[$j]['label']?>
+						<br />
+				<?php
+						break;
+					case 'c': // checkbox
+				?>
+						<input 
+							type="checkbox" 
+							name="<?php echo $survey_question[$i]['question_id'] ?>_ac[]" 
+							id="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							value="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							<?php if ($survey_question[$i]['required']==1) echo 'required'; ?> 
+							title="Câu <?php echo $question_num ?>"
+							<?php
+								if ($flag_update==1)
+								{
+									foreach($survey_answers as $survey_answer_item)
+									{
+										if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+										{
+											echo 'checked';
+										}
+									}
+								}
+							?>
+							>
+							<?php echo $answer_template[$j]['label'] ?>
+						<br />
+				<?php
+						break; // text
+					case 't':
+						if ($answer_template[$j]['sub_answer']==0)
+						{
+				?>
+							<p><?php echo $answer_template[$j]['label']?></p>
+							<p class="longInput">
+								<input 
+									type="text" 
+									name="<?php echo $answer_template[$j]['answer_template_id']?>_at" 
+									id="<?php echo $answer_template[$j]['answer_template_id']?>" 
+									<?php if ($survey_question[$i]['required']==1) echo 'required'; ?> 
+									title="<?php echo $answer_template[$j]['label']?>"
+									<?php
+										if ($flag_update==1)
+										{
+											foreach($survey_answers as $survey_answer_item)
+											{
+												if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+												{
+													echo 'value="'.$survey_answer_item['content'].'"';
+												}
+											}
+										}
+									?>
+									>
+							</p>
+				<?php
+						}
+						else
+						{
+				?>
+						
+						<table width="100%" cellpadding="0" cellspacing="0">
+							<tr>
+								<td> Địa chỉ</td>
+								<td> Tỉnh/Thành phố</td>    
+							</tr>
+							<tr>
+								<td class="longInput">
+									<input 
+										type="text" 
+										name="<?php echo $answer_template[$j]['answer_template_id']?>_at" 
+										id="<?php echo $answer_template[$j]['answer_template_id']?>" 
+										<?php if ($survey_question[$i]['required']==1) echo 'required'; ?> 
+										title="<?php echo $answer_template[$j]['label']?>"
+										<?php
+										if ($flag_update==1)
+										{
+											foreach($survey_answers as $survey_answer_item)
+											{
+												if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+												{
+													echo 'value="'.$survey_answer_item['content'].'"';
+												}
+											}
+										}
+										?>
+										>
+								</td>
+								<td class="city">
+									<select 
+										id='<?php echo $survey_answer_template_sub[$answer_template[$j]['answer_template_id']][0]['answer_template_id'] ?>' 
+										name='<?php echo $survey_answer_template_sub[$answer_template[$j]['answer_template_id']][0]['answer_template_id'] ?>'>
+										<option value="-1" selected></option>
+										<?php foreach ($provinces as $province_item):?>
+										<option 
+											value='<?php echo $province_item['province_id']; ?>'
+											<?php
+											if ($flag_update==1)
+											{
+												foreach($survey_answers as $survey_answer_item)
+												{
+													if ($survey_answer_item['content']==$province_item['province_id'])
+													{
+														echo 'selected';
+													}
+												}
+											}
+											?>
+										><?php echo $province_item['province_name']; ?></option>
+										<?php endforeach ?>
+									</select>
+								</td>
+							</tr>
+						</table>
+				<?php
+						
+						} /* print_r($survey_answer_template_sub); */
+						break;
+					case 'rt': // radio button + textbox
+				?>
+						<input 
+							type="radio" 
+							name="<?php echo $survey_question[$i]['question_id'].'_ar' ?>" 
+							id="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							value="<?php echo $answer_template[$j]['answer_template_id']?>" 
+							<?php if ($survey_question[$i]['required']==1) echo 'required'; ?>
+							<?php
+							if ($flag_update==1)
+							{
+								foreach($survey_answers as $survey_answer_item)
+								{
+									if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+									{
+										echo 'checked';
+									}
+								}
+							}
+							?>
+						><?php echo $answer_template[$j]['label']?>
+						<input 
+							type="text" 
+							style="input-medium" 
+							id="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							name="<?php echo $survey_question[$i]['question_id'].'_rt' ?>"
+							<?php
+							if ($flag_update==1)
+							{
+								foreach($survey_answers as $survey_answer_item)
+								{
+									if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+									{
+										echo 'value="'.$survey_answer_item['content'].'"';
+									}
+									else echo 'value=""';
+								}
+							}
+							?> 
+						>
+				<?php	
+						break;
+						
+					case 'ct': // checkbox + textbox
+				?>
+						<input 
+							type="checkbox" 
+							name="<?php echo $survey_question[$i]['question_id'].'_ac[]' ?>" 
+							id="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							value="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							<?php if ($survey_question[$i]['required']==1) echo 'required'; ?>
+							<?php
+							if ($flag_update==1)
+							{
+								foreach($survey_answers as $survey_answer_item)
+								{
+									if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+									{
+										echo 'checked';
+									}
+								}
+							}
+							?>
+						><?php echo $answer_template[$j]['label']?>
+						<input 
+							type="text" 
+							style="input-medium" 
+							id="<?php echo $answer_template[$j]['answer_template_id'] ?>" 
+							name="<?php echo $answer_template[$j]['answer_template_id'].'_ct' ?>"
+							<?php
+							if ($flag_update==1)
+							{
+								foreach($survey_answers as $survey_answer_item)
+								{
+									if ($survey_answer_item['answer_template_id']==$answer_template[$j]['answer_template_id'])
+									{
+										echo 'value="'.$survey_answer_item['content'].'"';
+									}
+									else echo 'value=""';
+								}
+							}
+							?>
+						>
+				<?php
+						break;
+				}
+			} // end switch?>
+			</div>
+			<?php } // end for ?>
+		</div>
+	<div class="roundbottom" style="background: url(<?php echo img_url();?>do_survey/br.gif) no-repeat top right;"> 
+		<img src="<?php echo img_url() ?>do_survey/bl.gif" alt="" width="15" height="15" class="corner"> 
+	</div>
+</div> 
+	
+    <div class="lastbox">
+		* Anh/Chị vui lòng kiểm tra lại thông tin sau đó click chọn "Đồng ý" để hoàn thành phiếu khảo sát.
+	</div>
+
+<div class="formEnd">
+	<span class="submit"><input type="submit" value="Đồng ý" /></span>
+</div>
+<hr />
+<div class="bottom">
+	<p class="bottomTitle">Trường Đại học Dân lập Văn Lang </p>
+    Trụ sở: 45 Nguyễn Khắc Nhu, Q1, TP. HCM - ĐT: (84.8) 3836 1412 - 3836 7933   |  CS. 2: 233A Phan Văn Trị , P.11, Q. Bình Thạnh
+</div>
+	</div> <!-- wrapper-->
+
+		</form>
+	</body>
+</html>
+<!-- JAVASCRIPT -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		init_data();
+		$("#myform").validate({
+			submitHandler: function(form) {
+				// some other code
+				// maybe disabling submit button
+				// then:
+		    $(form).submit();
+		  }
+		 });
+		
+		<?php
+		for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)
+		{
+			$answer_template = $survey_answer_template[$survey_question[$i]['question_id']];
+			for($j=0,$len_a=count($answer_template);$j<$len_a;$j++)
+			{
+				if($answer_template[$j]['is_effect']==1)
+				{
+					// Script An/Hien
+					?>
+					$('#<?php echo $answer_template[$j]['answer_template_id'] ?>').click(function(){ 
+					<?php
+						foreach($question_relation as $relation)
+						{
+							if ($relation['answer_template_id']==$answer_template[$j]['answer_template_id'])
+							{
+								$attr = 'show()';
+								if($relation['attribute']==1) 
+								{
+									$attr = 'show("slow")'; 
+									?>
+									$.ajax(
+									{
+										url:"<?php echo base_url('do_survey/get_answer_for_question').'/'.$relation['question_id'] ?>",
+										type: "POST",
+										dataType: "json",
+										success: function(data){
+											if (data!=null){
+												for (var i=0;i<data.length;i++)
+												{
+													switch (data[i]['option_type'])
+													{
+														case 'r':
+															if (data[i]['required']==1) 
+															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
+															break;
+														case 'c':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr('required','required');
+															break;
+														case 't':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
+															break;	
+														case 'rt':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
+															break;
+														case 'ct':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr('required','required');
+															break;
+													}
+												}
+											}
+
+										}
+									});
+									<?
+								}
+								else
+								{ 
+									$attr = 'hide("slow")';
+									?>
+									$.ajax(
+									{
+										url:"<?php echo base_url('do_survey/get_answer_for_question').'/'.$relation['question_id'] ?>",
+										type: "POST",
+										dataType: "json",
+										success: function(data){
+											if (data!=null){
+												for (var i=0;i<data.length;i++)
+												{
+													switch (data[i]['option_type'])
+													{
+														case 'r':
+															$("#"+data[i]['answer_template_id']+"").prop('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+														case 'c':
+															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+														case 't':
+															$("#"+data[i]['answer_template_id']+"").val('');
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;	
+														case 'rt':
+															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+														case 'ct':
+															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+													}
+												}
+											}
+										}
+									});
+									<?
+								}
+								echo "$('#".$relation['question_id']."').".$attr.";";
+							}
+						}
+					?>
+					});
+					<?
+					
+				}
+			}
+		} 	
+		?>
+		
+		// button kiem tra thong tin sinh vien
+		$("#check_student_id").click(function(){
+			$.ajax({
+				url:"<?php echo base_url('do_survey/get_student_infor').'/'.$survey['survey_id'].'/' ?>"+$("#student_id").val(),
+				type: "POST",
+				dataType: "json",
+				success: function(data){
+					if (data!=null){
+						$("#name").val($.trim(data['first_name'])+' '+$.trim(data['last_name']));
+						$("#class").val(data['class_id']);
+						$("#graduated_year").val(data['graduated_year']);
+						$("#address").val(data['contact_address']);
+						$("#faculty option").each(function(){
+							if($(this).val()!=data['faculty_id']) $(this).remove();
+						});
+						$("#home_phone").val(data['phone']);
+						$("#hand_phone").val(data['hand_phone']);
+						$("#email_address").val(data['email']);
+					}
+				}
+			});
+		});
+		
+	});
+	
+	function init_data()
+	{
+		$.ajax({
+			url:"<?php echo base_url('do_survey/get_student_infor').'/'.$survey['survey_id'].'/'.$student_id ?>",
+			type: "POST",
+			dataType: "json",
+			success: function(data){
+				if (data!=null){
+					$("#student_id").val(data['student_id']);
+					$("#name").val($.trim(data['first_name'])+' '+$.trim(data['last_name']));
+					$("#class").val(data['class_id']);
+					$("#graduated_year").val(data['graduated_year']);
+					$("#address").val(data['contact_address']);
+					$("#faculty option").each(function(){
+						if($(this).val()!=data['faculty_id']) $(this).remove();
+					});
+					$("#home_phone").val(data['phone']);
+					$("#hand_phone").val(data['hand_phone']);
+					$("#email_address").val(data['email']);
+				}
+			}
+		});
+		
+		// Xet An/Hien theo thuoc tinh
+		<?php
+		for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)
+		{
+			$answer_template = $survey_answer_template[$survey_question[$i]['question_id']];
+			for($j=0,$len_a=count($answer_template);$j<$len_a;$j++)
+			{
+				if($answer_template[$j]['is_effect']==1)
+				{
+					// Script An/Hien
+					?>
+					if ($('#<?php echo $answer_template[$j]['answer_template_id'] ?>').is(":checked")){ 
+					<?php
+						foreach($question_relation as $relation)
+						{
+							if ($relation['answer_template_id']==$answer_template[$j]['answer_template_id'])
+							{
+								$attr = 'show()';
+								if($relation['attribute']==1) 
+								{
+									$attr = 'show("slow")'; 
+									?>
+									$.ajax(
+									{
+										url:"<?php echo base_url('do_survey/get_answer_for_question').'/'.$relation['question_id'] ?>",
+										type: "POST",
+										dataType: "json",
+										success: function(data){
+											if (data!=null){
+												for (var i=0;i<data.length;i++)
+												{
+													switch (data[i]['option_type'])
+													{
+														case 'r':
+															if (data[i]['required']==1) 
+															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
+															break;
+														case 'c':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr('required','required');
+															break;
+														case 't':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
+															break;	
+														case 'rt':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
+															break;
+														case 'ct':
+															if (data[i]['required']==1)
+															$("#"+data[i]['answer_template_id']+"").attr('required','required');
+															break;
+													}
+												}
+											}
+
+										}
+									});
+									<?
+								}
+								else
+								{ 
+									$attr = 'hide("slow")';
+									?>
+									$.ajax(
+									{
+										url:"<?php echo base_url('do_survey/get_answer_for_question').'/'.$relation['question_id'] ?>",
+										type: "POST",
+										dataType: "json",
+										success: function(data){
+											if (data!=null){
+												for (var i=0;i<data.length;i++)
+												{
+													switch (data[i]['option_type'])
+													{
+														case 'r':
+															$("#"+data[i]['answer_template_id']+"").prop('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+														case 'c':
+															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+														case 't':
+															$("#"+data[i]['answer_template_id']+"").val('');
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;	
+														case 'rt':
+															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+														case 'ct':
+															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
+															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
+															break;
+													}
+												}
+											}
+										}
+									});
+									<?
+								}
+								echo "$('#".$relation['question_id']."').".$attr.";";
+							}
+						}
+					?>
+					}
+					<?
+					
+				}
+			}
+		} 	
+		?>
+	}
+</script>
