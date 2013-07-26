@@ -37,11 +37,6 @@
 								<h3>
 									Danh sách Loại khảo sát
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<table class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort" data-nosort="0">

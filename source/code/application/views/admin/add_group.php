@@ -42,14 +42,9 @@
 									<i class="icon-group"></i>
 									Tạo mới nhóm tài khoản
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">	
-								<form action="#" method="POST" class="form-horizontal form-striped">
+								<form action="<?php echo base_url('admin/insert_group') ?>" method="POST" class="form-horizontal form-bordered">
 									<div class="control-group">
 										<label for="group_name" class="control-label">Tên nhóm</label>
 										<div class="controls">
@@ -62,10 +57,12 @@
 											<textarea name="group_description" rows="3" id="group_description" class="input-block-level"></textarea>
 										</div>
 									</div>
-									<div class="form-actions	">
+									<div class="form-actions">
 										<input type="submit" class="btn btn-primary" value="Lưu">
-										<input type="reset" class="btn" value="Huỷ" onclick="location.href='<?php echo base_url('admin/groups'); ?>';">
+										<a href="<?php echo base_url('admin/groups') ?>" class="btn">Huỷ</a>
+<!-- 										<input type="reset" class="btn" value="Huỷ" onclick="location.href='<?php echo base_url('admin/groups'); ?>';"> -->
 									</div>
+									<div id="infoMessage"><?php echo $message;?></div>
 								</form>
 							</div>
 						</div>

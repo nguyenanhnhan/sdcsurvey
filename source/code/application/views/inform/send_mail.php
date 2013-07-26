@@ -38,11 +38,6 @@
 									<i class="icon-pencil"></i>
 									Gửi email thông báo
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('inform/send'); ?>" method="post" class="form-horizontal form-bordered" id="myform">
@@ -80,12 +75,14 @@
 										<label class="control-label" >Từ địa chỉ</label>
 										<div class="controls">
 											<input type="text" class="input-xlarge" id="email_address" name="email_address" value="<?php echo $user_email; ?>" />
+											<span class="help-block">Chỉ hỗ trợ địa chỉ e-mail của Trường ĐH Văn Lang</span>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">Mật khẩu</label>
 										<div class="controls">
 											<input type="password" class="input-xlarge" id="password" name="password" />
+											<span class="help-block">Mật khẩu truy cập e-mail (hệ thống khảo sát không lưu lại mật khẩu này)</span>
 										</div>
 									</div>
 									<div class="control-group">
@@ -94,7 +91,7 @@
 											<input id="title" name="title" type="text" class="input-xxlarge" value="From: Van Lang University" />
 										</div>
 									</div>
-									<div class="control-group" id="div_course">
+									<div class="control-group">
 										<label class="control-label">Nội dung</label>
 										<div class="controls">
 											<textarea name="editor" id ="editor" class='span12' rows="10">
@@ -102,17 +99,25 @@
 											</textarea>
 										</div>
 									</div>
-									<div class="control-group" id="div_graduated_year">
+									<div class="control-group">
 										<label class="control-label">Số lượng gửi</label>
 										<div class="controls">
 											<div class="input-xlarge">
-												<select name="send_number" id="send_number" class="chosen-select">
+												<select name="send_number" id="send_number" class="input-small">
 													<option value="10" selected>10</option>
 													<option value="20">20</option>
 													<option value="30">30</option>
 													<option value="-1">Tất cả</option>
 												</select>
 											</div>
+											<span class="help-block">Việc gửi quá nhiều mail một lúc có thể bị đặt nghi vấn spam mail.</span>
+										</div>
+									</div>
+									<div class="control-group" >
+										<label class="control-label">Xem trước nội dung</label>
+										<div class="controls">
+											<input type="checkbox" name="preview" id="preview" class="icheck-me" data-skin="square" data-color="blue"/>
+											<span class="help-block">Hiển thị nội dung cần gửi. Các nội dung này vẫn chưa được gửi đi.</span>
 										</div>
 									</div>
 									<div class="form-actions">

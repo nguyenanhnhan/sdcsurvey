@@ -40,41 +40,24 @@
 							<div class="box-title">
 								<h3>
 									<i class="icon-group"></i>
-									Thêm người dùng vào nhóm
+									Thêm người dùng vào nhóm <?php echo $group['name'].' [id='.$group['id'].']' ?>
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">	
-								<form action="#" method="POST" class="form-horizontal form-striped">
-									<div class="control-group">
-										<label class="control-label">Tên nhóm</label>
-										<div class="controls">
-											<label class="control-label">Admin (Id: 1)</label>
-										</div>
-									</div>
+								<form action="<?php echo base_url('admin/insert_to_group/'.$group['id']) ?>" method="POST" class="form-horizontal form-bordered">
 									<div class="control-group">
 										<label for="users" class="control-label">Người dùng</label>
 										<div class="controls">
-											<select name="users" id="users" multiple="multiple" class="chosen-select input-xxlarge">
-												<option value="1">Option-1</option>
-												<option value="2">Option-2</option>
-												<option value="3">Option-3</option>
-												<option value="4">Option-4</option>
-												<option value="5">Option-5</option>
-												<option value="6">Option-6</option>
-												<option value="7">Option-7</option>
-												<option value="8">Option-8</option>
-												<option value="9">Option-9</option>
+											<select name="users[]" id="users" multiple="multiple" class="chosen-select input-xxlarge">
+												<?php foreach ($users_not_in_group as $user_not_group) { ?>
+												<option value="<?php echo $user_not_group['id'] ?>"><?php echo $user_not_group['username'] ?></option>
+												<?php } ?>
 											</select>
 										</div>
 									</div>
 									<div class="form-actions">
 										<input type="submit" class="btn btn-primary" value="Thêm vào nhóm">
-										<input type="reset" class="btn" value="Huỷ" onclick="location.href='<?php echo base_url('admin/groups'); ?>';">
+										<a href="<?php echo base_url('admin/groups') ?>" class="btn">Quay lại trang trước</a>
 									</div>
 								</form>
 								<table class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort" data-nosort="0">
@@ -87,22 +70,14 @@
 										</tr>
 									</thead>
 									<tbody>
+										<?php foreach($users_in_group as $user_in_group) { ?>
 										<tr>
-											<td>
-												<a href="#" class="btn btn-danger"><i class="icon-remove"></i></a>
-											</td>
-											<td>admin</td>
-											<td>Nguyễn Ảnh Nhân</td>
-											<td>admin@admin.com</td>
+											<td><a href="<?php echo base_url('admin/remove_user_group/'.$group['id'].'/'.$user_in_group['id']) ?>" class="btn btn-danger"><i class="icon-remove"</a></td>
+											<td><?php echo $user_in_group['username'] ?></td>
+											<td><?php echo trim($user_in_group['first_name']).' '.trim($user_in_group['last_name']) ?></td>
+											<td><?php echo $user_in_group['email'] ?></td>
 										</tr>
-										<tr>
-											<td>
-												<a href="#" class="btn btn-danger"><i class="icon-remove"></i></a>
-											</td>
-											<td>buiminhphung</td>
-											<td>Bùi Minh Phụng</td>
-											<td>buiminhphung@vanlanguni.edu.vn</td>
-										</tr>
+										<?php } ?>
 									</tbody>
 								</table> 
 							</div>

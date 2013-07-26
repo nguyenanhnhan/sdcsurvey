@@ -38,8 +38,8 @@
 |
 */
 
-$route['default_controller'] = "admin/";
-$route['404_override'] = '';
+$route['default_controller'] = "do_survey/home/d803426a-0d76-49c8-88b7-6ee452ac748b"; //"admin/";
+$route['404_override'] = 'errors/error_404';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

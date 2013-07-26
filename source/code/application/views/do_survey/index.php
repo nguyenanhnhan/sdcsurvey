@@ -11,16 +11,11 @@
 		
 		<style>
 			#my_form input.error {border: 1px dotted red;}
-			/*
-div.error { display: none; }
-			input.checkbox { border: none }
-			input:focus { border: 1px dotted black; }
-			input.error { border: 1px dotted red; }
-*/
+			#my_form label.error {margin-left: 10px !important; width: auto !important; display: none !important;}
 		</style>
 	</head>
 <body>
-	<form id="my_form" method="post" action="<?php echo base_url('do_survey/save/'.$survey['survey_id']) ?>">
+	<form id="my_form" method="post" action="<?php echo base_url('do_survey/save/'.$survey['survey_id'].'/'.$type_id) ?>">
 	<input type="hidden" id="hiden_update_value" name="hiden_update_value" value="<?php echo $flag_update ?>" />
 	<div id="form_wrapper">
 		<div class="top">
@@ -60,7 +55,7 @@ div.error { display: none; }
 				$question_num=$i+1;
 			?>
 			<div id="<?php echo $survey_question[$i]['question_id'] ?>">
-				<p class="question"><?php echo $question_num ?>. <?php echo $survey_question[$i]['content'] ?><?php if ($survey_question[$i]['required']==1) echo '<span class="star">*</span>'; ?></p>
+				<p class="question"><?php echo $survey_question[$i]['content'] ?><?php if ($survey_question[$i]['required']==1) echo '<span class="star">*</span>'; ?></p>
 				<?php
 				// Chu thich Array
 				// $survey_answer_template[$survey_question[$i]['question_id']: Array cau tra loi theo question_id
@@ -73,6 +68,7 @@ div.error { display: none; }
 					{
 						case 'r': // radio button
 				?>
+					<div>
 						<input 
 							type="radio" 
 							name="<?php echo $survey_question[$i]['question_id'].'_ar' ?>" 
@@ -94,11 +90,12 @@ div.error { display: none; }
 							?>
 						>
 						<?php echo $answer_template[$j]['label']?>
-						<br />
+					</div>
 				<?php
 						break;
 					case 'c': // checkbox
 				?>
+					<div>
 						<input 
 							type="checkbox" 
 							name="<?php echo $survey_question[$i]['question_id'] ?>_ac[]" 
@@ -120,13 +117,14 @@ div.error { display: none; }
 							?>
 							>
 							<?php echo $answer_template[$j]['label'] ?>
-						<br />
+					</div>
 				<?php
 						break; // text
 					case 't':
 						if ($answer_template[$j]['sub_answer']==0)
 						{
 				?>
+						<div>
 							<p><?php echo $answer_template[$j]['label']?></p>
 							<p class="longInput">
 								<input 
@@ -149,12 +147,12 @@ div.error { display: none; }
 									?>
 									>
 							</p>
+						</div>
 				<?php
 						}
 						else
 						{
 				?>
-						
 						<table width="100%" cellpadding="0" cellspacing="0">
 							<tr>
 								<td> Địa chỉ</td>
@@ -214,6 +212,7 @@ div.error { display: none; }
 						break;
 					case 'rt': // radio button + textbox
 				?>
+					<div>
 						<input 
 							type="radio" 
 							name="<?php echo $survey_question[$i]['question_id'].'_ar' ?>" 
@@ -252,11 +251,13 @@ div.error { display: none; }
 							}
 							?> 
 						>
+					</div>
 				<?php	
 						break;
 						
 					case 'ct': // checkbox + textbox
 				?>
+					<div>
 						<input 
 							type="checkbox" 
 							name="<?php echo $survey_question[$i]['question_id'].'_ac[]' ?>" 
@@ -295,6 +296,7 @@ div.error { display: none; }
 							}
 							?>
 						>
+					</div>
 				<?php
 						break;
 				}
@@ -312,7 +314,8 @@ div.error { display: none; }
 	</div>
 
 <div class="formEnd">
-	<span class="submit"><input type="submit" value="Đồng ý" /></span>
+	<span class="submit"><input type="submit" value="Lưu phiếu khảo sát" /></span>
+	<span class="submit"><a href="<?php echo base_url('survey_result/result_filter/'.$faculty_id.'/'.$survey['survey_id'].'/'.$type_id) ?>">Quay lại danh sách Sinh viên</a></span>
 </div>
 <hr />
 <div class="bottom">
@@ -328,7 +331,7 @@ div.error { display: none; }
 <script type="text/javascript">
 	$(document).ready(function(){
 		init_data();
-		$("#myform").validate({
+		$("#my_form").validate({
 			submitHandler: function(form) {
 				// some other code
 				// maybe disabling submit button
@@ -392,7 +395,6 @@ div.error { display: none; }
 													}
 												}
 											}
-
 										}
 									});
 									<?
@@ -498,120 +500,5 @@ div.error { display: none; }
 				}
 			}
 		});
-		
-		// Xet An/Hien theo thuoc tinh
-		<?php
-		for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)
-		{
-			$answer_template = $survey_answer_template[$survey_question[$i]['question_id']];
-			for($j=0,$len_a=count($answer_template);$j<$len_a;$j++)
-			{
-				if($answer_template[$j]['is_effect']==1)
-				{
-					// Script An/Hien
-					?>
-					if ($('#<?php echo $answer_template[$j]['answer_template_id'] ?>').is(":checked")){ 
-					<?php
-						foreach($question_relation as $relation)
-						{
-							if ($relation['answer_template_id']==$answer_template[$j]['answer_template_id'])
-							{
-								$attr = 'show()';
-								if($relation['attribute']==1) 
-								{
-									$attr = 'show("slow")'; 
-									?>
-									$.ajax(
-									{
-										url:"<?php echo base_url('do_survey/get_answer_for_question').'/'.$relation['question_id'] ?>",
-										type: "POST",
-										dataType: "json",
-										success: function(data){
-											if (data!=null){
-												for (var i=0;i<data.length;i++)
-												{
-													switch (data[i]['option_type'])
-													{
-														case 'r':
-															if (data[i]['required']==1) 
-															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
-															break;
-														case 'c':
-															if (data[i]['required']==1)
-															$("#"+data[i]['answer_template_id']+"").attr('required','required');
-															break;
-														case 't':
-															if (data[i]['required']==1)
-															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
-															break;	
-														case 'rt':
-															if (data[i]['required']==1)
-															$("#"+data[i]['answer_template_id']+"").attr("required",'required');
-															break;
-														case 'ct':
-															if (data[i]['required']==1)
-															$("#"+data[i]['answer_template_id']+"").attr('required','required');
-															break;
-													}
-												}
-											}
-
-										}
-									});
-									<?
-								}
-								else
-								{ 
-									$attr = 'hide("slow")';
-									?>
-									$.ajax(
-									{
-										url:"<?php echo base_url('do_survey/get_answer_for_question').'/'.$relation['question_id'] ?>",
-										type: "POST",
-										dataType: "json",
-										success: function(data){
-											if (data!=null){
-												for (var i=0;i<data.length;i++)
-												{
-													switch (data[i]['option_type'])
-													{
-														case 'r':
-															$("#"+data[i]['answer_template_id']+"").prop('checked',false);
-															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
-															break;
-														case 'c':
-															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
-															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
-															break;
-														case 't':
-															$("#"+data[i]['answer_template_id']+"").val('');
-															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
-															break;	
-														case 'rt':
-															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
-															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
-															break;
-														case 'ct':
-															$("#"+data[i]['answer_template_id']+"").attr('checked',false);
-															$("#"+data[i]['answer_template_id']+"").removeAttr("required");
-															break;
-													}
-												}
-											}
-										}
-									});
-									<?
-								}
-								echo "$('#".$relation['question_id']."').".$attr.";";
-							}
-						}
-					?>
-					}
-					<?
-					
-				}
-			}
-		} 	
-		?>
 	}
 </script>

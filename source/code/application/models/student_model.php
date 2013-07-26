@@ -23,4 +23,12 @@ class Student_model extends CI_Model
 		return $query->row_array();
 	}
 	
+	// Lay danh sach sinh vien co email
+	function get_student_with_email($faculty_id,$survey_id)
+	{
+		$this->db->where('email !=',"");
+		$query=$this->db->get_where('sur_student',array('survey_id'=>$survey_id,'faculty_id'=>$faculty_id));
+		return $query->result_array();
+	}
+	
 }

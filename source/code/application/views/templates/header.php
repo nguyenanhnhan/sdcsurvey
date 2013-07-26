@@ -155,6 +155,7 @@
 						<span>Dashboard</span>
 					</a>
 				</li>
+				<?php if ($is_admin==1) { ?>
 				<li>
 					<a href="#" data-toggle="dropdown" class="dropdown-toggle">
 						<span>Hệ thống</span>
@@ -191,10 +192,11 @@
 						</li>
 					</ul>
 				</li>
+				<?php } ?>
 			</ul>
 			<div class="user">
 				<div class="dropdown">
-					<a href="#" class='dropdown-toggle' data-toggle="dropdown">Nhan Nguyen<img src="<?php echo img_url() ?>demo/nhan_avatar.jpg" alt="" style="width: 27px; height: 27px"></a>
+					<a href="#" class='dropdown-toggle' data-toggle="dropdown"><?php echo $display_name; ?><img src="<?php echo img_url() ?>demo/default_avatar.png" alt="" style="width: 27px; height: 27px"></a>
 					<ul class="dropdown-menu pull-right">
 						<li>
 							<a href="<?php echo base_url('admin/edit_profile') ?>">Chỉnh sửa hồ sơ cá nhân</a>
@@ -209,6 +211,7 @@
 	</div>
 	<div class="container-fluid" id="content">
 		<div id="left">
+			<?php if ($is_admin==1) { ?>
 			<div class="subnav">
 				<div class="subnav-title">
 					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Thông tin sinh viên</span></a>
@@ -222,26 +225,31 @@
 					</li>
 				</ul>
 			</div>
+			<?php } ?>
 			<div class="subnav">
 				<div class="subnav-title">
 					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Quản lý khảo sát</span></a>
 				</div>
 				<ul class="subnav-menu">
+					<?php if ($is_admin==1) { ?>
 					<li>
 						<a href="<?php echo base_url('survey_type') ?>">Phiếu khảo sát</a>
 					</li>
+					<?php  } ?>
 					<li>
 						<a href="<?php echo base_url('inform')?>">Thông báo</a>
 					</li>
 					<li>
-						<a href="<?php echo base_url('survey_result') ?>">Kết quả khảo sát</a>
+						<a href="<?php echo base_url('survey_result') ?>">Danh sách SV khảo sát</a>
 					</li>
+					<?php if ($is_admin==1) { ?>
 					<li>
 						<a href="#">Đánh giá</a>
 					</li>
 					<li>
 						<a href="#">Kiểm tra độ tin cậy</a>
 					</li>
+					<?php } ?>
 				</ul>
 			</div>
 			<div class="subnav">

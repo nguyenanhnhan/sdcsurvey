@@ -42,22 +42,16 @@
 									<i class="icon-group"></i>
 									Phân quyền nhóm tài khoản
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content">	
-								<form action="#" method="POST" class="form-vertical">
+								<form action="<?php echo base_url('admin/insert_permission/'.$group['id']) ?>" method="POST" class="form-vertical">
 									<div class="row-fluid">
 										<div class="span6">
 											<div class="control-group">
 												<label for="" class="control-label">Nhóm vai trò</label>
 												<div class="controls controls-row">
-													<select name="" id="" class="chosen-select">
-														<option value="1">Quản trị hệ thống</option>
-														<option value="2">Trung tâm phát triển phần mềm</option>
+													<select name="group" id="group" class="chosen-select">
+														<option value="<?php echo $group['id'] ?>"><?php echo $group['name'] ?></option>
 													</select>
 												</div>
 											</div>
@@ -66,9 +60,10 @@
 											<div class="control-group">
 												<label for="" class="control-label">Khoa / Ban</label>
 												<div class="controls controls-row">
-													<select name="" id="" class="chosen-select">
-														<option value="1">Khoa Kiến trúc</option>
-														<option value="2">Khoa Xây dựng</option>
+													<select name="faculty" id="faculty" class="chosen-select">
+														<?php foreach ($faculties as $faculty) { ?>
+														<option value="<?php echo $faculty['faculty_id'] ?>"><?php echo $faculty['faculty_name'] ?></option>
+														<?php } ?>
 													</select>
 												</div>
 											</div>
@@ -79,7 +74,7 @@
 											<label for="" class="control-label">Quyền hạn</label>
 											<div class="controls controls-row">
 												<div class="check-line">
-													<input type="checkbox" class="icheck-me" data-skin="square" data-color="blue" checked="true"><label class="inline">Xem báo cáo</label>
+													<input name='view' type="checkbox" class="icheck-me" data-skin="square" data-color="blue" checked="true"><label class="inline">Xem báo cáo</label>
 												</div>
 											</div>
 										</div>
@@ -87,7 +82,7 @@
 											<label for="" class="control-label">&nbsp;</label>
 											<div class="controls controls-row">
 												<div class="check-line">
-													<input type="checkbox" class="icheck-me" data-skin="square" data-color="blue" checked="true"><label class="inline">Thao tác trên dữ liệu</label>
+													<input name='edit' type="checkbox" class="icheck-me" data-skin="square" data-color="blue" checked="true"><label class="inline">Thao tác trên dữ liệu</label>
 												</div>
 											</div>
 										</div>
@@ -95,43 +90,35 @@
 									<div class="row-fluid">
 										<hr/>
 										<input type="submit" class="btn btn-primary" name="submit" value="Lưu">
-										<input type="reset" class="btn" name="reset" value="Huỷ">
+										<a href="<?php echo base_url('admin/groups') ?>" class="btn">Quay lại trang trước</a>
 									</div>
 								</form>
 								<table class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort" data-nosort="0,1,2">
 									<thead>
 										<tr>
 											<th style="width: 36px"></th>
-											<th style="text-align:center; width: 100px">Xem báo cáo</th>
-											<th style="text-align:center; width: 100px">Thao tác trên dữ liệu</th>
+											<th style="width: 40px">Xem</th>
+											<th style="width: 40px">Sửa</th>
 											<th>Khoa / Ban</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php foreach ($permissions as $permission) { ?>
 										<tr>
+											<td><a href="<?php echo base_url('admin/delete_permission/'.$permission['id'].'/'.$permission['group_id']) ?>" class="btn btn-danger"><i class="icon-remove"></i></a></td>
 											<td>
-												<a href="#" class="btn btn-danger"><i class="icon-remove"></i></a>
-											</td>
-											<td style="text-align:center">
+												<?php if ($permission['view'] == 1) {?>
 												<span class="btn btn-success"><i class="icon-check"></i></span>
+												<?php } ?>
 											</td>
-											<td style="text-align:center">
-												<span class="btn btn-success"><i class="icon-check"></i></span>
-											</td>
-											<td>Khoa Xây dựng</td>
-										</tr>
-										<tr>
 											<td>
-												<a href="#" class="btn btn-danger"><i class="icon-remove"></i></a>
-											</td>
-											<td style="text-align:center">
+												<?php if ($permission['edit'] == 1) {?>
 												<span class="btn btn-success"><i class="icon-check"></i></span>
+												<?php } ?>
 											</td>
-											<td style="text-align:center">
-												<span class="btn btn-success"><i class="icon-check-empty"></i></span>
-											</td>
-											<td>Khoa Công nghệ thông tin</td>
+											<td><?php echo $permission['faculty_name'] ?></td>
 										</tr>
+										<?php } ?>
 									</tbody>
 								</table> 
 							</div>

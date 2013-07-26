@@ -1,7 +1,7 @@
-	<h2>Thông tin về Cựu sinh viên</h2>
-	<p class="explain">Anh/Chị vui lòng nhập thông tin vào chỗ trống (cần điền đầy đủ thông tin những chỗ có đánh dấu *), gõ Tiếng Việt có dấu, font Unicode. </p>
+	<h2>Thông tin về Sinh viên</h2>
+	<p class="explain">Bạn vui lòng nhập thông tin vào chỗ trống (cần điền đầy đủ thông tin những chỗ có đánh dấu *), gõ Tiếng Việt có dấu, font Unicode. </p>
 	<p>
-	 Mã sinh viên: <input type="text" name="student_id" id="student_id"  title="Mã sinh viên" required />
+	 Mã sinh viên:<span class="star">*</span> <input type="text" name="student_id" id="student_id"  title="Mã sinh viên" required />
 	 <span class="submit"><input type="button" id="check_student_id" value="Kiểm tra" /></span>
 	 <span class="explain2"> (Nhập mã SV rồi nhấn vào nút kiểm tra để hiển thị thông tin cá nhân)</span>
 	</p>
@@ -39,18 +39,18 @@
 	</table>
 	
 	<p class="text">
-		Địa chỉ liên hệ: <br/><br/>
-			<textarea name="address" id="address"></textarea>
+		Địa chỉ liên hệ: <span class="star">*</span><br/><br/>
+			<textarea name="address" id="address" title="Địa chỉ liên hệ" required></textarea>
 	</p>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-	    	<td> Số điện thoại gia đình:	</td>
-	    	<td class="mobile"> Số điện thoại di động:</td>
-	    	<td class="email">Địa chỉ email: </td>
+	    	<td> Số điện thoại gia đình:<span class="star">*</span></td>
+	    	<td class="mobile"> Số điện thoại di động:<span class="star">*</span></td>
+	    	<td class="email">Địa chỉ email:<span class="star">*</span></td>
 	    </tr>
 	    <tr>
-	    	<td class="homephone"> <input type="text" name="home_phone" id="home_phone" title="Điện thoại bàn"/></td>
-	        <td class="mobile"> <input type="text" name="hand_phone" id="hand_phone" title="Điện thoại di động" /></td>
-	        <td class="email"> <input type="text" name="email_address" id="email_address" title="Email" /></td>
+	    	<td class="homephone"> <input type="text" name="home_phone" id="home_phone" title="Điện thoại bàn" required/></td>
+	        <td class="mobile"> <input type="text" name="hand_phone" id="hand_phone" title="Điện thoại di động" required /></td>
+	        <td class="email"> <input type="text" name="email_address" id="email_address" title="Email" required/></td>
 	    </tr>
 	</table>

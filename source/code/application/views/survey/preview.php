@@ -48,7 +48,7 @@
 		$question_num=$i+1;
 	?>
 	<div id="<?php echo $survey_question[$i]['question_id'] ?>">
-	<p class="question"><?php echo $question_num ?>. <?php echo $survey_question[$i]['content'] ?><?php if ($survey_question[$i]['required']==1) echo '<span class="star">*</span>'; ?></p>
+	<p class="question"><?php echo $survey_question[$i]['content'] ?><?php if ($survey_question[$i]['required']==1) echo '<span class="star">*</span>'; ?></p>
 	<?php
 		// Chu thich Array
 		// $survey_answer_template[$survey_question[$i]['question_id']: Array cau tra loi theo question_id
@@ -107,23 +107,19 @@
 					break;
 				case 'rt': // radio button + textbox
 			?>
-					<div class="row-fluid">
-						<label class="radio">
-							<input type="radio"><?php echo $answer_template[$j]['label']?>
-						</label>
-						<input type="text" style="input-medium">
-					</div>
+					<p>
+					<input type="radio"><?php echo $answer_template[$j]['label']?>
+					<input type="text" style="input-medium">
+					</p>
 			<?php	
 					break;
 					
 				case 'ct': // checkbox + textbox
 			?>
-					<div class="row-fluid">
-						<label class="checkbox">
-							<input type="checkbox"><?php echo $answer_template[$j]['label']?>
-						</label>
-						<input type="text" style="input-medium">
-					</div>
+					<p>
+					<input type="checkbox"><?php echo $answer_template[$j]['label']?>
+					<input type="text" style="input-medium">
+					</p>
 			<?php
 					break;
 			}

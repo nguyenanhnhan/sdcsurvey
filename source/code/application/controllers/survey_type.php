@@ -15,7 +15,11 @@ class Survey_type extends CI_Controller
 			$this->load->model('survey_type_model');
 			$data['survey_type'] = $this->survey_type_model->get();
 			
-			$this->load->view('templates/header');
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey_type/list', $data);
 			$this->load->view('templates/footer');
 		}
@@ -51,7 +55,10 @@ class Survey_type extends CI_Controller
 			
 			$data['stype_item'] = $this->survey_type_model->get($stype_id);
 			
-			$this->load->view('templates/header');
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey_type/edit', $data);
 			$this->load->view('templates/footer');	
 		}

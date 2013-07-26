@@ -42,11 +42,6 @@
 									<i class="icon-plus"></i>
 									Danh sách sinh viên tham gia khảo sát
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<table id="student_list" class="table table-hover table-nomargin dataTable">
@@ -71,7 +66,7 @@
 									  		if ($students_no_survey!=NULL){
 										  		foreach ($students_no_survey as $student_no_survey_item){ ?>
 									  	<tr>
-											<td><a target="_blank" href=" <?php echo base_url('do_survey/index/'.$faculty['faculty_id'].'/'.$survey['survey_id'].'/'.$student_no_survey_item['student_id']) ?>" class="btn btn-success"><i class="icon-eye-open"></i></a></td>
+											<td><a target="_self" href="<?php echo base_url('do_survey/index/'.$faculty['faculty_id'].'/'.$survey['survey_id'].'/'.$student_no_survey_item['student_id']).'/'.$type_id ?>" class="btn btn-success"><i class="icon-eye-open"></i></a></td>
 											<td><?php echo $student_no_survey_item['student_id'] ?></td>
 											<td><?php echo $student_no_survey_item['first_name'] ?></td>
 											<td><?php echo $student_no_survey_item['last_name'] ?></td>
@@ -88,7 +83,7 @@
 									  	if ($students_surveyed!=NULL){	
 									  		foreach ($students_surveyed as $student_surveyed_item){ ?>
 									  	<tr>
-											<td><a target="_blank" href="<?php echo base_url('do_survey/index/'.$faculty['faculty_id'].'/'.$survey['survey_id'].'/'.$student_surveyed_item['student_id']) ?>" class="btn btn-success"><i class="icon-eye-open"></i></a></td>
+											<td><a target="_self" href="<?php echo base_url('do_survey/index/'.$faculty['faculty_id'].'/'.$survey['survey_id'].'/'.$student_surveyed_item['student_id']).'/'.$type_id ?>" class="btn btn-success"><i class="icon-eye-open"></i></a></td>
 											<td><?php echo $student_surveyed_item['student_id'] ?></td>
 											<td><?php echo $student_surveyed_item['first_name'] ?></td>
 											<td><?php echo $student_surveyed_item['last_name'] ?></td>

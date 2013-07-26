@@ -38,17 +38,12 @@
 									<i class="icon-group"></i>
 									Tài khoản người dùng
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<table class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort" data-nosort="0">
 									<thead>
 										<tr>
-											<th style="width: 102px">Điều khiển</th>
+											<th style="width: 75px">Điều khiển</th>
 											<th>Tài khoản</th>
 											<th>Họ và tên</th>
 											<th>Email</th>
@@ -56,28 +51,18 @@
 										</tr>
 									</thead>
 									<tbody>
+										<?php foreach ($users as $user) { ?>
 										<tr>
 											<td>
-												<a href="#" class="btn btn-danger"><i class="icon-remove"></i></a>
-												<a href="<?php echo base_url('admin/edit_user') ?>" class="btn"><i class="icon-edit"></i></a>
-												<a href="#" class="btn"><i class="icon-group"></i></a>
+												<a href="<?php echo base_url('admin/delete_user/'.$user['id'])?>" class="btn btn-danger"><i class="icon-remove"></i></a>
+												<a href="<?php echo base_url('admin/edit_user/'.$user['id']) ?>" class="btn btn-success"><i class="icon-edit"></i></a>
 											</td>
-											<td>admin</td>
-											<td>Administrator</td>
-											<td>admin@admin.com</td>
-											<td>02/07/2013</td>
+											<td><?php echo $user['username'] ?></td>
+											<td><?php echo trim($user['first_name'].' '.trim($user['last_name'])) ?></td>
+											<td><?php echo $user['email'] ?></td>
+											<td><?php echo mdate('%d/%m/%Y',strtotime(unix_to_human($user['created_on']))) ?></td>
 										</tr>
-										<tr>
-											<td>
-												<a href="#" class="btn btn-danger"><i class="icon-remove"></i></a>
-												<a href="<?php echo base_url('admin/edit_user') ?>" class="btn"><i class="icon-edit"></i></a>
-												<a href="#" class="btn"><i class="icon-group"></i></a>
-											</td>
-											<td>nguyenanhnhan</td>
-											<td>Nguyễn Ảnh Nhân</td>
-											<td>nguyenanhnhan@vanlanguni.edu.vn</td>
-											<td>02/07/2013</td>
-										</tr>
+										<?php } ?>
 									</tbody>
 								</table>	
 							</div>

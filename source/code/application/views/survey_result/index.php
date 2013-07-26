@@ -37,11 +37,6 @@
 								<h3>
 									Lọc Danh sách Sinh viên theo Phiếu khảo sát
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content">
 								<form id="my_form" action="<?php echo base_url('survey_result/filter')?>" method="post" class="form-vertical">
@@ -52,7 +47,7 @@
 												<div class="controls controls-row">
 													<select name='faculty' id='faculty' class="input-block-level">
 														<?php foreach ($faculties as $faculty_item):?>
-														<option value="<?php echo $faculty_item['faculty_id'] ?>"><?php echo $faculty_item['faculty_name'] ?></option>
+														<option value="<?php echo trim($faculty_item['faculty_id']) ?>"><?php echo $faculty_item['faculty_name'] ?></option>
 														<?php endforeach ?>
 													</select>
 												</div>

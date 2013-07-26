@@ -71,6 +71,26 @@
 														<div class="icon">
 															<i class="icon-info-sign"></i>
 														</div>
+														<div class="date">23 / 7</div>
+													</div>
+													<div class="activity">
+														<div class="user"><a href="#">Nguyễn Ảnh Nhân</a> 
+														<span>Phiên bản 4.0.5.1, </span></div>
+														<ul class="timeline-images">
+															<p>Phiên bản 4.0.5.1 Cập nhật</p>
+															<p>- Sửa lỗi chồng hiệu ứng hiển thị khi xem lại phiếu đã khảo sát => không nhìn thấy các thông tin ẩn</p>
+															<p>- Mở chức năng khảo sát dành cho Quản lý sinh viên các khoa</p>
+														</ul>
+													</div>
+												</div>
+												<div class="line"></div>
+											</li>
+											<li>
+												<div class="timeline-content">
+													<div class="left">
+														<div class="icon">
+															<i class="icon-info-sign"></i>
+														</div>
 														<div class="date">15 / 7</div>
 													</div>
 													<div class="activity">

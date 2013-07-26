@@ -8,7 +8,7 @@ class Do_survey extends CI_Controller
 		$this->load->helper(array('url', 'date', 'file', 'form'));
 	}
 	
-	function index($faculty_id, $survey_id, $student_id)
+	function index($faculty_id, $survey_id, $student_id, $type_id)
 	{
 		if ($this->ion_auth->logged_in())
 		{
@@ -69,6 +69,9 @@ class Do_survey extends CI_Controller
 				$data['survey_answers']=$this->survey_answer_model->get($data_student_temp['infor_id']);
 			}
 			
+			$data['faculty_id'] = $faculty_id;
+			$data['type_id'] = $type_id;
+			
 			$this->load->view('do_survey/index', $data);
 		}
 		else
@@ -77,7 +80,117 @@ class Do_survey extends CI_Controller
 		}
 	}
 	
-	function save($survey_id)
+	function student($faculty_id, $survey_id, $student_id)
+	{
+		$this->load->model(array('survey_model', 'survey_type_model','design_template_model', 
+			'survey_question_model', 'survey_answer_template_model', 'survey_answer_relation_model', 
+			'survey_answer_model', 'province_model', 'infor_model'));
+			
+		// Lay mau khao sat hien muon sua
+		$data['survey'] = $this->survey_model->get(FALSE, $survey_id);
+		
+		// Lay cac mau cau hoi va cau tra loi tuong ung voi phieu khao sat
+		$data['survey_question'] = $this->survey_question_model->get($survey_id);
+		
+		// Lay cau tra loi tuong ung voi cau hoi
+		$data['survey_answer_template'] = NULL;
+		for ($i = 0, $len = count($data['survey_question']); $i < $len ; $i++)
+		{
+			$data['survey_answer_template'][$data['survey_question'][$i]['question_id']] = $this->survey_answer_template_model->get($data['survey_question'][$i]['question_id']);
+		}
+		
+		// Lay cau tra loi la sub cua cau tra loi kia
+		$data['survey_answer_template_sub'] = NULL;
+		for ($i=0, $len_q=count($data['survey_question']); $i<$len ; $i++)
+		{
+			$answer_template_array = $data['survey_answer_template'][$data['survey_question'][$i]['question_id']];
+			for ($j=0, $len_a=count($answer_template_array); $j<$len_a; $j++)
+			{
+				if ($answer_template_array[$j]['sub_answer'] == 1)
+				{
+					$data['survey_answer_template_sub'][$answer_template_array[$j]['answer_template_id']] = $this->survey_answer_template_model->get($answer_template_array[$j]['answer_template_id']);
+				}
+			}
+		}
+		
+		// Lay cac cau hoi co lien he voi cau tra loi
+		$data['question_relation']          = $this->survey_answer_relation_model->get_all();
+		$data['distinct_question_relation'] = $this->survey_answer_relation_model->get_distinct();
+		
+		// Du lieu Tinh/Than
+		$data['provinces'] = $this->province_model->get();
+		
+		// Lay mau design nhap thong tin
+		$template             = $this->design_template_model->get_design_template($data['survey']['design_template_id']);
+		$read_content         = read_file($template['template_link']);
+		$data['read_content'] = $read_content;
+		
+		// Ma sinh vien
+		$data['student_id'] = $student_id;
+		
+		// Dat co kiem tra thong tin, neu co san tren bang infor thi du lieu nay chi can update
+		$data_student_temp = $this->infor_model->get_student_infor($survey_id, $student_id);
+		if (!empty($data_student_temp)) $data['flag_update'] = 1;
+		else $data['flag_update'] = 0;
+		
+		// neu day la du lieu update, tien hanh lay du lieu khao sat
+		if ($data['flag_update']==1)
+		{
+			$data['survey_answers']=$this->survey_answer_model->get($data_student_temp['infor_id']);
+		}
+		
+		$this->load->view('do_survey/student', $data);
+	}
+	
+	function home($survey_id)
+	{
+		$this->load->model(array('survey_model', 'survey_type_model','design_template_model', 
+			'survey_question_model', 'survey_answer_template_model', 'survey_answer_relation_model', 
+			'survey_answer_model', 'province_model', 'infor_model'));
+			
+		// Lay mau khao sat hien muon sua
+		$data['survey'] = $this->survey_model->get(FALSE, $survey_id);
+		
+		// Lay cac mau cau hoi va cau tra loi tuong ung voi phieu khao sat
+		$data['survey_question'] = $this->survey_question_model->get($survey_id);
+		
+		// Lay cau tra loi tuong ung voi cau hoi
+		$data['survey_answer_template'] = NULL;
+		for ($i = 0, $len = count($data['survey_question']); $i < $len ; $i++)
+		{
+			$data['survey_answer_template'][$data['survey_question'][$i]['question_id']] = $this->survey_answer_template_model->get($data['survey_question'][$i]['question_id']);
+		}
+		
+		// Lay cau tra loi la sub cua cau tra loi kia
+		$data['survey_answer_template_sub'] = NULL;
+		for ($i=0, $len_q=count($data['survey_question']); $i<$len ; $i++)
+		{
+			$answer_template_array = $data['survey_answer_template'][$data['survey_question'][$i]['question_id']];
+			for ($j=0, $len_a=count($answer_template_array); $j<$len_a; $j++)
+			{
+				if ($answer_template_array[$j]['sub_answer'] == 1)
+				{
+					$data['survey_answer_template_sub'][$answer_template_array[$j]['answer_template_id']] = $this->survey_answer_template_model->get($answer_template_array[$j]['answer_template_id']);
+				}
+			}
+		}
+		
+		// Lay cac cau hoi co lien he voi cau tra loi
+		$data['question_relation']          = $this->survey_answer_relation_model->get_all();
+		$data['distinct_question_relation'] = $this->survey_answer_relation_model->get_distinct();
+		
+		// Du lieu Tinh/Than
+		$data['provinces'] = $this->province_model->get();
+		
+		// Lay mau design nhap thong tin
+		$template             = $this->design_template_model->get_design_template($data['survey']['design_template_id']);
+		$read_content         = read_file($template['template_link']);
+		$data['read_content'] = $read_content;
+		
+		$this->load->view('do_survey/home', $data);
+	}
+	
+	function save($survey_id,$type_filte_id)
 	{
 		if ($this->ion_auth->logged_in())
 		{
@@ -100,7 +213,7 @@ class Do_survey extends CI_Controller
 			{
 				$data['student_infor']['first_name'].=$full_name[$i].' ';
 			}
-			$data['student_infor']['last_name']=end($full_name);
+			$data['student_infor']['last_name']      = end($full_name);
 			
 			$data['student_infor']['class_id']       = $this->input->post('class');
 			$data['student_infor']['graduated_year'] = $this->input->post('graduated_year');
@@ -154,17 +267,20 @@ class Do_survey extends CI_Controller
 							
 							if (!empty($data_temp))
 							{
-								for ($j=0,$len=count($data_temp);$j<$len;$j++)
+								for ($j=0,$len_c=count($data_temp);$j<$len_c;$j++)
 								{
 									$answr_temp=$this->survey_answer_template_model->get_answer_template($data_temp[$j]);
-									if ($answr_temp['option_type']=='ct')
+									if (!empty($answr_temp))
 									{
-										$data_text=$this->input->post($answr_temp['answer_template_id'].'_ct');
-										$this->survey_answer_model->staff_insert($user_name, $infor_id, $question['question_id'],$data_temp[$j],$data_text);
-									}
-									else
-									{
-										$this->survey_answer_model->staff_insert($user_name,$infor_id,$question['question_id'],$data_temp[$j], 'TRUE');
+										if ($answr_temp['option_type']=='ct')
+										{
+											$data_text=$this->input->post($answr_temp['answer_template_id'].'_ct');
+											$this->survey_answer_model->staff_insert($user_name, $infor_id, $question['question_id'],$data_temp[$j],$data_text);
+										}
+										else
+										{
+											$this->survey_answer_model->staff_insert($user_name,$infor_id,$question['question_id'],$data_temp[$j], 'TRUE');
+										}
 									}
 								}
 							}
@@ -195,6 +311,10 @@ class Do_survey extends CI_Controller
 						}
 					}
 				}
+				
+				// Quay lai trang result_filter
+				redirect('survey_result/result_filter/'.$data['student_infor']['faculty_id'].'/'.$survey_id.'/'.$type_filte_id);
+				
 			}
 			else // Cap nhat thong tin
 			{
@@ -289,6 +409,7 @@ $data['survey_questions'] = $this->survey_question_model->get($survey_id);
 					}
 				}
 */
+				redirect('survey_result/result_filter/'.$data['student_infor']['faculty_id'].'/'.$survey_id.'/'.$type_filte_id);
 			}
 		}
 		else
@@ -296,7 +417,139 @@ $data['survey_questions'] = $this->survey_question_model->get($survey_id);
 			redirect('auth');
 		}
 	}
+	
+	function student_save($survey_id)
+	{
+		$this->load->model(array('survey_model', 'survey_type_model', 'survey_question_model', 
+		'survey_answer_template_model', 'survey_answer_relation_model', 'province_model', 'infor_model', 'survey_answer_model'));
 		
+		// LAY THONG TIN NHAP
+		$data['student_infor']['student_id'] = $this->input->post('student_id');
+		$data['student_infor']['type_id']    = '4db02701-ce28-43c0-8741-29e5ca83245f'; // Set cung: Khao sat qua email
+		
+		// Tach ho va ten
+		$full_name                           = explode(" ",trim($this->input->post('name')));
+		$data['student_infor']['first_name'] = NULL;
+		$data['student_infor']['last_name']  = NULL;
+		for ($i=0,$len=count($full_name);$i<$len-1;$i++)
+		{
+			$data['student_infor']['first_name'].=$full_name[$i].' ';
+		}
+		$data['student_infor']['last_name']=end($full_name);
+		
+		$data['student_infor']['class_id']       = $this->input->post('class');
+		$data['student_infor']['graduated_year'] = $this->input->post('graduated_year');
+		$data['student_infor']['address']        = $this->input->post('address');
+		$data['student_infor']['faculty_id']     = $this->input->post('faculty');
+		$data['student_infor']['home_phone']     = $this->input->post('home_phone');
+		$data['student_infor']['hand_phone']     = $this->input->post('hand_phone');
+		$data['student_infor']['email_address']  = $this->input->post('email_address');
+		
+		$check_surveyed = $this->infor_model->get_student_infor($survey_id, $this->input->post('student_id'));
+		
+		if (empty($check_surveyed)) // Tao moi thong tin
+		{
+			// LUU THONG TIN NHAP
+			$infor_id = $this->uuid->v4();
+			$result_ins = $this->infor_model->student_insert(trim($this->input->post('name')),$infor_id,$survey_id, $data['student_infor']);
+			// KET THUC LUU THONG TIN NHAP
+			
+			// LAY THONG TIN KHAO SAT
+			$data['survey_questions'] = $this->survey_question_model->get($survey_id);
+			if (!empty($data['survey_question'])==NULL)
+			{
+				for ($i=0,$len=count($data['survey_questions']);$i<$len;$i++)
+				{
+					$question = $data['survey_questions'][$i];
+					$answer_templates = $this->survey_answer_template_model->get($question['question_id'],FALSE);
+					
+					// Cau tra loi dau tien co dang Radio Button hoac Radio Button + Text Box
+					if ($answer_templates[0]['option_type']=='r' || $answer_templates[0]['option_type']=='rt')
+					{
+						$data_temp = $this->input->post($question['question_id'].'_ar');
+						if (!empty($data_temp))
+						{
+							$answ_temp=$this->survey_answer_template_model->get_answer_template($data_temp);
+							if ($answ_temp['option_type']=='rt')
+							{
+								$data_text=$this->input->post($question['question_id'].'_rt');
+								$this->survey_answer_model->student_insert(trim($this->input->post('name')), $infor_id, $question['question_id'], $answ_temp['answer_template_id'],$data_text);
+							}
+							else
+							{
+								$this->survey_answer_model->student_insert(trim($this->input->post('name')), $infor_id, $question['question_id'], $data_temp, 'TRUE');
+							}
+							
+						}
+					}
+					
+					// Cau tra loi dau tien co dang Checkbox Button hoac Checkbox Button + Text Box
+					if ($answer_templates[0]['option_type']=='c' || $answer_templates[0]['option_type']=='ct')
+					{
+						$data_temp = $this->input->post($question['question_id'].'_ac');
+						
+						if (count($data_temp)>0)
+						{
+							for ($j=0,$len_c=count($data_temp);$j<$len_c;$j++)
+							{
+								$answr_temp = $this->survey_answer_template_model->get_answer_template($data_temp[$j]);
+								if (!empty($answr_temp))
+								{
+									if ($answr_temp['option_type']=="c")
+									{
+										$this->survey_answer_model->student_insert(trim($this->input->post('name')),$infor_id,$question['question_id'],$data_temp[$j], 'TRUE');
+									}
+									else 
+									{
+										$data_text=$this->input->post($answr_temp['answer_template_id'].'_ct');
+										$this->survey_answer_model->student_insert(trim($this->input->post('name')), $infor_id, $question['question_id'],$data_temp[$j],$data_text);
+									}
+								}
+								
+								/*
+if ($answr_temp['option_type']=='ct')
+								{
+									$data_text=$this->input->post($answr_temp['answer_template_id'].'_ct');
+									$this->survey_answer_model->student_insert(trim($this->input->post('name')), $infor_id, $question['question_id'],$data_temp[$j],$data_text);
+								}
+								else
+								{
+									$this->survey_answer_model->student_insert(trim($this->input->post('name')),$infor_id,$question['question_id'],$data_temp[$j], 'TRUE');
+								}
+*/
+							}
+						}
+					}
+					
+					// Cau tra loi dau tien co dang Text
+					if ($answer_templates[0]['option_type']=='t')
+					{
+						foreach ($answer_templates as $answer_template_item)
+						{
+							$data_text = $this->input->post($answer_template_item['answer_template_id'].'_at');
+							if(!empty($data_text))
+							{
+								$this->survey_answer_model->student_insert(trim($this->input->post('name')),$infor_id,$question['question_id'],$answer_template_item['answer_template_id'],$data_text);
+								// kiem tra xem cau tra loi tren co cau tra loi con hay khong
+								$answ_temp=$this->survey_answer_template_model->get_answer_template($answer_template_item['answer_template_id']);
+								if ($answ_temp['sub_answer']==1)// Co
+								{
+									// Lay cau tra loi co ma cau hoi la cau tra loi parrent
+									$data_sub=$this->survey_answer_template_model->get($answ_temp['answer_template_id'],FALSE);
+									$data_sub_text=$this->input->post($data_sub[0]['answer_template_id']);
+									// Them vao db
+									$this->survey_answer_model->student_insert(trim($this->input->post('name')),$infor_id,$answer_template_item['answer_template_id'],$data_sub[0]['answer_template_id'],$data_sub_text);
+								}
+							}
+						}
+						
+					}
+				}
+			}
+		}
+		// Load view bao thanh cong
+		$this->load->view('do_survey/success.php');
+	}
 	////////////////////
 	// AJAX Function ///
 	////////////////////

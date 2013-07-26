@@ -49,11 +49,6 @@
 									<i class="icon-pencil"></i>
 									Thông tin chung của phiếu khảo sát
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<table class="table table-bordered table-striped table-force-topborder" style="clear: both">

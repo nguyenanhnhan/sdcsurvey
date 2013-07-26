@@ -43,13 +43,11 @@
 									Tạo tài khoản người dùng
 								</h3>
 								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
 									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
 								</div>
 							</div>
 							<div class="box-content">
-								<form action="" method="post" class="form-horizontal">
+								<form action="<?php echo base_url('admin/insert_user') ?>" method="post" class="form-horizontal">
 									<div class="row-fluid">
 										<div class="span2">
 											<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -72,7 +70,7 @@
 											<div class="control-group">
 												<label for="account_name" class="control-label">Tên tài khoản</label>
 												<div class="controls">
-													<input type="text" name="account_name" class="input-xlarge" placeholder="Tên dùng đăng nhập">
+													<input type="text" name="user_name" class="input-xlarge" placeholder="Tên dùng đăng nhập">
 												</div>
 											</div>
 											<div class="control-group">
@@ -122,7 +120,8 @@
 											</div>
 											<div class="form-actions">
 												<button type="submit" class="btn btn-primary">Lưu</button>
-												<button type="reset" class="btn" onclick="location.href='<?php echo base_url('admin/users') ?>'">Huỷ</button>
+												<a href="<?php echo base_url('admin/users') ?>" class="btn">Huỷ</a>
+<!-- 												<button type="reset" class="btn" onclick="location.href='<?php echo base_url('admin/users') ?>'">Huỷ</button> -->
 											</div>
 										</div>
 									</div>

@@ -42,11 +42,6 @@
 									<i class="icon-edit"></i>
 									Sửa loại khảo sát
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content">
 								<form action="<?php echo base_url('survey_type/update') ?>" method="post" class="form-horizontal">

@@ -38,11 +38,6 @@
 									<i class="icon-user"></i>
 									Hồ sơ cá nhân
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<ul class="tabs tabs-inline tabs-top">
@@ -58,73 +53,65 @@
 								</ul>
 								<div class="tab-content padding tab-content-inline tab-content-bottom">
 									<div class="tab-pane active" id="profile">
-										<form action="<?php echo base_url('admin/update_user')?>" class="form-horizontal form-validate" method="post">
-											<div class="row-fluid">
-												<div class="span2">
-													<div class="fileupload fileupload-new" data-provides="fileupload">
-														<div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 200px;">
-															<!-- avatar default -->
-															<?php echo $this->config->item('avatar_default'); ?>
-														</div>
-														<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 200px; line-height: 20px;"></div>
-														<div>
-															<span class="btn btn-file">
-																<span class="fileupload-new">Đổi hình đại diện</span>
-																<span class="fileupload-exists">Thay đổi</span>
-																<input type="file" name='imagefile' />
-															</span>
-															<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Huỷ bỏ</a>
-														</div>
+										<form action="<?php echo base_url('admin/update_profile')?>" class="form-horizontal form-validate" method="post">
+											<div class="span2">
+												<div class="fileupload fileupload-new" data-provides="fileupload">
+													<div class="fileupload-new thumbnail" style="max-width: 200px; max-height: 200px;">
+														<!-- avatar default -->
+														<?php echo $this->config->item('avatar_default'); ?>
 													</div>
-												</div>
-												<div class="span10">
-													<div class="control-group">
-														<label for="user_name" class="control-label">Tên tài khoản</label>
-														<div class="controls">
-															<div class="input-xlarge uneditable-input"><?php echo $username; ?></div>
-														</div>
+													<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 200px; line-height: 20px;"></div>
+													<div>
+														<span class="btn btn-file">
+															<span class="fileupload-new">Đổi hình đại diện</span>
+															<span class="fileupload-exists">Thay đổi</span>
+															<input type="file" name='imagefile' />
+														</span>
+														<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Huỷ bỏ</a>
 													</div>
-													<div class="control-group">
-														<label for="first_name" class="control-label">Họ và tên đệm</label>
-														<div class="controls">
-															<input type="text" name="first_name" class='input-xlarge' value="<?php echo $first_name; ?>">
-														</div>
-													</div>
-													<div class="control-group">
-														<label for="last_name" class="control-label">Tên</label>
-														<div class="controls">
-															<input type="text" name="last_name" class='input-xlarge' value="<?php echo $last_name; ?>">
-														</div>
-													</div>
-													<div class="control-group">
-														<label for="phone" class="control-label">Số điện thoại</label>
-														<div class="controls">
-															<input type="text" name="phone" class="input-xlarge" value="<?php echo $phone; ?>">
-														</div>
-													</div>
-													<div class="control-group">
-														<label for="email" class="control-label">Địa chỉ email</label>
-														<div class="controls">
-															<input type="text" name="email" id="email" class='input-xlarge' value="<?php echo $email; ?>" data-rule-required="true" data-rule-email="true">
-														</div>
-													</div>
-													<div class="form-actions">
-														<input type="submit" class="btn btn-primary" value="Lưu">
-														<input type="reset" class="btn" value="Không thay đổi">
-													</div>
-													<div id="infoMessage"><?php echo $message;?></div>
-												</div>
-											</form>
-										</div>
-									</div>
-									<div class="tab-pane" id="change_password">
-										<form action="#" method="post" class="form-horizontal form-validate" id="form_change_password">
-											<div class="control-group">
-												<label for="old_password" class="control-label">Mật khẩu đang sử dụng</label>
-												<div class="opass controls">
-													<input type="password" name="old_password" id="old_password" class="input-xlarge" data-rule-required="true">
 												</div>
 											</div>
+											<div class="span10">
+												<div class="control-group">
+													<label for="user_name" class="control-label">Tên tài khoản</label>
+													<div class="controls">
+														<div class="input-xlarge uneditable-input"><?php echo $username; ?></div>
+													</div>
+												</div>
+												<div class="control-group">
+													<label for="first_name" class="control-label">Họ và tên đệm</label>
+													<div class="controls">
+														<input type="text" name="first_name" class='input-xlarge' value="<?php echo $first_name; ?>">
+													</div>
+												</div>
+												<div class="control-group">
+													<label for="last_name" class="control-label">Tên</label>
+													<div class="controls">
+														<input type="text" name="last_name" class='input-xlarge' value="<?php echo $last_name; ?>">
+													</div>
+												</div>
+												<div class="control-group">
+													<label for="phone" class="control-label">Số điện thoại</label>
+													<div class="controls">
+														<input type="text" name="phone" class="input-xlarge" value="<?php echo $phone; ?>">
+													</div>
+												</div>
+												<div class="control-group">
+													<label for="email" class="control-label">Địa chỉ email</label>
+													<div class="controls">
+														<input type="text" name="email" id="email" class='input-xlarge' value="<?php echo $email; ?>" data-rule-required="true" data-rule-email="true">
+													</div>
+												</div>
+												<div class="form-actions">
+													<input type="submit" class="btn btn-primary" value="Lưu">
+													<input type="reset" class="btn" value="Không thay đổi">
+												</div>
+												<div id="infoMessage"><?php echo $message;?></div>
+											</div>
+										</form>
+									</div>
+									<div class="tab-pane" id="change_password">
+										<form action="<?php echo base_url('admin/change_pass_profile') ?>" method="post" class="form-horizontal form-validate" id="form_change_password">
 											<div class="control-group">
 												<label for="new_password" class="control-label">Mật khẩu mới</label>
 												<div class="npass controls">

@@ -5,6 +5,7 @@ class Survey_result extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library(array ('ion_auth', 'form_validation', 'session'));
+		$this->load->model(array('group_permission_model'));
 		$this->load->helper('url');
 	}
 	
@@ -13,10 +14,38 @@ class Survey_result extends CI_Controller
 		if ($this->ion_auth->logged_in())
 		{
 			$this->load->model(array('survey_type_model', 'survey_model', 'faculty_model', 'student_model', 'infor_model', 'survey_faculty_model'));
-			// Load het cac Khoa/Ban
-			$data['faculties'] = $this->faculty_model->get();
 			
-			$this->load->view('templates/header');
+			$data['faculties']=array();
+			// Load cac khoa ban theo quyen han
+			$groups = $this->ion_auth->get_users_groups()->result_array();
+			foreach($groups as $group)
+			{
+				// Lay quyen han cua group
+				$permissions = $this->group_permission_model->get_group_permission($group['id']);
+				
+				foreach ($permissions as $permissions)
+				{
+					$flag_existing = 0;
+					for ($i=0,$len=count($data['faculties']);$i<$len;$i++)
+					{
+						if ($data['faculties'][$i]['faculty_id']==$permissions['faculty_id']) 
+						{
+							$flag_existing = 1;
+							break;
+						}
+					}
+					if($flag_existing==0) array_push($data['faculties'], $permissions);
+				}
+			}
+			
+			// Load het cac Khoa/Ban
+			/* $data['faculties'] = $this->faculty_model->get(); */
+			
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey_result/index', $data);
 			$this->load->view('templates/footer');
 		}
@@ -66,7 +95,6 @@ class Survey_result extends CI_Controller
 			{
 				// Lay sinh vien da khao sat
 				$data['students_surveyed'] = $this->infor_model->gets_of_faculty($faculty_id, $survey_id);
-				
 				// Lay sinh vien chua khao sat
 				$data['students_no_survey']=$this->student_model->get_student_of_faculty($faculty_id, $survey_id);
 			}
@@ -92,7 +120,12 @@ class Survey_result extends CI_Controller
 				
 			}// Ket thuc lay thong tin sinh vien
 			
-			$this->load->view('templates/header');
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			$data['type_id'] = $type_id;
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey_result/result_filter',$data);
 			$this->load->view('templates/footer');
 		}

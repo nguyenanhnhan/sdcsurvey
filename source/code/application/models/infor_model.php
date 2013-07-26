@@ -52,6 +52,30 @@ class Infor_model extends CI_Model
 		return $this->db->insert('sur_infor',$data);
 	}
 	
+	function student_insert($user_name,$infor_id,$survey_id,$data_infor)
+	{
+		$data = array (
+			'infor_id'          => $infor_id,
+			'student_id'        => $data_infor['student_id'],
+			'type_id'           => $data_infor['type_id'],
+			'faculty_id'        => $data_infor['faculty_id'],
+			'class_id'          => $data_infor['class_id'],
+			'survey_id'         => $survey_id,
+			'first_name'        => $data_infor['first_name'],
+			'last_name'         => $data_infor['last_name'],
+			'contact_address'   => $data_infor['address'],
+			'graduated_year'    => $data_infor['graduated_year'],
+			'phone'             => $data_infor['home_phone'],
+			'hand_phone'        => $data_infor['hand_phone'],
+			'email'             => $data_infor['email_address'],
+			'survey_date'       => mdate('%Y/%m/%d %H:%i:%s',now()),
+			'created_by_user_id'    => $user_name,
+			'created_on_date' => mdate('%Y/%m/%d %H:%i:%s',now())
+		);
+		
+		return $this->db->insert('sur_infor',$data);
+	}
+	
 	function staff_update($user_name,$infor_id,$survey_id, $data_infor)
 	{
 		$data = array (

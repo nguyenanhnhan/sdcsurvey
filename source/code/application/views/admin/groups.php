@@ -38,38 +38,28 @@
 									<i class="icon-group"></i>
 									Nhóm tài khoản
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<table class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort" data-nosort="0">
 									<thead>
 										<tr>
-											<th style="width: 75px">Điều khiển</th>
+											<th style="width: 105px">Điều khiển</th>
 											<th>Tên nhóm</th>
 											<th>Mô tả</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php foreach ($groups as $group) { ?>
 										<tr>
 											<td>
-												<a href="<?php echo base_url('admin/group_permission') ?>" class="btn"><i class="icon-cogs"></i></a>
-												<a href="<?php echo base_url('admin/group_user') ?>" class="btn"><i class="icon-group"></i></a>
+												<a href="<?php echo base_url('admin/delete_group/'.$group['id']) ?>" class="btn btn-danger"><i class="icon-remove"></i></a>
+												<a href="<?php echo base_url('admin/group_permission/'.$group['id']) ?>" class="btn"><i class="icon-cogs"></i></a>
+												<a href="<?php echo base_url('admin/group_user/'.$group['id']) ?>" class="btn"><i class="icon-group"></i></a>
 											</td>
-											<td>Admin</td>
-											<td>Quản trị hệ thống</td>
+											<td><?php echo $group['name']?></td>
+											<td><?php echo $group['description'] ?></td>
 										</tr>
-										<tr>
-											<td>
-												<a href="#" class="btn"><i class="icon-cogs"></i></a>
-												<a href="<?php echo base_url('admin/group_user') ?>" class="btn"><i class="icon-group"></i></a>
-											</td>
-											<td>Trung tâm phát triển phần mềm</td>
-											<td>Trung tâm phát triển phần mềm</td>
-										</tr>
+										<?php } ?>
 									</tbody>
 								</table>	
 							</div>

@@ -54,11 +54,6 @@
 									<i class="icon-pencil"></i>
 									Tạo hiệu ứng ẩn/hiện cho câu trả lời [<?php echo $asnwer_template_item['label'] ?>]
 								</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('survey/add_effect').'/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'].'/'.$question['question_id'].'/'.$asnwer_template_item['answer_template_id']; ?>" method="post" class="form-horizontal form-bordered" id="myform">

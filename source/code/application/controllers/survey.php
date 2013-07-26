@@ -17,7 +17,11 @@ class Survey extends CI_Controller
 			$data['surveys'] = $this->survey_model->get($stype_id);
 			$data['survey_type'] = $this->survey_type_model->get($stype_id);
 			
-			$this->load->view('templates/header');
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey/list', $data);
 			$this->load->view('templates/footer');
 		}
@@ -60,7 +64,11 @@ class Survey extends CI_Controller
 			// Lay tat ca cac khoa ban
 			$data['faculties'] = $this->faculty_model->get();
 			
-			$this->load->view('templates/header');
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey/create_step_1', $data);
 			$this->load->view('templates/footer');
 		}
@@ -187,8 +195,12 @@ class Survey extends CI_Controller
 			// Lay danh sach cac khoa duoc ap dung phieu khao sat
 			$data['survey_faculties'] = $this->survey_faculty_model->get($survey_id);
 			
-			$this->load->view('templates/header');
-			$this->load->view('survey/edit_step_1', $data);
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
+			$this->load->view('survey/edit_step_1',$data);
 			$this->load->view('templates/footer');
 		}
 		else
@@ -273,7 +285,11 @@ class Survey extends CI_Controller
 			// Lay mau nhap thong tin sinh vien
 			$data['design_templates'] = $this->design_template_model->get();
 			
-			$this->load->view('templates/header');
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey/edit_step_2',$data);
 			$this->load->view('templates/footer');
 		}
@@ -353,7 +369,10 @@ class Survey extends CI_Controller
 			// Lay max view order
 			$data['max_view_order'] = $this->survey_question_model->get_max_view_order($survey_id);
 			
-			$this->load->view('templates/header');
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey/edit_step_3',$data);
 			$this->load->view('templates/footer');
 		}
@@ -514,7 +533,10 @@ class Survey extends CI_Controller
 			// Lay cau tra loi tuong ung voi cau hoi
 			$data['survey_answer_template'] = $this->survey_answer_template_model->get($question_id);
 			
-			$this->load->view('templates/header');
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey/edit_question', $data);
 			$this->load->view('templates/footer');
 		}
@@ -673,7 +695,10 @@ class Survey extends CI_Controller
 			// Du lieu Tinh/Than
 			$data['provinces'] = $this->province_model->get();
 			
-			$this->load->view('templates/header');
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('survey/edit_step_4',$data);
 			$this->load->view('templates/footer');
 		}
@@ -749,9 +774,11 @@ class Survey extends CI_Controller
 			// Lay cac cau hoi co lien he voi cau tra loi
 			$data['question_relation'] = $this->survey_answer_relation_model->get($answer_template_id);
 			
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
 			
-			$this->load->view('templates/header');
-			$this->load->view('survey/edit_effect', $data);
+			$this->load->view('templates/header',$data);
+			$this->load->view('survey/edit_effect',$data);
 			$this->load->view('templates/footer');
 		}
 		else
@@ -831,8 +858,11 @@ class Survey extends CI_Controller
 			// Lay danh sach cac khoa duoc ap dung phieu khao sat
 			$data['survey_faculties'] = $this->survey_faculty_model->get($survey_id);
 			
-			$this->load->view('templates/header');
-			$this->load->view('survey/create_summary', $data);
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
+			$this->load->view('survey/create_summary',$data);
 			$this->load->view('templates/footer');
 		}
 		else
