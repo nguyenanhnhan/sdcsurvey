@@ -10,9 +10,9 @@ class Survey_answer_template_model extends CI_Model
 	// get
 	function get($question_id, $answer_template_id = FALSE)
 	{
+		$this->db->order_by('view_order','ASC');
 		if($answer_template_id===FALSE)
 		{
-			$this->db->order_by('view_order','ASC');
 			$query = $this->db->get_where('sur_answer_template', array('question_id'=>$question_id));
 			return $query->result_array();
 		}

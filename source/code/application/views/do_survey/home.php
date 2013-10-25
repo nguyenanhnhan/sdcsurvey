@@ -12,6 +12,8 @@
 		<style>
 			#my_form input.error {border: 1px dotted red;}
 			#my_form label.error {margin-left: 10px !important; width: auto !important; display: none !important;}
+			#my_form textarea.error {border: 1px dotted red;}
+			#my_form select.error {border: 1px dotted red;}
 		</style>
 	</head>
 <body>
@@ -219,14 +221,7 @@
 <!-- JAVASCRIPT -->
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#my_form").validate({
-			submitHandler: function(form) {
-				// some other code
-				// maybe disabling submit button
-				// then:
-		    $(form).submit();
-		  }
-		 });
+		$("#my_form").validate();
 		
 		<?php
 		for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)

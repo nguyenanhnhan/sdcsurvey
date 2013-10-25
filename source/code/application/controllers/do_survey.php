@@ -324,9 +324,11 @@ class Do_survey extends CI_Controller
 				$this->infor_model->staff_update($user_name,$infor_surveyed['infor_id'],$survey_id,$data['student_infor']);
 				$infor_id = $infor_surveyed['infor_id'];
 				
+				// XOA CAC CAU TRA LOI TRUOC DO
+				$this->survey_answer_model->delete_answer($infor_id);
+				
 				// CAP NHAT LAI THONG TIN CAU TRA LOI
-				/*
-$data['survey_questions'] = $this->survey_question_model->get($survey_id);
+				$data['survey_questions'] = $this->survey_question_model->get($survey_id);
 				if (!empty($data['survey_question'])==NULL)
 				{
 					for ($i=0,$len=count($data['survey_questions']);$i<$len;$i++)
@@ -337,8 +339,6 @@ $data['survey_questions'] = $this->survey_question_model->get($survey_id);
 						// Cau tra loi dau tien co dang Radio Button hoac Radio Button + Text Box
 						if ($answer_templates[0]['option_type']=='r' || $answer_templates[0]['option_type']=='rt')
 						{
-							
-							// Them moi
 							$data_temp = $this->input->post($question['question_id'].'_ar');
 							if (!empty($data_temp))
 							{
@@ -346,11 +346,10 @@ $data['survey_questions'] = $this->survey_question_model->get($survey_id);
 								if ($answ_temp['option_type']=='rt')
 								{
 									$data_text=$this->input->post($question['question_id'].'_rt');
-									$this->survey_answer_model->staff_insert($user_name, $infor_surveyed['infor_id'], $question['question_id'], $answ_temp['answer_template_id'],$data_text);
+									$this->survey_answer_model->staff_insert($user_name, $infor_id, $question['question_id'], $answ_temp['answer_template_id'],$data_text);
 								}
 								else
 								{
-									
 									$this->survey_answer_model->staff_insert($user_name, $infor_id, $question['question_id'], $data_temp, 'TRUE');
 								}
 								
@@ -360,23 +359,24 @@ $data['survey_questions'] = $this->survey_question_model->get($survey_id);
 						// Cau tra loi dau tien co dang Checkbox Button hoac Checkbox Button + Text Box
 						if ($answer_templates[0]['option_type']=='c' || $answer_templates[0]['option_type']=='ct')
 						{
-							
-							// Them moi
 							$data_temp = $this->input->post($question['question_id'].'_ac');
 							
 							if (!empty($data_temp))
 							{
-								for ($j=0,$len=count($data_temp);$j<$len;$j++)
+								for ($j=0,$len_c=count($data_temp);$j<$len_c;$j++)
 								{
 									$answr_temp=$this->survey_answer_template_model->get_answer_template($data_temp[$j]);
-									if ($answr_temp['option_type']=='ct')
+									if (!empty($answr_temp))
 									{
-										$data_text=$this->input->post($answr_temp['answer_template_id'].'_ct');
-										$this->survey_answer_model->staff_insert($user_name, $infor_id, $question['question_id'],$data_temp[$j],$data_text);
-									}
-									else
-									{
-										$this->survey_answer_model->staff_insert($user_name,$infor_id,$question['question_id'],$data_temp[$j], 'TRUE');
+										if ($answr_temp['option_type']=='ct')
+										{
+											$data_text=$this->input->post($answr_temp['answer_template_id'].'_ct');
+											$this->survey_answer_model->staff_insert($user_name, $infor_id, $question['question_id'],$data_temp[$j],$data_text);
+										}
+										else
+										{
+											$this->survey_answer_model->staff_insert($user_name,$infor_id,$question['question_id'],$data_temp[$j], 'TRUE');
+										}
 									}
 								}
 							}
@@ -387,7 +387,6 @@ $data['survey_questions'] = $this->survey_question_model->get($survey_id);
 						{
 							foreach ($answer_templates as $answer_template_item)
 							{
-								// THEM MOI
 								$data_text = $this->input->post($answer_template_item['answer_template_id'].'_at');
 								if(!empty($data_text))
 								{
@@ -408,7 +407,6 @@ $data['survey_questions'] = $this->survey_question_model->get($survey_id);
 						}
 					}
 				}
-*/
 				redirect('survey_result/result_filter/'.$data['student_infor']['faculty_id'].'/'.$survey_id.'/'.$type_filte_id);
 			}
 		}
@@ -550,6 +548,7 @@ if ($answr_temp['option_type']=='ct')
 		// Load view bao thanh cong
 		$this->load->view('do_survey/success.php');
 	}
+	
 	////////////////////
 	// AJAX Function ///
 	////////////////////

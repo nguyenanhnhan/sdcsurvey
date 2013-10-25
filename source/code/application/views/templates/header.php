@@ -41,7 +41,7 @@
 	<!-- icheck -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/icheck/all.css">
 	<!-- Theme CSS -->
-	<link rel="stylesheet" href="<?php echo css_url() ?>style.css">
+	<link rel="stylesheet" href="<?php echo css_url() ?>style__not-minified.css">
 	<!-- Color CSS -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>themes.css">
 	<!-- dataTables -->
@@ -50,12 +50,6 @@
 
 	<!-- jQuery -->
 	<script src="<?php echo js_url() ?>jquery.min.js"></script>
-	
-	<!-- Flot -->
-	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.bar.order.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.pie.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/flot/jquery.flot.resize.min.js"></script>
 	
 	<!-- Nice Scroll -->
 	<script src="<?php echo js_url() ?>plugins/nicescroll/jquery.nicescroll.min.js"></script>
@@ -117,17 +111,21 @@
 	
 	<!-- TinyMCE -->
 	<script src="<?php echo js_url() ?>plugins/tinymce/tinymce.min.js"></script>
-
+	
+	<!-- HighCharts -->
+	<script src="<?php echo js_url() ?>plugins/highcharts/highcharts.js"></script>
+	<script src="<?php echo js_url() ?>plugins/highcharts/modules/exporting.js"></script>
+	<script src="<?php echo js_url() ?>plugins/highcharts/themes/grid_mod.js"></script>
 
 	<!-- Theme framework -->
 	<!-- <script src="<?php echo js_url() ?>eakroko.min.js"></script> -->
-		<script src="<?php echo js_url() ?>eakroko.js?updated=1"></script>
+		<script src="<?php echo js_url() ?>eakroko.js"></script>
 	<!-- Theme scripts -->
 	<!-- <script src="<?php echo js_url() ?>application.min.js"></script> -->
-	<script src="<?php echo js_url() ?>application.js?updated=1"></script>
+	<script src="<?php echo js_url() ?>application.js"></script>
 	<!-- Just for demonstration -->
 	<!-- <script src="<?php echo js_url() ?>demonstration.min.js"></script> -->
-	<script src="<?php echo js_url() ?>demonstration.js?updated=1"></script>
+	<script src="<?php echo js_url() ?>demonstration.js"></script>
 	
 	<!--[if lte IE 9]>
 		<script src="<?php echo js_url() ?>plugins/placeholder/jquery.placeholder.min.js"></script>
@@ -142,7 +140,18 @@
 	<link rel="shortcut icon" href="<?php echo img_url() ?>favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
 	<link rel="apple-touch-icon-precomposed" href="<?php echo img_url() ?>apple-touch-icon-precomposed.png" />
-
+	
+	<!--Start of Zopim Live Chat Script-->
+	<script type="text/javascript">
+	/*
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+	d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+	_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+	$.src='//v2.zopim.com/?1PDNwxMPWvM5fnCabYpB4yVTl9OXMbwF';z.t=+new Date;$.
+	type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+*/
+	</script>
+	<!--End of Zopim Live Chat Script-->
 </head>
 <body data-layout-sidebar="fixed" data-layout-topbar="fixed">
 	<div id="navigation">
@@ -209,7 +218,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid" id="content">
+	<div class="container-fluid" id="content" >
 		<div id="left">
 			<?php if ($is_admin==1) { ?>
 			<div class="subnav">
@@ -258,13 +267,13 @@
 				</div>
 				<ul class="subnav-menu">
 					<li>
-						<a href="#">Tình hình khảo sát</a>
+						<a href="<?php echo base_url('report/survey_status') ?>">Tình hình khảo sát</a>
 					</li>
 					<li>
-						<a href="#">Thống kê chi tiết</a>
+						<a href="<?php echo base_url('report/survey_export') ?>">Kết xuất dữ liệu</a>
 					</li>
 					<li>
-						<a href="#">Thống kê tổng hợp</a>
+						<a href="<?php echo base_url('report/survey_summary') ?>">Thống kê tổng hợp</a>
 					</li>
 				</ul>
 			</div>

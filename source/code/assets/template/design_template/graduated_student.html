@@ -15,8 +15,8 @@
 	<tr>
 		<td class="name"> <input type="text" name="name" id="name" title="Họ và tên" required/></td>
 	    <td class="major">
-	    <select id="faculty" name="faculty"> 
-	    	<option selected="selected" value="-1"></option>
+	    <select id="faculty" name="faculty" required> 
+	    	<option value=""></option>
 			<option value="M">Công nghệ môi trường</option>
 			<option value="S">Công nghệ sinh học</option>
 			<option value="T">Công nghệ thông tin</option>
@@ -44,12 +44,12 @@
 	</p>
 	<table cellpadding="0" cellspacing="0">
 		<tr>
-	    	<td> Số điện thoại gia đình:<span class="star">*</span></td>
+	    	<td> Số điện thoại gia đình:</td>
 	    	<td class="mobile"> Số điện thoại di động:<span class="star">*</span></td>
 	    	<td class="email">Địa chỉ email:<span class="star">*</span></td>
 	    </tr>
 	    <tr>
-	    	<td class="homephone"> <input type="text" name="home_phone" id="home_phone" title="Điện thoại bàn" required/></td>
+	    	<td class="homephone"> <input type="text" name="home_phone" id="home_phone" title="Điện thoại bàn"/></td>
 	        <td class="mobile"> <input type="text" name="hand_phone" id="hand_phone" title="Điện thoại di động" required /></td>
 	        <td class="email"> <input type="text" name="email_address" id="email_address" title="Email" required/></td>
 	    </tr>

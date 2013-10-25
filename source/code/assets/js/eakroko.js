@@ -202,7 +202,7 @@ $(document).ready(function() {
 			var $el = $(this);
 			var search = ($el.attr("data-nosearch") === "true") ? true : false,
 			opt = {};
-			if(search) opt.disable_search_threshold = 9999999;
+			if(search) opt.disable_search_threshold = 20;
 			$el.chosen(opt);
 		});
 	}

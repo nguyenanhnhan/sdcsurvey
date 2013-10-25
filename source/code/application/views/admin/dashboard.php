@@ -71,6 +71,27 @@
 														<div class="icon">
 															<i class="icon-info-sign"></i>
 														</div>
+														<div class="date">29 / 7</div>
+													</div>
+													<div class="activity">
+														<div class="user"><a href="#">Nguyễn Ảnh Nhân</a> 
+														<span>Phiên bản 4.0.5.2, </span></div>
+														<ul class="timeline-images">
+															<p>Phiên bản 4.0.5.2 Cập nhật</p>
+															<p>- Lược bỏ bắt buộc nhập số điện thoại gia đình trong phiếu khảo sát</p>
+															<p>- Thêm module chat hỗ trợ người dùng trực tuyến, chỉ dùng cho người quản lý.</p>
+															<p>- Cập nhật lại dữ liệu sai (không có mã khoa)</p>
+														</ul>
+													</div>
+												</div>
+												<div class="line"></div>
+											</li>
+											<li>
+												<div class="timeline-content">
+													<div class="left">
+														<div class="icon">
+															<i class="icon-info-sign"></i>
+														</div>
 														<div class="date">23 / 7</div>
 													</div>
 													<div class="activity">
@@ -162,23 +183,6 @@
 										</ul> <!-- End Timeline -->
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="box">
-							<div class="box-title">
-								<h3><i class="icon-bolt"></i>Server load</h3>
-								<div class="actions">
-									<a href="#" class="btn btn-mini content-refresh"><i class="icon-refresh"></i></a>
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
-								</div>
-							</div>
-							<div class="box-content">
-								<div class="flot flot-line"></div>
 							</div>
 						</div>
 					</div>

@@ -19,8 +19,15 @@ class Survey_faculty_model extends CI_Model
 		// Khong co bien tham so $faculty_id
 		elseif ($faculty_id===FALSE)
 		{
-			$query = $this->db->get_where('sur_survey_faculty', array('survey_id'=>$survey_id));
+			$sql = ('SELECT sf.*, f.faculty_name 
+					 FROM sur_survey_faculty AS sf JOIN sur_faculty AS f ON sf.faculty_id = f.faculty_id 
+					 WHERE sf.survey_id = "'.$survey_id.'"');
+			return $this->db->query($sql)->result_array();
+			
+			/*
+$query = $this->db->get_where('sur_survey_faculty', array('survey_id'=>$survey_id));
 			return $query->result_array();
+*/
 		}
 		// Khong co ca 2 bien tham so
 		else

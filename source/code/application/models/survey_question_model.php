@@ -29,9 +29,9 @@ class Survey_question_model extends CI_Model
 	// get
 	function get($survey_id, $question_id = FALSE)
 	{
+		$this->db->order_by('view_order','ASC');
 		if($question_id===FALSE)
 		{
-			$this->db->order_by('view_order','ASC');
 			$query = $this->db->get_where('sur_question', array('survey_id'=>$survey_id));
 			return $query->result_array();
 		}
@@ -54,6 +54,15 @@ class Survey_question_model extends CI_Model
 		$this->db->order_by('view_order','ASC');
 		$query = $this->db->get_where('sur_question',array('survey_id'=>$survey_id));
 		return $query->result_array();
+	}
+	
+	function get_question_answer_no_text($survey_id) 
+	{
+		$query = "SELECT *
+				  FROM sur_question
+				  WHERE survey_id = '".$survey_id."' AND question_id IN (SELECT at.question_id FROM sur_answer_template AS at WHERE at.option_type <> 't')
+				  ORDER BY view_order ASC";
+		return $this->db->query($query)->result_array();
 	}
 	
 	function get_max_view_order($survey_id)
