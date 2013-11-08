@@ -44,6 +44,16 @@ class Survey_answer_model extends CI_Model
 		return $query->result_array();
 	}
 	
+	// Lay noi dung tra loi
+	function get_answer_content($infor_id, $answer_template_id)
+	{
+		$query = $this->db->query("SELECT sur_answer.content
+				  				   FROM sur_answer
+				  				   WHERE infor_id = '".$infor_id."' AND
+				  				   answer_template_id = '".$answer_template_id."'");
+		return $query->row_array();
+	}
+	
 	// insert
 	function staff_insert($user_name, $infor_id, $question_id, $answer_template_id, $content)
 	{

@@ -2,7 +2,7 @@
 			<div class="container-fluid">
 				<div class="page-header">
 					<div class="pull-left">
-						<h1>Loại khảo sát</h1>
+						<h1>Biểu đồ trực quan</h1>
 					</div>
 					<div class="pull-right">
 						<ul class="stats">
@@ -45,16 +45,25 @@
 										<label for="survey_type" class="control-label">Loại khảo sát</label>
 										<div class="controls">
 											<div class="input-xxlarge">
-												<select name="survey_type" id="survey_type" class='chosen-select'>
-													<option value="1">Option-1</option>
-													<option value="2">Option-2</option>
-													<option value="3">Option-3</option>
-													<option value="4">Option-4</option>
-													<option value="5">Option-5</option>
-													<option value="6">Option-6</option>
-													<option value="7">Option-7</option>
-													<option value="8">Option-8</option>
-													<option value="9">Option-9</option>
+												<select name="survey_type" id="survey_type" class='chosen-select' data-placeholder="Chọn loại khảo sát">
+													<option value=""></option>
+													<?php 
+													foreach ($survey_type as $survey_type_item) { 
+														if (isset($survey_type_selected)){
+															if ($survey_type_item['survey_type_id'] == $survey_type_selected)
+															{?>
+															<option value="<?php echo $survey_type_item['survey_type_id'] ?>" selected><?php echo $survey_type_item['survey_type_name'] ?></option>
+													  <?php }
+															else 
+															{?>
+															<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
+													  <?php }
+														}
+														else
+														{?>
+															<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
+													  <?php }
+													}?>
 												</select>
 											</div>
 										</div>
@@ -63,23 +72,16 @@
 										<label class="control-label">Phiếu khảo sát</label>
 										<div class="controls">
 											<div class="input-xxxlarge">
-												<select name="survey" id="survey" class='chosen-select'>
-													<option value="1">Option-1</option>
-													<option value="2">Option-2</option>
-													<option value="3">Option-3</option>
-													<option value="4">Option-4</option>
-													<option value="5">Option-5</option>
-													<option value="6">Option-6</option>
-													<option value="7">Option-7</option>
-													<option value="8">Option-8</option>
-													<option value="9">Option-9</option>
-												</select>
+												<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần xem biểu đồ" data-nosearch="true">
+											</select>
 											</div>
 										</div>
 									</div>
-									<div class="form-actions">
+									<!--
+<div class="form-actions">
 										<button class="btn btn-primary" type="submit" name="submit" value="submint">Xem biểu đồ</button>
 									</div>
+-->
 								</form>	
 							</div>
 						</div>
@@ -95,7 +97,7 @@
 						<div class="box-content">
 							<div id="sum_graph" style="height: 500px"></div>
 							<div>&nbsp;</div>
-							<div id="fac_graph" style="height: 1000px"></div>
+							<div id="fac_graph"></div>
 						</div>
 					</div>
 				</div>
@@ -103,7 +105,92 @@
 		</div>
 		<script type="text/javascript">
 			$(document).ready(function (){
-				$('#sum_graph').highcharts({
+			
+				$('#survey_type').chosen().change(function(){
+					$.ajax({
+						type: "POST",
+						url: "<?php echo base_url('report/gets_survey') ?>"+"/"+$('#survey_type').val(),
+						dataType: 'json',
+						success: function(data) {
+							if (data.surveys.length > 0)
+							{
+								$('#survey option').remove();
+								$('#survey').trigger("chosen:updated");
+								
+								$('#survey').append('<option value=""></option>');
+								for (var i=0; i<data.surveys.length; i++)
+								{
+									$('#survey').append('<option value="'+data.surveys[i].survey_id+'">'+data.surveys[i].survey_name+'</option>');
+								}
+								$('#survey').trigger("chosen:updated");
+							}
+						}
+					});
+				});
+				
+				$('#survey').chosen().change(function(){
+					
+					$.ajax({
+						type: "POST",
+						url: "<?php echo base_url('report/get_sum_student_survey') ?>"+"/"+$('#survey').val(),
+						dataType: 'json',
+						success: function(data){
+							// chart area
+							
+							var chart = new Highcharts.Chart({
+								chart: {
+									renderTo: 'sum_graph',
+									plotBackgroundColor: null,
+									plotBorderWidth: null,
+									plotShadow: false
+								},
+								title: {
+									text: 'Tình hình khảo sát toàn trường'
+								},
+								subtitle: {
+									text: 'Bậc Đại học'
+								},
+								tooltip: {
+									pointFormat: '{series.name}: <b>{point.y}</b> sinh viên'
+								},
+								plotOptions: {
+									pie: {
+										allowPointSelect: true,
+										cursor: 'pointer',
+										dataLabels: {
+											enabled: true,
+											color: '#000000',
+											connectorColor: '#000000',
+											format: '<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)'
+										},
+										showInLegend: true
+									}
+								},
+								series:
+								[
+									{
+										type:'pie',
+										name: 'Số lượng',
+										data: 
+										[
+											['Đã khảo sát', parseInt(data.sum_student_surveyed.sum_student_surveyed)],
+											['Chưa khảo sát', parseInt(data.sum_student_survey.sum_student) - parseInt(data.sum_student_surveyed.sum_student_surveyed)]
+										]
+									}
+								]
+		
+							});
+							
+							// end chart
+						}
+					});
+					
+					
+				
+				});
+				
+				/*
+$('#sum_graph').highcharts({
 					chart: {
 						plotBackgroundColor: null,
 						plotBorderWidth: null,
@@ -144,6 +231,7 @@
 						}
 					]
 				});
+*/
 				$('#fac_graph').highcharts({
 					chart: {
 						type: 'bar'
@@ -201,4 +289,5 @@
 					]
 				});
 			});
+
 		</script>

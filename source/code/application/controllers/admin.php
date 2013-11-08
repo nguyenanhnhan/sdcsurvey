@@ -46,7 +46,11 @@ class Admin extends CI_Controller {
 	{
 		if ($this->ion_auth->logged_in())
 		{
-			$this->load->view('templates/header');
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			$this->load->view('templates/header',$data);
 			$this->load->view('admin/export_student');
 			$this->load->view('templates/footer');
 		}

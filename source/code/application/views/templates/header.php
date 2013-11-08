@@ -256,7 +256,7 @@ window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
 						<a href="#">Đánh giá</a>
 					</li>
 					<li>
-						<a href="#">Kiểm tra độ tin cậy</a>
+						<a href="<?php echo base_url('survey_validation') ?>">Kiểm tra độ tin cậy</a>
 					</li>
 					<?php } ?>
 				</ul>

@@ -13,12 +13,17 @@ class Report extends CI_Controller
 	{
 		if ($this->ion_auth->logged_in())
 		{
+			$this->load->model(array('survey_type_model','survey_model'));
+			
 			$user = $this->ion_auth->user()->row();
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
 			$data['is_admin'] = $this->ion_auth->is_admin();
 			
+			// Lay danh sach loai khao sat
+			$data['survey_type'] = $this->survey_type_model->get(FALSE);
+			
 			$this->load->view('templates/header',$data);
-			$this->load->view('report/status');
+			$this->load->view('report/status',$data);
 			$this->load->view('templates/footer');
 		}
 		else
@@ -122,6 +127,7 @@ class Report extends CI_Controller
 					$faculty_data = $this->faculty_model->get($faculty_item);
 					$this->excel->getActiveSheet()->setCellValue('A'.$start_row, $faculty_data['faculty_name']);
 					
+					// Tong so sinh vien can khao sat
 					$student_survey = $this->student_model->count_student_survey($survey_sel, $faculty_item);
 					$this->excel->getActiveSheet()->setCellValue('B'.$start_row, $student_survey['sum_student']);
 					
@@ -210,6 +216,9 @@ class Report extends CI_Controller
 								
 								$this->excel->getActiveSheet()->setCellValue($columns[$i].$start_row_answer, count($student_answer));
 								
+								if ($count_student_of_question['sum_student']>0)
+									$this->excel->getActiveSheet()->setCellvalue($columns[$i+1].$start_row_answer, '='.$columns[$i].$start_row_answer.'*100/'.$columns[$start_column_answer].$start_row_answer);
+								
 								$count_answer_template+=1;
 							}
 							
@@ -240,6 +249,7 @@ class Report extends CI_Controller
 	}
 	
 	// AJAX Function
+	// ham lay cac phieu khao sat phan theo loai khao sat
 	function gets_survey($survey_type_id) 
 	{
 		$this->load->model('survey_model');
@@ -248,6 +258,7 @@ class Report extends CI_Controller
 		echo json_encode($data);
 	}
 	
+	// ham lay cac khoa tham gia phieu khao sat
 	function gets_survey_faculty($survey_id)
 	{
 		$this->load->model('survey_faculty_model');
@@ -256,10 +267,30 @@ class Report extends CI_Controller
 		echo json_encode($data);
 	}
 	
+	// ham lay cac cau hoi co cau tra loi khong phai dang text
 	function gets_question_answer_no_text($survey_id)
 	{
 		$this->load->model('survey_question_model');
 		$data['questions'] = $this->survey_question_model->get_question_answer_no_text($survey_id);
+		
+		echo json_encode($data);
+	}
+	
+	// ham lay mau cau tra loi
+	function gets_answer_template($question_id)
+	{
+		$this->load->model('survey_answer_template_model');
+		$data['answer_template'] = $this->survey_answer_template_model->get($question_id);
+		
+		echo json_encode($data);
+	}
+	
+	// ham lay tong so sinh vien can khao sat theo phieu khao sat
+	function get_sum_student_survey ($survey_id)
+	{
+		$this->load->model('student_model');
+		$data['sum_student_survey'] = $this->student_model->count_student_survey($survey_id, FALSE);
+		$data['sum_student_surveyed'] = $this->student_model->count_student_surveyed($survey_id, FALSE);
 		
 		echo json_encode($data);
 	}

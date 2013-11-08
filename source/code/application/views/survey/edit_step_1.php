@@ -133,8 +133,8 @@
 									<div class="control-group" id="div_faculty">
 										<label class="control-label">Áp dụng cho Khoa</label>
 										<div class="controls">
-											<div class="input-xxxlarge">
-												<select name="survey_faculty[]" id="survey_faculty" multiple="true" class="chosen-select">
+											<div>
+												<select name="survey_faculty[]" id="survey_faculty" multiple="true" class="chosen-select span12">
 													<?php foreach ($faculties as $faculty):
 														if ($faculty['is_vocation']==0){?>
 														<option value="<?php echo $faculty['faculty_id'] ?>" 
@@ -149,8 +149,8 @@
 									<div class="control-group" id="div_vocation">
 										<label class="control-label">Áp dụng cho Ban TCCN</label>
 										<div class="controls">
-											<div class="input-xxxlarge">
-												<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select">
+											<div>
+												<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select span12">
 													<?php foreach ($faculties as $faculty):
 														if ($faculty['is_vocation']==1){?>
 														<option value="<?php echo $faculty['faculty_id'] ?>"

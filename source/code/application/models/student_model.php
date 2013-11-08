@@ -37,9 +37,40 @@ class Student_model extends CI_Model
 	// So luong sinh vien cua khoa tham gia khao sat
 	function count_student_survey($survey_id, $faculty_id)
 	{
-		$query = $this->db->query("SELECT COUNT(*) AS 'sum_student'
+		// So luong sinh vien toan truong tham gia khao sat
+		if ($faculty_id==FALSE)
+		{
+			$query = $this->db->query("SELECT COUNT(*) AS 'sum_student'
 								   FROM sur_student
-								   WHERE faculty_id = '".$faculty_id."' AND survey_id = '".$survey_id."'");
+								   WHERE survey_id = '".$survey_id."'");
 		return $query->row_array();
+		}
+		else // So luong sinh vien cua khoa tham gia khao sat
+		{
+			$query = $this->db->query("SELECT COUNT(*) AS 'sum_student'
+									   FROM sur_student
+									   WHERE faculty_id = '".$faculty_id."' AND survey_id = '".$survey_id."'");
+			return $query->row_array();
+		}
+	}
+	
+	// So luong sinh vien da tham gia khao sat
+	function count_student_surveyed($survey_id, $faculty_id)
+	{
+		// So luong sinh vien toan truong da tham gia khao sat
+		if ($faculty_id==FALSE)
+		{
+			$query = $this->db->query ("SELECT COUNT(*) AS 'sum_student_surveyed'
+										FROM sur_infor
+										WHERE sur_infor.survey_id= '".$survey_id."'");
+			return $query->row_array();
+		}
+		else // So luong sinh vien cua khoa da tham gia khao sat
+		{
+			$query = $this->db->query ("SELECT COUNT(*) AS 'sum_student_surveyed'
+										FROM sur_infor
+										WHERE faculty_id = '".$faculty_id."' AND sur_infor.survey_id= '".$survey_id."'");
+			return $query->row_array(); 
+		}
 	}
 }

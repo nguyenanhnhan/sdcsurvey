@@ -71,7 +71,7 @@
 											<td><?php echo $student_no_survey_item['first_name'] ?></td>
 											<td><?php echo $student_no_survey_item['last_name'] ?></td>
 											<td><?php echo $student_no_survey_item['class_id']?></td>
-											<td>Chưa khảo sát</td>
+											<td><i class="icon-remove"></i></td>
 											<td></td>
 											<td></td>
 											<td></td>
@@ -88,7 +88,7 @@
 											<td><?php echo $student_surveyed_item['first_name'] ?></td>
 											<td><?php echo $student_surveyed_item['last_name'] ?></td>
 											<td><?php echo $student_surveyed_item['class_id']?></td>
-											<td>Đã khảo sát</td>
+											<td><i class="icon-ok"></i></td>
 											<td></td>
 											<td>
 												<?php 
