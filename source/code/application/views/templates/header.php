@@ -47,7 +47,6 @@
 	<!-- dataTables -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/datatable/TableTools.css">
 
-
 	<!-- jQuery -->
 	<script src="<?php echo js_url() ?>jquery.min.js"></script>
 	
@@ -253,7 +252,7 @@ window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
 					</li>
 					<?php if ($is_admin==1) { ?>
 					<li>
-						<a href="#">Đánh giá</a>
+						<a href="<?php echo base_url('survey_evaluation') ?>">Đánh giá</a>
 					</li>
 					<li>
 						<a href="<?php echo base_url('survey_validation') ?>">Kiểm tra độ tin cậy</a>

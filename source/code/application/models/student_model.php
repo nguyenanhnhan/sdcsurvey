@@ -73,4 +73,14 @@ class Student_model extends CI_Model
 			return $query->row_array(); 
 		}
 	}
+	
+	// Lay lop hoc trong danh sach sinh vien
+	function gets_class_by_faculty($survey_id, $faculty_id)
+	{
+		$query = $this->db->query("SELECT DISTINCT (class_id)
+								   FROM sur_student
+								   WHERE survey_id = '".$survey_id."' AND faculty_id = '".$faculty_id."'
+								   ORDER BY class_id ASC;");
+		return $query->result_array();
+	}
 }

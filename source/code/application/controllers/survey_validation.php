@@ -239,5 +239,5 @@ class Survey_validation extends CI_Controller {
 	
 }
 
-/* End of file survey_confirm.php */
-/* Location: ./application/controllers/survey_confirm.php */
+/* End of file survey_validation.php */
+/* Location: ./application/controllers/survey_validation.php */

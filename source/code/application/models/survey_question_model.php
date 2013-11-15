@@ -81,6 +81,15 @@ class Survey_question_model extends CI_Model
 		return $query->row_array();
 	}
 	
+	function gets_question_is_evaluated($survey_id)
+	{
+		$query = $this->db->query("SELECT *
+								   FROM sur_question
+								   WHERE is_evaluated = TRUE AND survey_id = '".$survey_id."'");
+		return $query->result_array();
+	}
+	
+	
 	// insert row
 	function insert($uid, $question_id, $reused_question_id, $survey_id, $content, $view_order, 
 	$max_option, $start_hide, $required, $view_style, $is_validated, $is_evaluated)
