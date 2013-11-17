@@ -494,7 +494,8 @@ $(document).ready(function() {
 	{
 		$(".slider").each(function(){
 			var $el = $(this);
-			var min = parseInt($el.attr('data-min')),
+			var defaultvar = parseInt($el.attr('data-default')),
+			min = parseInt($el.attr('data-min')),
 			max = parseInt($el.attr('data-max')),
 			step = parseInt($el.attr('data-step')),
 			range = $el.attr('data-range'),

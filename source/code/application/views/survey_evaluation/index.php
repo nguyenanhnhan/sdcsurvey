@@ -43,7 +43,7 @@
 							</div>
 							<div class="box-content nopadding">
 								<!-- Widget Content -->
-								<form action="#" method="POST" class="form-horizontal form-bordered">
+								<form action="<?php echo base_url('survey_evaluation/get_list') ?>" method="POST" class="form-horizontal form-bordered">
 									<!-- Loai khao sat -->
 									<div class="control-group">
 										<label class="control-label">Loại khảo sát</label>
@@ -112,6 +112,14 @@
 										</div>
 									</div>
 									
+									<!-- Ten danh sach danh gia -->
+									<div class="control-group">
+										<label class="control-label">Tên danh sách</label>
+										<div class="controls">
+											<input type="text" class="span12" id="list_name" name="list_name"/>
+										</div>
+									</div>
+									
 									<!-- Action -->
 									<div class="form-actions">
 										<button type="submit" class="btn btn-primary">Lấy danh sách đánh giá</button>
@@ -119,6 +127,50 @@
 								</form> 
 							</div>
 						</div>
+					</div>
+				</div>
+				
+				<div class="row-fluid">
+					<div class="span12">
+						<!-- Danh sach -->
+						<div class="box box-color box-bordered">
+							<div class="box-title">
+								<h3>
+									<!-- Widget title -->
+									Danh sách đánh giá thông tin
+								</h3>
+								<div class="actions">
+									<a href="#" class="btn btn-mini content-slideUp">
+										<i class="icon-angle-down"></i>
+									</a>
+								</div>
+							</div>
+							<div class="box-content nopadding">
+								<!-- Widget Content -->
+								<table class="table table-hover table-nomargin dataTable dataTable-nosort" data-nosort="0" id="evaluation_list">
+									<thead>
+										<tr>
+											<th style="width:70px"></th>
+											<th>Tên</th>
+											<th style="width:100px">Ngày lập</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach ($survey_evaluation_list as $list_item) {?>
+										<tr>
+											<td>
+												<a href="<?php echo base_url('survey_evaluation/delete/'.$list_item['list_id']); ?>" class="btn btn-danger"><i class="icon-remove"></i></a>
+												<a href="<?php echo base_url('survey_evaluation/view/'.$list_item['list_id']); ?>" class="btn btn-success"><i class="icon-eye-open"></i></a>
+											</td>
+											<td><?php echo $list_item['list_name'] ?></td>
+											<td><?php echo mdate('%d/%m/%Y %H:%i:%s',strtotime($list_item['created_on_date'])); ?></td>
+										</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- Ket thuc -->
 					</div>
 				</div>
 				
@@ -138,121 +190,7 @@
 									</div>
 								</div>
 								<div class="box-content nopadding">
-									<!-- Widget Content --> 
-									<table class="table table-hover table-nomargin">
-									<thead>
-										<tr>
-											<th>Họ và tên đệm</th>
-											<th>Tên</th>
-											<th>Điện thoại</th>
-											<th>Tên Cty làm việc</th>
-											<th>Công việc thực hiện</th>
-											<th style="width:120px">Mức độ phù hợp</th>
-											<th style="width:60px;">Ghi chú</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Trident</td>
-											<td>
-												Internet
-												Explorer 4.0
-											</td>
-											<td class='hidden-350'>Win 95+</td>
-											<td class='hidden-1024'>4</td>
-											<td class='hidden-480'>X</td>
-											<td>
-												<div class="slider" data-step="1" data-min="0" data-max="5" data-key="1" id="1">
-													<div class="amount"></div>
-													<div class="slide"></div>
-												</div>
-											</td>
-											<td class="center">
-												<a href="#modal-2" class="btn btn-info" data-toggle="modal" data-key="1"><i class="icon-edit"></i></a>
-											</td>
-										</tr>
-										<tr>
-											<td>Presto</td>
-											<td>Nokia N800</td>
-											<td class='hidden-350'>N800</td>
-											<td class='hidden-1024'>-</td>
-											<td class='hidden-480'>A</td>
-											<td>
-												<div class="slider" data-step="1" data-min="0" data-max="5">
-													<div class="amount"></div>
-													<div class="slide"></div>
-												</div>
-											</td>
-											<td class="center">
-												<a href="#" class="btn btn-info"><i class="icon-edit"></i></a>
-											</td>
-										</tr>
-										<tr>
-											<td>Misc</td>
-											<td>NetFront 3.4</td>
-											<td class='hidden-350'>Embedded devices</td>
-											<td class='hidden-1024'>-</td>
-											<td class='hidden-480'>A</td>
-											<td>
-												<div class="slider" data-step="1" data-min="0" data-max="5">
-													<div class="amount"></div>
-													<div class="slide"></div>
-												</div>
-											</td>
-											<td class="center">
-												<a href="#" class="btn btn-info"><i class="icon-edit"></i></a>
-											</td>
-										</tr>
-										<tr>
-											<td>Misc</td>
-											<td>Dillo 0.8</td>
-											<td class='hidden-350'>Embedded devices</td>
-											<td class='hidden-1024'>-</td>
-											<td class='hidden-480'>X</td>
-											<td>
-												<div class="slider" data-step="1" data-min="0" data-max="5">
-													<div class="amount"></div>
-													<div class="slide"></div>
-												</div>
-											</td>
-											<td class="center">
-												<a href="#" class="btn btn-info"><i class="icon-edit"></i></a>
-											</td>
-										</tr>
-										<tr>
-											<td>Misc</td>
-											<td>Links</td>
-											<td class='hidden-350'>Text only</td>
-											<td class='hidden-1024'>-</td>
-											<td class='hidden-480'>X</td>
-											<td>
-												<div class="slider" data-step="1" data-min="0" data-max="5">
-													<div class="amount"></div>
-													<div class="slide"></div>
-												</div>
-											</td>
-											<td class="center">
-												<a href="#" class="btn btn-info"><i class="icon-edit"></i></a>
-											</td>
-										</tr>
-										<tr>
-											<td>Misc</td>
-											<td>Lynx</td>
-											<td class='hidden-350'>Text only</td>
-											<td class='hidden-1024'>-</td>
-											<td class='hidden-480'>X</td>
-											<td>
-												<div class="slider" data-step="1" data-min="0" data-max="5">
-													<div class="amount"></div>
-													<div class="slide"></div>
-												</div>
-											</td>
-											<td class="center">
-												<a href="#" class="btn btn-info"><i class="icon-edit"></i></a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
+									
 								</div>
 							</div>
 						</div>
@@ -261,29 +199,13 @@
 				</div>
 			</div>
 		</div>
-		
-		<!-- Modal -->
-		<div id="modal-2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel">Modal header</h3>
-			</div>
-			<div class="modal-body">
-				<input type="text" multiple="true" id="myNote"/>
-			</div>
-			<div class="modal-footer">
-				<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-				<button class="btn btn-primary" data-dismiss="modal" id="modalSave">Save changes</button>
-			</div>
-		</div>
-		<input type="hidden" id="tempValue" />
 		<!-- javascript -->
 		<script type="text/javascript">
 			$(document).ready(function(){
 				// Khi chon loai khao sat
 				$("#survey_type").chosen().change(function(){
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: "<?php echo base_url('survey_evaluation/gets_survey') ?>"+"/"+$(this).val(),
 						dataType: "json",
 						success: function(data){ // Thuc hien viec liet ke cau hoi khao sat tuong ung
@@ -302,10 +224,11 @@
 						}
 					});
 				});
+				
 				// Khi chon phieu khao sat
 				$('#survey').chosen().change(function(){
 					$.ajax({
-						type: 'POST',
+						type: 'GET',
 						url: "<?php echo base_url('survey_evaluation/gets_survey_faculty') ?>"+"/"+$('#survey').val(),
 						dataType: 'json',
 						success: function (data) { // Thuc hien viec liet ke Khoa tham gia khao sat
@@ -326,7 +249,7 @@
 					});
 					
 					$.ajax({
-						type: "POST",
+						type: "GET",
 						url: "<?php echo base_url('survey_evaluation/gets_question_is_evaluated') ?>"+"/"+$(this).val(),
 						dataType: "json",
 						success: function (data){
@@ -334,15 +257,77 @@
 							if (data.questions.length > 0)
 							{
 								$("#q_company_name option").remove();
+								$("#q_doing_job option").remove();
+								
 								$("#q_company_name").trigger("chosen:updated");
+								$("#q_doing_job").trigger("chosen:updated");
 								
 								$("#q_company_name").append("<option value=''></option>");
+								$("#q_doing_job").append("<option value=''></option>");
 								
 								for (var i=0; i<data.questions.length; i++)
 								{
 									$("#q_company_name").append("<option value='"+data.questions[i].question_id+"'>"+data.questions[i].content+"</option>");
+									$("#q_doing_job").append("<option value='"+data.questions[i].question_id+"'>"+data.questions[i].content+"</option>");
 								}
 								$("#q_company_name").trigger("chosen:updated");
+								$("#q_doing_job").trigger("chosen:updated");
+							}
+						}
+					});
+				});
+				
+				// Khi chon cau hoi xac dinh ten cong ty
+				$("#q_company_name").chosen().change(function (){
+					$.ajax({
+						type: "GET",
+						url: "<?php echo base_url('survey_evaluation/gets_answer_template') ?>"+"/"+$(this).val(),
+						dataType: "json",
+						success: function (data){
+							if (data.answer_template.length > 0)
+							{
+								$("#a_company_name option").remove();
+								$("#a_company_name").trigger("chosen:updated");
+								
+								$("#a_company_name").append("<option value=''></option>");
+								
+								for (var i=0; i<data.answer_template.length; i++)
+								{
+									$("#a_company_name").append("<option value='"+data.answer_template[i].answer_template_id+"'>"+data.answer_template[i].label+"</option>");
+								}
+								
+								$("#a_company_name").trigger("chosen:updated");
+							}
+						}
+					});
+				});
+				
+				// Khi chon cau hoi xac dinh cong viec dang lam
+				$("#q_doing_job").chosen().change(function (){
+					$.ajax({
+						type: "GET",
+						url: "<?php echo base_url('survey_evaluation/gets_answer_template') ?>"+"/"+$(this).val(),
+						dataType: "json",
+						success: function (data){
+							if (data.answer_template.length > 0)
+							{
+								$("#a_doing_job option").remove();
+								$("#a_doing_job").trigger("chosen:updated");
+								
+								$("#a_doing_job").append("<option value=''></option>");
+								
+								for (var i=0; i<data.answer_template.length; i++)
+								{
+									if (data.answer_template[i].label){
+										$("#a_doing_job").append("<option value='"+data.answer_template[i].answer_template_id+"'>"+data.answer_template[i].label+"</option>");
+									}
+									else
+									{
+										$("#a_doing_job").append("<option value='"+data.answer_template[i].answer_template_id+"'>Câu trả lời không có nhãn</option>");
+									}
+								}
+								
+								$("#a_doing_job").trigger("chosen:updated");
 							}
 						}
 					});
@@ -370,31 +355,6 @@
 							}
 						}
 					});
-				});
-			
-				// Phan xu ly trong danh sach danh gia
-				$("#1").slider({
-					value: 4,
-				});
-				$("#1 .amount").text(4);
-				
-				$(".slider").slider({
-					stop: function (event, ui)
-					{
-						alert($(this).attr('data-key'));
-					}
-				});
-				
-				$("a[href='#modal-2']").click(function(){
-					$("#temp_value").val($(this).attr('data-key'));
-				});
-				
-				$("#modalSave").click(function(){
-					alert($("#tempValue").val());
-				});
-				
-				$("#modal-2").bind('show', function(){
-					$(".modal-body #myNote").val("Hello world");
 				});
 			});
 		</script>

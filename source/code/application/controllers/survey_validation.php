@@ -65,24 +65,24 @@ class Survey_validation extends CI_Controller {
 			$user_name = $user->username;
 			
 			$var_array = array(
-				'list_id'=>$list_id,
-				'survey_type_id'=>$survey_type_id,
-				'survey_id'=>$survey_id,
-				'question_id'=>$question_id,
-				'answer_template_id'=>$answer_template_id,
-				'faculty_id'=>$faculty_id,
-				'question_company_name'=>$question_company_name,
-				'answer_company_name'=>$answer_company_name,
-				'question_company_address'=>$question_company_address,
-				'answer_company_address'=>$answer_company_address,
-				'question_company_phone'=>$question_company_phone,
-				'answer_company_phone'=>$answer_company_phone,
-				'question_doing_job'=>$question_doing_job,
-				'answer_doing_job'=>$answer_doing_job,
-				'get_percent'=>$get_percent,
-				'list_name'=>$list_name,
-				'created_by_user_id'=>$user_name,
-				'created_on_date'=>mdate('%Y/%m/%d %H:%i:%s', now())
+				'list_id'                   => $list_id,
+				'survey_type_id'            => $survey_type_id,
+				'survey_id'                 => $survey_id,
+				'question_id'               => $question_id,
+				'answer_template_id'        => $answer_template_id,
+				'faculty_id'                => $faculty_id,
+				'question_company_name'     => $question_company_name,
+				'answer_company_name'       => $answer_company_name,
+				'question_company_address'  => $question_company_address,
+				'answer_company_address'    => $answer_company_address,
+				'question_company_phone'    => $question_company_phone,
+				'answer_company_phone'      => $answer_company_phone,
+				'question_doing_job'        => $question_doing_job,
+				'answer_doing_job'          => $answer_doing_job,
+				'get_percent'               => $get_percent,
+				'list_name'                 => $list_name,
+				'created_by_user_id'        => $user_name,
+				'created_on_date'           => mdate('%Y/%m/%d %H:%i:%s', now())
 			);
 			
 			// chen du lieu vao danh sach random 
@@ -92,13 +92,14 @@ class Survey_validation extends CI_Controller {
 			// 1. lay so phan tram sinh vien thoa question_id va answer_template_id
 			$data_gens = $this->survey_validation_model->generation($faculty_id, $answer_template_id);
 
+			// 2. Them vao bang sur_validation
 			foreach($data_gens as $gen_item)
 			{
-				$company_name = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_name);
-				$company_address = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_address);
-				$company_phone = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_phone);
-				$doing_job = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_doing_job);
-				$var_array_gen = array(
+				$company_name       = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_name);
+				$company_address    = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_address);
+				$company_phone      = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_phone);
+				$doing_job          = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_doing_job);
+				$var_array_gen      = array(
 					'validation_id'    => $this->uuid->v4(),
 					'list_id'          => $list_id,
 					'infor_id'         => $gen_item['infor_id'],
