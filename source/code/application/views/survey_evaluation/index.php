@@ -43,12 +43,12 @@
 							</div>
 							<div class="box-content nopadding">
 								<!-- Widget Content -->
-								<form action="<?php echo base_url('survey_evaluation/get_list') ?>" method="POST" class="form-horizontal form-bordered">
+								<form action="<?php echo base_url('survey_evaluation/get_list') ?>" method="POST" class="form-horizontal form-bordered" id="my_form">
 									<!-- Loai khao sat -->
 									<div class="control-group">
 										<label class="control-label">Loại khảo sát</label>
 										<div class="controls">
-											<select name="survey_type" id="survey_type" class='chosen-select span8' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+											<select name="survey_type" id="survey_type" class='chosen-select span8' data-placeholder="Chọn loại khảo sát" data-nosearch="true" required>
 												<option value=""></option>
 												<?php foreach ($survey_type as $item) {?>
 												<option value="<?php echo $item['survey_type_id'] ?>"><?php echo $item['survey_type_name'] ?></option>
@@ -60,7 +60,7 @@
 									<div class="control-group">
 										<label class="control-label">Phiếu khảo sát</label>
 										<div class="controls">
-											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
+											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
@@ -68,7 +68,7 @@
 									<div class="control-group">
 										<label class="control-label">Khoa</label>
 										<div class="controls">
-											<select name="faculty" id="faculty" class="chosen-select span6" data-placeholder="Chọn Khoa">
+											<select name="faculty" id="faculty" class="chosen-select span6" data-placeholder="Chọn Khoa" required>
 											
 											</select>
 										</div>
@@ -77,7 +77,7 @@
 									<div class="control-group">
 										<label class="control-label">Lớp</label>
 										<div class="controls">
-											<select name="class" id="class" class="chosen-select span6" data-placeholder="Chọn Lớp">
+											<select name="class" id="class" class="chosen-select span6" data-placeholder="Chọn Lớp" required>
 											</select>
 										</div>
 									</div>
@@ -86,13 +86,13 @@
 									<div class="control-group">
 										<label class="control-label">[Tên công ty]</label>
 										<div class="controls">
-											<select name="q_company_name" id="q_company_name" class="chosen-select span8" data-placeholder="Chọn câu hỏi để trích xuất">
+											<select name="q_company_name" id="q_company_name" class="chosen-select span8" data-placeholder="Chọn câu hỏi để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
 									<div class="control-group">
 										<div class="controls">
-											<select name="a_company_name" id="a_company_name" class="chosen-select span8" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true">
+											<select name="a_company_name" id="a_company_name" class="chosen-select span8" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
@@ -101,13 +101,13 @@
 									<div class="control-group">
 										<label class="control-label">[ Công việc thực hiện ]</label>
 										<div class="controls">
-											<select name="q_doing_job" id="q_doing_job" class="chosen-select span12" data-placeholder="Chọn câu hỏi để trích xuất" data-nosearch="true">
+											<select name="q_doing_job" id="q_doing_job" class="chosen-select span12" data-placeholder="Chọn câu hỏi để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
 									<div class="control-group">
 										<div class="controls">
-											<select name="a_doing_job" id="a_doing_job" class="chosen-select span12" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true">
+											<select name="a_doing_job" id="a_doing_job" class="chosen-select span12" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
@@ -116,7 +116,7 @@
 									<div class="control-group">
 										<label class="control-label">Tên danh sách</label>
 										<div class="controls">
-											<input type="text" class="span12" id="list_name" name="list_name"/>
+											<input type="text" class="span12" id="list_name" name="list_name" required />
 										</div>
 									</div>
 									
@@ -173,35 +173,13 @@
 						<!-- Ket thuc -->
 					</div>
 				</div>
-				
-				<div class="row-fluid">
-					<div class="span12">
-						<!-- Danh sach danh gia -->
-						<div class="box box-color box-bordered">
-								<div class="box-title">
-									<h3>
-										<!-- Widget title -->
-										Danh sách đánh giá thông tin
-									</h3>
-									<div class="actions">
-										<a href="#" class="btn btn-mini content-slideUp">
-											<i class="icon-angle-down"></i>
-										</a>
-									</div>
-								</div>
-								<div class="box-content nopadding">
-									
-								</div>
-							</div>
-						</div>
-						<!-- Ket thuc -->
-					</div>
-				</div>
 			</div>
 		</div>
 		<!-- javascript -->
 		<script type="text/javascript">
 			$(document).ready(function(){
+				$("#my_form").validate();
+				
 				// Khi chon loai khao sat
 				$("#survey_type").chosen().change(function(){
 					$.ajax({
@@ -358,4 +336,10 @@
 				});
 			});
 		</script>
+		<style>
+			#my_form input.error {border: 1px dotted red;}
+			#my_form label.error {margin-left: 10px !important; width: auto !important; display: none !important;}
+			#my_form textarea.error {border: 1px dotted red;}
+			#my_form select.error {border: 1px dotted red;}
+		</style>
 		

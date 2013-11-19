@@ -23,7 +23,7 @@
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
-							<a href="<?php echo base_url('survey_validation') ?>">Kiểm tra độ tin cậy</a>
+							<a href="<?php echo base_url('survey_evaluation') ?>">Đánh giá thông tin</a>
 						</li>
 					</ul>
 				</div>

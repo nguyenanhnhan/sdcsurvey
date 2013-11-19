@@ -8,7 +8,7 @@ class Survey_type_model extends CI_Model
 		$this->load->library('uuid');
 	}
 	
-	// get all row
+	// get all row with survey_type_id
 	function get($stype_id = FALSE)
 	{
 		if ($stype_id === FALSE)

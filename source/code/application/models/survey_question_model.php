@@ -65,6 +65,16 @@ class Survey_question_model extends CI_Model
 		return $this->db->query($query)->result_array();
 	}
 	
+	// lay cau hoi khong co cau tra loi dang text va co 2 lua chon
+	function get_question_answer_work($survey_id)
+	{
+		$query = "SELECT *
+				  FROM sur_question
+				  WHERE survey_id = '".$survey_id."'AND max_option = 2 AND question_id IN (SELECT at.question_id FROM sur_answer_template AS at WHERE at.option_type <> 't')
+				  ORDER BY view_order ASC";
+		return $this->db->query($query)->result_array();
+	}
+	
 	function get_question_answer_with_text($survey_id)
 	{
 		$query = "SELECT *

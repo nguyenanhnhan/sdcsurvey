@@ -97,4 +97,26 @@ class Infor_model extends CI_Model
 		$this->db->where(array('infor_id'=>$infor_id, 'survey_id'=>$survey_id));
 		return $this->db->update('sur_infor',$data);
 	}
+	
+	// Phuc vu rieng cho report
+	// Dem so sinh vien cua khoa thuc hien khao sat theo hinh thuc khao sat (type_id)
+	function count_with_type($survey_id, $type_id, $faculty_id)
+	{
+		if ($type_id == FALSE)
+		{
+			$query = $this->db->query("SELECT COUNT(infor_id) AS total
+									   FROM sur_infor
+									   WHERE survey_id = '".$survey_id."' AND 
+									   		 faculty_id = '".$faculty_id."'");
+			return $query->row_array();
+		}
+		$query = $this->db->query("SELECT COUNT(infor_id) AS quantum
+								   FROM sur_infor
+								   WHERE survey_id = '".$survey_id."' AND 
+								   		 type_id = '".$type_id."' AND 
+								   		 faculty_id = '".$faculty_id."'");
+		return $query->row_array();
+	}
+	
+	
 }
