@@ -114,10 +114,10 @@ class Report extends CI_Controller
 			//Set cell style
 			$this->excel->getActiveSheet()->getStyle('G3:H5')->getFont()->setColor(new PHPExcel_Style_Color(PHPExcel_Style_Color::COLOR_RED));
 			
-			$survey_type_sel = $this->input->post('survey_type');
-			$survey_sel = $this->input->post('survey');
-			$faculty_sel = $this->input->post('faculty');
-			$questions_sel = $this->input->post('question');
+			$survey_type_sel     = $this->input->post('survey_type');
+			$survey_sel      = $this->input->post('survey');
+			$faculty_sel     = $this->input->post('faculty');
+			$questions_sel   = $this->input->post('question');
 			
 			if (!empty($faculty_sel))
 			{
@@ -256,8 +256,8 @@ class Report extends CI_Controller
 			
 			// Lay thong tin POST
 			$survey_type_sel = $this->input->post('kind_survey_type');
-			$survey_sel = $this->input->post('kind_survey');
-			$faculty_sel = $this->input->post('kind_faculty');
+			$survey_sel      = $this->input->post('kind_survey');
+			$faculty_sel     = $this->input->post('kind_faculty');
 			
 			$columns = array('A');
 			$current = 'A';
@@ -365,6 +365,387 @@ class Report extends CI_Controller
 			$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
 			//force user to download the Excel file without writing it to server's HD
 			$objWriter->save('php://output');
+		}
+		else
+		{
+			redirect("auth");
+		}
+	}
+	
+	function export_sum_survey()
+	{
+		if ($this->ion_auth->logged_in())
+		{
+		
+			$this->load->model(array('survey_model','faculty_model','student_model','infor_model','survey_question_model','survey_answer_template_model', 'survey_answer_model'));
+			
+			// lay du lieu tren form
+			$survey_type_sel                 = $this->input->post("sum_survey_type");
+			$survey_sel                      = $this->input->post("sum_survey");
+			$question_work_sel               = $this->input->post("q_sum_work");
+			$answer_working_template_sel     = $this->input->post("a_sum_working");
+			$answer_underwork_template_sel   = $this->input->post("a_sum_underwork");
+			$questions_report_sel            = $this->input->post("sum_question");
+			$faculty_report_sel              = $this->input->post("sum_faculty");
+			
+			$columns = array('A');
+			$current = 'A';
+			while ($current != 'ZZ')
+			{
+				$columns[] = ++$current;
+			}
+			
+			$this->excel->setActiveSheetIndex(0);
+			//name the worksheet
+			$this->excel->getActiveSheet()->setTitle('TK_tong_hop');
+			
+			// TIEU DE BAO CAO //
+			
+			//change the font size
+ 			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setSize(20);
+			//make the font become bold 			
+			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setBold(true);
+			$this->excel->getActiveSheet()->mergeCells("A1:G1");
+			$this->excel->getActiveSheet()->setCellValue("A1", "KẾT QUẢ KHẢO SÁT VIỆC LÀM SAU MỘT NĂM TỐT NGHIỆP");
+			
+			// head of table
+			// nganh dao tao
+			$this->excel->getActiveSheet()->mergeCells("A3:A5");
+			$this->excel->getActiveSheet()->setCellValue("A3", "Ngành đào tạo");
+			
+			// so sinh vien can khao sat
+			$this->excel->getActiveSheet()->mergeCells("B3:B5");
+			$this->excel->getActiveSheet()->setCellValue("B3", "Số SV cần khảo sát");
+			
+			// so sinh vien da khao sat
+			$this->excel->getActiveSheet()->mergeCells("C3:D3");
+			$this->excel->getActiveSheet()->setCellValue("C3","Số SV đã khảo sát");
+			$this->excel->getActiveSheet()->mergeCells("C4:C5");
+			$this->excel->getActiveSheet()->setCellValue("C4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("D4:D5");
+			$this->excel->getActiveSheet()->setCellValue("D4","Tỷ lệ");
+			
+			// co viec lam
+			$this->excel->getActiveSheet()->mergeCells("E3:F3");
+			$this->excel->getActiveSheet()->setCellValue("E3","Có việc làm");
+			$this->excel->getActiveSheet()->mergeCells("E4:E5");
+			$this->excel->getActiveSheet()->setCellValue("E4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("F4:F5");
+			$this->excel->getActiveSheet()->setCellValue("F4","Tỷ lệ");
+
+			// chua co viec lam
+			$this->excel->getActiveSheet()->mergeCells("G3:H3");
+			$this->excel->getActiveSheet()->setCellValue("G3","Chưa có việc làm");
+			$this->excel->getActiveSheet()->mergeCells("G4:G5");
+			$this->excel->getActiveSheet()->setCellValue("G4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("H4:H5");
+			$this->excel->getActiveSheet()->setCellValue("H4","Tỷ lệ");
+			
+			// cac cau hoi da lua chon ket xuat data
+			if (!empty($questions_report_sel))
+			{
+				// start In tieu de bao cao
+				$start_column = 8;
+				foreach($questions_report_sel as $question_item)
+				{
+					$question = $this->survey_question_model->get_question($question_item);
+					$answer_template = $this->survey_answer_template_model->get($question['question_id']);
+					
+					// noi dung cau hoi
+					$end_column = $question['max_option'] * 2;
+					$this->excel->getActiveSheet()->mergeCells(''.$columns[$start_column].'3:'.$columns[$end_column+$start_column+1].'3');
+					$this->excel->getActiveSheet()->setCellValue(''.$columns[$start_column].'3', $question['content']);
+					
+					// so sinh vien tra loi
+					$this->excel->getActiveSheet()->mergeCells($columns[$start_column]."4:".$columns[$start_column+1]."4");
+					$this->excel->getActiveSheet()->setCellValue($columns[$start_column]."4","Số SV trả lời");
+					$this->excel->getActiveSheet()->setCellValue($columns[$start_column]."5","Số lượng");
+					$this->excel->getActiveSheet()->setCellValue($columns[$start_column+1]."5","Tỷ lệ");
+					
+					// answer template
+					$count_answer = 0;
+					for ($i=$start_column+2,$j=$start_column+$end_column+2; $i<$j; $i=$i+2)
+					{
+						$this->excel->getActiveSheet()->mergeCells(''.$columns[$i].'4:'.$columns[$i+1].'4');
+						$this->excel->getActiveSheet()->setCellValue(''.$columns[$i].'4', $answer_template[$count_answer]['label']);
+						
+						$this->excel->getActiveSheet()->setCellValue(''.$columns[$i].'5', 'Số lượng');
+						$this->excel->getActiveSheet()->setCellValue(''.$columns[$i+1].'5', 'Tỉ lệ %');
+						
+						$count_answer += 1;
+					}
+					$start_column = $start_column+$end_column+2;
+				}
+				// end In tieu de bao cao
+			}
+			
+			// Dua lieu [Nganh dao tao], [So SV can KS], [Co viec lam], [Chua co viec lam]
+			if (!empty($faculty_report_sel))
+			{
+				$start_rows = 6;
+				foreach ($faculty_report_sel as $faculty_item)
+				{	
+					// dua ten nganh vao cot A
+					$faculty_data = $this->faculty_model->get($faculty_item);
+					$this->excel->getActiveSheet()->setCellValue("A".$start_rows, $faculty_data['faculty_name']);
+					
+					// Tong so sinh vien can khao sat
+					$student_survey = $this->student_model->count_student_survey($survey_sel, $faculty_item);
+					$this->excel->getActiveSheet()->setCellValue('B'.$start_rows, $student_survey['sum_student']);
+					
+					// So sinh vien khao sat duoc
+					$student_surveyed = $this->infor_model->gets_of_faculty($faculty_item,$survey_sel);
+					$this->excel->getActiveSheet()->setCellValue('C'.$start_rows, count($student_surveyed));
+					
+					if ($student_survey['sum_student']>0)
+					{
+						$this->excel->getActiveSheet()->setCellValue('D'.$start_rows, '=C'.$start_rows.'*100/B'.$start_rows);
+					}
+					else
+					{
+						$this->excel->getActiveSheet()->setCellValue("D".$start_rows, 0);
+					}
+					
+					// Co viec lam
+					$working = $this->survey_answer_model->get_student_of_answer($faculty_item, $question_work_sel, $answer_working_template_sel);
+					$this->excel->getActiveSheet()->setCellValue("E".$start_rows, count($working));
+					if (count($student_surveyed)>0)
+					{
+						$this->excel->getActiveSheet()->setCellValue("F".$start_rows,"=E".$start_rows."*100/C".$start_rows);
+					}
+					else
+					{
+						$this->excel->getActiveSheet()->setCellValue("F".$start_rows,0);
+					}
+					
+					// Chua co viec lam
+					$underwork = $this->survey_answer_model->get_student_of_answer($faculty_item, $question_work_sel, $answer_underwork_template_sel);
+					$this->excel->getActiveSheet()->setCellValue("G".$start_rows, count($underwork));
+					if (count($student_surveyed)>0)
+					{
+						$this->excel->getActiveSheet()->setCellValue("H".$start_rows,"=G".$start_rows."*100/C".$start_rows);
+					}
+					else
+					{
+						$this->excel->getActiveSheet()->setCellValue("H".$start_rows,0);
+					}
+					
+					// du lieu cua cau hoi
+					$start_columns = 8;
+					foreach($questions_report_sel as $question_item)
+					{
+						$question = $this->survey_question_model->get_question($question_item);
+						$answer_template = $this->survey_answer_template_model->get($question['question_id']);
+					
+						// noi dung cau hoi
+						$end_columns = $question['max_option'] * 2;
+						
+						// so sinh vien tra loi
+						$sum_student = $this->survey_answer_model->count_fsurvey_of_question($faculty_item, $question_item);
+						$this->excel->getActiveSheet()->setCellValue($columns[$start_columns].$start_rows,$sum_student["sum_student"]);
+						if ($question["flag_working"] == TRUE && count($working)>0) // Neu co viec lam thi chia cho cot E
+							$this->excel->getActiveSheet()->setCellValue($columns[$start_columns+1].$start_rows,"=".$columns[$start_columns].$start_rows."/E".$start_rows."*100");
+						elseif ($question["flag_underwork"] == TRUE && count($underwork)>0) // Neu chua co viec lam thi chi cho cot G
+							$this->excel->getActiveSheet()->setCellValue($columns[$start_columns+1].$start_rows,"=".$columns[$start_columns].$start_rows."/G".$start_rows."*100");
+						
+						$start_columns_answ = $start_columns+2;
+						foreach($answer_template as $answer_template_item)
+						{
+							$student_answer = $this->survey_answer_model->get_student_of_answer($faculty_item, $question_item, $answer_template_item['answer_template_id']);
+							$this->excel->getActiveSheet()->setCellValue($columns[$start_columns_answ].$start_rows, count($student_answer));
+							if ($question["flag_working"] == TRUE && count($working)>0) 
+								$this->excel->getActiveSheet()->setCellValue($columns[$start_columns_answ+1].$start_rows,"=".$columns[$start_columns_answ].$start_rows."/".$columns[$start_columns].$start_rows."*100");
+							elseif ($question["flag_underwork"] == TRUE && count($underwork)>0)
+								$this->excel->getActiveSheet()->setCellValue($columns[$start_columns_answ+1].$start_rows,"=".$columns[$start_columns_answ].$start_rows."/".$columns[$start_columns].$start_rows."*100");
+							elseif(count($working)>0)
+								$this->excel->getActiveSheet()->setCellValue($columns[$start_columns_answ+1].$start_rows,"=".$columns[$start_columns_answ].$start_rows."/E".$start_rows."*100");
+							$start_columns_answ = $start_columns_answ + 2;
+						}
+						
+						$start_columns = $start_columns + $end_columns + 2;
+					} 
+					
+					$start_rows = $start_rows + 1;
+				}
+			}
+			
+			// ghi ra file
+			$filename='tong_ket_tong_hop_'.mdate("%d_%m_%Y-%h_%i_%a", now()).'.xls'; //save our workbook as this file name
+			header('Content-Type: application/vnd.ms-excel'); //mime type
+			header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+			header('Cache-Control: max-age=0'); //no cache
+
+			//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+			//if you want to save it as .XLSX Excel 2007 format
+			$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+			//force user to download the Excel file without writing it to server's HD
+			$objWriter->save('php://output');
+		}
+		else
+		{
+			redirect("auth");
+		}
+	}
+	
+	function export_evaluation_survey()
+	{
+		if ($this->ion_auth->logged_in())
+		{
+			$this->load->model(array('survey_model','faculty_model','student_model','infor_model','survey_question_model','survey_answer_template_model', 'survey_answer_model', 'survey_evaluation_model'));
+			// lay du lieu tren form
+			$survey_type_sel             = $this->input->post("eval_survey_type");
+			$survey_sel                  = $this->input->post("eval_survey");
+			$question_work_sel           = $this->input->post("q_eval_work");
+			$answer_working_template_sel = $this->input->post("a_eval_working");
+			$faculty_sel                 = $this->input->post("eval_faculty");
+			
+			$this->excel->setActiveSheetIndex(0);
+			//name the worksheet
+			$this->excel->getActiveSheet()->setTitle('TK_muc_do_phu_hop');
+			
+			// TIEU DE BAO CAO //
+			
+			//change the font size
+ 			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setSize(20);
+			//make the font become bold 			
+			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setBold(true);
+			$this->excel->getActiveSheet()->mergeCells("A1:R1");
+			$this->excel->getActiveSheet()->setCellValue("A1", "MỨC ĐỘ PHÙ HỢP GIỮA CÔNG VIỆC ĐANG LÀM VỚI LĨNH VỰC ĐƯỢC ĐÀO TẠO");
+			
+			// head of table
+			// nganh dao tao
+			$this->excel->getActiveSheet()->mergeCells("A3:A5");
+			$this->excel->getActiveSheet()->setCellValue("A3", "Ngành đào tạo");
+			
+			// so sinh vien can khao sat
+			$this->excel->getActiveSheet()->mergeCells("B3:B5");
+			$this->excel->getActiveSheet()->setCellValue("B3", "Số SV cần khảo sát");
+			
+			// so sinh vien da khao sat
+			$this->excel->getActiveSheet()->mergeCells("C3:D3");
+			$this->excel->getActiveSheet()->setCellValue("C3","Số SV đã khảo sát");
+			$this->excel->getActiveSheet()->mergeCells("C4:C5");
+			$this->excel->getActiveSheet()->setCellValue("C4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("D4:D5");
+			$this->excel->getActiveSheet()->setCellValue("D4","Tỷ lệ");
+			
+			// co viec lam
+			$this->excel->getActiveSheet()->mergeCells("E3:F3");
+			$this->excel->getActiveSheet()->setCellValue("E3","Có việc làm");
+			$this->excel->getActiveSheet()->mergeCells("E4:E5");
+			$this->excel->getActiveSheet()->setCellValue("E4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("F4:F5");
+			$this->excel->getActiveSheet()->setCellValue("F4","Tỷ lệ");
+
+			// So sinh vien duoc danh gia
+			$this->excel->getActiveSheet()->mergeCells("G3:H3");
+			$this->excel->getActiveSheet()->setCellValue("G3","Số SV được đánh giá");
+			$this->excel->getActiveSheet()->mergeCells("G4:G5");
+			$this->excel->getActiveSheet()->setCellValue("G4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("H4:H5");
+			$this->excel->getActiveSheet()->setCellValue("H4","Tỷ lệ");
+			
+			// Muc do phu hop giua cong viec dang lam voi.....
+			$this->excel->getActiveSheet()->mergeCells("I3:R3");
+			$this->excel->getActiveSheet()->setCellValue("I3","Mức độ phù hợp giữa công việc đang làm với lĩnh vực được đào tạo");
+			$this->excel->getActiveSheet()->mergeCells("I4:J4");
+			$this->excel->getActiveSheet()->setCellValue("I4","Mức 1");
+			$this->excel->getActiveSheet()->setCellValue("I5","Số lượng");
+			$this->excel->getActiveSheet()->setCellValue("J5","Tỷ lệ");
+			
+			$this->excel->getActiveSheet()->mergeCells("K4:L4");
+			$this->excel->getActiveSheet()->setCellValue("K4","Mức 2");
+			$this->excel->getActiveSheet()->setCellValue("K5","Số lượng");
+			$this->excel->getActiveSheet()->setCellValue("L5","Tỷ lệ");
+			
+			$this->excel->getActiveSheet()->mergeCells("M4:N4");
+			$this->excel->getActiveSheet()->setCellValue("M4","Mức 3");
+			$this->excel->getActiveSheet()->setCellValue("M5","Số lượng");
+			$this->excel->getActiveSheet()->setCellValue("N5","Tỷ lệ");
+
+			$this->excel->getActiveSheet()->mergeCells("O4:P4");
+			$this->excel->getActiveSheet()->setCellValue("O4","Mức 4");
+			$this->excel->getActiveSheet()->setCellValue("O5","Số lượng");
+			$this->excel->getActiveSheet()->setCellValue("G5","Tỷ lệ");
+
+			$this->excel->getActiveSheet()->mergeCells("Q4:R4");
+			$this->excel->getActiveSheet()->setCellValue("Q4","Mức 5");
+			$this->excel->getActiveSheet()->setCellValue("Q5","Số lượng");
+			$this->excel->getActiveSheet()->setCellValue("R5","Tỷ lệ");
+			
+			if (!empty($faculty_sel))
+			{
+				$start_rows = 6;
+				foreach($faculty_sel as $faculty_item)
+				{
+					// dua ten nganh vao cot A
+					$faculty_data = $this->faculty_model->get($faculty_item);
+					$this->excel->getActiveSheet()->setCellValue("A".$start_rows, $faculty_data['faculty_name']);
+					
+					// Tong so sinh vien can khao sat
+					$student_survey = $this->student_model->count_student_survey($survey_sel, $faculty_item);
+					$this->excel->getActiveSheet()->setCellValue('B'.$start_rows, $student_survey['sum_student']);
+					
+					// So sinh vien khao sat duoc
+					$student_surveyed = $this->infor_model->gets_of_faculty($faculty_item,$survey_sel);
+					$this->excel->getActiveSheet()->setCellValue('C'.$start_rows, count($student_surveyed));
+					if ($student_survey["sum_student"]>0)
+						$this->excel->getActiveSheet()->setCellValue("D".$start_rows, "=C".$start_rows."/B".$start_rows."*100");
+					
+					// Co viec lam
+					$working = $this->survey_answer_model->get_student_of_answer($faculty_item, $question_work_sel, $answer_working_template_sel);
+					$this->excel->getActiveSheet()->setCellValue("E".$start_rows, count($working));
+					if (count($student_surveyed)>0)
+					{
+						$this->excel->getActiveSheet()->setCellValue("F".$start_rows,"=E".$start_rows."*100/C".$start_rows);
+					}
+					
+					$quantum_evaluated = $this->survey_evaluation_model->student_evaluated($survey_sel, $faculty_item);
+					$this->excel->getActiveSheet()->setCellValue("G".$start_rows, $quantum_evaluated["quantum_evaluated"]);
+					if (count($working)>0)
+						$this->excel->getActiveSheet()->setCellValue("H".$start_rows, "=G".$start_rows."*100/E".$start_rows);
+					
+					// Muc 1
+					$quantum_evaluated_score_1 = $this->survey_evaluation_model->student_evaluated_rate_score($survey_sel, $faculty_item, 1);
+					$this->excel->getActiveSheet()->setCellValue("I".$start_rows, $quantum_evaluated_score_1["quantum_evaluated_rate_score"]); 
+					// Muc 2	
+					$quantum_evaluated_score_2 = $this->survey_evaluation_model->student_evaluated_rate_score($survey_sel, $faculty_item, 2);
+					$this->excel->getActiveSheet()->setCellValue("K".$start_rows, $quantum_evaluated_score_2["quantum_evaluated_rate_score"]);
+					// Muc 3
+					$quantum_evaluated_score_3 = $this->survey_evaluation_model->student_evaluated_rate_score($survey_sel, $faculty_item, 3);
+					$this->excel->getActiveSheet()->setCellValue("M".$start_rows, $quantum_evaluated_score_3["quantum_evaluated_rate_score"]);
+					// Muc 4
+					$quantum_evaluated_score_4 = $this->survey_evaluation_model->student_evaluated_rate_score($survey_sel, $faculty_item, 4);
+					$this->excel->getActiveSheet()->setCellValue("O".$start_rows, $quantum_evaluated_score_4["quantum_evaluated_rate_score"]);
+					// Muc 5
+					$quantum_evaluated_score_5 = $this->survey_evaluation_model->student_evaluated_rate_score($survey_sel, $faculty_item, 5);
+					$this->excel->getActiveSheet()->setCellValue("Q".$start_rows, $quantum_evaluated_score_5["quantum_evaluated_rate_score"]);
+					
+					if ($quantum_evaluated["quantum_evaluated"]>0)
+					{
+						$this->excel->getActiveSheet()->setCellValue("J".$start_rows, "=I".$start_rows."*100/G".$start_rows);
+						$this->excel->getActiveSheet()->setCellValue("L".$start_rows, "=K".$start_rows."*100/G".$start_rows);
+						$this->excel->getActiveSheet()->setCellValue("N".$start_rows, "=M".$start_rows."*100/G".$start_rows);
+						$this->excel->getActiveSheet()->setCellValue("P".$start_rows, "=O".$start_rows."*100/G".$start_rows);
+						$this->excel->getActiveSheet()->setCellValue("R".$start_rows, "=Q".$start_rows."*100/G".$start_rows);
+					}
+					
+					$start_rows = $start_rows + 1;
+				}
+			}
+			
+			// ghi ra file
+			$filename='tong_ket_muc_do_phu_hop_'.mdate("%d_%m_%Y-%h_%i_%a", now()).'.xls'; //save our workbook as this file name
+			header('Content-Type: application/vnd.ms-excel'); //mime type
+			header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+			header('Cache-Control: max-age=0'); //no cache
+
+			//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+			//if you want to save it as .XLSX Excel 2007 format
+			$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+			//force user to download the Excel file without writing it to server's HD
+			$objWriter->save('php://output');
+			
 		}
 		else
 		{

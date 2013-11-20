@@ -24,7 +24,33 @@ class Survey_evaluation_model extends CI_Model
 		return $this->db->query($query)->result_array();
 	}
 	
-	// sinh danh sach random
+	// so sinh vien cua khoa da duoc danh gia
+	function student_evaluated($survey_id, $faculty_id)
+	{
+		$query = "SELECT COUNT(sur_evaluation.infor_id) as quantum_evaluated
+				  FROM sur_evaluation INNER JOIN sur_list_evaluation ON sur_evaluation.list_evaluation_id = sur_list_evaluation.list_id
+				  INNER JOIN sur_infor ON sur_evaluation.infor_id = sur_infor.infor_id
+				  WHERE sur_infor.faculty_id = '".$faculty_id."' AND
+				  		sur_list_evaluation.survey_id = '".$survey_id."'
+				  		AND rate_score > 0";
+		
+		return $this->db->query($query)->row_array();
+	}
+	
+	// so sinh vien cua khoa duoc danh gia theo thang diem
+	function student_evaluated_rate_score($survey_id, $faculty_id, $rate_score)
+	{
+		$query = "SELECT COUNT(sur_evaluation.infor_id) as quantum_evaluated_rate_score
+				  FROM sur_evaluation INNER JOIN sur_list_evaluation ON sur_evaluation.list_evaluation_id = sur_list_evaluation.list_id
+				  INNER JOIN sur_infor ON sur_evaluation.infor_id = sur_infor.infor_id
+				  WHERE sur_infor.faculty_id = '".$faculty_id."' AND
+				  		sur_list_evaluation.survey_id = '".$survey_id."'
+				  		AND rate_score =".$rate_score;
+		
+		return $this->db->query($query)->row_array();
+	}
+	
+	// sinh danh sach
 	function generation($list_id)
 	{
 		$query = "SELECT sur_infor.infor_id
@@ -41,7 +67,8 @@ class Survey_evaluation_model extends CI_Model
 	}
 	
 	// xac nhan thong tin
-	function validate($validation_id, $value, $user_name)
+	/*
+function validate($validation_id, $value, $user_name)
 	{
 		$data = array(
 			'value'=>$value,
@@ -51,6 +78,7 @@ class Survey_evaluation_model extends CI_Model
 		$this->db->where('validation_id',$validation_id);
 		return $this->db->update('sur_validation',$data);
 	}
+*/
 	
 	function update_rate_score($evaluation_id, $rate_score, $user_name)
 	{

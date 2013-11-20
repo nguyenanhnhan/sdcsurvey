@@ -151,6 +151,12 @@ class Do_survey extends CI_Controller
 		// Lay mau khao sat hien muon sua
 		$data['survey'] = $this->survey_model->get(FALSE, $survey_id);
 		
+		if ($data["survey"]["end_date"] < mdate('%Y-%m-%d %H:%i:%s',now()))
+		{
+			echo "Phiếu khảo sát đã kết thúc vào ngày ".$data["survey"]["end_date"];
+			exit;
+		}
+		
 		// Lay cac mau cau hoi va cau tra loi tuong ung voi phieu khao sat
 		$data['survey_question'] = $this->survey_question_model->get($survey_id);
 		
