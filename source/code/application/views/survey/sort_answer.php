@@ -63,28 +63,10 @@
 								<?php } ?>
 							</div>
 						</div>
-						<!--
-<?php $q_count = 1; ?>
-						<?php foreach ($questions as $question_item) { ?>
-						<div class="box box-color box-bordered blue sort" id="<?php echo $question_item["question_id"]; ?>">
-							<div class="box-title">
-								<h3><?php echo $q_count.'. '.$question_item["content"]; $q_count ++?></h3>
-								<?php if ($question_item["max_option"]>1) { ?>
-								<div class="actions">
-									<a href="<?php echo base_url("survey/sort_answer/".$survey_type["survey_type_id"]."/".$survey["survey_id"]."/".$question_item["question_id"]) ?>" class="btn btn-mini">
-										<i class="glyphicon-sort"></i>
-									</a>
-								</div>
-								<?php } ?>
-							</div>
-						</div>
-						<?php } ?>
--->
 					</div>
 				</div>
 			</div>
 		</div>
-		
 		<script>
 			$(document).ready(function(){
 				$(".sortable-box").sortable({
@@ -98,6 +80,21 @@
 								dataType:"json",
 							});
 							a_count++;
+						});
+					}
+				});
+				$(".sortable-box").sortable({
+					stop: function( event, ui ) {
+						var title = "Thông báo",
+						message = "Đã cập nhật lại vị trí",
+						time = 1000;
+				
+						$.gritter.add({
+							title: 	(typeof title !== 'undefined') ? title : 'Message - Head',
+							text: 	(typeof message !== 'undefined') ? message : 'Body',
+							image: 	null,
+							sticky: false,
+							time: 	(typeof time !== 'undefined') ? time : 3000
 						});
 					}
 				});

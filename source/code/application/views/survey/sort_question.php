@@ -78,5 +78,20 @@
 						});
 					}
 				});
+				$(".sortable-box").sortable({
+					stop: function( event, ui ) {
+						var title = "Thông báo",
+						message = "Đã cập nhật lại vị trí",
+						time = 1000;
+				
+						$.gritter.add({
+							title: 	(typeof title !== 'undefined') ? title : 'Message - Head',
+							text: 	(typeof message !== 'undefined') ? message : 'Body',
+							image: 	null,
+							sticky: false,
+							time: 	(typeof time !== 'undefined') ? time : 3000
+						});
+					}
+				});
 			});
 		</script>

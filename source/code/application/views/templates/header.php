@@ -46,6 +46,8 @@
 	<link rel="stylesheet" href="<?php echo css_url() ?>themes.css">
 	<!-- dataTables -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/datatable/TableTools.css">
+	<!-- Notify -->
+	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/gritter/jquery.gritter.css">
 
 	<!-- jQuery -->
 	<script src="<?php echo js_url() ?>jquery.min.js"></script>
@@ -107,6 +109,8 @@
 	<script src="<?php echo js_url() ?>plugins/validation/additional-methods.min.js"></script>
 	
 	<script src="<?php echo js_url() ?>plugins/form/jquery.form.min.js"></script>
+	<!-- Notify -->
+	<script src="<?php echo js_url() ?>plugins/gritter/jquery.gritter.min.js"></script>
 	
 	<!-- TinyMCE -->
 	<script src="<?php echo js_url() ?>plugins/tinymce/tinymce.min.js"></script>
