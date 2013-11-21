@@ -53,8 +53,21 @@ class Survey_answer_template_model extends CI_Model
 			'last_modified_by_user_id' => $uid,
 			'last_modified_on_date'    => mdate('%Y/%m/%d %H:%i:%s', now())
 		);
+		$this->db->where("answer_template_id",$answer_template_id);
 		
 		return $this->db->update('sur_answer_template', $data);
+	}
+	
+	// update sort
+	function update_sort($uid, $answer_template_id, $view_order)
+	{
+		$data = array(
+				"view_order"                => $view_order,
+				"last_modified_by_user_id"  => $uid,
+				"last_modified_on_date"     => mdate("%Y/%m/%d %H:%i:%s", now())
+		);
+		$this->db->where("answer_template_id", $answer_template_id);
+		return $this->db->update("sur_answer_template", $data);
 	}
 	
 }

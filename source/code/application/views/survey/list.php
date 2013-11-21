@@ -46,8 +46,8 @@
 								<table class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort" data-nosort="0">
 									<thead>
 										<tr>
-											<th style="width: 102px">Điều khiển</th>
-											<th>Tên loại khảo sát</th>
+											<th style="width: 140px">Điều khiển</th>
+											<th>Tên phiếu khảo sát</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -57,6 +57,7 @@
 												<a href="<?php echo base_url('survey/delete/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn btn-danger"><i class="icon-remove"></i></a>
 												<a href="<?php echo base_url('survey/edit_step_1/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn"><i class="icon-edit"></i></a>
 												<a href="<?php echo base_url('survey/create_summary/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn btn-success"><i class="icon-eye-open"></i></a>
+												<a href="<?php echo base_url('survey/sort_question/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn"><i class="glyphicon-sort"></i></a>
 											</td>
 											<td><?php echo $survey_item['survey_name']; ?></td>
 										</tr>

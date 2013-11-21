@@ -927,6 +927,75 @@ class Survey extends CI_Controller
 		}
 	}
 	
+	function sort_question($survey_type_id, $survey_id)
+	{
+		if ($this->ion_auth->logged_in())
+		{
+			$this->load->model(array('survey_model', 'survey_type_model', 'faculty_model', 'survey_faculty_model', 'survey_question_model'));
+			
+			// Lay thong tin nguoi dung
+			$user = $this->ion_auth->user()->row();
+			$uid  = $user->id;
+			
+			// Lay loai khao sat
+			$data['survey_type'] = $this->survey_type_model->get($survey_type_id);
+			
+			// Lay mau khao sat hien muon sua
+			$data['survey'] = $this->survey_model->get($survey_type_id, $survey_id);
+			
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			// Lay danh sach cau hoi
+			$data["questions"] = $this->survey_question_model->get($survey_id);
+			
+			$this->load->view('templates/header',$data);
+			$this->load->view('survey/sort_question',$data);
+			$this->load->view('templates/footer');
+		}
+		else
+		{
+			redirect("auth");
+		}
+	}
+	
+	function sort_answer($survey_type_id, $survey_id, $question_id)
+	{
+		if ($this->ion_auth->logged_in())
+		{
+			$this->load->model(array('survey_model', 'survey_type_model', 'faculty_model', 'survey_faculty_model', 'survey_question_model', 'survey_answer_template_model'));
+			
+			// Lay thong tin nguoi dung
+			$user = $this->ion_auth->user()->row();
+			$uid  = $user->id;
+			
+			// Lay loai khao sat
+			$data['survey_type'] = $this->survey_type_model->get($survey_type_id);
+			
+			// Lay mau khao sat hien muon sua
+			$data['survey'] = $this->survey_model->get($survey_type_id, $survey_id);
+			
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			// Lay du lieu cau hoi
+			$data["question"] = $this->survey_question_model->get_question($question_id);
+			
+			// lay danh sach cau tra loi
+			$data["answers"] = $this->survey_answer_template_model->get($question_id);
+			
+			
+			
+			$this->load->view('templates/header',$data);
+			$this->load->view('survey/sort_answer',$data);
+			$this->load->view('templates/footer');
+		}
+		else
+		{
+			redirect("auth");
+		}
+	}
+	
 	////////////////////////////////////
 	// AJAX function
 	////////////////////////////////////
@@ -938,5 +1007,32 @@ class Survey extends CI_Controller
 		$data['faculties'] = $this->faculty_model->get_is_vocation($is_vocation);
 		
 		echo json_encode($data);
+	}
+	
+	function update_view_order()
+	{
+		$this->load->model(array('survey_model','survey_question_model'));
+		// Lay thong tin nguoi dung
+		$user = $this->ion_auth->user()->row();
+		$uid  = $user->id;
+		
+		$question_id = $_REQUEST["question_id"];
+		$view_order = $_REQUEST["view_order"];
+		
+		$this->survey_question_model->update_sort($uid, $question_id, $view_order);
+	}
+	
+	function update_answer_view_order()
+	{
+		$this->load->model(array('survey_answer_template_model'));
+		// Lay thong tin nguoi dung
+		$user = $this->ion_auth->user()->row();
+		$uid  = $user->id;
+		
+		$answer_template_id = $_REQUEST["answer_template_id"];
+		$view_order = $_REQUEST["view_order"];
+		
+		$this->survey_answer_template_model->update_sort($uid, $answer_template_id, $view_order);
+
 	}
 }
