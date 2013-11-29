@@ -83,4 +83,10 @@ class Student_model extends CI_Model
 								   ORDER BY class_id ASC;");
 		return $query->result_array();
 	}
+	
+	// insert student
+	function insert_student ($data)
+	{
+		return $this->db->insert("sur_student",$data);
+	}
 }

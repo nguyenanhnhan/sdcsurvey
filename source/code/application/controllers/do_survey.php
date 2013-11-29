@@ -151,10 +151,23 @@ class Do_survey extends CI_Controller
 		// Lay mau khao sat hien muon sua
 		$data['survey'] = $this->survey_model->get(FALSE, $survey_id);
 		
-		if ($data["survey"]["end_date"] < mdate('%Y-%m-%d %H:%i:%s',now()))
+		if ($data["survey"]["start_date"] > mdate("%Y-%m-%d %H:%i:%s",now()))
 		{
-			echo "Phiếu khảo sát đã kết thúc vào ngày ".$data["survey"]["end_date"];
+			echo "Phiếu khảo sát sẽ bắt đầu vào ngày ".$data["survey"]["start_date"];
 			exit;
+		}
+		else
+		{
+			if ($data["survey"]["end_date"] < mdate('%Y-%m-%d %H:%i:%s',now()))
+			{
+				echo "Phiếu khảo sát đã kết thúc vào ngày ".$data["survey"]["end_date"];
+				exit;
+			}
+			elseif ($data["survey"]["status"]==FALSE)
+			{
+				echo "Phiếu khảo sát chưa được chấp nhận sử dụng";
+				exit;
+			}
 		}
 		
 		// Lay cac mau cau hoi va cau tra loi tuong ung voi phieu khao sat

@@ -100,53 +100,53 @@
 		
 		<!-- javascript -->
 		<script type="text/javascript">
+			$(document).ready(function(){
 			// Phan xu ly trong danh sach danh gia
-			<?php foreach ($student_list as $student) {?>
-			$("#<?php echo $student['evaluation_id'] ?>").slider({
-				value: <?php echo $student['rate_score'] ?>
-			});
-			
-			$("#<?php echo $student['evaluation_id'] ?> .amount").text(<?php echo $student['rate_score'] ?>);
-			<?php }?>
-			
-			$(".slider").slider({
-				stop: function (event, ui)
-				{
-					$.ajax ({
-						type: 'POST',
-						url: "<?php echo base_url('survey_evaluation/update_rate_score') ?>"+"/"+$(this).attr("data-key")+"/"+ui.value,
-						dataType: 'json',
-						success: function (data) { 
-						}
-					});
-/* 					alert($(this).attr('data-key')); */
-/* 					alert(ui.value); */
-				}
-			});
-			
-			$("a[href='#modal-note']").click(function(){
-				$("#temp_value").val($(this).attr("data-key"));
-			});
-			
-			$("#modal-note").bind('show', function(){
-				$.ajax({
-					type: "GET",
-					url: "<?php echo base_url('survey_evaluation/get_note') ?>"+"/"+$("#temp_value").val(),
-					dataType: "json",
-					success: function (data) {
-						$(".modal-body #my_note").val(data.note.note);
+				<?php foreach ($student_list as $student) {?>
+				$("#<?php echo $student['evaluation_id'] ?>").slider({
+					value: <?php echo $student['rate_score'] ?>
+				});
+				
+				$("#<?php echo $student['evaluation_id'] ?> .amount").text(<?php echo $student['rate_score'] ?>);
+				<?php }?>
+				
+				$(".slider").slider({
+					stop: function (event, ui)
+					{
+						$.ajax ({
+							type: 'POST',
+							url: "<?php echo base_url('survey_evaluation/update_rate_score') ?>"+"/"+$(this).attr("data-key")+"/"+ui.value,
+							dataType: 'json',
+							success: function (data) { 
+							}
+						});
 					}
 				});
-			});
-			
-			$("#modal_save").click(function(){
-				$.ajax({
-					type: "POST",
-					url: "<?php echo base_url('survey_evaluation/update_note')?>",/* +"/"+$("#temp_value").val()+"/"+$(".modal-body #my_note").val(), */
-					data: "evaluation_id="+$("#temp_value").val()+"&note="+$(".modal-body #my_note").val(),
-					dataType: "json",
-					success: function (data) {
-					}
+				
+				$("a[href='#modal-note']").click(function(){
+					$("#temp_value").val($(this).attr("data-key"));
+				});
+				
+				$("#modal-note").bind('show', function(){
+					$.ajax({
+						type: "GET",
+						url: "<?php echo base_url('survey_evaluation/get_note') ?>"+"/"+$("#temp_value").val(),
+						dataType: "json",
+						success: function (data) {
+							$(".modal-body #my_note").val(data.note.note);
+						}
+					});
+				});
+				
+				$("#modal_save").click(function(){
+					$.ajax({
+						type: "POST",
+						url: "<?php echo base_url('survey_evaluation/update_note')?>",/* +"/"+$("#temp_value").val()+"/"+$(".modal-body #my_note").val(), */
+						data: "evaluation_id="+$("#temp_value").val()+"&note="+$(".modal-body #my_note").val(),
+						dataType: "json",
+						success: function (data) {
+						}
+					});
 				});
 			});
 		</script>

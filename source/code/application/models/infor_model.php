@@ -27,6 +27,27 @@ class Infor_model extends CI_Model
 		return $query->row_array();
 	}
 	
+	//get students list with missing information of faculty
+	function gets_students_infor_missing_infor_of_faculty($faid, $survey_id, $missinfor)
+	{
+		$str = "SELECT * 
+				FROM sur_infor 
+				WHERE survey_id = '".$survey_id."' AND faculty_id = '".$faid."' AND (";
+		$i=0; 
+		foreach($missinfor as $infor)
+		{
+			if($i == 0)
+				$str = $str . $infor . " = ''";
+			else
+				$str = $str . " OR " . $infor . " = ''";
+			$i++;
+		}
+		$str = $str . ")";
+		//echo $str;
+		$query = $this->db->query($str);
+		return $query->result_array();
+	}
+	
 	// Insert thong tin nguoi duoc khao sat
 	function staff_insert($user_name,$infor_id, $survey_id, $data_infor)
 	{

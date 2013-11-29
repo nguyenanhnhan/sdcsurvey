@@ -79,6 +79,13 @@
 										</div>
 									</div>
 									<div class="control-group">
+										<label class="control-label">Đến địa chỉ</label>
+										<div class="controls">
+											<input type="text" class="input-xlarge" id="to_email_address" name="email_address" />
+											<span class="help-block">Các mail thông báo sẽ gửi đến địa chỉ này. Chỉ có hiệu lực trong quá trình test.</span>
+										</div>
+									</div>
+									<div class="control-group">
 										<label class="control-label">Mật khẩu</label>
 										<div class="controls">
 											<input type="password" class="input-xlarge" id="password" name="password" />
@@ -92,11 +99,20 @@
 										</div>
 									</div>
 									<div class="control-group">
-										<label class="control-label">Nội dung</label>
+										<label class="control-label">Nội dung &nbsp;
+											<i id="replace_content" class="icon-undo" rel="tooltip" data-placement="bottom" data-original-title="Nội dung mẫu"></i>
+											<i id="save_content" class="icon-save" rel="tooltip" data-placement"top" data-original-title="Lưu lại mẫu vừa soạn"></i>
+										</label>
 										<div class="controls">
 											<textarea name="editor" id ="editor" class='span12' rows="10">
-											<?php echo $mail_template ?>
+												<?php echo $mail_template; ?>
 											</textarea>
+											<div style="color:red"><strong>Chú thích từ khoá</strong></div>
+											<ul>
+												<li><strong>[Student|Fullname]</strong>: Họ tên sinh viên trích xuất từ danh sách</li>
+												<li><strong>[Faculty|Name]</strong>: Tên Khoa</li>
+												<li><strong>[Survey|Link]</strong>: Đường dẫn đế phiếu khảo sát</li>
+											</ul>
 										</div>
 									</div>
 									<div class="control-group">
@@ -135,12 +151,16 @@
 		</div>
 		<!--- Javascript -->
 		<script type="text/javascript">
-		tinyMCE.init({
-			// General options
-			selector:"textarea"
-		});
-		
 		$(document).ready(function(){
+			
+			tinyMCE.init({
+				// General options
+				selector:"textarea",
+				force_br_newlines : false,
+				force_p_newlines : false,
+				forced_root_block : '',
+/* 				entity_encoding : "raw" */
+			});
 			
 			// Khoi tao data
 			$.ajax({
@@ -175,6 +195,49 @@
 						for (var i=0, len=data.surveys_faculty.length; i<len; i++)
 						{
 							$("#survey").append("<option value='"+data.surveys_faculty[i].survey_id+"'>"+data.surveys_faculty[i].survey_name+"</option>");
+						}
+					}
+				});
+			});
+			
+			$("#replace_content").click(function(){
+				tinyMCE.activeEditor.setContent(<?php echo "'".$mail_template."'"; ?>);
+			});
+			
+			$("#save_content").click(function(){
+				$.ajax({
+					url:"<?php echo base_url('inform/save_mail_template') ?>",
+					type:"POST",
+					data:"content="+encodeURIComponent(tinyMCE.activeEditor.getContent())+"&title="+$("#title").val()+"&survey_id="+$("#survey option:selected").val(),
+					dataType: "json",
+					success: function (data){
+						if (data == "TRUE")
+						{
+							var title = "Thông báo",
+							message = "Đã lưu lại mẫu thư",
+							time = 1000;
+					
+							$.gritter.add({
+								title: 	(typeof title !== 'undefined') ? title : 'Message - Head',
+								text: 	(typeof message !== 'undefined') ? message : 'Body',
+								image: 	null,
+								sticky: false,
+								time: 	(typeof time !== 'undefined') ? time : 3000
+							});
+						}
+						else
+						{
+							var title = "Thông báo",
+							message = "Quá trình lưu xảy ra lỗi",
+							time = 2000;
+					
+							$.gritter.add({
+								title: 	(typeof title !== 'undefined') ? title : 'Message - Head',
+								text: 	(typeof message !== 'undefined') ? message : 'Body',
+								image: 	null,
+								sticky: false,
+								time: 	(typeof time !== 'undefined') ? time : 3000
+							});
 						}
 					}
 				});

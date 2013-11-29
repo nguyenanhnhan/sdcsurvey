@@ -51,7 +51,8 @@
 										</tr>
 									</thead>
 									<tbody>
-										<?php foreach ($surveys as $survey_item): ?>
+										<?php foreach ($surveys as $survey_item){ ?>
+										<?php if ($survey_item["status"]==FALSE) { ?>
 										<tr>
 											<td>
 												<a href="<?php echo base_url('survey/delete/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn btn-danger"><i class="icon-remove"></i></a>
@@ -61,7 +62,17 @@
 											</td>
 											<td><?php echo $survey_item['survey_name']; ?></td>
 										</tr>
-										<?php endforeach?>
+										<?php } else { ?>
+										<tr>
+											<td>
+												<a href="#" class="btn btn-success" rel="tooltip" data-original-title="Phiếu đang được khảo sát"><i class="icon-tasks"></i></a>
+												<a href="<?php echo base_url('survey/create_summary/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn btn-info"><i class="icon-eye-open"></i></a>
+												<a href="<?php echo base_url('survey/sort_question/'.$survey_type['survey_type_id'].'/'.$survey_item['survey_id']); ?>" class="btn"><i class="glyphicon-sort"></i></a>
+											</td>
+											<td><?php echo $survey_item['survey_name']; ?></td>
+										</tr>
+										<?php } // end if else ?>
+										<?php } // end foreach?>
 									</tbody>
 								</table>	
 							</div>

@@ -120,4 +120,16 @@ class Survey_model extends CI_Model
 		$this->db->where('survey_id', $survey_id);
 		return $this->db->update('sur_survey', $data);
 	}
+	
+	// update status
+	function update_status($uid, $survey_id, $status)
+	{
+		$data = array(
+			"status"                     => $status,
+			"last_modified_by_user_id"   => $uid,
+			"last_modified_on_date"      => mdate("%Y/%m/%d %H:%i:%s", now())
+		);
+		$this->db->where("survey_id", $survey_id);
+		return $this->db->update("sur_survey", $data);
+	}
 }

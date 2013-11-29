@@ -148,8 +148,13 @@ class Survey extends CI_Controller
 		{
 			$this->load->model(array('survey_model'));
 			
-			// Tien hanh xao data trong bang sur_survey
-			$this->survey_model->delete($survey_id);
+			$survey_data = $this->surey_model->get($survey_type_id, $survey_id);
+			
+			if ($survey_data["status"]==FALSE)
+			{
+				// Tien hanh xao data trong bang sur_survey
+				$this->survey_model->delete($survey_id);
+			}
 			
 			redirect ('survey/index/'.$survey_type_id);
 		}
@@ -198,10 +203,17 @@ class Survey extends CI_Controller
 			$user = $this->ion_auth->user()->row();
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
 			$data['is_admin'] = $this->ion_auth->is_admin();
-			
-			$this->load->view('templates/header',$data);
-			$this->load->view('survey/edit_step_1',$data);
-			$this->load->view('templates/footer');
+
+			if ($data["survey"]["status"]==FALSE)
+			{
+				$this->load->view('templates/header',$data);
+				$this->load->view('survey/edit_step_1',$data);
+				$this->load->view('templates/footer');
+			}
+			else
+			{
+				redirect ('survey/index/'.$survey_type_id);
+			}
 		}
 		else
 		{
@@ -312,8 +324,14 @@ class Survey extends CI_Controller
 			// Lay tat ca thong tin tren form
 			$design_template_id = $this->input->post('design_template');
 			
-			// Cap nhat vao bang sur_survey
-			$this->survey_model->update_step_2($uid, $survey_id, $design_template_id);
+			// lay data cua phieu
+			$survey_data = $this->survey_model->get($survey_type_id, $survey_id);
+			
+			if ($surve_data["status"]==FALSE)
+			{
+				// Cap nhat vao bang sur_survey
+				$this->survey_model->update_step_2($uid, $survey_id, $design_template_id);
+			}
 			
 			redirect('survey/edit_step_3/'.$survey_type_id.'/'.$survey_id);
 		}
@@ -1034,5 +1052,20 @@ class Survey extends CI_Controller
 		
 		$this->survey_answer_template_model->update_sort($uid, $answer_template_id, $view_order);
 
+	}
+	
+	function update_status()
+	{
+		$this->load->model('survey_model');
+		
+		// Lay thong tin nguoi dung
+		$user=$this->ion_auth->user()->row();
+		$uid=$user->id;
+		
+		$survey_id = $_REQUEST["survey_id"];
+		$status = $_REQUEST["status"];
+		
+		$data['status'] = $this->survey_model->update_status($uid, $survey_id, $status);
+		echo json_encode($data);
 	}
 }

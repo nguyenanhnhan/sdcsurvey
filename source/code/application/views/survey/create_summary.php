@@ -99,18 +99,32 @@
 										<tr>
 											<td>Đang khảo sát</td>
 											<td>
-												<input type="checkbox" data-skin="square" data-color="blue" class="icheck-me" <?php if ($survey['status']==1) echo 'checked'; ?>>
+												<input id="doing_survey" name="doing_survey" type="checkbox" data-skin="square" data-color="blue" class="icheck-me" <?php if ($survey['status']==1) echo 'checked'; ?>>
 											</td>
 										</tr>
+										<!-- khong dung -->
+										<?php if($survey['status']==FALSE) {?>
 										<tr>
 											<td></td>
 											<td>
-												<a href="<?php echo base_url('survey/edit_step_1/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" class="btn btn-primary">Chỉnh sửa</a>
-												<?php if($survey['status']==0) {?>
-												<a href="<?php echo base_url('survey/delete/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" class="btn btn-danger">Xoá</a>
-												<?php } ?>
+												
+												<a id="edit_btn" href="<?php echo base_url('survey/edit_step_1/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" class="btn btn-primary">Chỉnh sửa</a>
+												
+												<a id="remove_btn" href="<?php echo base_url('survey/delete/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" class="btn btn-danger">Xoá</a>
 											</td>
 										</tr>
+										<!-- dang dung -->
+										<?php } elseif($survey['status']==TRUE) {?>
+										<tr>
+											<td></td>
+											<td>
+												
+												<a id="edit_btn" href="#modal-warning" class="btn btn-primary" data-toggle="modal">Chỉnh sửa</a>
+												
+												<a id="remove_btn" href="#modal-warning" class="btn btn-danger" data-toggle="modal">Xoá</a>
+											</td>
+										</tr>
+										<?php } ?>
 									</tbody>
 								</table>
 							</div>
@@ -123,4 +137,65 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Modal -->
+		<div id="modal-warning" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="myModalLabel">Thông báo</h3>
+			</div>
+			<div class="modal-body">
+				<p>
+					Phiếu khảo sát này đang được sử dụng. Việc sửa nội dung hoặc xoá bị ngăn chặn. Mọi chi tiết liên hệ người quản trị.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Thoát</button>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#doing_survey").change(function (){
+					if ($("#doing_survey").is(":checked"))
+					{
+						$.ajax({
+							type: "POST",
+							url: "<?php echo base_url("survey/update_status"); ?>",
+							data:"survey_id=<?php echo $survey['survey_id'] ?>&status=1",
+							dataType: "json",
+							success: function(data){
+								if (data.status == true)
+								{
+									$("#edit_btn").prop( "href", "#modal-warning" );
+									$("#edit_btn").attr( "data-toggle", "modal");
+									
+									$("#remove_btn").prop( "href", "#modal-warning" );
+									$("#remove_btn").attr( "data-toggle", "modal");
+								}
+							}
+						});
+					}
+					else
+					{
+						$.ajax({
+							type: "POST",
+							url: "<?php echo base_url("survey/update_status"); ?>",
+							data:"survey_id=<?php echo $survey['survey_id'] ?>&status=0",
+							dataType: "json",
+							success: function(data){
+								if (data.status == true)
+								{
+									$("#edit_btn").prop( "href", "<?php echo base_url('survey/edit_step_1/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" );
+									$("#edit_btn").removeAttr ("data-toggle");
+									
+									$("#remove_btn").prop( "href", "<?php echo base_url('survey/delete/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>");
+									$("#remove_btn").removeAttr ("data-toggle");
+								}
+							}
+						});
+					}
+				});
+			});
+		</script>
 		

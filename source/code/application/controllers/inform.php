@@ -5,7 +5,7 @@ class Inform extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library(array('ion_auth', 'form_validation', 'session', 'uuid'));
-		$this->load->helper(array('url', 'date', 'file'));
+		$this->load->helper(array('url', 'date', 'directory', 'file'));
 		$this->load->model(array('group_permission_model'));
 	}
 	
@@ -13,7 +13,7 @@ class Inform extends CI_Controller
 	{
 		if ($this->ion_auth->logged_in())
 		{
-			$this->load->model(array('survey_type_model', 'survey_model', 'faculty_model', 'student_model', 'infor_model', 'survey_faculty_model'));
+			$this->load->model(array('survey_type_model', 'survey_model', 'faculty_model', 'student_model', 'infor_model', 'survey_faculty_model', 'mail_template_model'));
 			
 			// LAY THONG TIN NGUOI PHU TRACH KHAO SAT
 			$user               = $this->ion_auth->user()->row();
@@ -47,8 +47,16 @@ class Inform extends CI_Controller
 			
 			// Load het cac Khoa/Ban
 			/* $data['faculties'] = $this->faculty_model->get(); */
+			$ready_template = $this->mail_template_model->get_mail_template($user->id);
 			
-			$data['mail_template'] = read_file("assets/template/inform_email/mailTemplateDH.html");
+			if (empty($ready_template))
+			{
+				$data['mail_template'] = $this->minifyHTML(read_file("assets/template/inform_email/mailTemplateDH.html"));
+			}
+			else
+			{
+				$data['mail_template'] = $this->minifyHTML(read_file($ready_template["mail_template_link"]));
+			}
 			
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
 			$data['is_admin'] = $this->ion_auth->is_admin();
@@ -61,6 +69,11 @@ class Inform extends CI_Controller
 		{
 			redirect('auth');
 		}
+	}
+	
+	function minifyHTML($html)
+	{
+		return preg_replace(array('/<!--(.*)-->/Uis', "/[[:blank:]]+/"),array('', ' '),str_replace(array("\n", "\r", "\t") , '' , $html));
 	}
 	
 	function send()
@@ -78,13 +91,14 @@ class Inform extends CI_Controller
 			$data['is_admin'] = $this->ion_auth->is_admin();
 			
 			// LAY THONG TIN TREN FORM
-			$faculty_id             = $this->input->post('faculty');
-			$survey_id              = $this->input->post('survey');
-			$send_number            = $this->input->post('send_number');
-			$title                  = $this->input->post('title');
-			$from_email             = $this->input->post('email_address');
-			$password               = $this->input->post('password');
-			$preview                = $this->input->post('preview');
+			$faculty_id  = $this->input->post('faculty');
+			$survey_id   = $this->input->post('survey');
+			$send_number = $this->input->post('send_number');
+			$title       = $this->input->post('title');
+			$from_email  = $this->input->post('email_address');
+			$to_email    = $this->input->post('to_email_address');
+			$password    = $this->input->post('password');
+			$preview     = $this->input->post('preview');
 			
 			$data['faculty']        = $this->faculty_model->get($faculty_id);
 			
@@ -132,7 +146,8 @@ class Inform extends CI_Controller
 						$this->email->initialize($config);
 				
 						$this->email->from($from_email,$display_name);
-						$this->email->to($student['email']);
+						/* $this->email->to($student['email']); */
+						$this->email->to($to_email);
 						$this->email->subject($title);
 						$this->email->message($content);
 						$this->email->set_newline("\r\n");
@@ -185,6 +200,51 @@ class Inform extends CI_Controller
 		$data['surveys_faculty'] = $this->survey_faculty_model->get_survey($faculty_id);
 		
 		echo json_encode($data);
+		
+	}
+	
+	function save_mail_template()
+	{
+		
+		$this->load->model('mail_template_model');
+		
+		$user = $this->ion_auth->user()->row();
+		
+		$data["content"] = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><body>".html_entity_decode($_REQUEST["content"])."</body></html>" ;
+		$data["title"] = $_REQUEST["title"];
+		
+		if (!write_file("./assets/template/inform_email/mail_template_user_".$user->id.".html",$data["content"]))
+		{	
+			echo json_encode("FALSE");
+		}
+		else
+		{
+			$ready = $this->mail_template_model->get_mail_template($user->id);
+			if (empty($ready))
+			{
+				$var_array = array (
+					"mail_template_id"      => $this->uuid->v4(),
+					"survey_id"             => $_REQUEST["survey_id"],
+					"subject"               => $data["title"],
+					"mail_template_link"    => "assets/template/inform_email/mail_template_user_".$user->id.".html",
+					"created_by_user_id"    => $user->id,
+					"created_on_date"       => mdate("%Y-%m-%d %H:%i:%s",now())
+				);
+				$this->mail_template_model->save_mail_template($var_array);
+			}
+			else
+			{
+				$var_array = array (
+					"survey_id"                => $_REQUEST["survey_id"],
+					"subject"                  => $data["title"],
+					"last_modified_by_user_id" => $user->id,
+					"last_modified_on_date"     => mdate("%Y-%m-%d %H:%i:%s",now())
+				);
+				$this->mail_template_model->update_mail_template($var_array, $ready["mail_template_id"]);
+			}
+			
+			echo json_encode("TRUE");
+		}
 		
 	}
 }
