@@ -799,12 +799,42 @@ class Report extends CI_Controller
 		echo json_encode($data);
 	}
 	
-	// ham lay tong so sinh vien can khao sat theo phieu khao sat
+	// ham tra ve tong so sinh vien can khao sat theo phieu khao sat
 	function get_sum_student_survey ($survey_id)
 	{
 		$this->load->model('student_model');
-		$data['sum_student_survey'] = $this->student_model->count_student_survey($survey_id, FALSE);
+		$data['sum_student_survey']   = $this->student_model->count_student_survey($survey_id, FALSE);
 		$data['sum_student_surveyed'] = $this->student_model->count_student_surveyed($survey_id, FALSE);
+		
+		echo json_encode($data);
+	}
+	
+	// ham tra ve sinh vien da khao sat, chua khao sat theo khoa
+	function get_sum_student_faculty_survey()
+	{
+		$this->load->model(array('survey_model','student_model','infor_model','faculty_model','survey_faculty_model'));
+		
+		$survey_id = $_REQUEST["survey_id"];
+		
+		// danh sach cac khoa them gia phieu khao sat
+		$faculties = $this->survey_faculty_model->get($survey_id);
+		
+		$data["faculties"] = array();
+		$data["not_yet_survey"] = array();
+		$data["surveyed"] = array();
+		if (!empty($faculties))
+		{
+			foreach ($faculties as $faculty)
+			{
+				array_push($data["faculties"], $faculty["faculty_name"]);
+				
+				$surveyed = $this->student_model->count_student_surveyed($survey_id, $faculty["faculty_id"]);
+				array_push($data["surveyed"], $surveyed["sum_student_surveyed"]);
+				
+				$student_survey = $this->student_model->count_student_survey($survey_id, $faculty["faculty_id"]);
+				array_push($data["not_yet_survey"], $student_survey["sum_student"] - $surveyed["sum_student_surveyed"]);
+			}
+		}
 		
 		echo json_encode($data);
 	}

@@ -44,44 +44,34 @@
 									<div class="control-group">
 										<label for="survey_type" class="control-label">Loại khảo sát</label>
 										<div class="controls">
-											<div class="input-xxlarge">
-												<select name="survey_type" id="survey_type" class='chosen-select' data-placeholder="Chọn loại khảo sát">
-													<option value=""></option>
-													<?php 
-													foreach ($survey_type as $survey_type_item) { 
-														if (isset($survey_type_selected)){
-															if ($survey_type_item['survey_type_id'] == $survey_type_selected)
-															{?>
-															<option value="<?php echo $survey_type_item['survey_type_id'] ?>" selected><?php echo $survey_type_item['survey_type_name'] ?></option>
-													  <?php }
-															else 
-															{?>
-															<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
-													  <?php }
-														}
-														else
+											<select name="survey_type" id="survey_type" class='chosen-select span10' data-placeholder="Chọn loại khảo sát">
+												<option value=""></option>
+												<?php 
+												foreach ($survey_type as $survey_type_item) { 
+													if (isset($survey_type_selected)){
+														if ($survey_type_item['survey_type_id'] == $survey_type_selected)
 														{?>
-															<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
-													  <?php }
-													}?>
-												</select>
-											</div>
+														<option value="<?php echo $survey_type_item['survey_type_id'] ?>" selected><?php echo $survey_type_item['survey_type_name'] ?></option>
+												  <?php }
+														else 
+														{?>
+														<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
+												  <?php }
+													}
+													else
+													{?>
+														<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
+												  <?php }
+												}?>
+											</select>
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">Phiếu khảo sát</label>
 										<div class="controls">
-											<div class="input-xxxlarge">
-												<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần xem biểu đồ" data-nosearch="true">
-											</select>
-											</div>
+											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần xem biểu đồ" data-nosearch="true"></select>
 										</div>
 									</div>
-									<!--
-<div class="form-actions">
-										<button class="btn btn-primary" type="submit" name="submit" value="submint">Xem biểu đồ</button>
-									</div>
--->
 								</form>	
 							</div>
 						</div>
@@ -97,7 +87,7 @@
 						<div class="box-content">
 							<div id="sum_graph" style="height: 500px"></div>
 							<div>&nbsp;</div>
-							<div id="fac_graph"></div>
+							<div id="fac_graph" style="height: 700px"></div>
 						</div>
 					</div>
 				</div>
@@ -130,13 +120,13 @@
 				
 				$('#survey').chosen().change(function(){
 					
+					// Sum graph
 					$.ajax({
 						type: "POST",
 						url: "<?php echo base_url('report/get_sum_student_survey') ?>"+"/"+$('#survey').val(),
 						dataType: 'json',
 						success: function(data){
 							// chart area
-							
 							var chart = new Highcharts.Chart({
 								chart: {
 									renderTo: 'sum_graph',
@@ -178,115 +168,80 @@
 										]
 									}
 								]
-		
 							});
-							
 							// end chart
 						}
 					});
 					
-					
-				
-				});
-				
-				/*
-$('#sum_graph').highcharts({
-					chart: {
-						plotBackgroundColor: null,
-						plotBorderWidth: null,
-						plotShadow: false
-					},
-					title: {
-						text: 'Tình hình khảo sát toàn trường'
-					},
-					subtitle: {
-						text: 'Bậc Đại học'
-					},
-					tooltip: {
-						pointFormat: '{series.name}: <b>{point.y}</b> sinh viên'
-					},
-					plotOptions: {
-						pie: {
-							allowPointSelect: true,
-							cursor: 'pointer',
-							dataLabels: {
-								enabled: true,
-								color: '#000000',
-								connectorColor: '#000000',
-								format: '<b>{point.name}</b>: {point.y} ({point.percentage:.1f}%)'
-							},
-							showInLegend: true
-						}
-					},
-					series:
-					[
+					// Faculties graph
+					$.ajax({
+						type: "POST",
+						url: "<?php echo base_url('report/get_sum_student_faculty_survey') ?>",
+						data: "survey_id="+$("#survey").val(),
+						dataType: "json",
+						success: function(data)
 						{
-							type:'pie',
-							name: 'Số lượng',
-							data: 
-							[
-								['Đã khảo sát', 1000],
-								['Chưa khảo sát', 500]
-							]
-						}
-					]
-				});
-*/
-				$('#fac_graph').highcharts({
-					chart: {
-						type: 'bar'
-					},
-					title: {
-						text: 'Tình hình khảo sát của Khoa'
-					},
-					xAxis: {
-						categories: [
-							'Kiến Trúc', 
-							'Xây Dựng' , 
-							'Kinh Tế Thương Mại', 
-							'Du Lịch', 
-							'Tài Chính Ngân Hàng', 
-							'Kế Toán Kiểm Toán', 
-							'Mỹ Thuật Công Nghiệp', 
-							'Công Nghệ Môi Trường', 
-							'Kỹ Thuật Nhiệt Lạnh', 
-							'Ngoại Ngữ', 
-							'Quan Hệ Công Chúng', 
-							'Quản Trị Kinh Doanh', 
-							'Công Nghệ Sinh Học', 
-							'Công Nghệ Thông Tin'
-						]
-					},
-					yAxis: {
-						min: 0,
-						title: {
-							text: 'Tổng sinh viên'
-						}
-					},
-					legend: {
-						backgroundColor: '#FFFFFF',
-						reversed: true
-					},
-					plotOptions: {
-						series: {
-							stacking: 'normal',
-							dataLabels: {
-								enabled: true,
-								color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
+							// chart area
+							// chuyen sang kieu Int so sinh vien da khao sat
+							var surveyed = $();
+							for (i = 0; i < data.surveyed.length; i++)
+							{
+								surveyed.push(parseInt(data.surveyed[i]));
 							}
+							
+							// chuyen sang kieu Int so sinh vien chua khao sat
+							var not_yet_survey = $();
+							for (i=0; i< data.not_yet_survey.length; i++)
+							{
+								not_yet_survey.push(parseInt(data.not_yet_survey[i]));
+							}
+							
+							var char = new Highcharts.Chart({
+								chart: {
+									renderTo: 'fac_graph',
+									type: 'bar',
+								},
+								title: {
+									text: 'Tình hình khảo sát của Khoa'
+								},
+								xAxis: {
+									categories: data.faculties
+								},
+								yAxis: {
+									min: 0,
+									title: {
+										text: 'Tổng sinh viên'
+									}
+								},
+								legend: {
+									backgroundColor: '#FFFFFF',
+									reversed: true
+								},
+								plotOptions: {
+									series: {
+										stacking: 'normal',
+										dataLabels: {
+											enabled: true,
+											color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'black'
+										}
+									}
+								},
+								series: 
+								[
+									{
+										name: 'Đã khảo sát',
+										data: surveyed
+									}, 
+									{
+										name: 'Chưa khảo sát',
+										data: not_yet_survey
+									}
+								]
+							});
+							// end chart
 						}
-					},
-					series: 
-					[
-						{
-							name: 'Đã khảo sát',
-							data: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180]
-						}, 
-						{
-							name: 'Chưa khảo sát',
-							data: [180, 170, 160, 150, 140, 130, 120, 110, 100, 90, 80, 70, 60, 50]
-						}
-					]
+					});
+				
 				});
 			});
 
