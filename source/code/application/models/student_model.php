@@ -19,6 +19,18 @@ class Student_model extends CI_Model
 		return $query->result_array();
 	}
 	
+	function search_student($survey_id, $first_name, $last_name, $faculty_id, $class_id)
+	{
+		$query = "SELECT *
+				  FROM sur_student
+				  WHERE survey_id = '".$survey_id."' 
+				  		AND first_name = '".$first_name."' 
+				  		AND last_name = '".$last_name."' 
+				  		AND class_id = '".$class_id."' 
+				  		AND faculty_id = '".$faculty_id."'";
+		return $this->db->query($query)->result_array();
+	}
+	
 	function get_student_infor($survey_id, $student_id)
 	{		
 		// Ke do moi den thong tin sinh vien duoc import

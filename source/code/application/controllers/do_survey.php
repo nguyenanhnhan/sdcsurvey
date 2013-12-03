@@ -568,6 +568,28 @@ if ($answr_temp['option_type']=='ct')
 		$this->load->view('do_survey/success.php');
 	}
 	
+	function search($survey_id)
+	{
+		$data["survey_id"] = $survey_id;
+		$this->load->view('do_survey/search', $data);
+	}
+	
+	function search_student($survey_id)
+	{
+		$this->load->model(array('student_model','survey_model'));
+		
+		// Lay thong tin post
+		$first_name   = $this->input->post("first_name");
+		$last_name    = $this->input->post("last_name");
+		$class        = $this->input->post("class");
+		$faculty_id   = $this->input->post("faculty");
+		
+		$data["survey_id"] = $survey_id;
+		$data["students"] = $this->student_model->search_student($survey_id,strtoupper($first_name), strtoupper($last_name), strtoupper($faculty_id), strtoupper($class));
+		$this->load->view("do_survey/search", $data);
+		
+	}
+	
 	////////////////////
 	// AJAX Function ///
 	////////////////////
