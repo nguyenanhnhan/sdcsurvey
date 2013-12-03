@@ -753,6 +753,256 @@ class Report extends CI_Controller
 		}
 	}
 	
+	function survey_summary()
+	{
+		if ($this->ion_auth->logged_in())
+		{
+			$this->load->model(array('survey_type_model','survey_model'));
+			
+			$user = $this->ion_auth->user()->row();
+			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin'] = $this->ion_auth->is_admin();
+			
+			// Lay danh sach loai khao sat
+			$data['survey_type'] = $this->survey_type_model->get(FALSE);
+			
+			$this->load->view('templates/header',$data);
+			$this->load->view('report/summary',$data);
+			$this->load->view('templates/footer');
+		}
+		else
+		{
+			redirect("auth");
+		}
+	}
+	
+	function export_summary()
+	{
+		if ($this->ion_auth->logged_in())
+		{
+			$this->load->model(array('survey_model','faculty_model','student_model','infor_model','survey_question_model','survey_answer_template_model', 'survey_answer_model'));
+			
+			// Lay thong tin tren input
+			$survey_type_sel                 = $this->input->post("survey_type");
+			$survey_sel                      = $this->input->post("survey");
+			$question_work_sel               = $this->input->post("q_sum_work");
+			$answer_working_template_sel     = $this->input->post("a_sum_working");
+			$answer_underwork_template_sel   = $this->input->post("a_sum_underwork");
+			$questions_report_sel            = $this->input->post("sum_question");
+			$time_active_sel                 = $this->input->post("time_active"); // Thoi diem tong ket, co chua survey_id
+			
+			$columns = array('A');
+			$current = 'A';
+			while ($current != 'ZZ')
+			{
+				$columns[] = ++$current;
+			}
+			
+			$this->excel->setActiveSheetIndex(0);
+			//name the worksheet
+			$this->excel->getActiveSheet()->setTitle('TK_tong_hop_cac_nam');
+			
+			// TIEU DE BAO CAO //
+			
+			//change the font size
+ 			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setSize(20);
+			//make the font become bold 			
+			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setBold(true);
+			$this->excel->getActiveSheet()->mergeCells("A1:G1");
+			$this->excel->getActiveSheet()->setCellValue("A1", "");
+			
+			// head of table
+			// STT
+			$this->excel->getActiveSheet()->mergeCells("A3:A5");
+			$this->excel->getActiveSheet()->setCellValue("A3","STT");
+			
+			// Thoi diem thuc hien
+			$this->excel->getActiveSheet()->mergeCells("B3:B5");
+			$this->excel->getActiveSheet()->setCellValue("B3", "Thời điểm thực hiện");
+			
+			// so sinh vien can khao sat
+			$this->excel->getActiveSheet()->mergeCells("C3:C5");
+			$this->excel->getActiveSheet()->setCellValue("C3", "Số SV cần khảo sát");
+			
+			// so sinh vien da khao sat
+			$this->excel->getActiveSheet()->mergeCells("D3:E3");
+			$this->excel->getActiveSheet()->setCellValue("D3","Số SV đã khảo sát");
+			$this->excel->getActiveSheet()->mergeCells("D4:D5");
+			$this->excel->getActiveSheet()->setCellValue("D4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("E4:E5");
+			$this->excel->getActiveSheet()->setCellValue("E4","Tỷ lệ");
+			
+			// co viec lam
+			$this->excel->getActiveSheet()->mergeCells("F3:G3");
+			$this->excel->getActiveSheet()->setCellValue("F3","Có việc làm");
+			$this->excel->getActiveSheet()->mergeCells("F4:F5");
+			$this->excel->getActiveSheet()->setCellValue("F4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("G4:G5");
+			$this->excel->getActiveSheet()->setCellValue("G4","Tỷ lệ");
+
+			// chua co viec lam
+			$this->excel->getActiveSheet()->mergeCells("H3:I3");
+			$this->excel->getActiveSheet()->setCellValue("H3","Chưa có việc làm");
+			$this->excel->getActiveSheet()->mergeCells("H4:H5");
+			$this->excel->getActiveSheet()->setCellValue("H4","Số lượng");
+			$this->excel->getActiveSheet()->mergeCells("I4:I5");
+			$this->excel->getActiveSheet()->setCellValue("I4","Tỷ lệ");
+			
+			if (!empty($questions_report_sel))
+			{
+				// start In tieu de bao cao
+				$start_column = 9;
+				foreach($questions_report_sel as $question_item)
+				{
+					$question = $this->survey_question_model->get_question($question_item);
+					$answer_template = $this->survey_answer_template_model->get($question['question_id']);
+					
+					// noi dung cau hoi
+					$end_column = $question['max_option'] * 2;
+					$this->excel->getActiveSheet()->mergeCells(''.$columns[$start_column].'3:'.$columns[$end_column+$start_column+1].'3');
+					$this->excel->getActiveSheet()->setCellValue(''.$columns[$start_column].'3', $question['content']);
+					
+					// so sinh vien tra loi
+					$this->excel->getActiveSheet()->mergeCells($columns[$start_column]."4:".$columns[$start_column+1]."4");
+					$this->excel->getActiveSheet()->setCellValue($columns[$start_column]."4","Số SV trả lời");
+					$this->excel->getActiveSheet()->setCellValue($columns[$start_column]."5","Số lượng");
+					$this->excel->getActiveSheet()->setCellValue($columns[$start_column+1]."5","Tỷ lệ");
+					
+					// answer template
+					$count_answer = 0;
+					for ($i=$start_column+2,$j=$start_column+$end_column+2; $i<$j; $i=$i+2)
+					{
+						$this->excel->getActiveSheet()->mergeCells(''.$columns[$i].'4:'.$columns[$i+1].'4');
+						$this->excel->getActiveSheet()->setCellValue(''.$columns[$i].'4', $answer_template[$count_answer]['label']);
+						
+						$this->excel->getActiveSheet()->setCellValue(''.$columns[$i].'5', 'Số lượng');
+						$this->excel->getActiveSheet()->setCellValue(''.$columns[$i+1].'5', 'Tỉ lệ %');
+						
+						$count_answer += 1;
+					}
+					$start_column = $start_column+$end_column+2;
+				}
+				// end In tieu de bao cao
+			}
+			
+			// Dua du lieu vao bang excel
+			if (!empty($time_active_sel))
+			{
+				$start_row = 6;
+				$start_column = 9;
+				$serial_num = 1;
+				foreach ($time_active_sel as $time_active)
+				{
+					// Ghi so thu tu ra excel
+					$this->excel->getActiveSheet()->setCellValue("A".$start_row, $serial_num);
+					
+					$data_time_active = $this->survey_model->get_date_of_survey($time_active);
+					$name_of_time_active = "T".$data_time_active["created_on_month"]."/".$data_time_active["created_on_year"]."(K".$data_time_active["course"].")";
+					// Ghi ten phieu khao sat vao excel
+					$this->excel->getActiveSheet()->setCellValue("B".$start_row,$name_of_time_active);
+					
+					// So sinh vien can khao sat cua phieu
+					$data_count_student = $this->student_model->count_student_survey($time_active,FALSE);
+					$this->excel->getActiveSheet()->setCellValue("C".$start_row,$data_count_student["sum_student"]);
+					
+					// So sinh vien da khao sat cua phieu
+					$data_count_student_surveyed = $this->student_model->count_student_surveyed($time_active,FALSE);
+					$this->excel->getActiveSheet()->setCellValue("D".$start_row,$data_count_student_surveyed["sum_student_surveyed"]);
+					$this->excel->getActiveSheet()->setCellValue("E".$start_row,"=D".$start_row."*100/C".$start_row);
+					
+					// Lay cau hoi tuong ung cau hoi co viec lam mau
+					$data_question_work = $this->survey_model->get_like_question($survey_type_sel, $time_active, $question_work_sel);
+					$working = 0;
+					$underwork = 0;
+					if (!empty($data_question_work))
+					{
+						// Lay cau tra loi cung loai voi cau tra loi Co
+						$data_answer_working_template = $this->survey_model->get_like_answer($data_question_work["question_id"],$answer_working_template_sel);
+						// Lay cau tra loi cung loai voi cau tra loi Khong
+						$data_answer_underwork_template = $this->survey_model->get_like_answer($data_question_work["question_id"],$answer_underwork_template_sel);
+						
+						// Dem so sinh vien tra loi Co
+						$count_answer_working = $this->survey_answer_model->count_student_answer($data_answer_working_template["answer_template_id"]);
+						$this->excel->getActiveSheet()->setCellValue("F".$start_row,$count_answer_working["sum_answer"]);
+						// Tinh ty le %
+						$this->excel->getActiveSheet()->setCellValue("G".$start_row,"=F".$start_row."*100/D".$start_row);
+						
+						// Dem so sinh vien tra loi Khong
+						$count_answer_underwork = $this->survey_answer_model->count_student_answer($data_answer_underwork_template["answer_template_id"]);
+						$this->excel->getActiveSheet()->setCellValue("H".$start_row,$count_answer_underwork["sum_answer"]);
+						// Tinh ty le %
+						$this->excel->getActiveSheet()->setCellValue("I".$start_row,"=H".$start_row."*100/D".$start_row);
+						
+						$working = $count_answer_working["sum_answer"];
+						$underwork = $count_answer_underwork["sum_answer"];
+					}
+					
+					if (!empty($questions_report_sel))
+					{
+						foreach ($questions_report_sel as $question_item)
+						{
+							// Lay cau hoi tuong ung cau hoi can ket xuat du lieu mau
+							$data_question_template = $this->survey_model->get_like_question($survey_type_sel, $time_active, $question_item);
+							$data_answer_template = $this->survey_answer_template_model->get($data_question_template['question_id']);
+							
+							//Cot ket thuc
+							$end_column = $data_question_template['max_option'] * 2;
+							if (!empty($data_question_template))
+							{
+								// Lay so nguoi tra loi cau hoi
+								$count_answer_question = $this->survey_answer_model->count_student_question($data_question_template["question_id"]);
+								$this->excel->getActiveSheet()->setCellValue($columns[$start_column].$start_row, $count_answer_question["sum_student"]);
+								// Tinh ty le
+								if ($data_question_template["flag_working"] == TRUE && $working > 0)
+								{
+									$this->excel->getActiveSheet()->setCellValue($columns[$start_column+1].$start_row, "=".$columns[$start_column].$start_row."*100/F".$start_row);
+								}
+								elseif($data_question_template["flag_underwork"] == TRUE && $underwork > 0)
+								{
+									$this->excel->getActiveSheet()->setCellValue($columns[$start_column+1].$start_row, "=".$columns[$start_column].$start_row."*100/H".$start_row);
+								}
+								
+								$start_column_answer_template = $start_column + 2;
+								foreach ($data_answer_template as $data_answer_template_item)
+								{
+									$data_like_answer_template = $this->survey_model->get_like_answer($data_question_template["question_id"],$data_answer_template_item["answer_template_id"]);
+									$count_answer = $this->survey_answer_model->count_student_answer($data_like_answer_template["answer_template_id"]);
+									// So luong sinh vien
+									$this->excel->getActiveSheet()->setCellValue($columns[$start_column_answer_template].$start_row,$count_answer["sum_answer"]);
+									// Tinh ty le
+									$this->excel->getActiveSheet()->setCellValue($columns[$start_column_answer_template+1].$start_row,"=".$columns[$start_column_answer_template].$start_row."*100/".$columns[$start_column].$start_row);
+									
+									$start_column_answer_template = $start_column_answer_template + 2;
+								}
+							}
+							$start_column = $start_column + $end_column + 2;
+						}
+					}
+					
+					// Tang so thu tu
+					$serial_num = $serial_num + 1;
+					$start_row = $start_row + 1;
+				}
+			}
+			
+			// ghi ra file
+			$filename='tong_ket_tong_hop_theo_nam_'.mdate("%d_%m_%Y-%h_%i_%a", now()).'.xls'; //save our workbook as this file name
+			header('Content-Type: application/vnd.ms-excel'); //mime type
+			header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+			header('Cache-Control: max-age=0'); //no cache
+
+			//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+			//if you want to save it as .XLSX Excel 2007 format
+			$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+			//force user to download the Excel file without writing it to server's HD
+			$objWriter->save('php://output');
+		}
+		else
+		{
+			redirect("auth");
+		}
+	}
+	
 	// AJAX Function
 	// ham lay cac phieu khao sat phan theo loai khao sat
 	function gets_survey($survey_type_id) 
@@ -835,6 +1085,19 @@ class Report extends CI_Controller
 				array_push($data["not_yet_survey"], $student_survey["sum_student"] - $surveyed["sum_student_surveyed"]);
 			}
 		}
+		
+		echo json_encode($data);
+	}
+	
+	// ham tra ve danh sach cac phieu khao sat co nam nho hon hoac bang phieu khao sat lay 
+	function get_survey_of_year()
+	{
+		$this->load->model('survey_model');
+		
+		$survey_id = $_REQUEST["survey_id"];
+		
+		$survey_date = $this->survey_model->get_date_of_survey($survey_id);
+		$data["year_summary"] = $this->survey_model->get_survey_less_than_year($survey_date["created_on_year"]);
 		
 		echo json_encode($data);
 	}

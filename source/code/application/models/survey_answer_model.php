@@ -24,6 +24,24 @@ class Survey_answer_model extends CI_Model
 		return $query->row_array();
 	}
 	
+	// Dem so sinh vien co cau tra loi cau hoi thuoc phieu khao sat
+	function count_student_answer($answer_template_id)
+	{
+		$query = "SELECT COUNT(*) AS sum_answer
+				 FROM sur_answer
+				 WHERE answer_template_id = '".$answer_template_id."'";
+		return $this->db->query($query)->row_array();
+	}
+	
+	// Dem so sinh vien tham gia cau hoi thuoc phieu khao sat
+	function count_student_question($question_id)
+	{
+		$query = "SELECT COUNT(*) AS sum_student
+				 FROM sur_answer
+				 WHERE question_id = '".$question_id."'";
+		return $this->db->query($query)->row_array();
+	}
+	
 	// Lay danh sach sinh vien cua khoa da tra loi theo mau tra loi
 	function get_student_of_answer($faculty_id, $question_id, $answer_template_id)
 	{

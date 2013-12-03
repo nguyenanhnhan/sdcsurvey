@@ -21,6 +21,43 @@ class Survey_model extends CI_Model
 		return $query->row_array();
 	}
 	
+	// get date of survey
+	function get_date_of_survey($survey_id)
+	{
+		$query = "SELECT survey_id, course, YEAR(created_on_date) AS created_on_year, MONTH(created_on_date) AS created_on_month
+				  FROM sur_survey
+				  WHERE survey_id = '".$survey_id."'";
+		return $this->db->query($query)->row_array();
+	}
+	
+	// lay cac phieu khao sat co nam lon hon
+	function get_survey_less_than_year($year)
+	{
+		$query = "SELECT survey_id, course, YEAR(created_on_date) AS created_on_year, MONTH(created_on_date) AS created_on_month
+				 FROM sur_survey
+				 WHERE YEAR(created_on_date) >= ".$year;
+		return $this->db->query($query)->result_array();
+	}
+	
+	// lay cac cau hoi cung loai khao sat co cau hoi tuong ung
+	function get_like_question($survey_type_id,$survey_id, $question_id)
+	{
+		$query = "SELECT sur_question.*
+				  FROM sur_survey INNER JOIN sur_survey_type ON sur_survey.survey_type_id = sur_survey_type.survey_type_id
+				  	   INNER JOIN sur_question ON sur_question.survey_id = sur_survey.survey_id
+				  WHERE sur_survey_type.survey_type_id = '".$survey_type_id."'AND sur_question.survey_id='".$survey_id."' AND (sur_question.question_id = '".$question_id."' OR sur_question.reused_question_id = '".$question_id."')";
+		return $this->db->query($query)->row_array();
+	}
+	
+	// Lay cac cau tra loi cung loai cau tra loi mau de so  sanh
+	function get_like_answer($question_id, $answer_template_id)
+	{
+		$query = "SELECT *
+				  FROM sur_answer_template
+				  WHERE question_id = '".$question_id."' AND (answer_template_id = '".$answer_template_id."' OR reuse_answer_template_id = '".$answer_template_id."')";
+		return $this->db->query($query)->row_array();
+	}
+	
 	// delete row
 	function delete($survey_id)
 	{
