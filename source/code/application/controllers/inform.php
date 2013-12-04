@@ -210,10 +210,10 @@ class Inform extends CI_Controller
 		
 		$user = $this->ion_auth->user()->row();
 		
-		$data["content"] = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><body>".html_entity_decode($_REQUEST["content"])."</body></html>" ;
+		$data["content"] = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><body>"./* html_entity_decode( */$_REQUEST["content"]/* ) */."</body></html>" ;
 		$data["title"] = $_REQUEST["title"];
 		
-		if (!write_file("./assets/template/inform_email/mail_template_user_".$user->id.".html",$data["content"]))
+		if (!write_file("./assets/template/inform_email/mail_template_user_".$user->id.".html",$data["content"],"w+"))
 		{	
 			echo json_encode("FALSE");
 		}
