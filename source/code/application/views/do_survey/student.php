@@ -464,6 +464,10 @@
 			});
 		});
 		
+		$("#search").click(function(){
+			window.location = "<?php echo base_url('do_survey/search').'/'.$survey['survey_id'] ?>";
+		});
+		
 	});
 	
 	function init_data()
@@ -489,4 +493,5 @@
 			}
 		});
 	}
+	
 </script>

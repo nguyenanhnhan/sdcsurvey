@@ -21,13 +21,28 @@ class Student_model extends CI_Model
 	
 	function search_student($survey_id, $first_name, $last_name, $faculty_id, $class_id)
 	{
-		$query = "SELECT *
-				  FROM sur_student
+		$query = "SELECT sur_student.student_id, 
+						 sur_student.faculty_id, 
+						 sur_faculty.faculty_name, 
+						 sur_student.class_id, 
+						 sur_student.survey_id, 
+						 sur_student.first_name, 
+						 sur_student.last_name, 
+						 sur_student.place_of_birth, 
+						 sur_student.date_of_birth, 
+						 sur_student.graduated_ranking, 
+						 sur_student.phone, 
+						 sur_student.hand_phone, 
+						 sur_student.email, 
+						 sur_student.contact_address, 
+						 sur_student.course, 
+						 sur_student.graduated_year
+				  FROM sur_student INNER JOIN sur_faculty ON sur_student.faculty_id = sur_faculty.faculty_id
 				  WHERE survey_id = '".$survey_id."' 
 				  		AND first_name = '".$first_name."' 
 				  		AND last_name = '".$last_name."' 
 				  		AND class_id = '".$class_id."' 
-				  		AND faculty_id = '".$faculty_id."'";
+				  		AND sur_faculty.faculty_id = '".$faculty_id."'";
 		return $this->db->query($query)->result_array();
 	}
 	
