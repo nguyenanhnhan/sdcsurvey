@@ -101,6 +101,80 @@
 					</div>
 				</div>
 				
+				<!-- Ket xuat tat ca du lieu -->
+				
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="box box-color box-bordered">
+							<div class="box-title">
+								<h3>
+									<!-- Widget title -->
+									<i class="icon-download"></i>
+									Kết xuất tất cả dữ liệu khảo sát
+								</h3>
+								<div class="actions">
+									<a href="#" class="btn btn-mini content-slideUp">
+										<i class="icon-angle-down"></i>
+									</a>
+								</div>
+							</div>
+							<div class="box-content nopadding">
+								<form action="<?php echo base_url('report/export_all_data') ?>" method="post" class="form-horizontal form-bordered">
+									<div class="control-group">
+										<label class="control-label">Loại khảo sát</label>
+										<div class="controls">
+											<select name="ex_survey_type" id="ex_survey_type" class="chosen-select span8" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+												<option value=""></option>
+												<?php 
+												foreach ($survey_type as $survey_type_item) { 
+													if (isset($survey_type_selected)){
+														if ($survey_type_item['survey_type_id'] == $survey_type_selected)
+														{?>
+														<option value="<?php echo $survey_type_item['survey_type_id'] ?>" selected><?php echo $survey_type_item['survey_type_name'] ?></option>
+												  <?php }
+														else 
+														{?>
+														<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
+												  <?php }
+													}
+													else
+													{?>
+														<option value="<?php echo $survey_type_item['survey_type_id'] ?>" ><?php echo $survey_type_item['survey_type_name'] ?></option>
+												  <?php }
+												}?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Phiếu khảo sát</label>
+										<div class="controls">
+											<select name="ex_survey" id="ex_survey" class="chosen-select span12" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Ngành đào tạo</label>
+										<div class="controls">
+											<select name="ex_faculty[]" id="ex_faculty" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Theo câu hỏi</label>
+										<div class="controls">
+											<select name="ex_question[]" id="ex_question" multiple="multiple" class="chosen-select span12" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
+											</select>
+										</div>
+									</div>
+									<div class="form-actions">
+										<button class="btn btn-primary" name="export" value="export">Kết xuất dữ liệu theo chuẩn excel 2003 (.xls)</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<!-- Tong hop theo hinh thuc khao sat -->
 				<div class="row-fluid">
 					<div class="span12">
@@ -402,9 +476,75 @@
 						}
 					});
 				});
-				// end Quickly report
+				////////////////////////
+				// end Quickly report //
+				////////////////////////
 				
+				/////////////////////
+				// All data report //
+				/////////////////////
 				
+				$('#ex_survey_type').chosen().change(function(){
+					$.ajax({
+						type: "POST",
+						url: "<?php echo base_url('report/gets_survey') ?>"+"/"+$(this).val(),
+						dataType: 'json',
+						success: function(data) {
+							if (data.surveys.length > 0)
+							{
+								$('#ex_survey option').remove();
+								$('#ex_survey').trigger("chosen:updated");
+								
+								$('#ex_survey').append('<option value=""></option>');
+								for (var i=0; i<data.surveys.length; i++)
+								{
+									$('#ex_survey').append('<option value="'+data.surveys[i].survey_id+'">'+data.surveys[i].survey_name+'</option>');
+								}
+								$('#ex_survey').trigger("chosen:updated");
+							}
+						}
+					});
+				});
+				
+				$('#ex_survey').chosen().change(function(){
+					$.ajax({
+						type: 'POST',
+						url: "<?php echo base_url('report/gets_survey_faculty') ?>"+"/"+$(this).val(),
+						dataType: 'json',
+						success: function (data) {
+							if (data.survey_faculties.length > 0 )
+							{
+								$('#ex_faculty option').remove();
+								$('#ex_faculty').trigger('chosen:updated');
+								for (var i=0; i<data.survey_faculties.length; i++)
+								{
+									$('#ex_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+								}
+								$('#ex_faculty').trigger("chosen:updated");
+							}
+						}
+					});
+					
+					$.ajax({
+						type: 'POST',
+						url: "<?php echo base_url('report/gets_question_answer') ?>"+"/"+$(this).val(),
+						dataType: 'json',
+						success: function (data) {
+							$('#ex_question option').remove();
+							$('#ex_question').trigger('chosen:updated');
+							for (var i=0; i<data.questions.length; i++)
+							{
+								$('#ex_question').append('<option value="'+data.questions[i].question_id+'" selected>'+data.questions[i].content+'</option>');
+							}
+							$('#ex_question').trigger("chosen:updated");
+						}
+					});
+				});
+				
+				/////////////////////////
+				// end all data report //
+				/////////////////////////
+
 				// Kind survey report
 				$('#kind_survey_type').chosen().change(function(){
 					$.ajax({

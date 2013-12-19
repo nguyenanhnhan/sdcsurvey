@@ -248,6 +248,182 @@ class Report extends CI_Controller
 		}
 	}
 	
+	function export_all_data()
+	{
+		if ($this->ion_auth->logged_in())
+		{
+			$this->load->model(array('survey_type_model','survey_model','infor_model','survey_question_model','survey_answer_template_model','survey_answer_model'));
+			
+			// Lay du lieu tren form
+			$survey_type_sel = $this->input->post('ex_survey_type');
+			$survey_sel      = $this->input->post('ex_survey');
+			$faculty_sel     = $this->input->post('ex_faculty');
+			$question_sel    = $this->input->post('ex_question');
+			
+			// Khoi tao cot
+			$columns = array('A');
+			$current = 'A';
+			while ($current != 'ZZ')
+			{
+				$columns[] = ++$current;
+			}
+			
+			$this->excel->setActiveSheetIndex(0);
+			//name the worksheet
+			$this->excel->getActiveSheet()->setTitle('danh_sach_da_khao_sat');
+			
+			// TIEU DE BAO CAO //
+			
+			//change the font size
+ 			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setSize(20);
+			//make the font become bold 			
+			$this->excel->getActiveSheet()->getStyle("A1")->getFont()->setBold(true);
+			$this->excel->getActiveSheet()->mergeCells("A1:G1");
+			$this->excel->getActiveSheet()->setCellValue("A1", "DỮ LIỆU ĐÃ KHẢO SÁT");
+			
+			// head of table
+			// STT
+			$this->excel->getActiveSheet()->mergeCells("A3:A4");
+			$this->excel->getActiveSheet()->setCellValue("A3", "STT");
+			
+			// MSSV
+			$this->excel->getActiveSheet()->mergeCells("B3:B4");
+			$this->excel->getActiveSheet()->setCellValue("B3","MSSV");
+			
+			// HO & TEN DEM
+			$this->excel->getActiveSheet()->mergeCells("C3:C4");
+			$this->excel->getActiveSheet()->setCellValue("C3","Họ và Tên đệm");
+			
+			// TEN
+			$this->excel->getActiveSheet()->mergeCells("D3:D4");
+			$this->excel->getActiveSheet()->setCellValue("D3","Tên");
+			
+			// Khoa
+			$this->excel->getActiveSheet()->mergeCells("E3:E4");
+			$this->excel->getActiveSheet()->setCellValue("E3","Khoa");
+			
+			// Lop
+			$this->excel->getActiveSheet()->mergeCells("F3:F4");
+			$this->excel->getActiveSheet()->setCellValue("F3","Lớp");
+			
+			// Dia chi
+			$this->excel->getActiveSheet()->mergeCells("G3:G4");
+			$this->excel->getActiveSheet()->setCellValue("G3","Địa chỉ");
+			
+			// So DT Ban
+			$this->excel->getActiveSheet()->mergeCells("H3:H4");
+			$this->excel->getActiveSheet()->setCellValue("H3","Số ĐT bàn");
+			
+			// So DTDD
+			$this->excel->getActiveSheet()->mergeCells("I3:I4");
+			$this->excel->getActiveSheet()->setCellValue("I3","Số ĐTDĐ");
+			
+			// Email
+			$this->excel->getActiveSheet()->mergeCells("J3:J4");
+			$this->excel->getActiveSheet()->setCellValue("J3","Email");
+			
+			// cau hoi
+			if (!empty($question_sel))
+			{
+				// start in tieu de cau hoi
+				$start_column = 10;
+				foreach ($question_sel as $question_item)
+				{
+					$question = $this->survey_question_model->get_question($question_item);
+					$answer_template = $this->survey_answer_template_model->get($question['question_id']);
+					
+					// noi dung cau hoi
+					$end_column = $question['max_option'];
+					$this->excel->getActiveSheet()->mergeCells(''.$columns[$start_column].'3:'.$columns[$end_column+$start_column-1].'3');
+					$this->excel->getActiveSheet()->setCellValue(''.$columns[$start_column].'3', $question['content']);
+
+					// answer template
+					$count_answer = 0;
+					for ($i=$start_column,$j=$start_column+$end_column; $i<$j; $i++)
+					{
+						$this->excel->getActiveSheet()->setCellValue($columns[$i].'4', $answer_template[$count_answer]['label']);
+						$count_answer += 1;
+					}
+					$start_column = $start_column+$end_column;
+				}
+			}
+			
+			// Do data vao file excel
+			if (!empty($faculty_sel))
+			{
+				$no         = 1;
+				$start_row  = 5;
+				foreach ($faculty_sel as $faculty_item)
+				{
+					$students = $this->infor_model->gets_of_faculty($faculty_item, $survey_sel);
+					if (!empty($students))
+					{
+						foreach ($students as $student)
+						{
+							$this->excel->getActiveSheet()->setCellValue("A".$start_row, $no);
+							$this->excel->getActiveSheet()->setCellValue("B".$start_row, $student["student_id"]);
+							$this->excel->getActiveSheet()->setCellValue("C".$start_row, $student["first_name"]);
+							$this->excel->getActiveSheet()->setCellValue("D".$start_row, $student["last_name"]);
+							$this->excel->getActiveSheet()->setCellValue("E".$start_row, $student["faculty_id"]);
+							$this->excel->getActiveSheet()->setCellValue("F".$start_row, $student["class_id"]);
+							$this->excel->getActiveSheet()->setCellValue("G".$start_row, $student["contact_address"]);
+							
+							$phone_number        = $student["phone"];
+							$hand_phone_number   = $student["hand_phone"];
+							
+							$this->excel->getActiveSheet()->setCellValueExplicit("H".$start_row,"$phone_number",PHPExcel_Cell_DataType::TYPE_STRING);
+							$this->excel->getActiveSheet()->setCellValueExplicit("I".$start_row,"$hand_phone_number",PHPExcel_Cell_DataType::TYPE_STRING);
+							$this->excel->getActiveSheet()->setCellValue("J".$start_row, $student["email"]);
+							
+							if (!empty($question_sel))
+							{
+								$start_column = 10;
+								foreach ($question_sel as $question_item)
+								{
+									$question = $this->survey_question_model->get_question($question_item);
+									$answer_template = $this->survey_answer_template_model->get($question['question_id']);
+									$end_column = $question['max_option'];
+									
+									// answer template
+									$count_answer = 0;
+									for ($i=$start_column,$j=$start_column+$end_column; $i<$j; $i++)
+									{
+										$answer_template_id = $answer_template[$count_answer]["answer_template_id"];
+										$value = $this->survey_answer_model->get_answer_content($student["infor_id"],$answer_template_id);
+										
+										if (!empty($value))
+										{
+											$this->excel->getActiveSheet()->setCellValue($columns[$i].$start_row, $value["content"]);
+										}	
+										$count_answer++;
+									}
+									$start_column = $start_column+$end_column;
+								}
+							}
+							$no++;
+							$start_row++;
+						}
+					}
+				}
+			}
+			
+			$filename='du_lieu_khao_sat_'.mdate("%d_%m_%Y-%h_%i_%a", now()).'.xls'; //save our workbook as this file name
+			header('Content-Type: application/vnd.ms-excel'); //mime type
+			header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+			header('Cache-Control: max-age=0'); //no cache
+
+			//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+			//if you want to save it as .XLSX Excel 2007 format
+			$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+			//force user to download the Excel file without writing it to server's HD
+			$objWriter->save('php://output');
+		}
+		else
+		{
+			redirect ('auth');
+		}
+	}
+	
 	function export_kind_survey()
 	{
 		if($this->ion_auth->logged_in())
@@ -1027,6 +1203,14 @@ class Report extends CI_Controller
 	{
 		$this->load->model('survey_question_model');
 		$data['questions'] = $this->survey_question_model->get_question_answer_no_text($survey_id);
+		
+		echo json_encode($data);
+	}
+	
+	function gets_question_answer($survey_id)
+	{
+		$this->load->model('survey_question_model');
+		$data['questions'] = $this->survey_question_model->get($survey_id);
 		
 		echo json_encode($data);
 	}
