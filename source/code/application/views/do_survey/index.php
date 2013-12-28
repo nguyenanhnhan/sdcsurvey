@@ -5,10 +5,11 @@
 		<meta content="text/html; charset=utf-8" http-equiv="content-type" />
 		<title>Phiếu khảo sát</title>
 		<link href="<?php echo css_url() ?>StyleSheet.css" rel="stylesheet" type="text/css" />
+		<link href="<?php echo css_url() ?>plugins/note/core.css" rel="stylesheet" type="text/css" />
 		<!-- jQuery -->
 		<script src="<?php echo js_url() ?>jquery.min.js"></script>
 		<script src="<?php echo js_url() ?>plugins/validation/jquery.validate.min.js"></script>
-		
+		<script src="<?php echo js_url() ?>plugins/note/core.js"></script>
 		<style>
 			#my_form input.error {border: 1px dotted red;}
 			#my_form label.error {margin-left: 10px !important; width: auto !important; display: none !important;}
@@ -309,21 +310,33 @@
 	</div>
 </div> 
 	
-    <div class="lastbox">
-		* Anh/Chị vui lòng kiểm tra lại thông tin sau đó click chọn "Đồng ý" để hoàn thành phiếu khảo sát.
-	</div>
+	    <div class="lastbox">
+			* Anh/Chị vui lòng kiểm tra lại thông tin sau đó click chọn "Đồng ý" để hoàn thành phiếu khảo sát.
+		</div>
 
-<div class="formEnd">
-	<span class="submit"><input type="submit" value="Lưu phiếu khảo sát" /></span>
-	<span class="submit"><a href="<?php echo base_url('survey_result/result_filter/'.$faculty_id.'/'.$survey['survey_id'].'/'.$type_id) ?>">Quay lại danh sách Sinh viên</a></span>
-</div>
-<hr />
-<div class="bottom">
-	<p class="bottomTitle">Trường Đại học Dân lập Văn Lang </p>
-    Trụ sở: 45 Nguyễn Khắc Nhu, Q1, TP. HCM - ĐT: (84.8) 3836 1412 - 3836 7933   |  CS. 2: 233A Phan Văn Trị , P.11, Q. Bình Thạnh
-</div>
+		<div class="formEnd">
+			<span class="submit"><input type="submit" value="Lưu phiếu khảo sát" /></span>
+			<span class="submit"><a href="<?php echo base_url('survey_result/result_filter/'.$faculty_id.'/'.$survey['survey_id'].'/'.$type_id) ?>">Quay lại danh sách Sinh viên</a></span>
+		</div>
+		<hr />
+		<div class="bottom">
+			<p class="bottomTitle">Trường Đại học Dân lập Văn Lang </p>
+		    Trụ sở: 45 Nguyễn Khắc Nhu, Q1, TP. HCM - ĐT: (84.8) 3836 1412 - 3836 7933   |  CS. 2: 233A Phan Văn Trị , P.11, Q. Bình Thạnh
+		</div>
 	</div> <!-- wrapper-->
-
+		
+		<!-- Note -->
+		<div class="feedback">
+			<a id="feedback_button">Ghi chú</a>
+			
+			<div class="form">
+				<h2>Phần ghi chú của phiếu</h2>
+				<textarea id="note_text" name="note_text"></textarea>
+				<div id="reset_note" style="display:block;background: red; cursor: pointer; padding: 5px; width: 70px; height: 20px; color: #FFFFFF; text-align: center; margin: 5px; font-size: 13px">Xoá ghi chú</div>
+			</div>
+		</div>
+		<!-- End note -->
+		
 		</form>
 	</body>
 </html>
@@ -332,7 +345,10 @@
 	$(document).ready(function(){
 		init_data();
 		$("#my_form").validate();
-		
+		$("#reset_note").click(function(){
+			$("#note_text").val("");
+			$("#note_text").focus();
+		});
 		<?php
 		for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)
 		{
