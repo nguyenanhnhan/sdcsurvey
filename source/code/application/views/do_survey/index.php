@@ -506,6 +506,7 @@
 					$("#home_phone").val(data['phone']);
 					$("#hand_phone").val(data['hand_phone']);
 					$("#email_address").val(data['email']);
+					$("#note_text").val(data['note']);
 				}
 			}
 		});

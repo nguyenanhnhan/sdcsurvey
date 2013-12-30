@@ -241,9 +241,12 @@ class Do_survey extends CI_Controller
 			$data['student_infor']['home_phone']     = $this->input->post('home_phone');
 			$data['student_infor']['hand_phone']     = $this->input->post('hand_phone');
 			$data['student_infor']['email_address']  = $this->input->post('email_address');
+			$data['student_infor']['note']           = $this->input->post('note_text');
 			
 			$hiden_update_flag = $this->input->post('hiden_update_value');
-			if ($hiden_update_flag==0) // Tao moi thong tin
+			$check_surveyed = $this->infor_model->get_student_infor($survey_id, $this->input->post('student_id'));
+			
+			if ($hiden_update_flag==0 && empty($check_surveyed)) // Tao moi thong tin
 			{
 				// LUU THONG TIN NHAP
 				$infor_id = $this->uuid->v4();

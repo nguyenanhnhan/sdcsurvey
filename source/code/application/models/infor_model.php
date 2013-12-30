@@ -52,22 +52,23 @@ class Infor_model extends CI_Model
 	function staff_insert($user_name,$infor_id, $survey_id, $data_infor)
 	{
 		$data = array (
-			'infor_id'          => $infor_id,
-			'student_id'        => $data_infor['student_id'],
-			'type_id'           => $data_infor['type_id'],
-			'faculty_id'        => $data_infor['faculty_id'],
-			'class_id'          => $data_infor['class_id'],
-			'survey_id'         => $survey_id,
-			'first_name'        => $data_infor['first_name'],
-			'last_name'         => $data_infor['last_name'],
-			'contact_address'   => $data_infor['address'],
-			'graduated_year'    => $data_infor['graduated_year'],
-			'phone'             => $data_infor['home_phone'],
-			'hand_phone'        => $data_infor['hand_phone'],
-			'email'             => $data_infor['email_address'],
-			'survey_date'       => mdate('%Y/%m/%d %H:%i:%s',now()),
-			'interviewer_id'    => $user_name,
-			'interview_on_date' => mdate('%Y/%m/%d %H:%i:%s',now())
+			'infor_id'           => $infor_id,
+			'student_id'         => $data_infor['student_id'],
+			'type_id'            => $data_infor['type_id'],
+			'faculty_id'         => $data_infor['faculty_id'],
+			'class_id'           => $data_infor['class_id'],
+			'survey_id'          => $survey_id,
+			'first_name'         => $data_infor['first_name'],
+			'last_name'          => $data_infor['last_name'],
+			'contact_address'    => $data_infor['address'],
+			'note'               => $data_infor['note'],
+			'graduated_year'     => $data_infor['graduated_year'],
+			'phone'              => $data_infor['home_phone'],
+			'hand_phone'         => $data_infor['hand_phone'],
+			'email'              => $data_infor['email_address'],
+			'survey_date'        => mdate('%Y/%m/%d %H:%i:%s',now()),
+			'interviewer_id'     => $user_name,
+			'interview_on_date'  => mdate('%Y/%m/%d %H:%i:%s',now())
 		);
 		
 		return $this->db->insert('sur_infor',$data);
@@ -100,19 +101,20 @@ class Infor_model extends CI_Model
 	function staff_update($user_name,$infor_id,$survey_id, $data_infor)
 	{
 		$data = array (
-			'student_id'               => $data_infor['student_id'],
-			'faculty_id'               => $data_infor['faculty_id'],
-			'class_id'                 => $data_infor['class_id'],
-			'first_name'               => $data_infor['first_name'],
-			'last_name'                => $data_infor['last_name'],
-			'contact_address'          => $data_infor['address'],
-			'graduated_year'           => $data_infor['graduated_year'],
-			'phone'                    => $data_infor['home_phone'],
-			'hand_phone'               => $data_infor['hand_phone'],
-			'email'                    => $data_infor['email_address'],
-			'survey_date'              => mdate('%Y/%m/%d %H:%i:%s',now()),
-			'last_modified_by_user_id' => $user_name,
-			'last_modified_on_date'    => mdate('%Y/%m/%d %H:%i:%s',now())
+			'student_id'                 => $data_infor['student_id'],
+			'faculty_id'                 => $data_infor['faculty_id'],
+			'class_id'                   => $data_infor['class_id'],
+			'first_name'                 => $data_infor['first_name'],
+			'last_name'                  => $data_infor['last_name'],
+			'contact_address'            => $data_infor['address'],
+			'graduated_year'             => $data_infor['graduated_year'],
+			'phone'                      => $data_infor['home_phone'],
+			'hand_phone'                 => $data_infor['hand_phone'],
+			'email'                      => $data_infor['email_address'],
+			'note'                       => $data_infor['note'],
+			'survey_date'                => mdate('%Y/%m/%d %H:%i:%s',now()),
+			'last_modified_by_user_id'   => $user_name,
+			'last_modified_on_date'      => mdate('%Y/%m/%d %H:%i:%s',now())
 		);
 		
 		$this->db->where(array('infor_id'=>$infor_id, 'survey_id'=>$survey_id));
