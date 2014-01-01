@@ -54,14 +54,20 @@
 									<div class="control-group">
 										<label class="control-label">Tên phiếu khảo sát</label>
 										<div class="controls">
-											<input type="text" class="input-xxlarge" name="survey_name" id="survey_name">
+											<input type="text" class="span12" name="survey_name" id="survey_name">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Mã báo cáo</label>
+										<div class="controls">
+											<input type="text" class="span2" name="modified_char_report" id="modified_char_report">
 										</div>
 									</div>
 									<div class="control-group">
 										<label class="control-label">Sử dụng lại</label>
 										<div class="controls">
-											<div class="input-xxlarge">
-												<select name="reuse" id="reuse" class='chosen-select'>
+											<div class="span12">
+												<select name="reuse" id="reuse" class="chosen-select span8">
 													<option value="">&nbsp;</option>
 													<?php
 														// Mau khao sat dung de sao chep
@@ -124,8 +130,8 @@
 									<div class="control-group" id="div_faculty">
 										<label class="control-label">Áp dụng cho Khoa</label>
 										<div class="controls">
-											<div class="input-xxxlarge">
-												<select name="survey_faculty[]" id="survey_faculty" multiple="true" class="chosen-select">
+											<div class="span12">
+												<select name="survey_faculty[]" id="survey_faculty" multiple="true" class="chosen-select span12">
 													<?php foreach ($faculties as $faculty):
 														if ($faculty['is_vocation']==0){?>
 														<option value="<?php echo $faculty['faculty_id'] ?>"><?php echo $faculty['faculty_name'] ?></option>
@@ -137,8 +143,8 @@
 									<div class="control-group" id="div_vocation">
 										<label class="control-label">Áp dụng cho Ban TCCN</label>
 										<div class="controls">
-											<div class="input-xxxlarge">
-												<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select">
+											<div class="span12">
+												<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select span12">
 													<?php foreach ($faculties as $faculty):
 														if ($faculty['is_vocation']==1){?>
 														<option value="<?php echo $faculty['faculty_id'] ?>"><?php echo $faculty['faculty_name']?></option>

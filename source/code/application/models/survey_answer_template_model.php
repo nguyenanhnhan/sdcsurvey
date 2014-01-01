@@ -45,6 +45,27 @@ class Survey_answer_template_model extends CI_Model
 		return $this->db->insert('sur_answer_template', $data);
 	}
 	
+	function insert_v2($data_answer)
+	{
+		$data = array(
+			"answer_template_id"         => $data_answer["answer_template_id"],
+			"reused_answer_template_id"  => $data_answer["reused_answer_template_id"],
+			"question_id"                => $data_answer["question_id"],
+			"option_type"                => $data_answer["option_type"],
+			"view_order"                 => $data_answer["view_order"],
+			"label"                      => $data_answer["label"],
+			"exception"                  => $data_answer["exception"],
+			"required"                   => $data_answer["required"],
+			"sub_answer"                 => $data_answer["sub_answer"],
+			"is_deleted"                 => $data_answer["is_deleted"],
+			"created_by_user_id"         => $data_answer["created_by_user_id"],
+			"created_on_date"            => mdate("%Y/%m/%d %H:%i:%s", now())
+		);
+		
+		return $this->db->insert("sur_answer_template", $data);
+	}
+	// end insert row
+	
 	// update
 	function update_effect($uid, $answer_template_id, $is_effect)
 	{

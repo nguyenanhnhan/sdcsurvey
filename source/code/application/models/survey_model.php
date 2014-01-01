@@ -5,7 +5,7 @@ class Survey_model extends CI_Model
 	{
 		parent::__construct();
 		$this->load->helper('date');
-		/* $this->load->library('uuid'); */
+		$this->load->library('uuid');
 	}
 	
 	// get all row
@@ -67,7 +67,7 @@ class Survey_model extends CI_Model
 	
 	// add row
 	
-	function add($uid, $survey_id, $stype_id, $reused_survey_id, $survey_name, $course, $graduated_year,$is_graduated, $start_date, $end_date, 
+	function add($uid, $survey_id, $stype_id, $reused_survey_id, $survey_name, $survey_modified_char_report, $course, $graduated_year,$is_graduated, $start_date, $end_date, 
 				$is_vocation, $is_evaluated)
 	{
 		
@@ -78,6 +78,7 @@ class Survey_model extends CI_Model
 		 * @param: $stype_id - Ma loai khao sat
 		 * @param: $resued_survey_id - Ma phieu khao sat dung de sao chep
 		 * @param: $survey_name - Ten phieu khao sat
+		 * @param: $survey_modified_char_report - Ky tu dung dinh danh khi xuat report
 		 * @param: $course - Khoa hoc
 		 * @param: $graduated_year - Nam tot nghiep
 		 * @param: $is_graduated - Da tot nghiep
@@ -91,20 +92,21 @@ class Survey_model extends CI_Model
 		 *
 		 */
 		$data = array(
-		'survey_id'          => $survey_id,
-		'survey_type_id'     => $stype_id,
-		'reused_survey_id'   => $reused_survey_id,
-		'survey_name'        => $survey_name,
-		'course'             => $course,
-		'graduated_year'     => $graduated_year,
-		'is_graduated'       => $is_graduated,
-		'start_date'         => $start_date,
-		'end_date'           => $end_date,
-		'is_vocation'        => $is_vocation,
-		'is_evaluated'       => $is_evaluated,
-		'is_deleted'         => FALSE,
-		'created_by_user_id' => $uid,
-		'created_on_date'    => mdate('%Y/%m/%d %H:%i:%s',now())
+			'survey_id'               => $survey_id,
+			'survey_type_id'          => $stype_id,
+			'reused_survey_id'        => $reused_survey_id,
+			'survey_name'             => $survey_name,
+			'modified_char_report'    => $survey_modified_char_report,
+			'course'                  => $course,
+			'graduated_year'          => $graduated_year,
+			'is_graduated'            => $is_graduated,
+			'start_date'              => $start_date,
+			'end_date'                => $end_date,
+			'is_vocation'             => $is_vocation,
+			'is_evaluated'            => $is_evaluated,
+			'is_deleted'              => FALSE,
+			'created_by_user_id'      => $uid,
+			'created_on_date'         => mdate('%Y/%m/%d %H:%i:%s',now())
 		);
 		
 		return $this->db->insert('sur_survey',$data);

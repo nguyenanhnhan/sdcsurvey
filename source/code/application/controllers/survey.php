@@ -84,24 +84,25 @@ class Survey extends CI_Controller
 		if ($this->ion_auth->logged_in())
 		{
 		
-			$this->load->model(array('survey_model', 'survey_faculty_model'));
+			$this->load->model(array('survey_model', 'survey_faculty_model', 'survey_question_model', 'survey_answer_template_model'));
 			
-			$survey_id        = $this->uuid->v4();
-			$survey_name      = $this->input->post('survey_name');
-			$reused_survey_id = $this->input->post('reuse');
-			$survey_type_id   = $this->input->post('hidden_stype_id');
-			$course           = $this->input->post('course');
-			$graduated_year   = $this->input->post('graduated_year');
-			$is_graduated     = (bool)$this->input->post('is_graduated');
-			$is_vocation      = (bool)$this->input->post('is_vocation');
+			$survey_id                   = $this->uuid->v4();
+			$survey_name                 = $this->input->post('survey_name');
+			$survey_modified_char_report = $this->input->post("modified_char_report");
+			$reused_survey_id            = $this->input->post('reuse');
+			$survey_type_id              = $this->input->post('hidden_stype_id');
+			$course                      = $this->input->post('course');
+			$graduated_year              = $this->input->post('graduated_year');
+			$is_graduated                = (bool)$this->input->post('is_graduated');
+			$is_vocation                 = (bool)$this->input->post('is_vocation');
 			
-			$array_sdate      = explode('/', $this->input->post('start_date'));
-			$start_date       = $array_sdate[2].'/'.$array_sdate[1].'/'.$array_sdate[0];
+			$array_sdate                 = explode('/', $this->input->post('start_date'));
+			$start_date                  = $array_sdate[2].'/'.$array_sdate[1].'/'.$array_sdate[0];
 			
-			$array_edate      = explode('/', $this->input->post('end_date'));
-			$end_date         = $array_edate[2].'/'.$array_edate[1].'/'.$array_edate[0];
+			$array_edate                 = explode('/', $this->input->post('end_date'));
+			$end_date                    = $array_edate[2].'/'.$array_edate[1].'/'.$array_edate[0];
 			
-			$is_evaluated     = (bool)$this->input->post('is_evaluated');
+			$is_evaluated                = (bool)$this->input->post('is_evaluated');
 			
 			// Lay thong tin cac Khoa/Ban duoc phep su dung mau khao sat
 			$survey_faculties['data'] = NULL;
@@ -120,7 +121,7 @@ class Survey extends CI_Controller
 			$user = $this->ion_auth->user()->row();
 			$uid = $user->id;
 			
-			$this->survey_model->add($uid,$survey_id,$survey_type_id,$reused_survey_id, $survey_name, $course, 
+			$this->survey_model->add($uid,$survey_id,$survey_type_id,$reused_survey_id, $survey_name, $survey_modified_char_report, $course, 
 			$graduated_year, $is_graduated, $start_date, $end_date, $is_vocation, $is_evaluated);
 			
 			// Them vao bang sur_survey_faculty nham phan quyen khao sat cho tung khoa/ban
@@ -132,6 +133,85 @@ class Survey extends CI_Controller
 				}
 			}
 /* 			redirect ('survey/index/'.$survey_type_id); */
+
+			if (!empty($reused_survey_id))
+			{
+				$cp_questions = $this->survey_question_model->get($reused_survey_id, FALSE);
+				foreach ($cp_questions as $cp_question)
+				{
+					// sao chep cau hoi
+					$question_id = $this->uuid->v4(); // xac dinh question id
+					
+					$data_question = array (
+						"question_id"         => $question_id,
+						"reused_question_id"  => $cp_question["question_id"],
+						"survey_id"           => $survey_id,
+						"content"             => $cp_question["content"],
+						"view_order"          => $cp_question["view_order"],
+						"max_option"          => $cp_question["max_option"],
+						"start_hide"          => $cp_question["start_hide"],
+						"required"            => $cp_question["required"],
+						"view_style"          => $cp_question["view_style"],
+						"is_vocation"         => $cp_question["is_vocation"],
+						"is_validated"        => $cp_question["is_validated"],
+						"is_evaluated"        => $cp_question["is_evaluated"],
+						"is_deleted"          => $cp_question["is_deleted"],
+						"flag_working"        => $cp_question["flag_working"],
+						"flag_underwork"      => $cp_question["flag_underwork"],
+						"created_by_user_id"  => $uid
+					);
+					if ($this->survey_question_model->insert_v2($data_question))
+					{
+						// Sao chep cau tra loi mau
+						// lay tat ca cau tra loi mau cua cau hoi dung lai
+						$cp_answers = $this->survey_answer_template_model->get($cp_question["question_id"]);
+						
+						foreach ($cp_answers as $cp_answer)
+						{
+							$answer_template_id = $this->uuid->v4();
+							$data_answer = array (
+								"answer_template_id"        => $answer_template_id,
+								"reused_answer_template_id" => $cp_answer["answer_template_id"],
+								"question_id"               => $question_id,
+								"option_type"               => $cp_answer["option_type"],
+								"view_order"                => $cp_answer["view_order"],
+								"label"                     => $cp_answer["label"],
+								"exception"                 => $cp_answer["exception"],
+								"required"                  => $cp_answer["required"],
+								"sub_answer"                => $cp_answer["sub_answer"],
+								"is_deleted"                => $cp_answer["is_deleted"],
+								"created_by_user_id"        => $uid
+							);
+							
+							if ($this->survey_answer_template_model->insert_v2($data_answer))
+							{
+								if ($cp_answer["sub_answer"] == TRUE)
+								{
+									$cp_sub_answers = $this->survey_answer_template_model->get($cp_answer["answer_template_id"]);
+									
+									foreach ($cp_sub_answers as $cp_sub_answer)
+									{
+										$data_sub_answer = array (
+											"answer_template_id"        => $this->uuid->v4(),
+											"reused_answer_template_id" => $cp_sub_answer["answer_template_id"],
+											"question_id"               => $answer_template_id,
+											"option_type"               => $cp_sub_answer["option_type"],
+											"view_order"                => $cp_sub_answer["view_order"],
+											"label"                     => $cp_sub_answer["label"],
+											"exception"                 => $cp_sub_answer["exception"],
+											"required"                  => $cp_sub_answer["required"],
+											"sub_answer"                => $cp_sub_answer["sub_answer"],
+											"is_deleted"                => $cp_sub_answer["is_deleted"],
+											"created_by_user_id"        => $uid
+										);
+										$this->survey_answer_template_model->insert_v2($data_sub_answer);
+									}
+								}// end copy sub answer template
+							}
+						}// end copy answer template
+					}// end copy question
+				}
+			}// end process reuse template
 			redirect ('survey/edit_step_2/'.$survey_type_id.'/'.$survey_id);
 		}
 		else
@@ -148,7 +228,7 @@ class Survey extends CI_Controller
 		{
 			$this->load->model(array('survey_model'));
 			
-			$survey_data = $this->surey_model->get($survey_type_id, $survey_id);
+			$survey_data = $this->survey_model->get($survey_type_id, $survey_id);
 			
 			if ($survey_data["status"]==FALSE)
 			{

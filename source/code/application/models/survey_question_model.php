@@ -5,6 +5,7 @@ class Survey_question_model extends CI_Model
 	{
 		parent::__construct();
 		$this->load->helper('date');
+		$this->load->library('uuid');
 	}
 	
 	/*
@@ -25,7 +26,7 @@ class Survey_question_model extends CI_Model
 	created_on_date
 	last_modified_by_user_id
 	last_modified_on_date
-*/
+	*/
 	// get
 	function get($survey_id, $question_id = FALSE)
 	{
@@ -122,6 +123,30 @@ class Survey_question_model extends CI_Model
 		
 		return $this->db->insert('sur_question', $data);
 	}
+	
+	function insert_v2($data_question)
+	{
+		$data = array (
+			"question_id"        => $data_question["question_id"],
+			"reused_question_id" => $data_question["reused_question_id"],
+			"survey_id"          => $data_question["survey_id"],
+			"content"            => $data_question["content"],
+			"view_order"         => $data_question["view_order"],
+			"max_option"         => $data_question["max_option"],
+			"start_hide"         => $data_question["start_hide"],
+			"required"           => $data_question["required"],
+			"view_style"         => $data_question["view_style"],
+			"is_validated"       => $data_question["is_validated"],
+			"is_evaluated"       => $data_question["is_evaluated"],
+			"flag_working"       => $data_question["flag_working"],
+			"flag_underwork"     => $data_question["flag_underwork"],
+			"created_by_user_id" => $data_question["created_by_user_id"],
+			"created_on_date"    => mdate("%Y/%m/%d %H:%m:%s", now())
+		);
+		
+		return $this->db->insert("sur_question", $data);
+	}
+	// end insert row
 	
 	function delete($question_id)
 	{

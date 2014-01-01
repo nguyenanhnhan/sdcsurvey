@@ -55,9 +55,9 @@ class Survey_validation_model extends CI_Model
 	function validate($validation_id, $value, $user_name)
 	{
 		$data = array(
-			'value'=>$value,
-			'created_by_user_id'=>$user_name,
-			'created_on_date'=>mdate('%Y/%m/%d %H:%i:%s', now())
+			'value'              => $value,
+			'created_by_user_id' => $user_name,
+			'created_on_date'    => mdate('%Y/%m/%d %H:%i:%s', now())
 		);
 		$this->db->where('validation_id',$validation_id);
 		return $this->db->update('sur_validation',$data);

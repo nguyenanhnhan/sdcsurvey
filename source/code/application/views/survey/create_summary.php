@@ -54,6 +54,12 @@
 								<table class="table table-bordered table-striped table-force-topborder" style="clear: both">
 									<tbody>
 										<tr>
+											<td width="15%">Mã phiếu</td>
+											<td width="50%">
+												<?php echo $survey["survey_id"]; ?>
+											</td>
+										</tr>
+										<tr>
 											<td width="15%">Tên phiếu khảo sát</td>
 											<td width="50%">
 												<a href="<?php echo base_url('survey/preview/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" target="_blank"><?php echo $survey['survey_name']?></a>
@@ -83,7 +89,9 @@
 											</td>
 										</tr>
 										<tr>
-											<td><?php if ($survey['is_graduated'] == 1) echo 'Năm tốt nghiệp'; else 'Đang học khoá'; ?></td>
+											<td>
+												<?php if ($survey['is_graduated'] == 1) echo 'Năm tốt nghiệp'; else echo 'Đang học khoá'; ?>
+											</td>
 											<td>
 												<?php if ($survey['is_graduated'] == 1) echo $survey['graduated_year']; else echo $survey['course']; ?>
 											</td>

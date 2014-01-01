@@ -111,7 +111,7 @@
 													<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Huỷ</a>
 												</div>
 											</div>
-											<span class="help-block">Chỉ chấp nhận file .xls (Dung lượng tối đa: 10MB)</span>
+											<span class="help-block">Chỉ chấp nhận file .xls (Dung lượng tối đa: 10MB). Tải file mẫu <a href="<?php echo base_url("assets/template/students_list/students_list_import.xls")?>">tại đây </a></span>
 										</div>
 									</div>
 									<div class="form-actions">

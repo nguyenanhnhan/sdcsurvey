@@ -13,8 +13,11 @@ class Survey_type_model extends CI_Model
 	{
 		if ($stype_id === FALSE)
 		{
-			$query = $this->db->get('sur_survey_type');
-			return $query->result_array();
+			$query = "SELECT *
+					  FROM sur_survey_type
+					  WHERE is_deleted != 1";
+			
+			return $this->db->query($query)->result_array();
 		}
 		
 		$query = $this->db->get_where('sur_survey_type', array('survey_type_id' => $stype_id));
@@ -24,7 +27,11 @@ class Survey_type_model extends CI_Model
 	// delete row
 	function delete($stype_id)
 	{
-		$this->db->delete('sur_survey_type',array('survey_type_id'=>$stype_id));
+		$data = array("is_deleted"=>1);
+		$this->db->where("survey_type_id", $stype_id);
+		/* $this->db->delete('sur_survey_type',array('survey_type_id'=>$stype_id)); */
+		return $this->db->update("sur_survey_type", $data); // Cap nhat lai trang thai
+		
 	}
 	
 	// add row
