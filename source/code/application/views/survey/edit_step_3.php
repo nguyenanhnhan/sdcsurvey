@@ -79,10 +79,12 @@
 										<label class="control-label">Thứ tự sắp xếp</label>
 										<div class="controls">
 											<div class="input-medium">
-												<select class="chosen-select" name='view_order'>
-													<?php for($i=0,$len=count($survey_question);$i<$len;$i++){ ?>
+												<select class="chosen-select" name='view_order' data-nosearch="true">
+													<!--
+<?php for($i=0,$len=count($survey_question);$i<$len;$i++){ ?>
 														<option value="<?php echo $i+1 ?>">Vị trí <?php echo $i+1 ?></option>
 													<?php } ?>
+-->
 													<option value="<?php echo $max_view_order['view_order']+1 ?>" selected>Cuối cùng</option>
 												</select>
 											</div>
@@ -92,7 +94,7 @@
 										<label class="control-label">Dạng câu trả lời</label>
 										<div class="controls">
 											<div class="input-medium">
-												<select id="answer_type" name="answer_type" class="chosen-select">
+												<select id="answer_type" name="answer_type" class="chosen-select" data-nosearch="true">
 													<option value="r">Một lựa chọn</option>
 													<option value="c">Nhiều lựa chọn</option>
 													<option value="t">Văn bản</option>
@@ -125,6 +127,14 @@
 										<label class="control-label">Mẫu câu trả lời</label>
 										<div class="controls" id="dyn_zone">
 											
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Bổ sung thống kê</label>
+										<div class="controls">
+											<div class="check-line">
+														<input type="checkbox" id="c5" class='icheck-me' data-skin="square" data-color="blue"> <label class='inline' for="c5">Default</label>
+											</div>
 										</div>
 									</div>
 									<div class="form-actions">

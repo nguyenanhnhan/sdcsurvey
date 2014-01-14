@@ -912,6 +912,7 @@ class Survey extends CI_Controller
 			{
 				$this->survey_answer_template_model->update_effect($uid, $answer_template_id,0);
 			}
+			
 			if(!empty($data['show_control']))
 			{
 				$this->survey_answer_template_model->update_effect($uid, $answer_template_id,1);

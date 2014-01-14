@@ -58,13 +58,38 @@
 								</ul>
 								<div class="tab-content padding tab-content-inline tab-content-bottom">
 									<div class="tab-pane" id="t1">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum voluptatibus velit tempora numquam ipsa consequuntur esse et dolores aliquam sit sunt illo recusandae amet officiis dolorem debitis facilis! Quia dolore facere commodi numquam id quo aperiam inventore ratione reiciendis in unde sequi soluta. Obcaecati hic molestias deleniti aliquid optio fugiat repellat ab modi maiores minus eius quasi exercitationem officia reiciendis molestiae in dignissimos aspernatur eveniet voluptas consequuntur corporis. Magni itaque quod doloremque quas ad incidunt accusamus libero. Id praesentium veniam beatae est in excepturi atque consequuntur odio! Iste maiores exercitationem temporibus optio nostrum doloremque commodi vero accusamus dolorem aut voluptatem tempora maxime tenetur labore nesciunt quis fugit aliquid amet quasi expedita sed delectus voluptatum deserunt illum ad provident suscipit ex consequatur repellat similique qui nemo accusantium distinctio eveniet porro animi obcaecati voluptates quo consequuntur dolores saepe sit. Maxime numquam earum quidem iure a at temporibus minima natus? Impedit quo architecto nobis deserunt cupiditate ex provident consectetur! Obcaecati corrupti tempore adipisci voluptatum vitae perferendis quidem soluta a officia possimus modi nobis velit facere repellendus quia fugiat assumenda? Non magni at nesciunt officia perferendis fuga inventore quis veritatis voluptas laudantium aliquid iusto omnis eaque vitae commodi repellat voluptatibus cupiditate minus ut a.
+										Đang cập nhật.....
 									</div>
 									<div class="tab-pane" id="t2">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto vel labore sed odio laudantium in eum aliquid reiciendis blanditiis consequatur excepturi dicta quisquam soluta quis neque nostrum expedita temporibus illum aliquam voluptatibus a cumque sit nulla et consectetur ex maiores sequi culpa suscipit. Voluptate quae id consequatur consequuntur exercitationem cumque beatae obcaecati laudantium? Ea tenetur animi itaque eos aperiam molestiae reprehenderit eaque perferendis iusto beatae sapiente fuga ex ab fugit excepturi nesciunt blanditiis nostrum ipsa. Facere repellendus tempore deleniti neque nihil commodi nemo recusandae eveniet error eligendi tenetur quia et consequuntur cupiditate facilis esse aspernatur praesentium reprehenderit dolorum accusantium ipsum cum voluptas quisquam ea atque aliquid omnis at quam magnam rem cumque repellat maxime mollitia nulla architecto sequi saepe veritatis optio amet culpa consectetur ducimus sapiente doloribus corporis odit adipisci. Commodi ab culpa accusamus maxime amet dolore at necessitatibus fugit beatae id asperiores doloribus perspiciatis expedita quisquam itaque iusto eos ad quibusdam rem fuga ipsum ut quasi. Unde explicabo quae quod saepe maxime nulla ut. Aperiam possimus repellendus deleniti quasi quaerat aliquam veniam numquam doloremque sequi perspiciatis eligendi provident nam voluptates nihil earum saepe maxime mollitia maiores porro animi nulla odit sapiente atque totam illo! Accusantium quis corporis omnis et.
+										Đang cập nhật.....
 									</div>
 									<div class="tab-pane active" id="t3">
 										<ul class="timeline">
+											<li>
+												<div class="timeline-content">
+													<div class="left">
+														<div class="icon">
+															<i class="icon-info-sign"></i>
+														</div>
+														<div class="date">2 / 1 / 2014</div>
+													</div>
+													<div class="activity">
+														<div class="user"><a href="#">Nguyễn Ảnh Nhân</a> 
+														<span>Phiên bản 4.1.0.0, </span></div>
+														<ul class="timeline-images">
+															<p><strong>Tính năng mới</strong></p>
+															<p>- [ Nhân viên quản lý ] Ghi chú trong phiếu khảo sát</p>
+															<p>- [ Admin ] Thêm link tải mẫu template nhập thông tin sinh viên</p>
+															<p><strong>Sửa lỗi</strong></p>
+															<p>- [ Nhân viên quản lý ] Phiếu khảo sát trùng mã sinh viên</p>
+															<p>- [ Admin ] Sao chép phiếu khảo sát</p>
+															<p>- Nhiều lỗi nhỏ</p>
+															<p>- Loại bỏ khung CHAT hỗ trợ </p>
+														</ul>
+													</div>
+												</div>
+												<div class="line"></div>
+											</li>
 											<li>
 												<div class="timeline-content">
 													<div class="left">
