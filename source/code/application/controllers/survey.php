@@ -14,12 +14,12 @@ class Survey extends CI_Controller
 		{
 			$this->load->model(array('survey_type_model','survey_model'));
 			
-			$data['surveys'] = $this->survey_model->get($stype_id);
-			$data['survey_type'] = $this->survey_type_model->get($stype_id);
+			$data['surveys']      = $this->survey_model->get($stype_id);
+			$data['survey_type']  = $this->survey_type_model->get($stype_id);
 			
-			$user = $this->ion_auth->user()->row();
+			$user                 = $this->ion_auth->user()->row();
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
-			$data['is_admin'] = $this->ion_auth->is_admin();
+			$data['is_admin']     = $this->ion_auth->is_admin();
 			
 			$this->load->view('templates/header',$data);
 			$this->load->view('survey/list', $data);
@@ -50,7 +50,7 @@ class Survey extends CI_Controller
 			$data['graduated_years'] = $graduated_year_array;
 			
 			// Lay cac khoa dang hoc, chua tot nghiep
-			$course_array = array("");
+			$course_array         = array("");
 			$count_graduated_year = count($graduated_year_array);
 			for ($i = $count_graduated_year; $i <=$count_graduated_year+4; $i++)
 			{
@@ -59,14 +59,14 @@ class Survey extends CI_Controller
 			$data['courses_learning'] = $course_array;
 			
 			// Lay cac mau khao sat truoc co cung loai khao sat
-			$data['surveys'] = $this->survey_model->get($stype_id);
+			$data['surveys']          = $this->survey_model->get($stype_id);
 			
 			// Lay tat ca cac khoa ban
-			$data['faculties'] = $this->faculty_model->get();
+			$data['faculties']        = $this->faculty_model->get();
 			
-			$user = $this->ion_auth->user()->row();
+			$user                 = $this->ion_auth->user()->row();
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
-			$data['is_admin'] = $this->ion_auth->is_admin();
+			$data['is_admin']     = $this->ion_auth->is_admin();
 			
 			$this->load->view('templates/header',$data);
 			$this->load->view('survey/create_step_1', $data);
@@ -377,9 +377,9 @@ class Survey extends CI_Controller
 			// Lay mau nhap thong tin sinh vien
 			$data['design_templates'] = $this->design_template_model->get();
 			
-			$user = $this->ion_auth->user()->row();
-			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
-			$data['is_admin'] = $this->ion_auth->is_admin();
+			$user                     = $this->ion_auth->user()->row();
+			$data['display_name']     = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin']         = $this->ion_auth->is_admin();
 			
 			$this->load->view('templates/header',$data);
 			$this->load->view('survey/edit_step_2',$data);
@@ -432,10 +432,10 @@ class Survey extends CI_Controller
 			$uid  = $user->id;
 			
 			// Lay loai khao sat
-			$data['survey_type'] = $this->survey_type_model->get($survey_type_id);
+			$data['survey_type']     = $this->survey_type_model->get($survey_type_id);
 			
 			// Lay mau khao sat hien muon sua
-			$data['survey'] = $this->survey_model->get($survey_type_id, $survey_id);
+			$data['survey']          = $this->survey_model->get($survey_type_id, $survey_id);
 			
 			// Lay cac mau cau hoi va cau tra loi tuong ung voi phieu khao sat
 			$data['survey_question'] = $this->survey_question_model->get($survey_id);
@@ -462,13 +462,13 @@ class Survey extends CI_Controller
 			}
 			
 			// Du lieu Tinh/Than
-			$data['provinces'] = $this->province_model->get();
+			$data['provinces']      = $this->province_model->get();
 			
 			// Lay max view order
 			$data['max_view_order'] = $this->survey_question_model->get_max_view_order($survey_id);
 			
-			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
-			$data['is_admin'] = $this->ion_auth->is_admin();
+			$data['display_name']   = trim($user->first_name).' '.trim($user->last_name);
+			$data['is_admin']       = $this->ion_auth->is_admin();
 			
 			$this->load->view('templates/header',$data);
 			$this->load->view('survey/edit_step_3',$data);
@@ -508,7 +508,7 @@ class Survey extends CI_Controller
 			
 			// Dem tong so lua chon tra loi
 			$max_option = 0;
-			if (!empty($control['dyn_control'])) $max_option += count($control['dyn_control']);
+			if (!empty($control['dyn_control'])) $max_option       += count($control['dyn_control']);
 			if (!empty($control['dyn_other_control'])) $max_option += count($control['dyn_other_control']);
 			
 			// Them cau hoi vao bang sur_question
@@ -519,7 +519,7 @@ class Survey extends CI_Controller
 			{
 				// Them lua chon chuan
 				$option_type = $answer_type;
-				$c_count = 0;
+				$c_count     = 0;
 				for ($i = 0, $len = count($control['dyn_control']); $i < $len; $i++)
 				{
 					$c_count++;
@@ -678,11 +678,11 @@ class Survey extends CI_Controller
 			$this->survey_question_model->update($uid, $survey_id, $question_id, $reused_question_id, $content,$view_order, $max_option, $start_hide, $required, $view_style, $is_validated, $is_evaluated);
 			
 			// Xoa cac mau cau tra loi cu
-			$result = $this->survey_question_model->delete_answer($question_id);
+			$result      = $this->survey_question_model->delete_answer($question_id);
 			
 			// Them lua chon chuan
 			$option_type = $answer_type;
-			$c_count = 0;
+			$c_count     = 0;
 			
 			for ($i = 0, $len = count($control['dyn_control']); $i < $len; $i++)
 			{
@@ -790,11 +790,11 @@ class Survey extends CI_Controller
 				}
 			}
 			
-			// Du lieu Tinh/Than
-			$data['provinces'] = $this->province_model->get();
+			// Du lieu Tinh/Thanh
+			$data['provinces']    = $this->province_model->get();
 			
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
-			$data['is_admin'] = $this->ion_auth->is_admin();
+			$data['is_admin']     = $this->ion_auth->is_admin();
 			
 			$this->load->view('templates/header',$data);
 			$this->load->view('survey/edit_step_4',$data);
@@ -820,9 +820,9 @@ class Survey extends CI_Controller
 			$data['survey_type'] = $this->survey_type_model->get($survey_type_id);
 			
 			// Lay mau khao sat hien muon sua
-			$data['survey'] = $this->survey_model->get($survey_type_id, $survey_id);
+			$data['survey']      = $this->survey_model->get($survey_type_id, $survey_id);
 			
-			$sort_question = $this->input->post('view_order');
+			$sort_question       = $this->input->post('view_order');
 			print_r($sort_question); die;
 			// Sap xep lai cau hoi
 			if (!empty($sort_question))

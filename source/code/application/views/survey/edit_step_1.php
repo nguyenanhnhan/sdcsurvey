@@ -58,10 +58,10 @@
 										</div>
 									</div>
 									<div class="control-group">
-										<label class="control-label">Bậc học  <?php print (bool)$survey['is_graduated'];?></label>
+										<label class="control-label">Bậc học</label>
 										<div class="controls">
 											<div class="input-xlarge">
-												<select name="is_vocation" id="is_vocation" class='chosen-select'>
+												<select name="is_vocation" id="is_vocation" class='chosen-select' data-nosearch="true">
 													<?php
 														// Hien thi phan biet giua cap bac dao tao
 														if ($survey['is_vocation'] == '1')

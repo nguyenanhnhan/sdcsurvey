@@ -133,7 +133,12 @@
 										<label class="control-label">Bổ sung thống kê</label>
 										<div class="controls">
 											<div class="check-line">
-														<input type="checkbox" id="c5" class='icheck-me' data-skin="square" data-color="blue"> <label class='inline' for="c5">Default</label>
+												<input type="checkbox" id="flag_working" class='icheck-me' data-skin="square" data-color="blue"/>
+												<label class='inline' for="flag_working">Câu hỏi bổ nghĩa cho thống kê Có việc làm</label>
+											</div>
+											<div class="check-line">
+												<input type="checkbox" id="flag_underwork" class="icheck-me" data-skin="square" data-color="blue"/>
+												<label class="inline" for="flag_underwork">Câu hỏi bổ nghĩa cho thống kê Chưa có việc làm</label>
 											</div>
 										</div>
 									</div>
@@ -200,7 +205,7 @@
 												{
 										?>
 												<div class="row-fluid">
-													<div class="span12"
+													<div class="span12">
 														<label class="control-label"><?php echo $answer_template[$j]['label']?></label>
 														<div class="controls controls-row">
 															<input type="text" class="input-xxlarge" name="<?php echo $answer_template[$j]['answer_template_id']?>">
@@ -341,6 +346,18 @@
 				{
 					$node = "<p><input type='text' placeholder='Tiêu đề' name='dyn_other_control[]' class='input-xxlarge' />&nbsp;<span class='uneditable-input' >Tỉnh/Thành</span><span class='btn removeVar'>Xoá</span></p>";
 					$('#dyn_zone').append($node);
+				}
+			});
+
+			// Bo sung thong ke
+			$("#flag_working").change(function(){
+				if ($("#flag_underwork").is(":checked"))
+				{
+					alert ("underwork checked");
+				}
+				else
+				{
+					alert ("underwork not check");
 				}
 			});
 		</script>

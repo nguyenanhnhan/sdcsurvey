@@ -74,7 +74,7 @@
 										</div>
 										<div class="control_group">
 											<label class="control-label">Mô tả nội dung</label>
-											<div class="controls" style="height: 350px">
+											<div class="controls" style="height: 400px">
 												<img id="img_present" alt="" />
 											</div>
 										</div>

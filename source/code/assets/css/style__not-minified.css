@@ -3785,6 +3785,7 @@ label, input, button, select, textarea {
   background: #eee;
   width: 100%;
   position: relative;
+  z-index: -1;
 }
 #footer p {
   padding: 10px 0;
