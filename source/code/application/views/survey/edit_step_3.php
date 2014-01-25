@@ -286,79 +286,86 @@
 		</div>
 		<!--- Javascript -->
 		<script type="text/javascript">
-			// Bien dem so control duoc them vao
-			var c_count = 1;
-			
-			$('#answer_type').change(function(){
-				$('#dyn_zone p').remove();
-				c_count = 1;
-			});
-			
-			//remove a object    
-			$('#myform').on('click', '.removeVar', function(){
-				$(this).parent().remove();
-				c_count--;
-			});
-			
-			// Them cau tra loi khi click 'Them cau tra loi'
-			$('#add_more_answer').on('click', function(){
+			$(document).ready(function() {
+				// Bien dem so control duoc them vao
+				var c_count = 1;
 				
-				if ($('#answer_type option:selected').val() == 't')
-				{
-					$node = "<p><input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-xxlarge' /><span class='btn removeVar'>Xoá</span></p>";
-					$('#dyn_zone').append($node);
-					c_count ++;
-				}
-				else
-				{ 
+				$('#answer_type').change(function(){
+					$('#dyn_zone p').remove();
+					c_count = 1;
+				});
+				
+				//remove a object    
+				$('#myform').on('click', '.removeVar', function(){
+					$(this).parent().remove();
+					c_count--;
+				});
+				
+				// Them cau tra loi khi click 'Them cau tra loi'
+				$('#add_more_answer').on('click', function(){
+					
+					if ($('#answer_type option:selected').val() == 't')
+					{
+						$node = "<p><input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-xxlarge' /><span class='btn removeVar'>Xoá</span></p>";
+						$('#dyn_zone').append($node);
+						c_count ++;
+					}
+					else
+					{ 
+						if($('#answer_type option:selected').val() == 'r')
+						{
+							$node = "<p><input type='radio' class='icheck-me' data-skin='square' data-color='blue'/>&nbsp;<input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+							$('#dyn_zone').append($node);
+						}
+						else
+						{
+							$node = "<p><input type='checkbox' style='icheck-me' data-color='blue' data-skin='square'/>&nbsp;<input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+							$('#dyn_zone').append($node);
+						}
+					}
+				});
+				
+				// Them cau tra loi khi click 'Them cau hoi khac'
+				$('#add_other_answer').on('click',function(){
+					
 					if($('#answer_type option:selected').val() == 'r')
 					{
-						$node = "<p><input type='radio' class='icheck-me' data-skin='square' data-color='blue'/>&nbsp;<input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+						$node = "<p><input type='radio'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
 						$('#dyn_zone').append($node);
 					}
 					else
-					{
-						$node = "<p><input type='checkbox' style='icheck-me' data-color='blue' data-skin='square'/>&nbsp;<input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
-						$('#dyn_zone').append($node);
-					}
-				}
-			});
-			
-			// Them cau tra loi khi click 'Them cau hoi khac'
-			$('#add_other_answer').on('click',function(){
+						if($('#answer_type option:selected').val() == 'c')
+						{
+							$node = "<p><input type='checkbox'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+							$('#dyn_zone').append($node);
+						}
+				});
 				
-				if($('#answer_type option:selected').val() == 'r')
-				{
-					$node = "<p><input type='radio'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
-					$('#dyn_zone').append($node);
-				}
-				else
-					if($('#answer_type option:selected').val() == 'c')
+				// Them cau tra loi khi click 'Them Tinh/Thanh'
+				$('#add_province').on('click',function(){
+					if ($('#answer_type option:selected').val() == 't')
 					{
-						$node = "<p><input type='checkbox'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+						$node = "<p><input type='text' placeholder='Tiêu đề' name='dyn_other_control[]' class='input-xxlarge' />&nbsp;<span class='uneditable-input' >Tỉnh/Thành</span><span class='btn removeVar'>Xoá</span></p>";
 						$('#dyn_zone').append($node);
 					}
+				});
+
+				// Bo sung thong ke
+				$("#flag_working").change(function(){
+
+					if ($(this).is(":checked"))
+					{
+						$("#flag_underwork").iCheck('uncheck');
+					}
+				});
+
+				$("#flag_underwork").change(function(){
+					if ($(this).is(":checked"))
+					{
+						$("#flag_working").iCheck('uncheck');
+					}
+				});
 			});
 			
-			// Them cau tra loi khi click 'Them Tinh/Thanh'
-			$('#add_province').on('click',function(){
-				if ($('#answer_type option:selected').val() == 't')
-				{
-					$node = "<p><input type='text' placeholder='Tiêu đề' name='dyn_other_control[]' class='input-xxlarge' />&nbsp;<span class='uneditable-input' >Tỉnh/Thành</span><span class='btn removeVar'>Xoá</span></p>";
-					$('#dyn_zone').append($node);
-				}
-			});
-
-			// Bo sung thong ke
-			$("#flag_working").change(function(){
-				if ($("#flag_underwork").is(":checked"))
-				{
-					alert ("underwork checked");
-				}
-				else
-				{
-					alert ("underwork not check");
-				}
-			});
 		</script>
 		
