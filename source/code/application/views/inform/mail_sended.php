@@ -23,7 +23,7 @@
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>
-							<a href="<?php echo base_url('inform/send_mail') ?>">Thông báo</a>
+							<a href="<?php echo base_url('inform') ?>">Thông báo</a>
 							<i class="icon-angle-right"></i>
 						</li>
 						<li>

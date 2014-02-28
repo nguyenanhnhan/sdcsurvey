@@ -651,15 +651,17 @@ class Survey extends CI_Controller
 			$this->load->model(array('survey_model', 'survey_type_model', 'survey_question_model', 'survey_answer_template_model'));
 			
 			// Lay thong tin tren form
-			$reused_question_id = FALSE;
-			$content            = $this->input->post('survey_question');
-			$start_hide         = (bool)$this->input->post('is_hide');
-			$required           = (bool)$this->input->post('is_required');
-			$view_style         = 1;
-			$is_validated       = (bool)$this->input->post('is_validated');
-			$is_evaluated       = (bool)$this->input->post('is_evaluated');
-			$answer_type        = $this->input->post('answer_type');
-			$view_order         = 0;
+			$reused_question_id  = FALSE;
+			$content             = $this->input->post('survey_question');
+			$start_hide          = (bool)$this->input->post('is_hide');
+			$required            = (bool)$this->input->post('is_required');
+			$view_style          = 1;
+			$is_validated        = (bool)$this->input->post('is_validated');
+			$is_evaluated        = (bool)$this->input->post('is_evaluated');
+			$flag_working        = (bool)$this->input->post("flag_working");
+			$flag_underwork      = (bool)$this->input->post("flag_underwork");
+			$answer_type         = $this->input->post('answer_type');
+			$view_order          = 0;
 			
 			// Lay thong tin nguoi dung
 			$user = $this->ion_auth->user()->row();
@@ -675,7 +677,7 @@ class Survey extends CI_Controller
 			if (!empty($control['dyn_other_control'])) $max_option += count($control['dyn_other_control']);
 			
 			// Cap nhat lai cau hoi
-			$this->survey_question_model->update($uid, $survey_id, $question_id, $reused_question_id, $content,$view_order, $max_option, $start_hide, $required, $view_style, $is_validated, $is_evaluated);
+			$this->survey_question_model->update($uid, $survey_id, $question_id, $reused_question_id, $content,$view_order, $max_option, $start_hide, $required, $view_style, $is_validated, $is_evaluated, $flag_working, $flag_underwork);
 			
 			// Xoa cac mau cau tra loi cu
 			$result      = $this->survey_question_model->delete_answer($question_id);

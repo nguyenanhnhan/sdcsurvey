@@ -287,6 +287,13 @@
 		<!--- Javascript -->
 		<script type="text/javascript">
 			$(document).ready(function() {
+				// Initial Funcion
+				var init = function(){
+					var flag_working = <?php echo $survey_question["flag_working"] ?>;
+					alert(flag_working);
+				}
+				
+				init();
 				// Bien dem so control duoc them vao
 				var c_count = 1;
 				

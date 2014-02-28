@@ -47,6 +47,24 @@
 					<strong><?php echo $ignore; ?></strong>
 				</div>
 				<?php } ?>
+
+				<?php if (!empty($invalid)){ ?>
+				<div class="alert alert-error fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
+					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>
+					Các sinh viên có MSV:
+					<strong>
+						<?php 
+						$objects_number = count($invalid);
+						$count = 0;
+						foreach ($invalid as $item) {
+							$count++;
+							if ($count == $objects_number) echo $item;
+							else echo $item.",";
+						}?> 
+					</strong>
+					không đúng định dạng email.
+				</div>
+				<?php } ?>
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="box box-color box-bordered">

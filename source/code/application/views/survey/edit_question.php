@@ -92,7 +92,7 @@
 										<label class="control-label">Thứ tự sắp xếp</label>
 										<div class="controls">
 											<div class="input-medium">
-												<select class="chosen-select" name='view_order'>
+												<select class="chosen-select" name='view_order' data-nosearch="true" disabled="true">
 													<?php for($i=0,$len=count($question_survey);$i<$len;$i++){ ?>
 														<option value="<?php echo $i+1 ?>" <?php if($survey_question['view_order']==$i+1) echo 'selected' ?>>Vị trí <?php echo $i+1 ?></option>
 													<?php } ?>
@@ -145,6 +145,19 @@
 										<div class="controls" id="dyn_zone">
 										</div>
 									</div>
+									<div class="control-group">
+										<label class="control-label">Bổ sung thống kê</label>
+										<div class="controls">
+											<div class="check-line">
+												<input type="checkbox" id="flag_working" name="flag_working" class='icheck-me' data-skin="square" data-color="blue"/>
+												<label class='inline' for="flag_working">Câu hỏi bổ nghĩa cho thống kê Có việc làm</label>
+											</div>
+											<div class="check-line">
+												<input type="checkbox" id="flag_underwork" name="flag_underwork" class="icheck-me" data-skin="square" data-color="blue"/>
+												<label class="inline" for="flag_underwork">Câu hỏi bổ nghĩa cho thống kê Chưa có việc làm</label>
+											</div>
+										</div>
+									</div>
 									<div class="form-actions">
 										<button class="btn btn-primary" type="submit">Lưu</button>
 										<a href='<?php echo base_url('survey/edit_step_3/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'])?>' class="btn">Quay lại</a>
@@ -162,6 +175,19 @@
 		</div>
 		<!--- Javascript -->
 		<script type="text/javascript">
+		$(document).ready(function(){
+			// Ham khoi tao
+			var init = function(){
+				<?php if ($survey_question["flag_working"]==TRUE) {?>
+				$("#flag_working").iCheck("check");
+				$("#flag_underwork").iCheck("uncheck");
+				<?php } ?>
+				<?php if ($survey_question["flag_underwork"]==TRUE) {?>
+				$("#flag_underwork").iCheck("check");
+				$("#flag_working").iCheck("uncheck");
+				<?php } ?>
+			}
+			init();
 			
 			// khoi tao du lieu dua len
 			<?php foreach($survey_answer_template as $answer_template_item){ ?>
@@ -259,4 +285,22 @@
 					$('#dyn_zone').append($node);
 				}
 			});
+			
+			// Bo sung thong ke
+			$("#flag_working").change(function(){
+
+				if ($(this).is(":checked"))
+				{
+					$("#flag_underwork").iCheck('uncheck');
+				}
+			});
+
+			$("#flag_underwork").change(function(){
+				if ($(this).is(":checked"))
+				{
+					$("#flag_working").iCheck('uncheck');
+				}
+			});
+			
+		});
 		</script>

@@ -55,6 +55,7 @@ class Admin extends CI_Controller {
 		if ($this->ion_auth->logged_in())
 		{	
 			$this->load->model(array('survey_type_model','student_model'));
+			$this->load->helper('email');
 		
 			//Set config for upload file
 			$config['upload_path'] = './assets/upload/students_list/';
@@ -74,6 +75,7 @@ class Admin extends CI_Controller {
 			$data["error"]="";
 			$data["success"]="";
 			$data["ignore"]="";
+			$data["invalid"]=array();
 			if (!$this->upload->do_upload())
 			{
 				$data["error"] = $this->upload->display_errors();
@@ -113,28 +115,35 @@ class Admin extends CI_Controller {
 					$student_data = $this->student_model->get_student_infor($survey_id, $student_id);
 					if (empty($student_data))
 					{
-						$var_array = array(
-							"student_id"         => $student_id,
-							"faculty_id"         => $faculty_id,
-							"class_id"           => $class_id,
-							"survey_id"          => $survey_id,
-							"first_name"         => $first_name,
-							"last_name"          => $last_name,
-							"place_of_birth"     => $place_of_birth,
-							"date_of_birth"      => $date_of_birth,
-							"graduated_ranking"  => $grad_rank,
-							"phone"              => $phone,
-							"hand_phone"         => $hand_phone,
-							"email"              => $email,
-							"contact_address"    => $address,
-							"course"             => $course,
-							"graduated_year"     => $graduated_year,
-							"created_by_user_id" => $user->id,
-							"created_on_date"    => mdate('%Y/%m/%d %H:%i:%s', now())
-						);
-						
-						$var_return = $this->student_model->insert_student($var_array);
-						$success_count ++;
+						if (valid_email($email))
+						{
+							$var_array = array(
+								"student_id"         => $student_id,
+								"faculty_id"         => $faculty_id,
+								"class_id"           => $class_id,
+								"survey_id"          => $survey_id,
+								"first_name"         => $first_name,
+								"last_name"          => $last_name,
+								"place_of_birth"     => $place_of_birth,
+								"date_of_birth"      => $date_of_birth,
+								"graduated_ranking"  => $grad_rank,
+								"phone"              => $phone,
+								"hand_phone"         => $hand_phone,
+								"email"              => $email,
+								"contact_address"    => $address,
+								"course"             => $course,
+								"graduated_year"     => $graduated_year,
+								"created_by_user_id" => $user->id,
+								"created_on_date"    => mdate('%Y/%m/%d %H:%i:%s', now())
+							);
+							
+							$var_return = $this->student_model->insert_student($var_array);
+							$success_count ++;
+						}
+						else 
+						{
+							array_push($data["invalid"], $student_id);
+						}
 					} 
 					else
 					{

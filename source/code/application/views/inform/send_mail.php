@@ -40,7 +40,7 @@
 								</h3>
 							</div>
 							<div class="box-content nopadding">
-								<form action="<?php echo base_url('inform/send'); ?>" method="post" class="form-horizontal form-bordered" id="myform">
+								<form action="<?php echo base_url('inform/send'); ?>" method="post" class="form-horizontal form-bordered" id="myform" accept-charset="UTF-8">
 									<div class="control-group">
 										<label class="control-label">Khoa</label>
 										<div class="controls">
@@ -81,7 +81,7 @@
 									<div class="control-group">
 										<label class="control-label">Đến địa chỉ</label>
 										<div class="controls">
-											<input type="text" class="input-xlarge" id="to_email_address" name="email_address" />
+											<input type="text" class="input-xlarge" id="to_email_address" name="to_email_address" />
 											<span class="help-block">Các mail thông báo sẽ gửi đến địa chỉ này. Chỉ có hiệu lực trong quá trình test.</span>
 										</div>
 									</div>
@@ -156,12 +156,14 @@
 			tinyMCE.init({
 				// General options
 				selector:"textarea",
-				force_br_newlines : false,
-				force_p_newlines : false,
+				mode: "textareas",
+				force_br_newlines : true,
+				force_p_newlines : true,
 				forced_root_block : '',
-/* 				entity_encoding : "raw" */
+ 				entity_encoding : "raw"
 			});
 			
+
 			// Khoi tao data
 			$.ajax({
 				url: "<?php echo base_url('survey_result/get_survey_of_faculty') ?>"+"/"+$("#faculty option:selected").val(),

@@ -99,16 +99,20 @@ class Survey_validation extends CI_Controller {
 				$company_address    = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_address);
 				$company_phone      = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_company_phone);
 				$doing_job          = $this->survey_answer_model->get_answer_content($gen_item['infor_id'], $answer_doing_job);
-				$var_array_gen      = array(
-					'validation_id'    => $this->uuid->v4(),
-					'list_id'          => $list_id,
-					'infor_id'         => $gen_item['infor_id'],
-					'company_name'     => $company_name['content'],
-					'company_address'  => $company_address['content'],
-					'company_phone'    => $company_phone['content'],
-					'doing_job'        => $doing_job['content']
-				);
-				$this->survey_validation_model->insert($var_array_gen);
+
+				if (!empty($company_name) && !empty($company_address) && !empty($company_phone) && !empty($doing_job))
+				{
+					$var_array_gen      = array(
+						'validation_id'    => $this->uuid->v4(),
+						'list_id'          => $list_id,
+						'infor_id'         => $gen_item['infor_id'],
+						'company_name'     => $company_name['content'],
+						'company_address'  => $company_address['content'],
+						'company_phone'    => $company_phone['content'],
+						'doing_job'        => $doing_job['content']
+					);
+					$this->survey_validation_model->insert($var_array_gen);
+				}
 			}
 
 			redirect('survey_validation');

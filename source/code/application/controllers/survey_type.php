@@ -33,9 +33,12 @@ class Survey_type extends CI_Controller
 	{
 		if ($this->ion_auth->logged_in())
 		{
-			$this->load->model('survey_type_model');
-			
-			$this->survey_type_model->delete($stype_id);
+			$this->load->model(array('survey_type_model','survey_model'));
+
+			$check = $this->survey_model->get($stype_id);
+
+			if (empty($check))
+				$this->survey_type_model->delete($stype_id);
 			
 			redirect('survey_type','refresh');
 		}
@@ -50,13 +53,15 @@ class Survey_type extends CI_Controller
 		if ($this->ion_auth->logged_in())
 		{
 			$this->load->model('survey_type_model');
+			
+			/* End of file survey_type.php */
+			/* Location: ./application/controllers/survey_type.php */		
 			$user = $this->ion_auth->user()->row();
-			$uid = $user->id;
+			$uid  = $user->id;
 			
-			$data['stype_item'] = $this->survey_type_model->get($stype_id);
-			
+			$data['stype_item']   = $this->survey_type_model->get($stype_id);
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
-			$data['is_admin'] = $this->ion_auth->is_admin();
+			$data['is_admin']     = $this->ion_auth->is_admin();
 			
 			$this->load->view('templates/header',$data);
 			$this->load->view('survey_type/edit', $data);

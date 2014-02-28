@@ -22,6 +22,8 @@ class Survey_question_model extends CI_Model
 	is_validated
 	is_evaluated
 	is_deleted
+	flag_working
+	flag_underwork
 	created_by_user_id
 	created_on_date
 	last_modified_by_user_id
@@ -100,7 +102,6 @@ class Survey_question_model extends CI_Model
 		return $query->result_array();
 	}
 	
-	
 	// insert row
 	function insert($uid, $question_id, $reused_question_id, $survey_id, $content, $view_order, 
 	$max_option, $start_hide, $required, $view_style, $is_validated, $is_evaluated)
@@ -172,7 +173,7 @@ class Survey_question_model extends CI_Model
 	}
 	
 	// update question
-	function update ($uid, $survey_id,$question_id, $reused_question_id, $content,$view_order, $max_option, $start_hide, $required, $view_style, $is_validated, $is_evaluated)
+	function update ($uid, $survey_id,$question_id, $reused_question_id, $content,$view_order, $max_option, $start_hide, $required, $view_style, $is_validated, $is_evaluated, $flag_working, $flag_underwork)
 	{
 		// cap nhat view order cac control sau
 		/*
@@ -196,16 +197,18 @@ $this->db->where('view_order >', $view_order);
 */
 		
 		$data = array(
-			'reused_question_id' => $reused_question_id,
-			'content'            => $content,
-			'max_option'         => $max_option,
-			'start_hide'         => $start_hide,
-			'required'           => $required,
-			'view_style'         => $view_style,
-			'is_validated'       => $is_validated,
-			'is_evaluated'       => $is_evaluated,
-			'last_modified_by_user_id' => $uid,
-			'last_modified_on_date'    => mdate('%Y/%m/%d %H:%m:%s', now())
+			'reused_question_id'         => $reused_question_id,
+			'content'                    => $content,
+			'max_option'                 => $max_option,
+			'start_hide'                 => $start_hide,
+			'required'                   => $required,
+			'view_style'                 => $view_style,
+			'is_validated'               => $is_validated,
+			'is_evaluated'               => $is_evaluated,
+			'flag_working'               => $flag_working,
+			'flag_underwork'             => $flag_underwork,
+			'last_modified_by_user_id'   => $uid,
+			'last_modified_on_date'      => mdate('%Y/%m/%d %H:%m:%s', now())
 		);
 		$this->db->where('question_id', $question_id);
 		return $this->db->update('sur_question', $data);

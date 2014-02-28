@@ -4,6 +4,7 @@ class Inform extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 		$this->load->library(array('ion_auth', 'form_validation', 'session', 'uuid'));
 		$this->load->helper(array('url', 'date', 'directory', 'file'));
 		$this->load->model(array('group_permission_model'));
@@ -17,12 +18,11 @@ class Inform extends CI_Controller
 			
 			// LAY THONG TIN NGUOI PHU TRACH KHAO SAT
 			$user               = $this->ion_auth->user()->row();
-			$user_name          = $user->username;
+			$user_name          = $user->username; 
 			$data['user_email'] = $user->email;
-			
-			$data['faculties']=array();
+			$data['faculties']  =array();
 			// Load cac khoa ban theo quyen han
-			$groups = $this->ion_auth->get_users_groups()->result_array();
+			$groups             = $this->ion_auth->get_users_groups()->result_array();
 			foreach($groups as $group)
 			{
 				
@@ -55,7 +55,8 @@ class Inform extends CI_Controller
 			}
 			else
 			{
-				$data['mail_template'] = $this->minifyHTML(read_file($ready_template["mail_template_link"]));
+				// $data['mail_template'] = $this->minifyHTML(read_file($ready_template["mail_template_link"]));
+				$data['mail_template'] = read_file($ready_template["mail_template_link"]);
 			}
 			
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);
@@ -83,12 +84,12 @@ class Inform extends CI_Controller
 			$this->load->model(array('survey_type_model', 'survey_model', 'faculty_model', 'student_model', 'infor_model', 'survey_faculty_model'));
 			
 			// LAY THONG TIN NGUOI PHU TRACH KHAO SAT
-			$user         = $this->ion_auth->user()->row();
-			$user_name    = $user->username;
-			$display_name = trim($user->first_name).' '.trim($user->last_name);
-
+			$user                 = $this->ion_auth->user()->row();
+			$user_name            = $user->username;
+			$display_name         = trim($user->first_name).' '.trim($user->last_name);
+			
 			$data['display_name'] = $display_name;
-			$data['is_admin'] = $this->ion_auth->is_admin();
+			$data['is_admin']     = $this->ion_auth->is_admin();
 			
 			// LAY THONG TIN TREN FORM
 			$faculty_id  = $this->input->post('faculty');
@@ -108,20 +109,21 @@ class Inform extends CI_Controller
 			
 			$data['student_sended'] = "";
 			$data['error']          = "";
-			$data['preview'] = "";
+			$data['preview']        = "";
 			if (!empty($data['students']))
 			{
-				$send_counter = 0;
+				$send_counter    = 0;
 				$preview_counter = 0;
-				$students = $data['students'];
+				$students        = $data['students'];
 				foreach ($data['students'] as $student)
 				{
 					$send_counter++;
 					$content = $this->input->post('editor');
+					// echo $content; die;
 					$content = str_replace('[Faculty|Name]',$data['faculty']['faculty_name'],$content);
 					// Thay token [Student|FullName] = Ten sinh vien
 					$content = str_replace('[Student|FullName]',trim($student['first_name']).' '.trim($student['last_name']),$content);
-					// Thay toke [Survey|Link] = Duong dan den trang khao sat
+					// Thay token [Survey|Link] = Duong dan den trang khao sat
 					$content = str_replace('[Survey|Link]',
 						"<a href='".base_url('do_survey/student/'.$faculty_id.'/'.$survey_id.'/'.$student['student_id'])."'>".base_url('do_survey/student/'.$faculty_id.'/'.$survey_id.'/'.$student['student_id'])."</a>",
 						$content);
@@ -132,29 +134,45 @@ class Inform extends CI_Controller
 						$preview_counter ++;
 					}
 					else // Gui di
-					{						
+					{	
+						// SMTP Van Lang					
 						$config = Array(
 							'protocol'  => 'smtp',
 							'smtp_host' => 'mail.vanlanguni.edu.vn',
 							'smtp_port' => 25,
 							'smtp_user' => trim($from_email),
 							'smtp_pass' => trim($password),
-							'charset'   => 'utf8',
+							'charset'   => 'utf-8',
 							'mailtype'  => 'html'
 						);
 						
+						// SMTP Gmail
+						// $config = Array(
+						// 	'protocol' => 'smtp',
+						// 	'smtp_host' => 'ssl://smtp.googlemail.com',
+						// 	'smtp_port' => 465,
+						// 	'smtp_user' => 'nguyenanhnhan@gmail.com',
+						// 	'smtp_pass' => 'TrucTram68265',
+						// 	'charset' => 'utf-8',
+						// 	'mailtype' => 'html',
+						// 	'crlf' => '\r\n'
+						// );
+
 						$this->email->initialize($config);
 				
-						$this->email->from($from_email,$display_name);
+						$this->email->from(trim($from_email));
 						/* $this->email->to($student['email']); */
 						$this->email->to($to_email);
 						$this->email->subject($title);
 						$this->email->message($content);
+						
 						$this->email->set_newline("\r\n");
+						$this->email->set_crlf("\r\n");
 						if ( ! $this->email->send())
 						{
 							$data['error'][$send_counter]=$this->email->print_debugger();
 						}
+						else
 						{
 							$data['student_sended'][$send_counter] = $student;
 						}						
