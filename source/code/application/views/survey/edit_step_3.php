@@ -289,8 +289,7 @@
 			$(document).ready(function() {
 				// Initial Funcion
 				var init = function(){
-					var flag_working = <?php echo $survey_question["flag_working"] ?>;
-					alert(flag_working);
+					
 				}
 				
 				init();
