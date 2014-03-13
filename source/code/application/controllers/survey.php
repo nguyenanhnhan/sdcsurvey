@@ -256,7 +256,7 @@ class Survey extends CI_Controller
 			
 			// Lay nam tot nghiep
 			$graduated_year_array = array("");
-			for ($i = 1999; $i <= date('Y') - 1; $i++)
+			for ($i = 1999; $i <= date('Y'); $i++)
 			{
 				array_push($graduated_year_array, $i);
 			}
