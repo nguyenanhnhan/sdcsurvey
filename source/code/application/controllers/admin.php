@@ -115,7 +115,7 @@ class Admin extends CI_Controller {
 					$student_data = $this->student_model->get_student_infor($survey_id, $student_id);
 					if (empty($student_data))
 					{
-						if (valid_email($email))
+						if (valid_email($email) || empty($email))
 						{
 							$var_array = array(
 								"student_id"         => $student_id,

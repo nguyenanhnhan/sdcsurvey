@@ -169,7 +169,7 @@ class Survey extends CI_Controller
 						foreach ($cp_answers as $cp_answer)
 						{
 							$answer_template_id = $this->uuid->v4();
-							$data_answer = array (
+							$data_answer        = array (
 								"answer_template_id"        => $answer_template_id,
 								"reused_answer_template_id" => $cp_answer["answer_template_id"],
 								"question_id"               => $question_id,
@@ -340,6 +340,7 @@ class Survey extends CI_Controller
 					$survey_faculties['data'] = $this->input->post('survey_faculty');
 			}
 			// Tien hanh cap nhat
+			if (empty($cousse)) $course = 0;
 			$this->survey_model->update_step_1($uid, $survey_id, $survey_name, $course, $graduated_year, $is_graduated, 
 			$is_vocation, $start_date, $end_date, $is_evaluated);
 			

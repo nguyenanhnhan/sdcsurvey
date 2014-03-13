@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "do_survey/home/d803426a-0d76-49c8-88b7-6ee452ac748b"; //"admin/";
+$route['default_controller'] = "do_survey/home/c5b615f7-ca39-45b3-9de2-0d4777a75727"; //"admin/";
 $route['404_override'] = 'errors/error_404';
 
 /* End of file routes.php */
