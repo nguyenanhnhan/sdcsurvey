@@ -116,4 +116,30 @@ class Student_model extends CI_Model
 	{
 		return $this->db->insert("sur_student",$data);
 	}
+
+	// update student
+	function update_student ($data)
+	{
+		$data_update = array(
+			'faculty_id'               => $data['faculty_id'],
+			'class_id'                 => $data['class_id'],
+			'first_name'               => $data['first_name'],
+			'last_name'                => $data['last_name'],
+			'place_of_birth'           => $data['place_of_birth'],
+			'date_of_birth'            => $data['date_of_birth'],
+			'graduated_ranking'        => $data['grad_rank'],
+			'phone'                    => $data['phone'],
+			'hand_phone'               => $data['hand_phone'],
+			'email'                    => $data['email'],
+			'contact_address'          => $data['contact_address'],
+			'course'                   => $data['course'],
+			'graduated_year'           => $data['graduated_year'],
+			'last_modified_by_user_id' => $data['last_modified_by_user_id'],
+			'last_modified_on_date'    => $data['last_modified_on_date']
+		);
+
+		$this->db->where(array('student_id'=>"'".$data['student_id']."'", 'survey_id'=>$data['survey_id']));
+		return $this->db->update('sur_student', $data_update);
+	}
+
 }

@@ -48,6 +48,13 @@
 				</div>
 				<?php } ?>
 
+				<?php if (!empty($updated)) {?>
+				<div class="alert alert-info fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
+					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>
+					<strong><?php echo $updated; ?></strong>
+				</div>
+				<?php } ?>
+
 				<?php if (!empty($invalid)){ ?>
 				<div class="alert alert-error fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
 					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>

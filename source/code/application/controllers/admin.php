@@ -90,9 +90,10 @@ class Admin extends CI_Controller {
 				$objPHPExcel=$objReader->load(FCPATH."/assets/upload/students_list/uploaded_students_list.xls");
 				$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 				
-				$maxr = count($sheetData);
+				$maxr          = count($sheetData);
 				$success_count = 0;
-				$ignore_count = 0;
+				$ignore_count  = 0;
+				$updated_count  = 0;
 				for ($i=2; $i<=$maxr; $i++)
 				{
 					$faculty_id        = $sheetData[$i]["A"];
@@ -113,6 +114,7 @@ class Admin extends CI_Controller {
 					
 					// Kiem tra sinh vien da import chua
 					$student_data = $this->student_model->get_student_infor($survey_id, $student_id);
+					// Sinh vien chua co
 					if (empty($student_data))
 					{
 						if (valid_email($email) || empty($email))
@@ -145,14 +147,38 @@ class Admin extends CI_Controller {
 							array_push($data["invalid"], $student_id);
 						}
 					} 
-					else
+					else // Sinh vien da co
 					{
-						$ignore_count ++;
+						$var_array = array(
+							"student_id"               => $student_id,
+							"faculty_id"               => $faculty_id,
+							"class_id"                 => $class_id,
+							"survey_id"                => $survey_id,
+							"first_name"               => $first_name,
+							"last_name"                => $last_name,
+							"place_of_birth"           => $place_of_birth,
+							"date_of_birth"            => $date_of_birth,
+							"graduated_ranking"        => $grad_rank,
+							"phone"                    => $phone,
+							"hand_phone"               => $hand_phone,
+							"email"                    => $email,
+							"contact_address"          => $address,
+							"course"                   => $course,
+							"graduated_year"           => $graduated_year,
+							"last_modified_by_user_id" => $user->id,
+							"last_modified_on_date"    => mdate('%Y/%m/%d %H:%i:%s', now())
+						);
+						
+						$this->student_model->update_student($var_array);
+
+						$updated_count ++;
+						// $ignore_count ++;
 					}
 				}
-				$sum_record = $maxr - 1; // loai tru tieu de cot
-				$data["success"]="Đã cập nhật ".$success_count." trong ".$sum_record." dòng dữ liệu";
-				$data["ignore"]="Đã bỏ qua ".$ignore_count." dữ liệu trùng.";
+				$sum_record      = $maxr - 1; // loai tru tieu de cot
+				$data["success"] = "Đã cập nhật ".$success_count." trong ".$sum_record." dòng dữ liệu";
+				// $data["ignore"]  = "Đã bỏ qua ".$ignore_count." dữ liệu trùng.";
+				$data["updated"] = "Đã cập nhật ".$updated_count." sinh viên trong danh sách.";
 			}
 			$this->load->view('templates/header',$data);
 			$this->load->view('admin/import_student',$data);
