@@ -51,7 +51,7 @@
 
 	<!-- jQuery -->
 	<!-- <script src="<?php echo js_url() ?>jquery.min.js"></script> -->
-	<script src="<?php echo js_url() ?>jquery-1.11.0.min.js"></script>
+	<script src="<?php echo js_url() ?>jquery.min.js"></script>
 	
 	<!-- Nice Scroll -->
 	<script src="<?php echo js_url() ?>plugins/nicescroll/jquery.nicescroll.min.js"></script>
