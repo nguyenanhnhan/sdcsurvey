@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock"></span>
 								</div>
 							</li>
 						</ul>
@@ -20,7 +20,7 @@
 					<ul>
 						<li>
 							<a href="#">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('admin')?>">Dashboard</a>
@@ -68,8 +68,8 @@
 											<li>
 												<div class="timeline-content">
 													<div class="left">
-														<div class="icon">
-															<i class="icon-info-sign"></i>
+														<div class="icon green">
+															<i class="fa fa-bullhorn"></i>
 														</div>
 														<div class="date">2 / 1 / 2014</div>
 													</div>
@@ -93,8 +93,8 @@
 											<li>
 												<div class="timeline-content">
 													<div class="left">
-														<div class="icon">
-															<i class="icon-info-sign"></i>
+														<div class="icon green">
+															<i class="fa fa-bullhorn"></i>
 														</div>
 														<div class="date">29 / 7</div>
 													</div>
@@ -114,8 +114,8 @@
 											<li>
 												<div class="timeline-content">
 													<div class="left">
-														<div class="icon">
-															<i class="icon-info-sign"></i>
+														<div class="icon green">
+															<i class="fa fa-bullhorn"></i>
 														</div>
 														<div class="date">23 / 7</div>
 													</div>
@@ -134,8 +134,8 @@
 											<li>
 												<div class="timeline-content">
 													<div class="left">
-														<div class="icon">
-															<i class="icon-info-sign"></i>
+														<div class="icon green">
+															<i class="fa fa-bullhorn"></i>
 														</div>
 														<div class="date">15 / 7</div>
 													</div>
@@ -158,8 +158,8 @@
 											<li>
 												<div class="timeline-content">
 													<div class="left">
-														<div class="icon">
-															<i class="icon-info-sign"></i>
+														<div class="icon green">
+															<i class="fa fa-bullhorn"></i>
 														</div>
 														<div class="date">12 / 7</div>
 													</div>
@@ -179,8 +179,8 @@
 											<li>
 												<div class="timeline-content">
 													<div class="left">
-														<div class="icon">
-															<i class="icon-info-sign"></i>
+														<div class="icon green">
+															<i class="fa fa-bullhorn"></i>
 														</div>
 														<div class="date">11 / 7</div>
 													</div>
@@ -214,3 +214,10 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+			paceOptions = {
+				ajax: false, // disabled
+	  			document: false, // disabled
+	  			eventLag: false, // disabled
+			}
+		</script>

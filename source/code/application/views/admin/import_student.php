@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock"></span>
 								</div>
 							</li>
 						</ul>
@@ -20,7 +20,7 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url() ?>admin">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="import_student">Nhập danh sách sinh viên</a>
@@ -72,25 +72,24 @@
 					không đúng định dạng email.
 				</div>
 				<?php } ?>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-upload-alt"></i>
+									<i class="fa fa-cloud-upload"></i>
 									Nhập danh sách sinh viên
 								</h3>
 								<div class="actions">
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
+									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url("admin/upload_student_list") ?>" method="POST" enctype="multipart/form-data" class='form-horizontal form-bordered'>
-									<div class="control-group">
-										<label for="survey_type" class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="survey_type" id="survey_type" class='chosen-select span8' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label for="survey_type" class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey_type" id="survey_type" class='chosen-select form-control' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -112,29 +111,24 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey" id="survey" class='chosen-select form-control' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label for="file" class="control-label">Danh sách sinh viên</label>
-										<div class="controls">
-											<div class="fileupload fileupload-new" data-provides="fileupload">
-												<div class="input-append">
-													<div class="uneditable-input span3">
-														<i class="icon-file fileupload-exists"></i> 
-														<span class="fileupload-preview"></span>
-													</div>
-													<span class="btn btn-file">
-														<span class="fileupload-new">Chọn file</span>
-														<span class="fileupload-exists">Thay đổi file</span>
-														<input type="file" name="userfile" />
-													</span>
-													<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Huỷ</a>
-												</div>
+									<div class="form-group">
+										<label for="file" class="control-label col-sm-2">Danh sách sinh viên</label>
+										<div class="col-sm-10">
+											<div class="fileinput fileinput-new" data-provides="fileinput">
+												<span class="btn btn-default btn-file">
+													<span class="fileinput-new">Chọn file</span>
+													<span class="fileinput-exists">Thay đổi file</span>
+													<input type="file" name="userfile">
+												</span>
+												<span class="fileinput-filename"></span>
+												<a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
 											</div>
 											<span class="help-block">Chỉ chấp nhận file .xls (Dung lượng tối đa: 10MB). Tải file mẫu <a href="<?php echo base_url("assets/template/students_list/students_list_import.xls")?>">tại đây </a></span>
 										</div>

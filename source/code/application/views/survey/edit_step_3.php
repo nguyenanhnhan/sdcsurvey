@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,81 +20,78 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type') ?>">Loại khảo sát</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type/index/'.$survey_type['survey_type_id'])?>">
 								<?php echo $survey_type['survey_type_name']; ?>
 							</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey/index/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']); ?>">
 								<?php echo $survey['survey_name']; ?>
 							</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Sửa phiếu khảo sát</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 									Thông tin phiếu khảo sát
 								</h3>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('survey/update_step_3/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']); ?>" method="post" class="form-horizontal form-bordered" id="myform">
-									<div class="control-group">
-										<label class="control-label">Câu hỏi khảo sát</label>
-										<div class="controls">
-											<input type="text" class="input-xxlarge" name="survey_question" id="survey_question">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Câu hỏi khảo sát</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="survey_question" id="survey_question">
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Câu hỏi cần trả lời</label>
-										<div class="controls">
-											<input id="is_required" name="is_required" type="checkbox" data-skin="square" data-color="blue" class="icheck-me"/>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Câu hỏi cần trả lời</label>
+										<div class="col-sm-10">
+											<input id="is_required" name="is_required" type="checkbox" data-skin="square" data-color="blue" class="icheck-me form-control"/>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Câu hỏi ẩn</label>
-										<div class="controls">
-											<input id="is_hide" name="is_hide" type="checkbox" data-skin="square" data-color="blue" class="icheck-me"/>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Câu hỏi ẩn</label>
+										<div class="col-sm-10">
+											<input id="is_hide" name="is_hide" type="checkbox" data-skin="square" data-color="blue" class="icheck-me form-control"/>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Thứ tự sắp xếp</label>
-										<div class="controls">
-											<div class="input-medium">
-												<select class="chosen-select" name='view_order' data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Thứ tự sắp xếp</label>
+										<div class="col-sm-10">
+											<div class="col-xs-5">
+												<select class="chosen-select form-control" name='view_order' data-nosearch="true">
 													<!--
-<?php for($i=0,$len=count($survey_question);$i<$len;$i++){ ?>
+													<?php for($i=0,$len=count($survey_question);$i<$len;$i++){ ?>
 														<option value="<?php echo $i+1 ?>">Vị trí <?php echo $i+1 ?></option>
 													<?php } ?>
--->
+													-->
 													<option value="<?php echo $max_view_order['view_order']+1 ?>" selected>Cuối cùng</option>
 												</select>
 											</div>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Dạng câu trả lời</label>
-										<div class="controls">
-											<div class="input-medium">
-												<select id="answer_type" name="answer_type" class="chosen-select" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Dạng câu trả lời</label>
+										<div class="col-sm-10">
+											<div class="col-xs-5">
+												<select id="answer_type" name="answer_type" class="chosen-select form-control" data-nosearch="true">
 													<option value="r">Một lựa chọn</option>
 													<option value="c">Nhiều lựa chọn</option>
 													<option value="t">Văn bản</option>
@@ -102,8 +99,9 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
 											<div class="input-append input-prepend">
 												<span id="add_more_answer" class="btn">Thêm câu trả lời</span>
 												<div class="btn-group">
@@ -123,15 +121,15 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Mẫu câu trả lời</label>
-										<div class="controls" id="dyn_zone">
-											
+									<div class="form-group">
+										<label class="control-label col-sm-2">Mẫu câu trả lời</label>
+										<div class="col-sm-10" id="dyn_zone">
+
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Bổ sung thống kê</label>
-										<div class="controls">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Bổ sung thống kê</label>
+										<div class="col-sm-10">
 											<div class="check-line">
 												<input type="checkbox" id="flag_working" class='icheck-me' data-skin="square" data-color="blue"/>
 												<label class='inline' for="flag_working">Câu hỏi bổ nghĩa cho thống kê Có việc làm</label>
@@ -181,7 +179,7 @@
 									for ($j=0, $len_a=count($answer_template); $j<$len_a; $j++)
 									{
 									?>
-										<div class="control-group">
+										<div class="form-group">
 											<div class="controls">
 									<?php
 										switch ($answer_template[$j]['option_type'])
@@ -278,10 +276,6 @@
 				<?php
 					} // end for loop
 				?>
-				<!-- Fix loi footer tran len tren khi thu nho -->
-				<div class="row-fluid" style="height: 50px">
-
-				</div>
 			</div>
 		</div>
 		<!--- Javascript -->
@@ -297,13 +291,13 @@
 				var c_count = 1;
 				
 				$('#answer_type').change(function(){
-					$('#dyn_zone p').remove();
+					$('#dyn_zone div').remove();
 					c_count = 1;
 				});
 				
 				//remove a object    
 				$('#myform').on('click', '.removeVar', function(){
-					$(this).parent().remove();
+					$(this).parents("div .input-group").remove();
 					c_count--;
 				});
 				
@@ -312,7 +306,7 @@
 					
 					if ($('#answer_type option:selected').val() == 't')
 					{
-						$node = "<p><input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-xxlarge' /><span class='btn removeVar'>Xoá</span></p>";
+						$node = "<div class='input-group' style='margin-bottom:2px'><input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='form-control' /><div class='input-group-btn'><span class='btn removeVar' style='height:34px'>Xoá</span></div></div>";
 						$('#dyn_zone').append($node);
 						c_count ++;
 					}
@@ -320,12 +314,12 @@
 					{ 
 						if($('#answer_type option:selected').val() == 'r')
 						{
-							$node = "<p><input type='radio' class='icheck-me' data-skin='square' data-color='blue'/>&nbsp;<input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+							$node = "<div class='input-group' style='margin-bottom:2px'><span class='input-group-addon'><i class='fa fa-circle-o'></i></span><input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='form-control' /><div class='input-group-btn'><span class='btn removeVar' style='height:34px'>Xoá</span></div></div>";
 							$('#dyn_zone').append($node);
 						}
 						else
 						{
-							$node = "<p><input type='checkbox' style='icheck-me' data-color='blue' data-skin='square'/>&nbsp;<input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+							$node = "<div class='input-group' style='margin-bottom:2px'><span class='input-group-addon'><i class='fa fa-square-o'></i></span><input type='text' name='dyn_control[]' id='dyn_control_"+c_count+"' placeholder='Tiêu đề' class='form-control' /><div class='input-group-btn'><span class='btn removeVar' style='height:34px'>Xoá</span></div></div>";
 							$('#dyn_zone').append($node);
 						}
 					}
@@ -336,13 +330,13 @@
 					
 					if($('#answer_type option:selected').val() == 'r')
 					{
-						$node = "<p><input type='radio'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+						$node = "<div class='input-group' style='margin-bottom:2px'><span class='input-group-addon'><i class='fa fa-circle-o'></i></span><input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='form-control' /><div class='input-group-btn'><span class='btn removeVar' style='height:34px'>Xoá</span></div></div>";
 						$('#dyn_zone').append($node);
 					}
 					else
 						if($('#answer_type option:selected').val() == 'c')
 						{
-							$node = "<p><input type='checkbox'/>&nbsp;<input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='input-large' /><span class='btn removeVar'>Xoá</span></p>";
+							$node = "<div class='input-group' style='margin-bottom:2px'><span class='input-group-addon'><i class='fa fa-square-o'></i></span><input type='text' name='dyn_other_control[]' placeholder='Lựa chọn khác' class='form-control' /><div class='input-group-btn'><span class='btn removeVar' style='height:34px'>Xoá</span></div></div>";
 							$('#dyn_zone').append($node);
 						}
 				});
@@ -351,7 +345,8 @@
 				$('#add_province').on('click',function(){
 					if ($('#answer_type option:selected').val() == 't')
 					{
-						$node = "<p><input type='text' placeholder='Tiêu đề' name='dyn_other_control[]' class='input-xxlarge' />&nbsp;<span class='uneditable-input' >Tỉnh/Thành</span><span class='btn removeVar'>Xoá</span></p>";
+						// $node = "<div class='input-group' style='margin-bottom:2px'><span class='input-group-addon'><input type='text' placeholder='Tiêu đề' name='dyn_other_control[]' class='input-xxlarge' />&nbsp;<span class='uneditable-input' >Tỉnh/Thành</span><span class='btn removeVar'>Xoá</span></p>";
+						$node = "<div class='input-group' style='margin-bottom:2px'><div class='col-xs-9'><input type='text' name='dyn_other_control[]' placeholder='Tiêu đề' class='form-control' /></div><div class='col-xs-3'><input type='text' placeholder='Tỉnh/Thành' class='form-control' disabled /></div><div class='input-group-btn'><span class='btn removeVar' style='height:34px'>Xoá</span></div></div>";
 						$('#dyn_zone').append($node);
 					}
 				});

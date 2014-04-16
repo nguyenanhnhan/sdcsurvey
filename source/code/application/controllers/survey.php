@@ -826,7 +826,7 @@ class Survey extends CI_Controller
 			$data['survey']      = $this->survey_model->get($survey_type_id, $survey_id);
 			
 			$sort_question       = $this->input->post('view_order');
-			print_r($sort_question); die;
+
 			// Sap xep lai cau hoi
 			if (!empty($sort_question))
 			{

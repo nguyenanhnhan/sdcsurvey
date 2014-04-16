@@ -127,9 +127,9 @@ $(document).ready(function() {
         var opt = {
             "sPaginationType": "full_numbers",
             "oLanguage": {
-                "sSearch": "<span>Search:</span> ",
-                "sInfo": "Showing <span>_START_</span> to <span>_END_</span> of <span>_TOTAL_</span> entries",
-                "sLengthMenu": "_MENU_ <span>entries per page</span>"
+                "sSearch": "<span>Tìm kiếm:</span> ",
+                "sInfo": "Đang xem <span>_START_</span> đến <span>_END_</span> trong tổng số <span>_TOTAL_</span> mục",
+                "sLengthMenu": "<span>Thể hiện</span> _MENU_ <span>kết quả trong một trang</span>"
             },
             'sDom': "lfrtip",
             'aoColumnDefs': [{
@@ -145,7 +145,7 @@ $(document).ready(function() {
         };
         var oTable = $('.usertable').dataTable(opt);
 
-        $('.dataTables_filter input').attr("placeholder", "Search here...");
+        $('.dataTables_filter input').attr("placeholder", "Tìm tại đây...");
         $(".dataTables_length select").wrap("<div class='input-mini'></div>").chosen({
             disable_search_threshold: 9999999
         });

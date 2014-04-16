@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,48 +20,48 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type') ?>">Loại khảo sát</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type/index/'.$survey_type['survey_type_id'])?>">
 								<?php echo $survey_type['survey_type_name']; ?>
 							</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey/index/'.$survey_type['survey_type_id']) ?>"><?php echo $survey['survey_name']; ?>
 							</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-pencil"></i>
+									<i class="fa fa-info"></i>
 									Thông tin chung của phiếu khảo sát
 								</h3>
+								<div class="actions">
+									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
+								</div>
 							</div>
 							<div class="box-content nopadding">
 								<table class="table table-bordered table-striped table-force-topborder" style="clear: both">
 									<tbody>
 										<tr>
-											<td width="15%">Mã phiếu</td>
-											<td width="50%">
+											<td class="col-sm-2">Mã phiếu</td>
+											<td class="col-sm-10">
 												<?php echo $survey["survey_id"]; ?>
 											</td>
 										</tr>
 										<tr>
-											<td width="15%">Tên phiếu khảo sát</td>
-											<td width="50%">
+											<td>Tên phiếu khảo sát</td>
+											<td>
 												<a href="<?php echo base_url('survey/preview/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']) ?>" target="_blank"><?php echo $survey['survey_name']?></a>
 											</td>
 										</tr>
@@ -81,7 +81,7 @@
 													{
 														if ($faculty['faculty_id']==$survey_faculty_item['faculty_id'])
 														{
-															echo "<span class='uneditable-input' style='background:rgb(92, 147, 206); color: rgb(253, 252, 252);'>".$faculty['faculty_name']."</span>";
+															echo "<span class='label label-info'>".$faculty['faculty_name']."</span>";
 														}	
 													}
 												?>
@@ -138,10 +138,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- Fix loi footer tran len tren khi thu nho -->
-				<div class="row-fluid" style="height: 50px">
-
 				</div>
 			</div>
 		</div>

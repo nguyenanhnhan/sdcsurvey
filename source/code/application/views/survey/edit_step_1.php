@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,48 +20,48 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type') ?>">Loại khảo sát</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type/index/'.$survey_type['survey_type_id'])?>">
 								<?php echo $survey_type['survey_type_name']; ?>
 							</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#"><?php echo $survey['survey_name']; ?></a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 									Thông tin phiếu khảo sát
 								</h3>
+								<div class="actions">
+									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
+								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('survey/update_step_1/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']); ?>" method="post" class="form-horizontal form-bordered" id="myform">
-									<div class="control-group">
-										<label class="control-label">Tên phiếu khảo sát</label>
-										<div class="controls">
-											<input type="text" class="input-xxlarge" name="survey_name" id="survey_name" value="<?php echo $survey['survey_name']; ?>">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Tên phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" name="survey_name" id="survey_name" value="<?php echo $survey['survey_name']; ?>">
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Bậc học</label>
-										<div class="controls">
-											<div class="input-xlarge">
-												<select name="is_vocation" id="is_vocation" class='chosen-select' data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Bậc học</label>
+										<div class="col-sm-10">
+											<div class="col-xs-5">
+												<select name="is_vocation" id="is_vocation" class='chosen-select form-control' data-nosearch="true">
 													<?php
 														// Hien thi phan biet giua cap bac dao tao
 														if ($survey['is_vocation'] == '1')
@@ -79,18 +79,18 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Đã tốt nghiệp</label>
-										<div class="controls">
-											<input id="is_graduated" name="is_graduated" type="checkbox" class="icheck-me" 
+									<div class="form-group">
+										<label class="control-label col-sm-2">Đã tốt nghiệp</label>
+										<div class="col-sm-10">
+											<input id="is_graduated" name="is_graduated" type="checkbox" class="icheck-me form-control" 
 											data-skin="square" data-color="blue" <?php if ($survey['is_graduated']=='1') echo 'checked' ?> />
 										</div>
 									</div>
-									<div class="control-group" id="div_course">
-										<label class="control-label">Khoá</label>
-										<div class="controls">
-											<div class="input-xlarge">
-												<select name="course" id="course" class="chosen-select">
+									<div class="form-group" id="div_course">
+										<label class="control-label col-sm-2">Khoá</label>
+										<div class="col-sm-10">
+											<div class="col-xs-5">
+												<select name="course" id="course" class="chosen-select form-control">
 													<?php
 														// Cac khoa hoc chua tot nghiep
 														foreach ($courses_learning as $course_item){
@@ -108,11 +108,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group" id="div_graduated_year">
-										<label class="control-label">Năm tốt nghiệp</label>
-										<div class="controls">
-											<div class="input-xlarge">
-												<select name="graduated_year" id="graduated_year" class="chosen-select">
+									<div class="form-group" id="div_graduated_year">
+										<label class="control-label col-sm-2">Năm tốt nghiệp</label>
+										<div class="col-sm-10">
+											<div class="col-xs-3">
+												<select name="graduated_year" id="graduated_year" class="chosen-select form-control">
 													<?php 
 														// Nam tot nghiep
 														foreach ($graduated_years as $graduated_year) {
@@ -130,11 +130,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group" id="div_faculty">
-										<label class="control-label">Áp dụng cho Khoa</label>
-										<div class="controls">
+									<div class="form-group" id="div_faculty">
+										<label class="control-label col-sm-2">Áp dụng cho Khoa</label>
+										<div class="col-sm-10">
 											<div>
-												<select name="survey_faculty[]" id="survey_faculty" multiple="true" class="chosen-select span12">
+												<select name="survey_faculty[]" id="survey_faculty" multiple="true" class="chosen-select form-control">
 													<?php foreach ($faculties as $faculty):
 														if ($faculty['is_vocation']==0){?>
 														<option value="<?php echo $faculty['faculty_id'] ?>" 
@@ -146,11 +146,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group" id="div_vocation">
-										<label class="control-label">Áp dụng cho Ban TCCN</label>
-										<div class="controls">
+									<div class="form-group" id="div_vocation">
+										<label class="control-label col-sm-2">Áp dụng cho Ban TCCN</label>
+										<div class="col-sm-10">
 											<div>
-												<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select span12">
+												<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select form-control">
 													<?php foreach ($faculties as $faculty):
 														if ($faculty['is_vocation']==1){?>
 														<option value="<?php echo $faculty['faculty_id'] ?>"
@@ -162,23 +162,23 @@
 											</div>
 										</div>
 									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Áp dụng từ ngày</label>
-										<div class="controls">
-											<input type="text" name="start_date" id="start_date" class="input-medium datepick" 
+									<div class="form-group">
+										<label for="textfield" class="control-label col-sm-2">Áp dụng từ ngày</label>
+										<div class="col-sm-10">
+											<input type="text" name="start_date" id="start_date" class="input-medium datepick form-control" 
 											value="<?php echo date('d/m/Y',strtotime($survey['start_date'])); ?>">
 										</div>
 									</div>
-									<div class="control-group">
-										<label for="textfield" class="control-label">Áp dụng đến ngày</label>
-										<div class="controls">
-											<input type="text" name="end_date" id="end_date" class="input-medium datepick"
+									<div class="form-group">
+										<label for="textfield" class="control-label col-sm-2">Áp dụng đến ngày</label>
+										<div class="col-sm-10">
+											<input type="text" name="end_date" id="end_date" class="input-medium datepick form-control"
 											value="<?php echo date('d/m/Y', strtotime($survey['end_date'])); ?>">
 										</div>
 									</div>
-									<div class="control-group">
-										<label for="" class="control-label">Phiếu khảo sát cần được đánh giá</label>
-										<div class="controls">
+									<div class="form-group">
+										<label for="" class="control-label col-sm-2">Phiếu cần được đánh giá</label>
+										<div class="col-sm-10">
 											<input type="checkbox" name="is_evaluated" id="is_evaluated" class="icheck-me" data-skin="square" 
 											data-color="blue" <?php if ($survey['is_evaluated'] == '1') echo 'checked'; ?> />
 										</div>

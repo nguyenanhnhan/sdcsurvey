@@ -12,8 +12,6 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>bootstrap.min.css">
-	<!-- Bootstrap responsive -->
-	<link rel="stylesheet" href="<?php echo css_url() ?>bootstrap-responsive.min.css">
 	<!-- jQuery UI -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/jquery-ui/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/jquery-ui/smoothness/jquery.ui.theme.css">
@@ -41,13 +39,15 @@
 	<!-- icheck -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/icheck/all.css">
 	<!-- Theme CSS -->
-	<link rel="stylesheet" href="<?php echo css_url() ?>style__not-minified.css">
+	<link rel="stylesheet" href="<?php echo css_url() ?>style.css">
 	<!-- Color CSS -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>themes.css">
 	<!-- dataTables -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/datatable/TableTools.css">
 	<!-- Notify -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/gritter/jquery.gritter.css">
+	<!-- Pace CSS -->
+	<link rel="stylesheet" type="text/css" href="<?php echo css_url() ?>plugins/pace/pace.min.css">
 
 	<!-- jQuery -->
 	<!-- <script src="<?php echo js_url() ?>jquery.min.js"></script> -->
@@ -114,16 +114,19 @@
 	<script src="<?php echo js_url() ?>plugins/gritter/jquery.gritter.min.js"></script>
 	
 	<!-- TinyMCE -->
-	<script src="<?php echo js_url() ?>plugins/tinymce/tinymce.min.js"></script>
+	<!-- <script src="<?php echo js_url() ?>plugins/tinymce/tinymce.min.js"></script> -->
 	
 	<!-- HighCharts -->
 	<script src="<?php echo js_url() ?>plugins/highcharts/highcharts.js"></script>
 	<script src="<?php echo js_url() ?>plugins/highcharts/modules/exporting.js"></script>
-	<script src="<?php echo js_url() ?>plugins/highcharts/themes/grid_mod.js"></script>
+	<script src="<?php echo js_url() ?>plugins/highcharts/themes/grid.js"></script>
+
+	<!-- pace (page progress loading) -->
+	<script src="<?php echo js_url() ?>plugins/pace/pace.min.js"></script>
 
 	<!-- Theme framework -->
 	<!-- <script src="<?php echo js_url() ?>eakroko.min.js"></script> -->
-		<script src="<?php echo js_url() ?>eakroko.js"></script>
+	<script src="<?php echo js_url() ?>eakroko.js"></script>
 	<!-- Theme scripts -->
 	<!-- <script src="<?php echo js_url() ?>application.min.js"></script> -->
 	<script src="<?php echo js_url() ?>application.js"></script>
@@ -145,25 +148,57 @@
 	<!-- Apple devices Homescreen icon -->
 	<link rel="apple-touch-icon-precomposed" href="<?php echo img_url() ?>apple-touch-icon-precomposed.png" />
 	
-	<!--Start of Zopim Live Chat Script-->
 	<script type="text/javascript">
-	/*
-window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-	d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-	_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-	$.src='//v2.zopim.com/?1PDNwxMPWvM5fnCabYpB4yVTl9OXMbwF';z.t=+new Date;$.
-	type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-*/
+		function updateClock ( ){
+		  var currentTime = new Date();
+
+		  var currentYear = currentTime.getFullYear();
+		  var currentMonth = currentTime.getMonth();
+		  var months = new Array('Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12');
+
+		  var d = currentTime.getDate();
+		  var day = currentTime.getDay();
+		  var days = new Array('Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bẩy');
+
+		  var currentHours = currentTime.getHours();
+		  var currentMinutes = currentTime.getMinutes();
+		  var currentSeconds = currentTime.getSeconds();
+
+		  // Pad the minutes and seconds with leading zeros, if required
+		  currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+		  currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+
+		  // Choose either "AM" or "PM" as appropriate
+		  var timeOfDay = ( currentHours < 12 ) ? "SA" : "CH";
+
+		  // Convert the hours component to 12-hour format if needed
+		  currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+
+		  // Convert an hours component of "0" to "12"
+		  currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+
+		  // Compose the string for display
+		  var currentTimeString = days[day] + ", " + currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+		  var currentDateString = d + " " + months[currentMonth] + " năm " + currentYear;
+
+		  // Update the time display
+		  $("#clock").text(currentTimeString);
+
+		  $("#date").text(currentDateString);
+		}
+
 	</script>
 	<!--End of Zopim Live Chat Script-->
 </head>
-<body data-layout-sidebar="fixed" data-layout-topbar="fixed">
+<body data-layout-sidebar="fixed" data-layout-topbar="fixed" onload="updateClock(); setInterval('updateClock()', 1000 )">
 	<div id="navigation">
 		<div class="container-fluid">
-			<a href="#" id="brand">SDC PANEL</a>
-			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Bat/Tat bang dieu khien"><i class="icon-reorder"></i></a>
+			<a href="#" id="brand">FLAT</a>
+			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
+				<i class="fa fa-bars"></i>
+			</a>
 			<ul class='main-nav'>
-				<li class='active'>
+				<li>
 					<a href="<?php echo base_url('admin')?>">
 						<span>Dashboard</span>
 					</a>
@@ -227,7 +262,10 @@ window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
 			<?php if ($is_admin==1) { ?>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Thông tin sinh viên</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Thông tin sinh viên</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -241,7 +279,10 @@ window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
 			<?php } ?>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Quản lý khảo sát</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Quản lý khảo sát</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<?php if ($is_admin==1) { ?>
@@ -267,7 +308,10 @@ window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Thống kê</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Thống kê</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>

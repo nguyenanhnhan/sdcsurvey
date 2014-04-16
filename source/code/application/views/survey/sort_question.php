@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,26 +20,23 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type') ?>">Loại khảo sát</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#"><?php echo $survey_type['survey_type_name']; ?></a>
-							<i class="icon-angle-right"></i>
+							<a href="<?php echo base_url('survey/index').'/'.$survey_type['survey_type_id']; ?>"><?php echo $survey_type['survey_type_name']; ?></a>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Sắp xếp câu hỏi</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12 sortable-box">
+				<div class="row">
+					<div class="col-sm-12 sortable-box">
 						<?php $q_count = 1; ?>
 						<?php foreach ($questions as $question_item) { ?>
 						<div class="box box-color box-bordered blue sort" id="<?php echo $question_item["question_id"]; ?>">

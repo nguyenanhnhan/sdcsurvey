@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,35 +20,31 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url() ?>admin">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Xuất danh sách sinh viên</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-upload-alt"></i>
+									<i class="fa fa-cloud-download"></i>
 									Xuất danh sách sinh viên đã khảo sát
 								</h3>
 								<div class="actions">
-									<a href="#" class="btn btn-mini content-remove"><i class="icon-remove"></i></a>
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
+									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url("admin/export_info") ?>" method="POST" enctype="multipart/form-data" class='form-horizontal form-bordered'>
-									<div class="control-group">
-										<label for="survey_type" class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="survey_type" id="survey_type" class='chosen-select span8' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label for="survey_type" class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey_type" id="survey_type" class='chosen-select form-control' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -70,24 +66,24 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey" id="survey" class='chosen-select form-control' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Ngành đào tạo</label>
-										<div class="controls">
-											<select name="faculty[]" id="faculty" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Ngành đào tạo</label>
+										<div class="col-sm-10">
+											<select name="faculty[]" id="faculty" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Dữ liệu còn thiếu</label>
-										<div class="controls">
-											<select name="data_missing[]" id="data_missing" multiple="multiple" class="chosen-select span12" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Dữ liệu còn thiếu</label>
+										<div class="col-sm-10">
+											<select name="data_missing[]" id="data_missing" multiple="multiple" class="chosen-select form-control" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
 												<option value="phone">Điện thoại bàn</option>
 												<option value="hand_phone">Điện thoại di động</option>
 												<option value="contact_address">Địa chỉ liên hệ</option>
