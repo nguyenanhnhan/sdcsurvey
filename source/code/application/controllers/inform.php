@@ -55,8 +55,8 @@ class Inform extends CI_Controller
 			}
 			else
 			{
-				// $data['mail_template'] = $this->minifyHTML(read_file($ready_template["mail_template_link"]));
-				$data['mail_template'] = read_file($ready_template["mail_template_link"]);
+				$data['mail_template'] = $this->minifyHTML(read_file($ready_template["mail_template_link"]));
+				// $data['mail_template'] = read_file($ready_template["mail_template_link"]);
 			}
 			
 			$data['display_name'] = trim($user->first_name).' '.trim($user->last_name);

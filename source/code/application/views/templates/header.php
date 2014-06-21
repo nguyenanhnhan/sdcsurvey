@@ -114,7 +114,7 @@
 	<script src="<?php echo js_url() ?>plugins/gritter/jquery.gritter.min.js"></script>
 	
 	<!-- TinyMCE -->
-	<!-- <script src="<?php echo js_url() ?>plugins/tinymce/tinymce.min.js"></script> -->
+	<script src="<?php echo js_url() ?>plugins/tinymce/tinymce.min.js"></script>
 	
 	<!-- HighCharts -->
 	<script src="<?php echo js_url() ?>plugins/highcharts/highcharts.js"></script>

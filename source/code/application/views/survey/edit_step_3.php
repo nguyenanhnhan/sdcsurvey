@@ -123,7 +123,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2">Mẫu câu trả lời</label>
-										<div class="col-sm-10" id="dyn_zone">
+										<div class="col-sm-10" id="dyn_zone" style="min-height:40px">
 
 										</div>
 									</div>
@@ -165,7 +165,7 @@
 									<?php echo '#'.$q_count.' '.$survey_question[$i]['content']; ?>
 								</h3>
 								<div class="actions">
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
+									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
 								</div>
 							</div>
 							<div class="box-content">
@@ -186,46 +186,48 @@
 										{
 											case 'r': // radio button
 										?>
-												<label class='radio'>
-													<input type="radio" name="<?php echo $survey_question[$i]['question_id'].'_a' ?>" value="<?php echo $answer_template[$j]['answer_template_id'] ?>"><?php echo $answer_template[$j]['label']?>
-												</label>
+												<div class="check-line">
+													<input type="radio" class="icheck-me" data-skin="minimal" name="<?php echo $survey_question[$i]['question_id'].'_a' ?>" value="<?php echo $answer_template[$j]['answer_template_id'] ?>">
+													<label class="inline"><?php echo $answer_template[$j]['label']?></label>
+												</div>
 										<?php
 												break;
 											case 'c': // checkbox
 										?>
-												<label class='checkbox'>
-													<input type="checkbox" name="?php echo $survey_question[$i]['question_id'].'_a' ?>" value="<?php echo $answer_template[$j]['answer_template_id'] ?>"><?php echo $answer_template[$j]['label']?>
-												</label>
+												<div class="check-line">
+													<input type="checkbox" class="icheck-me" data-skin="minimal" name="?php echo $survey_question[$i]['question_id'].'_a' ?>" value="<?php echo $answer_template[$j]['answer_template_id'] ?>">
+													<label class="inline"><?php echo $answer_template[$j]['label']?></label>
+												</div>
 										<?php
 												break; // text
 											case 't':
 												if ($answer_template[$j]['sub_answer']==0)
 												{
 										?>
-												<div class="row-fluid">
-													<div class="span12">
+												<!-- <div class="row-fluid">
+													<div class="span12"> -->
 														<label class="control-label"><?php echo $answer_template[$j]['label']?></label>
 														<div class="controls controls-row">
-															<input type="text" class="input-xxlarge" name="<?php echo $answer_template[$j]['answer_template_id']?>">
+															<input type="text" class="form-control" name="<?php echo $answer_template[$j]['answer_template_id']?>">
 														</div>
-													</div>
-												</div>
+													<!-- </div>
+												</div> -->
 										<?php
 												}
 												else
 												{
 										?>
-												<div class="row-fluid">
-													<div class="span7">
+												<div class="row">
+													<div class="col-sm-8">
 														<label class="control-label"><?php echo $answer_template[$j]['label']?></label>
 														<div class="controls controls-row">
-															<input type="text" class="input-xxlarge" name="<?php echo $answer_template[$j]['answer_template_id']?>">
+															<input type="text" class="form-control" name="<?php echo $answer_template[$j]['answer_template_id']?>">
 														</div>
 													</div>
-													<div class="span3">
+													<div class="col-sm-4">
 														<label class="control-label">Tỉnh/Thành</label>
 														<div class="controls controls-row">
-															<select class="chosen-select" id='<?php echo $survey_answer_template_sub[$answer_template[$j]['answer_template_id']][0]['answer_template_id'] ?>'>
+															<select class="chosen-select" style="width:100%" id='<?php echo $survey_answer_template_sub[$answer_template[$j]['answer_template_id']][0]['answer_template_id'] ?>'>
 																<?php foreach ($provinces as $province_item):?>
 																<option value='<?php echo $province_item['province_id']; ?>'><?php echo $province_item['province_name']; ?></option>
 																<?php endforeach ?>
@@ -239,23 +241,24 @@
 												break;
 											case 'rt': // radio button + textbox
 										?>
-												<div class="row-fluid">
-													<label class="radio">
-														<input type="radio"><?php echo $answer_template[$j]['label']?>
-													</label>
-													<input type="text" style="input-medium">
+
+												<div class="check-line">
+													<input type="radio" class="icheck-me" data-skin="minimal">
+													<label class="inline"><?php echo $answer_template[$j]['label']?></label>
 												</div>
+												<input type="text" class="form-control">
 										<?php	
 												break;
 												
 											case 'ct': // checkbox + textbox
 										?>
-												<div class="row-fluid">
-													<label class="checkbox">
-														<input type="checkbox"><?php echo $answer_template[$j]['label']?>
-													</label>
-													<input type="text" style="input-medium">
+												
+												<div class="check-line">
+													<input type="checkbox" class="icheck-me" data-skin="minimal">
+													<label class="inline"><?php echo $answer_template[$j]['label']?></label>
 												</div>
+												<input type="text" class="form-control">
+
 										<?php
 												break;
 										}

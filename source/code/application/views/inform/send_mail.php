@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,91 +20,82 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Thông báo</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-pencil"></i>
+									<i class="fa fa-pencil"></i>
 									Gửi email thông báo
 								</h3>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('inform/send'); ?>" method="post" class="form-horizontal form-bordered" id="myform" accept-charset="UTF-8">
-									<div class="control-group">
-										<label class="control-label">Khoa</label>
-										<div class="controls">
-											<div class="input-xxlarge">
-												<select name="faculty" id="faculty" class='chosen-select'>
-													<?php foreach ($faculties as $faculty_item):?>
-														<option value="<?php echo $faculty_item['faculty_id'] ?>"><?php echo $faculty_item['faculty_name'] ?></option>
-														<?php endforeach ?>
-												</select>
-											</div>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Khoa</label>
+										<div class="col-sm-10">
+											<select name="faculty" id="faculty" class='chosen-select form-control'>
+												<?php foreach ($faculties as $faculty_item):?>
+													<option value="<?php echo $faculty_item['faculty_id'] ?>"><?php echo $faculty_item['faculty_name'] ?></option>
+													<?php endforeach ?>
+											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<div class="input-xxlarge">
-												<select name="survey" id="survey" class="input-block-level">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+												<select name="survey" id="survey" class="form-control">
 												</select>
-											</div>
 										</div>
 									</div>
-									<div class="control-group" style="display:none" >
-										<label class="control-label">Ban TCCN</label>
-										<div class="controls">
-											<div class="input-xlarge">
-												<select name="vocation" id="vocation" class='chosen-select'>
-												</select>
-											</div>
+									<div class="form-group" style="display:none" >
+										<label class="control-label col-sm-2">Ban TCCN</label>
+										<div class="col-sm-10">
+											<select name="vocation" id="vocation" class='chosen-select form-control' >
+											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label" >Từ địa chỉ</label>
-										<div class="controls">
-											<input type="text" class="input-xlarge" id="email_address" name="email_address" value="<?php echo $user_email; ?>" />
+									<div class="form-group">
+										<label class="control-label col-sm-2" >Từ địa chỉ</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="email_address" name="email_address" value="<?php echo $user_email; ?>" />
 											<span class="help-block">Chỉ hỗ trợ địa chỉ e-mail của Trường ĐH Văn Lang</span>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Đến địa chỉ</label>
-										<div class="controls">
-											<input type="text" class="input-xlarge" id="to_email_address" name="to_email_address" />
+									<div class="form-group">
+										<label class="control-label col-sm-2">Đến địa chỉ</label>
+										<div class="col-sm-10">
+											<input type="text" class="form-control" id="to_email_address" name="to_email_address" />
 											<span class="help-block">Các mail thông báo sẽ gửi đến địa chỉ này. Chỉ có hiệu lực trong quá trình test.</span>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Mật khẩu</label>
-										<div class="controls">
-											<input type="password" class="input-xlarge" id="password" name="password" />
+									<div class="form-group">
+										<label class="control-label col-sm-2">Mật khẩu</label>
+										<div class="col-sm-10">
+											<input type="password" class="form-control" id="password" name="password" />
 											<span class="help-block">Mật khẩu truy cập e-mail (hệ thống khảo sát không lưu lại mật khẩu này)</span>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Tiêu đề mail</label>
-										<div class="controls">
-											<input id="title" name="title" type="text" class="input-xxlarge" value="From: Van Lang University" />
+									<div class="form-group">
+										<label class="control-label col-sm-2">Tiêu đề mail</label>
+										<div class="col-sm-10">
+											<input id="title" name="title" type="text" class="form-control" value="From: Van Lang University" />
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Nội dung &nbsp;
-											<i id="replace_content" class="icon-undo" rel="tooltip" data-placement="bottom" data-original-title="Nội dung mẫu"></i>
-											<i id="save_content" class="icon-save" rel="tooltip" data-placement"top" data-original-title="Lưu lại mẫu vừa soạn"></i>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Nội dung &nbsp;
+											<i id="replace_content" class="fa fa-undo" rel="tooltip" data-placement="bottom" data-original-title="Nội dung mẫu"></i>
+											<i id="save_content" class="fa fa-save" rel="tooltip" data-placement"top" data-original-title="Lưu lại mẫu vừa soạn"></i>
 										</label>
-										<div class="controls">
-											<textarea name="editor" id ="editor" class='span12' rows="10">
+										<div class="col-sm-10">
+											<textarea name="editor" id ="editor" class='form-control' rows="10">
 												<?php echo $mail_template; ?>
 											</textarea>
 											<div style="color:red"><strong>Chú thích từ khoá</strong></div>
@@ -115,23 +106,21 @@
 											</ul>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Số lượng gửi</label>
-										<div class="controls">
-											<div class="input-xlarge">
-												<select name="send_number" id="send_number" class="input-small">
-													<option value="10" selected>10</option>
-													<option value="20">20</option>
-													<option value="30">30</option>
-													<option value="-1">Tất cả</option>
-												</select>
-											</div>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Số lượng gửi</label>
+										<div class="col-sm-10">
+											<select name="send_number" id="send_number" class="form-control" style="width:100px">
+												<option value="10" selected>10</option>
+												<option value="20">20</option>
+												<option value="30">30</option>
+												<option value="-1">Tất cả</option>
+											</select>
 											<span class="help-block">Việc gửi quá nhiều mail một lúc có thể bị đặt nghi vấn spam mail.</span>
 										</div>
 									</div>
-									<div class="control-group" >
-										<label class="control-label">Xem trước nội dung</label>
-										<div class="controls">
+									<div class="form-group" >
+										<label class="control-label col-sm-2">Xem trước nội dung</label>
+										<div class="col-sm-10">
 											<input type="checkbox" name="preview" id="preview" class="icheck-me" data-skin="square" data-color="blue"/>
 											<span class="help-block">Hiển thị nội dung cần gửi. Các nội dung này vẫn chưa được gửi đi.</span>
 										</div>
@@ -203,7 +192,7 @@
 			});
 			
 			$("#replace_content").click(function(){
-				tinyMCE.activeEditor.setContent(<?php echo "'".$mail_template."'"; ?>);
+				 tinyMCE.activeEditor.setContent(<?php echo "'".$mail_template."'"; ?>);
 			});
 			
 			$("#save_content").click(function(){

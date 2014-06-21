@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,23 +20,23 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type') ?>">Loại khảo sát</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_type/index/'.$survey_type['survey_type_id'])?>">
 								<?php echo $survey_type['survey_type_name']; ?>
 							</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey/index/'.$survey_type['survey_type_id'].'/'.$survey['survey_id']); ?>">
 								<?php echo $survey['survey_name']; ?>
 							</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Điều chỉnh</a>
@@ -46,9 +46,9 @@
 						<a href="#"><i class="icon-remove"></i></a>
 					</div>
 				</div>
-				<div class="row-fluid">&nbsp;</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">&nbsp;</div>
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box">
 							<div class="controls">
 								<a href="<?php echo base_url('survey/edit_step_3').'/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'] ?>" class="btn">Quay lại bước 3</a>
@@ -64,15 +64,15 @@
 					{
 						$q_count = $i+1;
 				?>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered <?php if ($survey_question[$i]['required']==1) echo 'red'; else echo 'green'; ?>">
 							<div class="box-title">
 								<h3>
 									<?php echo '#'.$q_count.' '.$survey_question[$i]['content']; ?>
 								</h3>
 								<div class="actions">
-									<a href="#" class="btn btn-mini content-slideUp"><i class="icon-angle-down"></i></a>
+									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
 								</div>
 							</div>
 							<?php  
@@ -83,7 +83,7 @@
 							<table class="table table-hover table-nomargin table-bordered">
 									<thead>
 										<tr>
-											<th style="width: 102px">Xét hiệu ứng</th>
+											<th style="width: 115px">Xét hiệu ứng</th>
 											<th>Lựa chọn</th>
 										</tr>
 									</thead>
@@ -91,7 +91,7 @@
 										<?php foreach ($answer_template as $template_item): ?>
 										<tr>
 											<td style="text-align: center">
-												<a href='<?php echo base_url('survey/edit_effect').'/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'].'/'.$survey_question[$i]['question_id'].'/'.$template_item['answer_template_id'] ?>' class="btn"><i class="icon-edit"></i></a>
+												<a href='<?php echo base_url('survey/edit_effect').'/'.$survey_type['survey_type_id'].'/'.$survey['survey_id'].'/'.$survey_question[$i]['question_id'].'/'.$template_item['answer_template_id'] ?>' class="btn"><i class="fa fa-edit"></i></a>
 											</td>
 											<td><?php echo $template_item['label']; ?></td>
 										</tr>
