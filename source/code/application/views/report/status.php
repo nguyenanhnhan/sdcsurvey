@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,31 +20,28 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Tình hình khảo sát</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-edit"></i>
+									<i class="fa fa-edit"></i>
 									Tình hình khảo sát
 								</h3>
 							</div>
 							<div class="box-content nopadding">
 								<form action="#" method="post" class="form-horizontal form-bordered">
-									<div class="control-group">
-										<label for="survey_type" class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="survey_type" id="survey_type" class='chosen-select span10' data-placeholder="Chọn loại khảo sát">
+									<div class="form-group">
+										<label for="survey_type" class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey_type" id="survey_type" class='chosen-select form-control' data-placeholder="Chọn loại khảo sát">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -66,10 +63,10 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần xem biểu đồ" data-nosearch="true"></select>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey" id="survey" class='chosen-select form-control' data-placeholder="Chọn phiếu khảo sát cần xem biểu đồ" data-nosearch="true"></select>
 										</div>
 									</div>
 								</form>	
@@ -77,11 +74,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="box box-color box-bordered">
+				<div class="row">
+					<div class="box box-color box-bordered col-sm-12">
 						<div class="box-title">
 							<h3>
-								<i class="icon-static">Biểu đồ</i>
+								<i class="fa fa-static">Biểu đồ</i>
 							</h3>
 						</div>
 						<div class="box-content">

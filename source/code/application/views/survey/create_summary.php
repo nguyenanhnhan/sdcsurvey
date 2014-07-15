@@ -143,21 +143,30 @@
 		</div>
 		
 		<!-- Modal -->
-		<div id="modal-warning" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel">Thông báo</h3>
+		<div id="modal-warning" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Thông báo</h4>
+					</div>
+					<!-- /.modal-header -->
+					<div class="modal-body">
+						<p>
+							Phiếu khảo sát này đang được sử dụng. Việc sửa nội dung hoặc xoá bị ngăn chặn. Mọi chi tiết liên hệ người quản trị.
+						</p>
+					</div>
+					<!-- /.modal-body -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+					</div>
+					<!-- /.modal-footer -->
+				</div>
+				<!-- /.modal-content -->
 			</div>
-			<div class="modal-body">
-				<p>
-					Phiếu khảo sát này đang được sử dụng. Việc sửa nội dung hoặc xoá bị ngăn chặn. Mọi chi tiết liên hệ người quản trị.
-				</p>
-			</div>
-			<div class="modal-footer">
-				<button class="btn" data-dismiss="modal" aria-hidden="true">Thoát</button>
-			</div>
+			<!-- /.modal-dialog -->
 		</div>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#doing_survey").change(function (){

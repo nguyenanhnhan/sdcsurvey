@@ -133,9 +133,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid" style="height:100px">
-				
-				</div>
 			</div>
 		</div>
 		<!--- Javascript -->

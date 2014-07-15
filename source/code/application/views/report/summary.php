@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,36 +20,33 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Tổng kết tổng hợp</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-download"></i>
+									<i class="fa fa-download"></i>
 									Kết xuất Tổng kết tổng hợp
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('report/export_summary') ?>" method="post" id="my_form" class="form-horizontal form-bordered">
-									<div class="control-group">
-										<label for="survey_type" class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="survey_type" id="survey_type" class='chosen-select span8' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label for="survey_type" class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey_type" id="survey_type" class='chosen-select form-control' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -71,43 +68,45 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey" id="survey" class='chosen-select form-control' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Mẫu câu hỏi xác định Có/Chưa có việc làm</label>
-										<div class="controls">
-											<select name="q_sum_work" id="q_sum_work" class="chosen-select span12" data-placeholder="Chọn mẫu câu hỏi" data-nosearch="true">
+									<div class="form-group" style="vertical-align: middle">
+										<label class="control-label col-sm-2">Mẫu câu hỏi xác định Có/Chưa có việc làm</label>
+										<div class="col-sm-10" style="min-height:59px">
+											<select name="q_sum_work" id="q_sum_work" class="chosen-select form-control" data-placeholder="Chọn mẫu câu hỏi" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_sum_working" id="a_sum_working" class="chosen-select span12" data-placeholder="Chọn mẫu trả lời [Có việc làm]" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_sum_working" id="a_sum_working" class="chosen-select form-control" data-placeholder="Chọn mẫu trả lời [Có việc làm]" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_sum_underwork" id="a_sum_underwork" class="chosen-select span12" data-placeholder="Chọn mẫu trả lời [Chưa có việc làm]" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_sum_underwork" id="a_sum_underwork" class="chosen-select form-control" data-placeholder="Chọn mẫu trả lời [Chưa có việc làm]" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Câu hỏi kết xuất dữ liệu</label>
-										<div class="controls">
-											<select name="sum_question[]" id="sum_question" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Câu hỏi kết xuất dữ liệu</label>
+										<div class="col-sm-10">
+											<select name="sum_question[]" id="sum_question" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Thời điểm thực hiện</label>
-										<div class="controls">
-											<select name="time_active[]" id="time_active" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các thời điểm cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Thời điểm thực hiện</label>
+										<div class="col-sm-10">
+											<select name="time_active[]" id="time_active" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các thời điểm cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>

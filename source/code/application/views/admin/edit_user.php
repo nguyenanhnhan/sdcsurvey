@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,26 +20,23 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('admin/users') ?>">Quản trị tài khoản người dùng</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Chỉnh sửa tài khoản người dùng</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-user"></i>
+									<i class="fa fa-user"></i>
 									Hồ sơ cá nhân
 								</h3>
 							</div>
@@ -47,10 +44,10 @@
 								<div class="box-content nopadding">
 									<ul class="tabs tabs-inline tabs-top">
 										<li class='active'>
-											<a href="#profile" data-toggle='tab'><i class="icon-user"></i> Thông tin cơ bản</a>
+											<a href="#profile" data-toggle='tab'><i class="fa fa-user"></i> Thông tin cơ bản</a>
 										</li>
 										<li>
-											<a href="#change_password" data-toggle='tab'><i class="icon-bullhorn"></i> Đổi mật khẩu</a>
+											<a href="#change_password" data-toggle='tab'><i class="fa fa-bullhorn"></i> Đổi mật khẩu</a>
 										</li>
 									</ul>
 									<div class="tab-content padding tab-content-inline tab-content-bottom">
@@ -73,35 +70,35 @@
 														</div>
 													</div>
 												</div>
-												<div class="span10">
-													<div class="control-group">
-														<label for="user_name" class="control-label">Tên tài khoản</label>
-														<div class="controls">
-															<div class="input-xlarge uneditable-input"><?php echo $edit_user['username'] ?></div>
+												<div class="col-sm-10" style="margin-top:5px;">
+													<div class="form-group">
+														<label for="user_name" class="control-label col-sm-2">Tên tài khoản</label>
+														<div class="col-sm-10">
+															<div class="form-control uneditable-input"><?php echo $edit_user['username'] ?></div>
 														</div>
 													</div>
-													<div class="control-group">
-														<label for="first_name" class="control-label">Họ và tên đệm</label>
-														<div class="controls">
-															<input type="text" name="first_name" class='input-xlarge' value="<?php echo $edit_user['first_name'] ?>">
+													<div class="form-group">
+														<label for="first_name" class="control-label col-sm-2">Họ và tên đệm</label>
+														<div class="col-sm-10">
+															<input type="text" name="first_name" class='form-control' value="<?php echo $edit_user['first_name'] ?>">
 														</div>
 													</div>
-													<div class="control-group">
-														<label for="last_name" class="control-label">Tên</label>
+													<div class="form-group">
+														<label for="last_name" class="control-label col-sm-2">Tên</label>
 														<div class="controls">
-															<input type="text" name="last_name" class='input-xlarge' value="<?php echo $edit_user['last_name'] ?>">
+															<input type="text" name="last_name" class='form-control' value="<?php echo $edit_user['last_name'] ?>">
 														</div>
 													</div>
-													<div class="control-group">
-														<label for="phone" class="control-label">Số điện thoại</label>
+													<div class="form-group">
+														<label for="phone" class="control-label col-sm-2">Số điện thoại</label>
 														<div class="controls">
-															<input type="text" name="phone" class="input-xlarge" value="<?php echo $edit_user['phone'] ?>">
+															<input type="text" name="phone" class="form-control" value="<?php echo $edit_user['phone'] ?>">
 														</div>
 													</div>
-													<div class="control-group">
-														<label for="email" class="control-label">Địa chỉ email</label>
+													<div class="form-group">
+														<label for="email" class="control-label col-sm-2">Địa chỉ email</label>
 														<div class="controls">
-															<input type="text" name="email" class='input-xxlarge' value="<?php echo $edit_user['email'] ?>">
+															<input type="text" name="email" class='form-control' value="<?php echo $edit_user['email'] ?>">
 														</div>
 													</div>
 													<div class="form-actions">
@@ -115,16 +112,16 @@
 										</div>
 										<div class="tab-pane" id="change_password">
 											<form action="<?php echo base_url('admin/change_pass/'.$edit_user['id']) ?>" method="post" class="form-horizontal form-validate" id="form_change_password">
-												<div class="control-group">
-													<label for="new_password" class="control-label">Mật khẩu mới</label>
-													<div class="npass controls">
-														<input type="password" name="new_password" id="new_password" class="input-xlarge" data-rule-required="true">
+												<div class="form-group">
+													<label for="new_password" class="control-label col-sm-2">Mật khẩu mới</label>
+													<div class="npass col-sm-10">
+														<input type="password" name="new_password" id="new_password" class="form-control" data-rule-required="true">
 													</div>
 												</div>
-												<div class="cpass control-group">
-													<label for="confirm_password" class="control-label">Xác nhận mật khẩu</label>
-													<div class="controls">
-														<input type="password" name="confirm_password" id="confirm_password" class="input-xlarge" data-rule-equalTo="#new_password">
+												<div class="cpass form-group">
+													<label for="confirm_password" class="control-label col-sm-2">Xác nhận mật khẩu</label>
+													<div class="col-sm-10">
+														<input type="password" name="confirm_password" id="confirm_password" class="form-control" data-rule-equalTo="#new_password">
 													</div>
 												</div>
 												<div class="form-actions">

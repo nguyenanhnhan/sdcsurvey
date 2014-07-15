@@ -342,9 +342,17 @@
 </html>
 <!-- JAVASCRIPT -->
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(window).load(function(){
 		init_data();
-		$("#my_form").validate();
+		$("#my_form").validate({
+			rules: {
+				email_address: {
+					required: true,
+					email: true
+				}
+			}
+		});
+		
 		$("#reset_note").click(function(){
 			$("#note_text").val("");
 			$("#note_text").focus();

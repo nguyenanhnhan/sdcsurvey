@@ -323,9 +323,17 @@
 </html>
 <!-- JAVASCRIPT -->
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(window).load(function(){
 		init_data();
-		$("#myform").validate();
+		$(document).ready(function(){
+		$("#my_form").validate({
+			rules: {
+				email_address: {
+					required: true,
+					email: true
+				}
+			}
+		});
 		
 		<?php
 		for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)

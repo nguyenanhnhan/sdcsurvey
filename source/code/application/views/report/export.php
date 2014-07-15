@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,36 +20,33 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">Kết xuất dữ liệu</a>
 						</li>
 					</ul>
-					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
-					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-download"></i>
+									<i class="fa fa-download"></i>
 									Kết xuất báo cáo nhanh
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('report/export_quick_summary') ?>" method="post" id="my_form" class="form-horizontal form-bordered">
-									<div class="control-group">
-										<label for="survey_type" class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="survey_type" id="survey_type" class='chosen-select span8' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label for="survey_type" class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey_type" id="survey_type" class='chosen-select form-control' data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -71,24 +68,24 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey" id="survey" class='chosen-select form-control' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Ngành đào tạo</label>
-										<div class="controls">
-											<select name="faculty[]" id="faculty" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Ngành đào tạo</label>
+										<div class="col-sm-10">
+											<select name="faculty[]" id="faculty" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Theo câu hỏi</label>
-										<div class="controls">
-											<select name="question[]" id="question" multiple="multiple" class="chosen-select span12" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Theo câu hỏi</label>
+										<div class="col-sm-10">
+											<select name="question[]" id="question" multiple="multiple" class="chosen-select form-control" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
@@ -103,27 +100,27 @@
 				
 				<!-- Ket xuat tat ca du lieu -->
 				
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
 									<!-- Widget title -->
-									<i class="icon-download"></i>
+									<i class="fa fa-download"></i>
 									Kết xuất tất cả dữ liệu khảo sát
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<form action="<?php echo base_url('report/export_all_data') ?>" method="post" class="form-horizontal form-bordered">
-									<div class="control-group">
-										<label class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="ex_survey_type" id="ex_survey_type" class="chosen-select span8" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="ex_survey_type" id="ex_survey_type" class="chosen-select form-control" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -145,24 +142,24 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="ex_survey" id="ex_survey" class="chosen-select span12" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="ex_survey" id="ex_survey" class="chosen-select form-control" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Ngành đào tạo</label>
-										<div class="controls">
-											<select name="ex_faculty[]" id="ex_faculty" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Ngành đào tạo</label>
+										<div class="col-sm-10">
+											<select name="ex_faculty[]" id="ex_faculty" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Theo câu hỏi</label>
-										<div class="controls">
-											<select name="ex_question[]" id="ex_question" multiple="multiple" class="chosen-select span12" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Theo câu hỏi</label>
+										<div class="col-sm-10">
+											<select name="ex_question[]" id="ex_question" multiple="multiple" class="chosen-select form-control" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
@@ -176,28 +173,28 @@
 				</div>
 				
 				<!-- Tong hop theo hinh thuc khao sat -->
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
 									<!-- Widget title -->
-									<i class="icon-download"></i>
+									<i class="fa fa-download"></i>
 									Kết xuất theo hình thức khảo sát
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<!-- Widget Content -->
 								<form action="<?php echo base_url('report/export_kind_survey') ?>" method="post" class="form-horizontal form-bordered">
-									<div class="control-group">
-										<label class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="kind_survey_type" id="kind_survey_type" class="chosen-select span8" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="kind_survey_type" id="kind_survey_type" class="chosen-select form-control" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -219,17 +216,17 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="kind_survey" id="kind_survey" class="chosen-select span12" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="kind_survey" id="kind_survey" class="chosen-select form-control" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Ngành đào tạo</label>
-										<div class="controls">
-											<select name="kind_faculty[]" id="kind_faculty" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Ngành đào tạo</label>
+										<div class="col-sm-10">
+											<select name="kind_faculty[]" id="kind_faculty" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
@@ -243,28 +240,28 @@
 				</div>
 				
 				<!-- Tong ket tong hop -->
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
 									<!-- Widget title -->
-									<i class="icon-download"></i>
+									<i class="fa fa-download"></i>
 									Kết xuất tổng kết tổng hợp
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<!-- Widget Content -->
 								<form action="<?php echo base_url('report/export_sum_survey') ?>" method="post" class="form-horizontal form-bordered">
-									<div class="control-group">
-										<label class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="sum_survey_type" id="sum_survey_type" class="chosen-select span8" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="sum_survey_type" id="sum_survey_type" class="chosen-select form-control" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -286,43 +283,45 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="sum_survey" id="sum_survey" class="chosen-select span12" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="sum_survey" id="sum_survey" class="chosen-select form-control" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Mẫu câu hỏi xác định Có/Chưa có việc làm</label>
-										<div class="controls">
-											<select name="q_sum_work" id="q_sum_work" class="chosen-select span12" data-placeholder="Chọn mẫu câu hỏi" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Mẫu câu hỏi xác định Có/Chưa có việc làm</label>
+										<div class="col-sm-10">
+											<select name="q_sum_work" id="q_sum_work" class="chosen-select form-control" data-placeholder="Chọn mẫu câu hỏi" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_sum_working" id="a_sum_working" class="chosen-select span12" data-placeholder="Chọn mẫu trả lời [Có việc làm]" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_sum_working" id="a_sum_working" class="chosen-select form-control" data-placeholder="Chọn mẫu trả lời [Có việc làm]" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_sum_underwork" id="a_sum_underwork" class="chosen-select span12" data-placeholder="Chọn mẫu trả lời [Chưa có việc làm]" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_sum_underwork" id="a_sum_underwork" class="chosen-select form-control" data-placeholder="Chọn mẫu trả lời [Chưa có việc làm]" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Câu hỏi kết xuất dữ liệu</label>
-										<div class="controls">
-											<select name="sum_question[]" id="sum_question" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Câu hỏi kết xuất dữ liệu</label>
+										<div class="col-sm-10">
+											<select name="sum_question[]" id="sum_question" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các câu hỏi cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Ngành đào tạo</label>
-										<div class="controls">
-											<select name="sum_faculty[]" id="sum_faculty" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Ngành đào tạo</label>
+										<div class="col-sm-10">
+											<select name="sum_faculty[]" id="sum_faculty" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
@@ -336,28 +335,28 @@
 				</div>
 				
 				<!-- Tong ket du lieu danh gia -->
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
 									<!-- Widget title -->
-									<i class="icon-download"></i>
+									<i class="fa fa-download"></i>
 									Kết xuất tổng kết dữ liệu đánh giá
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<!-- Widget Content -->
 								<form action="<?php echo base_url('report/export_evaluation_survey') ?>" method="post" class="form-horizontal form-bordered">
-									<div class="control-group">
-										<label class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="eval_survey_type" id="eval_survey_type" class="chosen-select span8" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="eval_survey_type" id="eval_survey_type" class="chosen-select form-control" data-placeholder="Chọn loại khảo sát" data-nosearch="true">
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -379,30 +378,31 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="eval_survey" id="eval_survey" class="chosen-select span12" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="eval_survey" id="eval_survey" class="chosen-select form-control" data-placeholder="Chọn phiếu khảo sát" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Mẫu câu hỏi xác định Có/Chưa có việc làm</label>
-										<div class="controls">
-											<select name="q_eval_work" id="q_eval_work" class="chosen-select span12" data-placeholder="Chọn mẫu câu hỏi" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Mẫu câu hỏi xác định Có/Chưa có việc làm</label>
+										<div class="col-sm-10">
+											<select name="q_eval_work" id="q_eval_work" class="chosen-select form-control" data-placeholder="Chọn mẫu câu hỏi" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_eval_working" id="a_eval_working" class="chosen-select span12" data-placeholder="Chọn mẫu trả lời [Có việc làm]" data-nosearch="true">
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_eval_working" id="a_eval_working" class="chosen-select form-control" data-placeholder="Chọn mẫu trả lời [Có việc làm]" data-nosearch="true">
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Ngành đào tạo</label>
-										<div class="controls">
-											<select name="eval_faculty[]" id="eval_faculty" class='chosen-select span12' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Ngành đào tạo</label>
+										<div class="col-sm-10">
+											<select name="eval_faculty[]" id="eval_faculty" class='chosen-select form-control' multiple="multiple" data-placeholder="Chọn các ngành cần kết xuất dữ liệu">
 											</select>
 										</div>
 									</div>
@@ -454,7 +454,17 @@
 								$('#faculty').trigger('chosen:updated');
 								for (var i=0; i<data.survey_faculties.length; i++)
 								{
-									$('#faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+									if (data.faculties.length > 0)
+									{
+										for (var j=0; j<data.faculties.length; j++)
+										{
+											if (data.survey_faculties[i].faculty_id == data.faculties[j].faculty_id)
+											{
+												$('#faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+											}
+										}
+									}
+									
 								}
 								$('#faculty').trigger("chosen:updated");
 							}
@@ -518,7 +528,16 @@
 								$('#ex_faculty').trigger('chosen:updated');
 								for (var i=0; i<data.survey_faculties.length; i++)
 								{
-									$('#ex_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+									if (data.faculties.length > 0)
+									{
+										for (var j=0; j<data.faculties.length; j++)
+										{
+											if (data.survey_faculties[i].faculty_id == data.faculties[j].faculty_id)
+											{
+												$('#ex_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+											}
+										}
+									}
 								}
 								$('#ex_faculty').trigger("chosen:updated");
 							}
@@ -579,7 +598,16 @@
 								$('#kind_faculty').trigger('chosen:updated');
 								for (var i=0; i<data.survey_faculties.length; i++)
 								{
-									$('#kind_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+									if (data.faculties.length > 0)
+									{
+										for (var j=0; j<data.faculties.length; j++)
+										{
+											if (data.survey_faculties[i].faculty_id == data.faculties[j].faculty_id)
+											{
+												$('#kind_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+											}
+										}
+									}
 								}
 								$('#kind_faculty').trigger("chosen:updated");
 							}
@@ -621,7 +649,16 @@
 								$('#sum_faculty').trigger('chosen:updated');
 								for (var i=0; i<data.survey_faculties.length; i++)
 								{
-									$('#sum_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+									if (data.faculties.length > 0)
+									{
+										for (var j=0; j<data.faculties.length; j++)
+										{
+											if (data.survey_faculties[i].faculty_id == data.faculties[j].faculty_id)
+											{
+												$('#sum_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+											}
+										}
+									}
 								}
 								$('#sum_faculty').trigger("chosen:updated");
 							}
@@ -732,7 +769,16 @@
 								$('#eval_faculty').trigger('chosen:updated');
 								for (var i=0; i<data.survey_faculties.length; i++)
 								{
-									$('#eval_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+									if (data.faculties.length > 0)
+									{
+										for (var j=0; j<data.faculties.length; j++)
+										{
+											if (data.survey_faculties[i].faculty_id == data.faculties[j].faculty_id)
+											{
+												$('#eval_faculty').append('<option value="'+data.survey_faculties[i].faculty_id+'" selected>'+data.survey_faculties[i].faculty_name+'</option>');
+											}
+										}
+									}
 								}
 								$('#eval_faculty').trigger("chosen:updated");
 							}

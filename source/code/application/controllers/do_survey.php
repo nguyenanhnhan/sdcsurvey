@@ -576,6 +576,11 @@ if ($answr_temp['option_type']=='ct')
 		$data["survey_id"] = $survey_id;
 		$this->load->view('do_survey/search', $data);
 	}
+
+	function browser()
+	{
+		$this->load->view('do_survey/browser');
+	}
 	
 	function search_student($survey_id)
 	{

@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,15 +20,15 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_validation') ?>">Kiểm tra độ tin cậy</a>
 						</li>
 					</ul>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
@@ -37,7 +37,7 @@
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
@@ -47,37 +47,37 @@
 									<!-- Table content -->
 									<thead>
 										<tr>
-											<th></th>
-											<th>Mã SV</th>
+											<th style="width: 50px"></th>
+											<th style="width:100px">Mã SV</th>
 											<th>Họ và tên đệm</th>
-											<th>Tên</th>
+											<th style="width:70px">Tên</th>
 											<th>Lớp</th>
 											<th>Số đt Cty</th>
-											<th><i class="icon-flag"></i></th>
+											<th style="text-align:center"><i class="fa fa-flag"></i></th>
 											<th>Người xác thực</th>
-											<th>Xác thực</th>
+											<th style="text-align:center; width: 90px">Xác thực</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php foreach($student_list as $student_item) { ?>
 										<tr>
-											<td><a href="<?php echo base_url('do_survey/index/'.$student_item['faculty_id'].'/'.$student_item['survey_id'].'/'.$student_item['student_id'].'/'.$student_item['type_id']) ?>" class="btn btn-info"><i class="icon-eye-open"></i></a></td>
-											<td><?php echo $student_item['student_id']; ?></td>
-											<td><?php echo $student_item['first_name']; ?></td>
-											<td><?php echo $student_item['last_name']; ?></td>
-											<td><?php echo $student_item['class_id']; ?></td>
-											<td><?php echo $student_item['company_phone']; ?></td>
-											<td>
+											<td><a href="<?php echo base_url('do_survey/index/'.$student_item['faculty_id'].'/'.$student_item['survey_id'].'/'.$student_item['student_id'].'/'.$student_item['type_id']) ?>" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+											<td style="vertical-align:middle"><?php echo $student_item['student_id']; ?></td>
+											<td style="vertical-align:middle"><?php echo $student_item['first_name']; ?></td>
+											<td style="vertical-align:middle"><?php echo $student_item['last_name']; ?></td>
+											<td style="vertical-align:middle"><?php echo $student_item['class_id']; ?></td>
+											<td style="vertical-align:middle"><?php echo $student_item['company_phone']; ?></td>
+											<td style="vertical-align:middle; text-align:center;">
 												<?php if ($student_item['value']=='TRUE') { ?>
-												<i class="icon-ok"></i>
+												<i class="fa fa-check" style="font-size: 20px"></i>
 												<?php } elseif ($student_item['value']=='FALSE') { ?>
-												<i class="icon-remove"></i>
+												<i class="fa fa-ban" style="font-size: 20px"></i>
 												<?php } ?>
 											</td>
-											<td><?php echo $student_item['created_by_user_id']; ?></td>
-											<td>
-												<a href="<?php echo base_url('survey_validation/confirm/'.$student_item['list_id'].'/'.$student_item['validation_id'].'/TRUE'); ?>" class="btn btn-success"><i class="icon-ok"></i></a>
-												<a href="<?php echo base_url('survey_validation/confirm/'.$student_item['list_id'].'/'.$student_item['validation_id'].'/FALSE'); ?>" class="btn"><i class="icon-remove"></i></a>
+											<td style="vertical-align:middle"><?php echo $student_item['created_by_user_id']; ?></td>
+											<td style="vertical-align:middle">
+												<a href="<?php echo base_url('survey_validation/confirm/'.$student_item['list_id'].'/'.$student_item['validation_id'].'/TRUE'); ?>" class="btn btn-success"><i class="fa fa-check"></i></a>
+												<a href="<?php echo base_url('survey_validation/confirm/'.$student_item['list_id'].'/'.$student_item['validation_id'].'/FALSE'); ?>" class="btn"><i class="fa fa-ban"></i></a>
 											</td>
 										</tr>
 										<tr>

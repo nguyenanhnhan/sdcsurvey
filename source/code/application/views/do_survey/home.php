@@ -2,6 +2,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<!--[if lt IE 9]> 
+			<script>	
+				window.location = "<?php echo base_url('do_survey/browser') ?>";
+			</script>
+		<![endif]-->
 		<meta content="text/html; charset=utf-8" http-equiv="content-type" />
 		<title>Phiếu khảo sát</title>
 		<link href="<?php echo css_url() ?>StyleSheet.css" rel="stylesheet" type="text/css" />
@@ -221,7 +226,17 @@
 <!-- JAVASCRIPT -->
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#my_form").validate();
+
+		alert (bowser);
+
+		$("#my_form").validate({
+			rules: {
+				email_address: {
+					required: true,
+					email: true
+				}
+			}
+		});
 		
 		<?php
 		for ($i=0,$len_q=count($survey_question);$i<$len_q;$i++)

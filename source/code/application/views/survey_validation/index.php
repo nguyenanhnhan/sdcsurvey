@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
-									<span class="big">February 22, 2013</span>
-									<span>Wednesday, 13:56</span>
+									<span class="big" id="date">February 22, 2013</span>
+									<span id="clock">Wednesday, 13:56</span>
 								</div>
 							</li>
 						</ul>
@@ -20,15 +20,15 @@
 					<ul>
 						<li>
 							<a href="<?php echo base_url('admin') ?>">Root</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="<?php echo base_url('survey_confirm') ?>">Kiểm tra độ tin cậy</a>
 						</li>
 					</ul>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
@@ -37,17 +37,17 @@
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
 							<div class="box-content nopadding">
 								<!-- Widget Content -->
 								<form action="<?php echo base_url('survey_validation/get_random') ?>" method="POST" class='form-horizontal form-bordered' id="my_form">
-									<div class="control-group">
-										<label class="control-label">Loại khảo sát</label>
-										<div class="controls">
-											<select name="survey_type" id="survey_type" class='chosen-select span8' data-placeholder="Chọn loại khảo sát" data-nosearch="true" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Loại khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey_type" id="survey_type" class='chosen-select form-control' data-placeholder="Chọn loại khảo sát" data-nosearch="true" required>
 												<option value=""></option>
 												<?php 
 												foreach ($survey_type as $survey_type_item) { 
@@ -69,93 +69,97 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Phiếu khảo sát</label>
-										<div class="controls">
-											<select name="survey" id="survey" class='chosen-select span12' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Phiếu khảo sát</label>
+										<div class="col-sm-10">
+											<select name="survey" id="survey" class='chosen-select form-control' data-placeholder="Chọn phiếu khảo sát cần kết xuất dữ liệu" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Chọn câu hỏi</label>
-										<div class="controls">
-											<select name="question" id="question" class="chosen-select span12" data-placeholder="Chọn câu hỏi để lấy dữ liệu" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Chọn câu hỏi</label>
+										<div class="col-sm-10">
+											<select name="question" id="question" class="chosen-select form-control" data-placeholder="Chọn câu hỏi để lấy dữ liệu" required>
 											
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Chọn câu trả lời</label>
-										<div class="controls">
-											<select name="answer_template" id="answer_template" class="chosen-select span6" data-placeholder="Chọn câu trả lời để lấy dữ liệu" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Chọn câu trả lời</label>
+										<div class="col-sm-10">
+											<select name="answer_template" id="answer_template" class="chosen-select col-sm-6" data-placeholder="Chọn câu trả lời để lấy dữ liệu" required>
 											
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Khoa</label>
-										<div class="controls">
-											<select name="faculty" id="faculty" class="chosen-select span6" data-placeholder="Chọn Khoa" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Khoa</label>
+										<div class="col-sm-10">
+											<select name="faculty" id="faculty" class="chosen-select col-sm-6" data-placeholder="Chọn Khoa" required>
 											
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">[Tên công ty]</label>
-										<div class="controls">
-											<select name="q_company_name" id="q_company_name" class="chosen-select span8" data-placeholder="Chọn câu hỏi để trích xuất" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">[Tên công ty]</label>
+										<div class="col-sm-10">
+											<select name="q_company_name" id="q_company_name" class="chosen-select form-control" data-placeholder="Chọn câu hỏi để trích xuất" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_company_name" id="a_company_name" class="chosen-select span8" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_company_name" id="a_company_name" class="chosen-select form-control" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">[Địa chỉ công ty]</label>
-										<div class="controls">
-											<select name="q_company_address" id="q_company_address" class="chosen-select span8" data-placeholder="Chọn câu hỏi để trích xuất" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">[Địa chỉ công ty]</label>
+										<div class="col-sm-10">
+											<select name="q_company_address" id="q_company_address" class="chosen-select form-control" data-placeholder="Chọn câu hỏi để trích xuất" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_company_address" id="a_company_address" class="chosen-select span8" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_company_address" id="a_company_address" class="chosen-select form-control" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">[Điện thoại]</label>
-										<div class="controls">
-											<select name="q_company_phone" id="q_company_phone" class="chosen-select span8" data-placeholder="Chọn câu hỏi để trích xuất" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">[Điện thoại]</label>
+										<div class="col-sm-10">
+											<select name="q_company_phone" id="q_company_phone" class="chosen-select form-control" data-placeholder="Chọn câu hỏi để trích xuất" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_company_phone" id="a_company_phone" class="chosen-select span8" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_company_phone" id="a_company_phone" class="chosen-select form-control" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">[Công việc đang làm]</label>
-										<div class="controls">
-											<select name="q_company_job" id="q_company_job" class="chosen-select span8" data-placeholder="Chọn câu hỏi trích xuất" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">[Công việc đang làm]</label>
+										<div class="col-sm-10">
+											<select name="q_company_job" id="q_company_job" class="chosen-select form-control" data-placeholder="Chọn câu hỏi trích xuất" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<div class="controls">
-											<select name="a_company_job" id="a_company_job" class="chosen-select span8" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2"></label>
+										<div class="col-sm-10">
+											<select name="a_company_job" id="a_company_job" class="chosen-select form-control" data-placeholder="Chọn câu trả lời để trích xuất" data-nosearch="true" required>
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Số phần % cần lấy</label>
-										<div class="controls">
-											<select name="percent" id="percent" class="chosen-select span2" data-nosearch="true" required>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Số phần % cần lấy</label>
+										<div class="col-sm-10">
+											<select name="percent" id="percent" class="chosen-select col-sm-2" data-nosearch="true" required>
 												<option value="5">5%</option>
 												<option value="10">10%</option>
 												<option value="15">15%</option>
@@ -169,10 +173,10 @@
 											</select>
 										</div>
 									</div>
-									<div class="control-group">
-										<label class="control-label">Tên danh sách</label>
-										<div class="controls">
-											<input type="text" name="list_name" id="list_name" class="input-xxlarge" required/>
+									<div class="form-group">
+										<label class="control-label col-sm-2">Tên danh sách</label>
+										<div class="col-sm-10">
+											<input type="text" name="list_name" id="list_name" class="form-control" required/>
 										</div>
 									</div>
 									<div class="form-actions">
@@ -185,8 +189,8 @@
 				</div>
 				
 				<!-- Danh sach da thuc hien lay ngau nhien -->
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
@@ -195,7 +199,7 @@
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp">
-										<i class="icon-angle-down"></i>
+										<i class="fa fa-angle-down"></i>
 									</a>
 								</div>
 							</div>
@@ -205,7 +209,7 @@
 									<!-- Table content -->
 									<thead>
 										<tr>
-											<th style="width: 70px"></th>
+											<th style="width: 90px"></th>
 											<th>Tên danh sách dữ liệu cần kiểm tra</th>
 											<th style="width:150px">Ngày tạo</th>
 											<!-- <th style="width:100px">Người tạo</th> -->
@@ -214,12 +218,12 @@
 									<tbody>
 										<?php foreach ($validation_list_random as $list_item) { ?>
 											<tr>
-												<td>
-													<a href="<?php echo base_url('survey_validation/delete/'.$list_item['list_id']); ?>" class="btn btn-danger"><i class="icon-remove"></i></a>
-													<a href="<?php echo base_url('survey_validation/view/'.$list_item['list_id']); ?>" class="btn btn-success"><i class="icon-eye-open"></i></a>
+												<td style="text-align:center; vertical-align:middle">
+													<a href="<?php echo base_url('survey_validation/delete/'.$list_item['list_id']); ?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+													<a href="<?php echo base_url('survey_validation/view/'.$list_item['list_id']); ?>" class="btn btn-success"><i class="fa fa-eye"></i></a>
 												</td>
-												<td><?php echo $list_item['list_name']; ?></td>
-												<td><?php echo mdate('%d/%m/%Y %H:%i:%s',strtotime($list_item['created_on_date'])); ?></td>
+												<td style="vertical-align:middle"><?php echo $list_item['list_name']; ?></td>
+												<td style="vertical-align:middle"><?php echo mdate('%d/%m/%Y %H:%i:%s',strtotime($list_item['created_on_date'])); ?></td>
 											</tr>
 											<!--
 <tr>

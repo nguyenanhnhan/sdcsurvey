@@ -2,6 +2,24 @@ SDCSurvey
 =========
 
 Ứng dụng Khảo sát sinh viên dành riêng cho Trường ĐH Văn Lang
+Phiên bản 4.2.3
+------------------
+* Chặn các trình duyệt IE 8 trở xuống sử dụng
+* Cập nhật quyền kết xuất dữ liệu
+* Cập nhật giao diện Nhóm người dùng
+* Cập nhật giao diện Phân quyền Nhóm người dùng
+* Cập nhật giao diện Quản lý Nhóm người dùng
+* Cập nhật giao diện Tài khoản người dùng (Thêm, Sửa)
+
+
+Phiên bản 4.2.2
+------------------
+* Bắt lỗi nhập đúng dạng chuẩn của email
+* Sửa lỗi không hiện modal popup trong phần create summary  của phiếu khảo sát
+* Cập nhật hiển thị sai icon trong danh sách các phiếu khảo sát (Phiếu khảo sát đang được sử dụng)
+* Cập nhật alert trong import student
+
+
 Phiên bản 4.2.1
 ------------------
 * Cập nhật CodeIgniter Framework 2.2.0 (16/6/2014)

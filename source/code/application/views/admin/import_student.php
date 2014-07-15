@@ -28,37 +28,37 @@
 					</ul>
 				</div>
 				<?php if (!empty($error)) {?>
-				<div class="alert alert-error fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
-					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>
+				<div class="alert alert-danger fade in" style="margin-top:10px; margin-bottom:-10px">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<strong><?php echo $error; ?></strong>
 				</div>
 				<?php } ?>
 				
 				<?php if (!empty($success)) {?>
-				<div class="alert alert-success fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
-					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>
+				<div class="alert alert-success fade in" style="margin-top:10px; margin-bottom:-10px">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<strong><?php echo $success; ?></strong>
 				</div>
 				<?php } ?>
 				
 				<?php if (!empty($ignore)) {?>
-				<div class="alert alert-info fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
-					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>
+				<div class="alert alert-info fade in" style="margin-top:10px; margin-bottom:-10px">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<strong><?php echo $ignore; ?></strong>
 				</div>
 				<?php } ?>
 
 				<?php if (!empty($updated)) {?>
-				<div class="alert alert-info fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
-					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>
+				<div class="alert alert-info fade in" style="margin-top:10px; margin-bottom:-10px">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<strong><?php echo $updated; ?></strong>
 				</div>
 				<?php } ?>
-
+				<!-- danh sách lỗi email -->
 				<?php if (!empty($invalid)){ ?>
-				<div class="alert alert-error fade in" style="margin-top:10px; margin-bottom:0px" aria-hidden="true">
-					<a href="#" class="btn btn-mini close" data-dismiss="alert"><i class="icon-remove"></i></a>
-					Các sinh viên có MSV:
+				<div class="alert alert-danger fade in" style="margin-top:10px; margin-bottom:-10px">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					Các sinh viên có MSSV:
 					<strong>
 						<?php 
 						$objects_number = count($invalid);

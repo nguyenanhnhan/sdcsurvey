@@ -1193,6 +1193,32 @@ class Report extends CI_Controller
 	function gets_survey_faculty($survey_id)
 	{
 		$this->load->model('survey_faculty_model');
+		$this->load->model('faculty_model');
+		$this->load->model('group_permission_model');
+
+		$data['faculties']=array();
+		// Load cac khoa ban theo quyen han
+		$groups = $this->ion_auth->get_users_groups()->result_array();
+		foreach($groups as $group)
+		{
+			// Lay quyen han cua group
+			$permissions = $this->group_permission_model->get_group_permission($group['id']);
+			
+			foreach ($permissions as $permissions)
+			{b
+				$flag_existing = 0;
+				for ($i=0,$len=count($data['faculties']);$i<$len;$i++)
+				{
+					if ($data['faculties'][$i]['faculty_id']==$permissions['faculty_id']) 
+					{
+						$flag_existing = 1;
+						break;
+					}
+				}
+				if($flag_existing==0) array_push($data['faculties'], $permissions);
+			}
+		}
+
 		$data['survey_faculties'] = $this->survey_faculty_model->get($survey_id, FALSE);
 		
 		echo json_encode($data);
