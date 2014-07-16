@@ -1,14 +1,15 @@
-<?php defined('BASEPATH') OR exit('Mã script không được phép truy xuất trực tiếp.');
-class Report extends CI_Controller 
-{
-	function __construct()
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Report extends CI_Controller {
+
+	public function __construct()
 	{
 		parent::__construct();
 		ini_set('memory_limit', "-1");
 		$this->load->library(array('ion_auth', 'form_validation', 'session', 'uuid', 'excel'));
 		$this->load->helper(array('url', 'date', 'file'));
 	}
-	
+
 	function survey_status()
 	{
 		if ($this->ion_auth->logged_in())
@@ -21,7 +22,6 @@ class Report extends CI_Controller
 			
 			// Lay danh sach loai khao sat
 			$data['survey_type'] = $this->survey_type_model->get(FALSE);
-			
 			$this->load->view('templates/header',$data);
 			$this->load->view('report/status',$data);
 			$this->load->view('templates/footer');
@@ -31,7 +31,7 @@ class Report extends CI_Controller
 			redirect ('auth');
 		}
 	}
-	
+
 	function survey_export()
 	{
 		if ($this->ion_auth->logged_in())
@@ -54,7 +54,7 @@ class Report extends CI_Controller
 			redirect ('auth');
 		}
 	}
-	
+
 	function export_quick_summary()
 	{
 		if ($this->ion_auth->logged_in())
@@ -247,7 +247,7 @@ class Report extends CI_Controller
 			redirect ('auth');
 		}
 	}
-	
+
 	function export_all_data()
 	{
 		if ($this->ion_auth->logged_in())
@@ -1178,7 +1178,7 @@ class Report extends CI_Controller
 			redirect("auth");
 		}
 	}
-	
+
 	// AJAX Function
 	// ham lay cac phieu khao sat phan theo loai khao sat
 	function gets_survey($survey_type_id) 
@@ -1205,7 +1205,7 @@ class Report extends CI_Controller
 			$permissions = $this->group_permission_model->get_group_permission($group['id']);
 			
 			foreach ($permissions as $permissions)
-			{b
+			{
 				$flag_existing = 0;
 				for ($i=0,$len=count($data['faculties']);$i<$len;$i++)
 				{
@@ -1311,4 +1311,8 @@ class Report extends CI_Controller
 		
 		echo json_encode($data);
 	}
+
 }
+
+/* End of file report.php */
+/* Location: ./application/controllers/report.php */
