@@ -1,4 +1,4 @@
-// FLAT Theme v2.0
+// FLAT Theme v2.2
 
 function sidebarFluid() {
     if ($("#left").hasClass("sidebar-fixed")) {
@@ -537,7 +537,6 @@ $(document).ready(function() {
         });
     });
 
-    // task-list
     $(".tasklist").on('click', "li", function(e) {
         var $el = $(this),
             $checkbox = $(this).find('input[type=checkbox]').first();
@@ -560,7 +559,7 @@ $(document).ready(function() {
     if ($("#new-task .select2-me").length > 0) {
         function formatIcons(option) {
             if (!option.id) return option.text;
-            return "<i class='" + option.text + "'></i> ." + option.text;
+			return "<i class='fa fa-" + option.id + "'></i> ." + option.text;
         }
         $("#new-task .select2-me").select2({
             formatResult: formatIcons,
@@ -674,7 +673,7 @@ $(document).ready(function() {
             var elementToAdd = "";
             ($bookmark.is(":checked")) ? elementToAdd += "<li class='bookmarked'>" : elementToAdd += "<li>";
 
-            elementToAdd += '<div class="check"><input type="checkbox" class="icheck-me" data-skin="square" data-color="blue"></div><span class="task"><i class="' + $icon.select2("val") + '"></i><span>' + $name.val() + '</span></span><span class="task-actions"><a href="#" class="task-delete" rel="tooltip" title="Delete that task"><i class="fa fa-times"></i></a><a href="#" class="task-bookmark" rel="tooltip" title="Mark as important"><i class="fa fa-bookmark-o"></i></a></span></li>';
+            elementToAdd += '<div class="check"><input type="checkbox" class="icheck-me" data-skin="square" data-color="blue"></div><span class="task"><i class="fa fa-' + $icon.select2("val") + '"></i><span>' + $name.val() + '</span></span><span class="task-actions"><a href="#" class="task-delete" rel="tooltip" title="Delete that task"><i class="fa fa-times"></i></a><a href="#" class="task-bookmark" rel="tooltip" title="Mark as important"><i class="fa fa-bookmark-o"></i></a></span></li>';
 
             if ($tasklist.find(".bookmarked").length > 0) {
                 if ($bookmark.is(":checked")) {
@@ -752,7 +751,15 @@ $(document).ready(function() {
         });
     }
 
-    $("[rel=popover]").popover();
+    $("[rel=popover]").each(function(){
+        var $el = $(this);
+        $el.click(function(e){e.preventDefault();});
+        var closeButton = '<button onclick="$(this).closest(\'div.popover\').prev().popover(\'hide\');" type="button" class="close" aria-hidden="true">&times;</button>';
+        $(this).popover({
+            html: true,
+            title: (($el.attr("data-custom-title") !== undefined) ? $el.attr("data-custom-title") : "&nbsp;" ) + closeButton
+        });
+    });
 
     $('.toggle-nav').click(function(e) {
         e.preventDefault();
@@ -774,7 +781,7 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
         var $el = $(this);
-        $el.parents('.table').find("tbody .selectable").prop('checked', (el.prop('checked')));
+        $el.parents('.table').find("tbody .selectable").prop('checked', ($el.prop('checked')));
     });
 
     $('.table-mail > tbody > tr').click(function(e) {

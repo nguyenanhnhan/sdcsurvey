@@ -7,10 +7,10 @@
 					<div class="pull-right">
 						<ul class="stats">
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
 									<span class="big" id="date">February 22, 2013</span>
-									<span id="clock">Wednesday, 13:56</span>
+									<span id="clock"></span>
 								</div>
 							</li>
 						</ul>

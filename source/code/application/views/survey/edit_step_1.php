@@ -90,7 +90,7 @@
 										<label class="control-label col-sm-2">Khoá</label>
 										<div class="col-sm-10">
 											<div class="col-xs-5">
-												<select name="course" id="course" class="chosen-select form-control">
+												<select name="course" id="course" class="chosen-select form-control" data-placeholder="Chọn một giá trị">
 													<?php
 														// Cac khoa hoc chua tot nghiep
 														foreach ($courses_learning as $course_item){
@@ -112,7 +112,7 @@
 										<label class="control-label col-sm-2">Năm tốt nghiệp</label>
 										<div class="col-sm-10">
 											<div class="col-xs-3">
-												<select name="graduated_year" id="graduated_year" class="chosen-select form-control">
+												<select name="graduated_year" id="graduated_year" class="chosen-select form-control" data-placeholder="Chọn một giá trị">
 													<?php 
 														// Nam tot nghiep
 														foreach ($graduated_years as $graduated_year) {
@@ -212,17 +212,16 @@
 			 	}
 			 	
 			 	// action when click checkbox graduated
-				$('#is_graduated').click(function(){
-					var $this = $(this);
-					if ($this.is(':checked')){
-						$('#div_course').hide();
-						$('#div_graduated_year').show();
-					}
-					else{
-						$('#div_course').show();
-						$('#div_graduated_year').hide();
-					}
-				});
+				$('#is_graduated').on('ifChanged', function() {
+			 		if ($(this).is(':checked')){
+			 			$('#div_course').hide();
+			 			$('#div_graduated_year').show();
+			 		}
+			 		else{
+			 			$('#div_course').show();
+			 			$('#div_graduated_year').hide();
+			 		}
+			 	});
 				
 				// Khoi tao du lieu Khoa/Ban
 				if ($('#is_vocation option:selected').val()==1){

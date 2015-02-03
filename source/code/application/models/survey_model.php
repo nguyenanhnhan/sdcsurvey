@@ -54,7 +54,7 @@ class Survey_model extends CI_Model
 	{
 		$query = "SELECT *
 				  FROM sur_answer_template
-				  WHERE question_id = '".$question_id."' AND (answer_template_id = '".$answer_template_id."' OR reuse_answer_template_id = '".$answer_template_id."')";
+				  WHERE question_id = '".$question_id."' AND (answer_template_id = '".$answer_template_id."' OR reused_answer_template_id = '".$answer_template_id."')";
 		return $this->db->query($query)->row_array();
 	}
 	

@@ -116,7 +116,7 @@
 										<label class="control-label col-sm-3">Năm tốt nghiệp</label>
 										<div class="col-sm-9">
 											<div class="col-xs-5">
-												<select name="graduated_year" id="graduated_year" class="chosen-select form-control">
+												<select name="graduated_year" id="graduated_year" class="chosen-select form-control" data-placeholder="Chọn một giá trị">
 													<?php 
 														// Nam tot nghiep
 														foreach ($graduated_years as $graduated_year) {
@@ -141,7 +141,7 @@
 									<div class="form-group" id="div_vocation">
 										<label class="control-label col-sm-3">Áp dụng cho Ban TCCN</label>
 										<div class="col-sm-9">
-											<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select span12">
+											<select name="survey_faculty_vocation[]" id="survey_faculty_vocation" multiple="true" class="chosen-select form-control" data-placeholder="Có thể chọn nhiều giá trị">
 												<?php foreach ($faculties as $faculty):
 													if ($faculty['is_vocation']==1){?>
 													<option value="<?php echo $faculty['faculty_id'] ?>"><?php echo $faculty['faculty_name']?></option>
@@ -200,17 +200,30 @@
 			 	}
 				
 			 	// action when click checkbox graduated
-				$('#is_graduated').click(function(){
-					var $this = $(this);
-					if ($this.is(':checked')){
-						$('#div_course').hide();
-						$('#div_graduated_year').show();
-					}
-					else{
-						$('#div_course').show();
-						$('#div_graduated_year').hide();
-					}
-				});
+				// $('#is_graduated').click(function(){
+				// 	alert('hello');
+				// 	var $this = $(this);
+				// 	if ($this.is(':checked')){
+				// 		$('#div_course').hide();
+				// 		$('#div_graduated_year').show();
+				// 	}
+				// 	else{
+				// 		$('#div_course').show();
+				// 		$('#div_graduated_year').hide();
+				// 	}
+				// });
+
+			 	$('#is_graduated').on('ifChanged', function() {
+			 		if ($(this).is(':checked')){
+			 			$('#div_course').hide();
+			 			$('#div_graduated_year').show();
+			 		}
+			 		else{
+			 			$('#div_course').show();
+			 			$('#div_graduated_year').hide();
+			 		}
+			 	});
+			 	
 				
 				// Khoi tao du lieu Khoa/Ban
 				if ($('#is_vocation option:selected').val()==1){

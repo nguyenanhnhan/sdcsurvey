@@ -1,4 +1,4 @@
-// FLAT Theme v2.0
+// FLAT Theme v2.2
 
 var onlineUserArray = [255, 455, 385, 759, 500, 284, 581, 684, 255, 455, 385, 759, 500, 293, 585, 342, 684];
 
@@ -127,9 +127,9 @@ $(document).ready(function() {
         var opt = {
             "sPaginationType": "full_numbers",
             "oLanguage": {
-                "sSearch": "<span>Tìm kiếm:</span> ",
-                "sInfo": "Đang xem <span>_START_</span> đến <span>_END_</span> trong tổng số <span>_TOTAL_</span> mục",
-                "sLengthMenu": "<span>Thể hiện</span> _MENU_ <span>kết quả trong một trang</span>"
+                "sSearch": "<span>Search:</span> ",
+                "sInfo": "Showing <span>_START_</span> to <span>_END_</span> of <span>_TOTAL_</span> entries",
+                "sLengthMenu": "_MENU_ <span>entries per page</span>"
             },
             'sDom': "lfrtip",
             'aoColumnDefs': [{
@@ -145,7 +145,7 @@ $(document).ready(function() {
         };
         var oTable = $('.usertable').dataTable(opt);
 
-        $('.dataTables_filter input').attr("placeholder", "Tìm tại đây...");
+        $('.dataTables_filter input').attr("placeholder", "Search here...");
         $(".dataTables_length select").wrap("<div class='input-mini'></div>").chosen({
             disable_search_threshold: 9999999
         });
@@ -1173,19 +1173,6 @@ $(document).ready(function() {
             direction: 'bottom'
         }]
     };
-    if ((location.pathname == "/flat/" || location.pathname == '/flat' || location.pathname == '/flat/index.html') && location.host != "localhost" && $(window).width() > 767) {
-        bootbox.animate(false);
-
-        bootbox.confirm("Would you like to start the page guide? It will show you functions you could miss!", "No", "Yes", function(r) {
-            if (r) $.pageguide(guide, {
-                events: {
-                    close: function() {
-                        $.pageguide('unload');
-                    }
-                }
-            }).open();
-        });
-    }
 
     if ($("#sico").length > 0) {
         function formatIcons(option) {

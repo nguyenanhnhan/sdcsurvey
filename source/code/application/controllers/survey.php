@@ -51,8 +51,8 @@ class Survey extends CI_Controller
 			
 			// Lay cac khoa dang hoc, chua tot nghiep
 			$course_array         = array("");
-			$count_graduated_year = count($graduated_year_array);
-			for ($i = $count_graduated_year; $i <=$count_graduated_year+4; $i++)
+			$count_graduated_year = count($graduated_year_array)-2;
+			for ($i = $count_graduated_year; $i <= $count_graduated_year+4; $i++)
 			{
 				array_push($course_array, $i);
 			}
@@ -264,7 +264,7 @@ class Survey extends CI_Controller
 			
 			// Lay cac khoa dang hoc, chua tot nghiep
 			$course_array = array("");
-			$count_graduated_year = count($graduated_year_array);
+			$count_graduated_year = count($graduated_year_array)-2;
 			for ($i = $count_graduated_year; $i <=$count_graduated_year+4; $i++)
 			{
 				array_push($course_array, $i);

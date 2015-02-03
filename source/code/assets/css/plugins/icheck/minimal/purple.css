@@ -1,8 +1,10 @@
-/* iCheck.js Minimal skin, purple
+/* iCheck plugin Minimal skin, purple
 ----------------------------------- */
 .icheckbox_minimal-purple,
 .iradio_minimal-purple {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 18px;
@@ -12,12 +14,10 @@
     cursor: pointer;
 }
 
-.icheckbox_minimal-purple,
-.icheckbox_minimal-purple.static:hover {
+.icheckbox_minimal-purple {
     background-position: 0 0;
 }
-    .icheckbox_minimal-purple.hover,
-    .icheckbox_minimal-purple:hover {
+    .icheckbox_minimal-purple.hover {
         background-position: -20px 0;
     }
     .icheckbox_minimal-purple.checked {
@@ -31,12 +31,10 @@
         background-position: -80px 0;
     }
 
-.iradio_minimal-purple,
-.iradio_minimal-purple.static:hover {
+.iradio_minimal-purple {
     background-position: -100px 0;
 }
-    .iradio_minimal-purple.hover,
-    .iradio_minimal-purple:hover {
+    .iradio_minimal-purple.hover {
         background-position: -120px 0;
     }
     .iradio_minimal-purple.checked {
@@ -50,11 +48,8 @@
         background-position: -180px 0;
     }
 
-/* Retina support */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-       only screen and (-moz-min-device-pixel-ratio: 1.5),
-       only screen and (-o-min-device-pixel-ratio: 1.5),
-       only screen and (min-device-pixel-ratio: 1.5) {
+/* HiDPI support */
+@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_minimal-purple,
     .iradio_minimal-purple {
         background-image: url(purple@2x.png);

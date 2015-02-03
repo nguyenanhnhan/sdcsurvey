@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -7,16 +8,13 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	
+
 	<title>FLAT - Shop product</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap responsive -->
-	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 	<!-- jQuery UI -->
-	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+	<link rel="stylesheet" href="css/plugins/jquery-ui/jquery-ui.min.css">
 	<!-- chosen -->
 	<link rel="stylesheet" href="css/plugins/chosen/chosen.css">
 	<!-- colorbox -->
@@ -29,18 +27,13 @@
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
-	
+
 	<!-- Nice Scroll -->
 	<script src="js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
 	<!-- imagesLoaded -->
 	<script src="js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
 	<!-- jQuery UI -->
-	<script src="js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.slider.js"></script>
+	<script src="js/plugins/jquery-ui/jquery-ui.js"></script>
 	<!-- slimScroll -->
 	<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- Bootstrap -->
@@ -67,7 +60,7 @@
 			});
 		</script>
 	<![endif]-->
-	
+
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="img/favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
@@ -79,7 +72,9 @@
 	<div id="navigation">
 		<div class="container-fluid">
 			<a href="#" id="brand">FLAT</a>
-			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
+			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
+				<i class="fa fa-bars"></i>
+			</a>
 			<ul class='main-nav'>
 				<li>
 					<a href="index.html">
@@ -157,7 +152,7 @@
 							<a href="tables-basic.html">Basic tables</a>
 						</li>
 						<li>
-							<a href="tables-dynamic.html">Dynamic tables</a>
+							<a href="tables-advanced.html">Advanced tables</a>
 						</li>
 						<li>
 							<a href="tables-large.html">Large tables</a>
@@ -191,7 +186,7 @@
 						<li>
 							<a href="plugins-dragdrop.html">Drag &amp; Drop widgets</a>
 						</li>
-						
+
 					</ul>
 				</li>
 				<li class='active'>
@@ -242,27 +237,16 @@
 							<a href="more-blank.html">Blank page</a>
 						</li>
 						<li class='dropdown-submenu'>
-							<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Another submenu</a>
+							<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Blog</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">This is level 3</a>
+									<a href="more-blog-list.html">List big image</a>
 								</li>
 								<li>
-									<a href="#">Another page here</a>
+									<a href="more-blog-list-small.html">List small image</a>
 								</li>
-								<li class='dropdown-submenu'>
-									<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Go to level 4</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="#">This is level 4</a>
-										</li>
-										<li>
-											<a href="#">Unlimited levels</a>
-										</li>
-										<li>
-											<a href="#">Easy to use</a>
-										</li>
-									</ul>
+								<li>
+									<a href="more-blog-post.html">Post</a>
 								</li>
 							</ul>
 						</li>
@@ -276,6 +260,9 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a href="layouts-sidebar-hidden.html">Default hidden sidebar</a>
+						</li>
+						<li>
+							<a href="layouts-sidebar-right.html">Sidebar right side</a>
 						</li>
 						<li>
 							<a href="layouts-color.html">Different default color</a>
@@ -306,7 +293,10 @@
 			<div class="user">
 				<ul class="icon-nav">
 					<li class='dropdown'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-envelope-alt"></i><span class="label label-lightred">4</span></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-envelope"></i>
+							<span class="label label-lightred">4</span>
+						</a>
 						<ul class="dropdown-menu pull-right message-ul">
 							<li>
 								<a href="#">
@@ -329,7 +319,7 @@
 										</div>
 									</div>
 									<div class="count">
-										<i class="icon-comment"></i>
+										<i class="fa fa-comment"></i>
 										<span>3</span>
 									</div>
 								</a>
@@ -346,13 +336,17 @@
 								</a>
 							</li>
 							<li>
-								<a href="components-messages.html" class='more-messages'>Go to Message center <i class="icon-arrow-right"></i></a>
+								<a href="components-messages.html" class='more-messages'>Go to Message center
+									<i class="fa fa-arrow-right"></i>
+								</a>
 							</li>
 						</ul>
 					</li>
-					
+
 					<li class="dropdown sett">
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-cog"></i></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-cog"></i>
+						</a>
 						<ul class="dropdown-menu pull-right theme-settings">
 							<li>
 								<span>Layout-width</span>
@@ -378,7 +372,9 @@
 						</ul>
 					</li>
 					<li class='dropdown colo'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-tint"></i>
+						</a>
 						<ul class="dropdown-menu pull-right theme-colors">
 							<li class="subtitle">
 								Predefined colors
@@ -403,12 +399,43 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="more-locked.html" class='lock-screen' rel='tooltip' title="Lock screen" data-placement="bottom"><i class="icon-lock"></i></a>
+					<li class='dropdown language-select'>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<img src="img/demo/flags/us.gif" alt="">
+							<span>US</span>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/br.gif" alt="">
+									<span>Brasil</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/de.gif" alt="">
+									<span>Deutschland</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/es.gif" alt="">
+									<span>España</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/fr.gif" alt="">
+									<span>France</span>
+								</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 				<div class="dropdown">
-					<a href="#" class='dropdown-toggle' data-toggle="dropdown">John Doe <img src="img/demo/user-avatar.jpg" alt=""></a>
+					<a href="#" class='dropdown-toggle' data-toggle="dropdown">John Doe
+						<img src="img/demo/user-avatar.jpg" alt="">
+					</a>
 					<ul class="dropdown-menu pull-right">
 						<li>
 							<a href="more-userprofile.html">Edit profile</a>
@@ -429,12 +456,17 @@
 			<form action="search-results.html" method="GET" class='search-form'>
 				<div class="search-pane">
 					<input type="text" name="search" placeholder="Search here...">
-					<button type="submit"><i class="icon-search"></i></button>
+					<button type="submit">
+						<i class="fa fa-search"></i>
+					</button>
 				</div>
 			</form>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Women</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Women</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -462,7 +494,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Colors</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Colors</span>
+					</a>
 				</div>
 				<div class="subnav-content">
 					<ul class="colors small">
@@ -489,7 +524,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Price range</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Price range</span>
+					</a>
 				</div>
 				<div class="subnav-content">
 					<div class="slider" data-min="0" data-max="75" data-range="true" data-rangestart="15" data-rangestop="45">
@@ -501,7 +539,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Best seller</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Best seller</span>
+					</a>
 				</div>
 				<div class="subnav-content">
 					<ul class="bestseller">
@@ -570,7 +611,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Popular tags</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Popular tags</span>
+					</a>
 				</div>
 				<div class="subnav-content">
 					<ul class="tags">
@@ -623,22 +667,26 @@
 					<div class="pull-right">
 						<ul class="minitiles">
 							<li class='grey'>
-								<a href="#"><i class="icon-cogs"></i></a>
+								<a href="#">
+									<i class="fa fa-cogs"></i>
+								</a>
 							</li>
 							<li class='lightgrey'>
-								<a href="#"><i class="icon-globe"></i></a>
+								<a href="#">
+									<i class="fa fa-globe"></i>
+								</a>
 							</li>
 						</ul>
 						<ul class="stats">
 							<li class='satgreen'>
-								<i class="icon-money"></i>
+								<i class="fa fa-money"></i>
 								<div class="details">
 									<span class="big">$324,12</span>
 									<span>Balance</span>
 								</div>
 							</li>
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
 									<span class="big">February 22, 2013</span>
 									<span>Wednesday, 13:56</span>
@@ -651,45 +699,57 @@
 					<ul>
 						<li>
 							<a href="more-login.html">Home</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="more-files.html">Pages</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="more-shop-product.html">Shop product view</a>
 						</li>
 					</ul>
 					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
+						<a href="#">
+							<i class="fa fa-times"></i>
+						</a>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box">
 							<div class="box-content">
-								<div class="row-fluid">
-									<div class="span6">
-										<a href="img/demo/shop/4.jpg" class='colorbox-image big'><img src="img/demo/shop/4.jpg" alt=""></a>
+								<div class="row">
+									<div class="col-sm-6">
+										<a href="img/demo/shop/4.jpg" class='colorbox-image big'>
+											<img src="img/demo/shop/4.jpg" alt="">
+										</a>
 										<div class="more-images">
 											<ul class="thumbnails">
-												<li class="span3">
-													<a href="img/demo/shop/8.jpg" class='colorbox-image'><img src="img/demo/shop/8.jpg" alt=""></a>
+												<li class="col-sm-3">
+													<a href="img/demo/shop/8.jpg" class='colorbox-image'>
+														<img src="img/demo/shop/8.jpg" alt="">
+													</a>
 												</li>
-												<li class="span3">
-													<a href="img/demo/shop/4.jpg" class='colorbox-image'><img src="img/demo/shop/4.jpg" alt=""></a>
+												<li class="col-sm-3">
+													<a href="img/demo/shop/4.jpg" class='colorbox-image'>
+														<img src="img/demo/shop/4.jpg" alt="">
+													</a>
 												</li>
-												<li class="span3">
-													<a href="img/demo/shop/6.jpg" class='colorbox-image'><img src="img/demo/shop/6.jpg" alt=""></a>
+												<li class="col-sm-3">
+													<a href="img/demo/shop/6.jpg" class='colorbox-image'>
+														<img src="img/demo/shop/6.jpg" alt="">
+													</a>
 												</li>
-												<li class="span3">
-													<a href="img/demo/shop/7.jpg" class='colorbox-image'><img src="img/demo/shop/7.jpg" alt=""></a>
+												<li class="col-sm-3">
+													<a href="img/demo/shop/7.jpg" class='colorbox-image'>
+														<img src="img/demo/shop/7.jpg" alt="">
+													</a>
 												</li>
 											</ul>
 										</div>
 									</div>
-									<div class="span6">
+									<div class="col-sm-6">
 										<div class="product-details">
 											<h4>Simple jeans</h4>
 											<div class="price">
@@ -726,8 +786,8 @@
 										</div>
 									</div>
 								</div>
-								<div class="row-fluid margin-top">
-									<div class="span12">
+								<div class="row margin-top">
+									<div class="col-sm-12">
 										<div class="infos">
 											<ul class="tabs tabs-inline tabs-top">
 												<li class='active'>
@@ -741,144 +801,178 @@
 												</li>
 											</ul>
 											<div class="tab-content padding tab-content-inline tab-content-bottom">
-												<div class="tab-pane active" id="pro">Lorem ipsum Sed eiusmod eiusmod eu dolore qui ut sit sit sint elit tempor irure. Lorem ipsum Irure veniam non ea aliqua laboris et voluptate. Lorem ipsum Amet enim nisi pariatur sit consequat occaecat non. Lorem ipsum Reprehenderit dolor aliquip nostrud sunt deserunt dolor ad veniam.</div>
-												<div class="tab-pane" id="info">Lorem ipsum Dolore magna Duis quis tempor eiusmod ut. Lorem ipsum Non pariatur enim mollit minim aliquip adipisicing do fugiat sit enim veniam ea. Lorem ipsum Pariatur aliqua amet dolore cillum culpa minim. Lorem ipsum Laborum sed dolor adipisicing exercitation ea Excepteur sed dolore. Lorem ipsum Anim veniam id exercitation dolore incididunt aute nulla. Lorem ipsum Duis consectetur magna non nostrud laborum incididunt. Lorem ipsum Incididunt labore do non ut ut Excepteur. Lorem ipsum Ut enim ex dolore quis non deserunt.</div>
-												<div class="tab-pane" id="rev">Lorem ipsum Veniam quis voluptate officia magna velit tempor exercitation elit nisi consequat officia in. Lorem ipsum Adipisicing ut voluptate aliqua elit reprehenderit incididunt aliquip sint quis. Lorem ipsum Commodo incididunt minim ex consequat irure sit reprehenderit exercitation et proident velit. Lorem ipsum Veniam qui nostrud in minim Excepteur mollit cupidatat cupidatat cillum dolor Excepteur adipisicing. Lorem ipsum Amet culpa consequat eu ex ut Excepteur amet. Lorem ipsum Dolore ut ut pariatur irure consequat in Excepteur quis laboris est minim. Lorem ipsum Do nisi quis est aliqua dolore adipisicing deserunt. Lorem ipsum Ut laboris minim Excepteur exercitation proident qui anim fugiat in non et deserunt. Lorem ipsum In magna dolore do pariatur nostrud dolore et ut.</div>
+												<div class="tab-pane active" id="pro">Lorem ipsum Sed eiusmod eiusmod eu dolore qui ut sit sit sint elit tempor irure. Lorem ipsum Irure veniam non ea aliqua laboris et voluptate. Lorem ipsum Amet enim nisi pariatur sit consequat occaecat non. Lorem ipsum Reprehenderit dolor aliquip
+													nostrud sunt deserunt dolor ad veniam.</div>
+												<div class="tab-pane" id="info">Lorem ipsum Dolore magna Duis quis tempor eiusmod ut. Lorem ipsum Non pariatur enim mollit minim aliquip adipisicing do fugiat sit enim veniam ea. Lorem ipsum Pariatur aliqua amet dolore cillum culpa minim. Lorem ipsum Laborum sed dolor adipisicing
+													exercitation ea Excepteur sed dolore. Lorem ipsum Anim veniam id exercitation dolore incididunt aute nulla. Lorem ipsum Duis consectetur magna non nostrud laborum incididunt. Lorem ipsum Incididunt labore do non ut ut Excepteur. Lorem ipsum
+													Ut enim ex dolore quis non deserunt.</div>
+												<div class="tab-pane" id="rev">Lorem ipsum Veniam quis voluptate officia magna velit tempor exercitation elit nisi consequat officia in. Lorem ipsum Adipisicing ut voluptate aliqua elit reprehenderit incididunt aliquip sint quis. Lorem ipsum Commodo incididunt minim ex
+													consequat irure sit reprehenderit exercitation et proident velit. Lorem ipsum Veniam qui nostrud in minim Excepteur mollit cupidatat cupidatat cillum dolor Excepteur adipisicing. Lorem ipsum Amet culpa consequat eu ex ut Excepteur amet. Lorem
+													ipsum Dolore ut ut pariatur irure consequat in Excepteur quis laboris est minim. Lorem ipsum Do nisi quis est aliqua dolore adipisicing deserunt. Lorem ipsum Ut laboris minim Excepteur exercitation proident qui anim fugiat in non et deserunt.
+													Lorem ipsum In magna dolore do pariatur nostrud dolore et ut.</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="row-fluid margin-top">
-									<div class="span12">
+								<div class="row margin-top">
+									<div class="col-sm-12">
 										<h4>Related outfits</h4>
 										<ul class="shop-items">
-											<li class="span3">
-												<a href="more-shop-product.html">
-													<img src="img/demo/shop/1.jpg" alt="">
-													<div class="details">
-														<div class="name">
-															Simple jeans
+											<li class="col-sm-3">
+												<div class="product">
+													<a href="more-shop-product.html">
+														<img src="img/demo/shop/1.jpg" alt="">
+														<div class="details">
+															<div class="name">
+																Simple jeans
+															</div>
+															<div class="price">
+																$25.00
+															</div>
 														</div>
-														<div class="price">
-															$25.00
+													</a>
+													<div class="extended">
+														<div class="pull-left">
+															<ul class="colors small">
+																<li class="red">
+																	<a href="#"></a>
+																</li>
+																<li class="pink">
+																	<a href="#"></a>
+																</li>
+																<li class="lightgrey">
+																	<a href="#"></a>
+																</li>
+															</ul>
 														</div>
-													</div>
-												</a>
-												<div class="extended">
-													<div class="pull-left">
-														<ul class="colors small">
-															<li class="red">
-																<a href="#"></a>
-															</li>
-															<li class="pink">
-																<a href="#"></a>
-															</li>
-															<li class="lightgrey">
-																<a href="#"></a>
-															</li>
-														</ul>
-													</div>
-													<div class="pull-right">
-														<a href="#" rel='tooltip' title="Add to cart"><i class="icon-shopping-cart"></i></a>
-														<a href="#" rel='tooltip' title="Add to whishlist"><i class="icon-cloud"></i></a>
+														<div class="pull-right">
+															<a href="#" rel='tooltip' title="Add to cart">
+																<i class="fa fa-shopping-cart"></i>
+															</a>
+															<a href="#" rel='tooltip' title="Add to whishlist">
+																<i class="fa fa-cloud"></i>
+															</a>
+														</div>
 													</div>
 												</div>
+												<!-- /.product -->
 											</li>
-											<li class="span3">
-												<a href="more-shop-product.html">
-													<img src="img/demo/shop/4.jpg" alt="">
-													<div class="details">
-														<div class="name">
-															Simple jeans
+											<li class="col-sm-3">
+												<div class="product">
+													<a href="more-shop-product.html">
+														<img src="img/demo/shop/4.jpg" alt="">
+														<div class="details">
+															<div class="name">
+																Simple jeans
+															</div>
+															<div class="price">
+																$25.00
+															</div>
 														</div>
-														<div class="price">
-															$25.00
+													</a>
+													<div class="extended">
+														<div class="pull-left">
+															<ul class="colors small">
+																<li class="red">
+																	<a href="#"></a>
+																</li>
+																<li class="pink">
+																	<a href="#"></a>
+																</li>
+																<li class="lightgrey">
+																	<a href="#"></a>
+																</li>
+															</ul>
 														</div>
-													</div>
-												</a>
-												<div class="extended">
-													<div class="pull-left">
-														<ul class="colors small">
-															<li class="red">
-																<a href="#"></a>
-															</li>
-															<li class="pink">
-																<a href="#"></a>
-															</li>
-															<li class="lightgrey">
-																<a href="#"></a>
-															</li>
-														</ul>
-													</div>
-													<div class="pull-right">
-														<a href="#" rel='tooltip' title="Add to cart"><i class="icon-shopping-cart"></i></a>
-														<a href="#" rel='tooltip' title="Add to whishlist"><i class="icon-cloud"></i></a>
+														<div class="pull-right">
+															<a href="#" rel='tooltip' title="Add to cart">
+																<i class="fa fa-shopping-cart"></i>
+															</a>
+															<a href="#" rel='tooltip' title="Add to whishlist">
+																<i class="fa fa-cloud"></i>
+															</a>
+														</div>
 													</div>
 												</div>
+												<!-- /.product -->
 											</li>
-											<li class="span3">
-												<a href="more-shop-product.html">
-													<img src="img/demo/shop/4.jpg" alt="">
-													<div class="details">
-														<div class="name">
-															Simple jeans
+											<li class="col-sm-3">
+												<div class="product">
+													<a href="more-shop-product.html">
+														<img src="img/demo/shop/4.jpg" alt="">
+														<div class="details">
+															<div class="name">
+																Simple jeans
+															</div>
+															<div class="price">
+																$25.00
+															</div>
 														</div>
-														<div class="price">
-															$25.00
+													</a>
+													<div class="extended">
+														<div class="pull-left">
+															<ul class="colors small">
+																<li class="red">
+																	<a href="#"></a>
+																</li>
+																<li class="pink">
+																	<a href="#"></a>
+																</li>
+																<li class="lightgrey">
+																	<a href="#"></a>
+																</li>
+															</ul>
 														</div>
-													</div>
-												</a>
-												<div class="extended">
-													<div class="pull-left">
-														<ul class="colors small">
-															<li class="red">
-																<a href="#"></a>
-															</li>
-															<li class="pink">
-																<a href="#"></a>
-															</li>
-															<li class="lightgrey">
-																<a href="#"></a>
-															</li>
-														</ul>
-													</div>
-													<div class="pull-right">
-														<a href="#" rel='tooltip' title="Add to cart"><i class="icon-shopping-cart"></i></a>
-														<a href="#" rel='tooltip' title="Add to whishlist"><i class="icon-cloud"></i></a>
+														<div class="pull-right">
+															<a href="#" rel='tooltip' title="Add to cart">
+																<i class="fa fa-shopping-cart"></i>
+															</a>
+															<a href="#" rel='tooltip' title="Add to whishlist">
+																<i class="fa fa-cloud"></i>
+															</a>
+														</div>
 													</div>
 												</div>
+												<!-- /.product -->
 											</li>
-											<li class="span3">
-												<a href="more-shop-product.html">
-													<img src="img/demo/shop/6.jpg" alt="">
-													<div class="details">
-														<div class="name">
-															Simple jeans
+											<li class="col-sm-3">
+												<div class="product">
+													<a href="more-shop-product.html">
+														<img src="img/demo/shop/6.jpg" alt="">
+														<div class="details">
+															<div class="name">
+																Simple jeans
+															</div>
+															<div class="price">
+																$25.00
+															</div>
 														</div>
-														<div class="price">
-															$25.00
+													</a>
+													<div class="extended">
+														<div class="pull-left">
+															<ul class="colors small">
+																<li class="red">
+																	<a href="#"></a>
+																</li>
+																<li class="pink">
+																	<a href="#"></a>
+																</li>
+																<li class="lightgrey">
+																	<a href="#"></a>
+																</li>
+															</ul>
 														</div>
-													</div>
-												</a>
-												<div class="extended">
-													<div class="pull-left">
-														<ul class="colors small">
-															<li class="red">
-																<a href="#"></a>
-															</li>
-															<li class="pink">
-																<a href="#"></a>
-															</li>
-															<li class="lightgrey">
-																<a href="#"></a>
-															</li>
-														</ul>
-													</div>
-													<div class="pull-right">
-														<a href="#" rel='tooltip' title="Add to cart"><i class="icon-shopping-cart"></i></a>
-														<a href="#" rel='tooltip' title="Add to whishlist"><i class="icon-cloud"></i></a>
+														<div class="pull-right">
+															<a href="#" rel='tooltip' title="Add to cart">
+																<i class="fa fa-shopping-cart"></i>
+															</a>
+															<a href="#" rel='tooltip' title="Add to whishlist">
+																<i class="fa fa-cloud"></i>
+															</a>
+														</div>
 													</div>
 												</div>
+												<!-- /.product -->
 											</li>
 										</ul>
 									</div>
@@ -888,9 +982,22 @@
 					</div>
 				</div>
 			</div>
-		</div></div>
-		
-	</body>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-38620714-4']);
+	_gaq.push(['_trackPageview']);
 
-	</html>
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+</body>
 
+</html>

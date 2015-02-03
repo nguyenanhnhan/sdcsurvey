@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -7,16 +8,13 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	
+
 	<title>FLAT - Wizard</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap responsive -->
-	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 	<!-- jQuery UI -->
-	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+	<link rel="stylesheet" href="css/plugins/jquery-ui/jquery-ui.min.css">
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="css/style.css">
 	<!-- Color CSS -->
@@ -25,17 +23,13 @@
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
-	
+
 	<!-- Nice Scroll -->
 	<script src="js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
 	<!-- imagesLoaded -->
 	<script src="js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
 	<!-- jQuery UI -->
-	<script src="js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
+	<script src="js/plugins/jquery-ui/jquery-ui.js"></script>
 	<!-- slimScroll -->
 	<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- Bootstrap -->
@@ -68,7 +62,7 @@
 			});
 		</script>
 	<![endif]-->
-	
+
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="img/favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
@@ -80,7 +74,9 @@
 	<div id="navigation">
 		<div class="container-fluid">
 			<a href="#" id="brand">FLAT</a>
-			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
+			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
+				<i class="fa fa-bars"></i>
+			</a>
 			<ul class='main-nav'>
 				<li>
 					<a href="index.html">
@@ -158,7 +154,7 @@
 							<a href="tables-basic.html">Basic tables</a>
 						</li>
 						<li>
-							<a href="tables-dynamic.html">Dynamic tables</a>
+							<a href="tables-advanced.html">Advanced tables</a>
 						</li>
 						<li>
 							<a href="tables-large.html">Large tables</a>
@@ -192,7 +188,7 @@
 						<li>
 							<a href="plugins-dragdrop.html">Drag &amp; Drop widgets</a>
 						</li>
-						
+
 					</ul>
 				</li>
 				<li>
@@ -243,27 +239,16 @@
 							<a href="more-blank.html">Blank page</a>
 						</li>
 						<li class='dropdown-submenu'>
-							<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Another submenu</a>
+							<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Blog</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">This is level 3</a>
+									<a href="more-blog-list.html">List big image</a>
 								</li>
 								<li>
-									<a href="#">Another page here</a>
+									<a href="more-blog-list-small.html">List small image</a>
 								</li>
-								<li class='dropdown-submenu'>
-									<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Go to level 4</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="#">This is level 4</a>
-										</li>
-										<li>
-											<a href="#">Unlimited levels</a>
-										</li>
-										<li>
-											<a href="#">Easy to use</a>
-										</li>
-									</ul>
+								<li>
+									<a href="more-blog-post.html">Post</a>
 								</li>
 							</ul>
 						</li>
@@ -277,6 +262,9 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a href="layouts-sidebar-hidden.html">Default hidden sidebar</a>
+						</li>
+						<li>
+							<a href="layouts-sidebar-right.html">Sidebar right side</a>
 						</li>
 						<li>
 							<a href="layouts-color.html">Different default color</a>
@@ -307,7 +295,10 @@
 			<div class="user">
 				<ul class="icon-nav">
 					<li class='dropdown'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-envelope-alt"></i><span class="label label-lightred">4</span></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-envelope"></i>
+							<span class="label label-lightred">4</span>
+						</a>
 						<ul class="dropdown-menu pull-right message-ul">
 							<li>
 								<a href="#">
@@ -330,7 +321,7 @@
 										</div>
 									</div>
 									<div class="count">
-										<i class="icon-comment"></i>
+										<i class="fa fa-comment"></i>
 										<span>3</span>
 									</div>
 								</a>
@@ -347,13 +338,17 @@
 								</a>
 							</li>
 							<li>
-								<a href="components-messages.html" class='more-messages'>Go to Message center <i class="icon-arrow-right"></i></a>
+								<a href="components-messages.html" class='more-messages'>Go to Message center
+									<i class="fa fa-arrow-right"></i>
+								</a>
 							</li>
 						</ul>
 					</li>
-					
+
 					<li class="dropdown sett">
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-cog"></i></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-cog"></i>
+						</a>
 						<ul class="dropdown-menu pull-right theme-settings">
 							<li>
 								<span>Layout-width</span>
@@ -379,7 +374,9 @@
 						</ul>
 					</li>
 					<li class='dropdown colo'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-tint"></i>
+						</a>
 						<ul class="dropdown-menu pull-right theme-colors">
 							<li class="subtitle">
 								Predefined colors
@@ -404,12 +401,43 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="more-locked.html" class='lock-screen' rel='tooltip' title="Lock screen" data-placement="bottom"><i class="icon-lock"></i></a>
+					<li class='dropdown language-select'>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<img src="img/demo/flags/us.gif" alt="">
+							<span>US</span>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/br.gif" alt="">
+									<span>Brasil</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/de.gif" alt="">
+									<span>Deutschland</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/es.gif" alt="">
+									<span>España</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/fr.gif" alt="">
+									<span>France</span>
+								</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 				<div class="dropdown">
-					<a href="#" class='dropdown-toggle' data-toggle="dropdown">John Doe <img src="img/demo/user-avatar.jpg" alt=""></a>
+					<a href="#" class='dropdown-toggle' data-toggle="dropdown">John Doe
+						<img src="img/demo/user-avatar.jpg" alt="">
+					</a>
 					<ul class="dropdown-menu pull-right">
 						<li>
 							<a href="more-userprofile.html">Edit profile</a>
@@ -430,12 +458,17 @@
 			<form action="search-results.html" method="GET" class='search-form'>
 				<div class="search-pane">
 					<input type="text" name="search" placeholder="Search here...">
-					<button type="submit"><i class="icon-search"></i></button>
+					<button type="submit">
+						<i class="fa fa-search"></i>
+					</button>
 				</div>
 			</form>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Content</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Content</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li class='dropdown'>
@@ -476,7 +509,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Plugins</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Plugins</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -517,7 +553,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Settings</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Settings</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -555,7 +594,10 @@
 			</div>
 			<div class="subnav subnav-hidden">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-right"></i><span>Default hidden</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-right"></i>
+						<span>Default hidden</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -598,22 +640,26 @@
 					<div class="pull-right">
 						<ul class="minitiles">
 							<li class='grey'>
-								<a href="#"><i class="icon-cogs"></i></a>
+								<a href="#">
+									<i class="fa fa-cogs"></i>
+								</a>
 							</li>
 							<li class='lightgrey'>
-								<a href="#"><i class="icon-globe"></i></a>
+								<a href="#">
+									<i class="fa fa-globe"></i>
+								</a>
 							</li>
 						</ul>
 						<ul class="stats">
 							<li class='satgreen'>
-								<i class="icon-money"></i>
+								<i class="fa fa-money"></i>
 								<div class="details">
 									<span class="big">$324,12</span>
 									<span>Balance</span>
 								</div>
 							</li>
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
 									<span class="big">February 22, 2013</span>
 									<span>Wednesday, 13:56</span>
@@ -626,55 +672,57 @@
 					<ul>
 						<li>
 							<a href="more-login.html">Home</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="forms-basic.html">Forms</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="forms-wizard.html">Wizard</a>
 						</li>
 					</ul>
 					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
+						<a href="#">
+							<i class="fa fa-times"></i>
+						</a>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box">
 							<div class="box-title">
 								<h3>
-									<i class="icon-magic"></i>
+									<i class="fa fa-magic"></i>
 									Basic wizard
 								</h3>
 							</div>
 							<div class="box-content">
 								<form action="post.php" method="POST" class='form-horizontal form-wizard' id="bb">
 									<div class="step" id="firstStep">
-										<div class="control-group">
-											<label for="firstname" class="control-label">First name</label>
-											<div class="controls">
-												<input type="text" name="firstname" id="firstname" class="input-xlarge">
+										<div class="form-group">
+											<label for="firstname" class="control-label col-sm-2">First name</label>
+											<div class="col-sm-10">
+												<input type="text" name="firstname" id="firstname" class="form-control">
 											</div>
 										</div>
-										<div class="control-group">
-											<label for="anotherelem" class="control-label">Last name</label>
-											<div class="controls">
-												<input type="text" name="anotherelem" id="anotherelem" class="input-xlarge">
+										<div class="form-group">
+											<label for="anotherelem" class="control-label col-sm-2">Last name</label>
+											<div class="col-sm-10">
+												<input type="text" name="anotherelem" id="anotherelem" class="form-control">
 											</div>
 										</div>
-										<div class="control-group">
-											<label for="additionalfield" class="control-label">Additional information</label>
-											<div class="controls">
-												<input type="text" name="additionalfield" id="additionalfield" class="input-xlarge">
+										<div class="form-group">
+											<label for="additionalfield" class="control-label col-sm-2">Additional information</label>
+											<div class="col-sm-10">
+												<input type="text" name="additionalfield" id="additionalfield" class="form-control">
 											</div>
 										</div>
 									</div>
 									<div class="step" id="secondStep">
-										<div class="control-group">
-											<label for="text" class="control-label">Gender</label>
-											<div class="controls">
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Gender</label>
+											<div class="col-sm-10">
 												<select name="gend" id="gend">
 													<option value="">-- Chose one --</option>
 													<option value="1">Male</option>
@@ -682,10 +730,13 @@
 												</select>
 											</div>
 										</div>
-										<div class="control-group">
-											<label for="text" class="control-label">Accept policy</label>
-											<div class="controls">
-												<label class="checkbox"><input type="checkbox" name="policy" value="agree"> I agree the policy.</label>
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Accept policy</label>
+											<div class="col-sm-10">
+												<div class="checkbox">
+													<label>
+														<input type="checkbox" name="policy" value="agree">I agree the policy.</label>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -698,12 +749,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-magic"></i>
+									<i class="fa fa-magic"></i>
 									Wizard with step overview
 								</h3>
 							</div>
@@ -743,22 +794,22 @@
 												</div>
 											</li>
 										</ul>
-										<div class="control-group">
-											<label for="firstname" class="control-label">First name</label>
-											<div class="controls">
-												<input type="text" name="firstname" id="firstname" class="input-xlarge">
+										<div class="form-group">
+											<label for="firstname" class="control-label col-sm-2">First name</label>
+											<div class="col-sm-10">
+												<input type="text" name="firstname" id="firstname" class="form-control">
 											</div>
 										</div>
-										<div class="control-group">
-											<label for="anotherelem" class="control-label">Last name</label>
-											<div class="controls">
-												<input type="text" name="anotherelem" id="anotherelem" class="input-xlarge">
+										<div class="form-group">
+											<label for="anotherelem" class="control-label col-sm-2">Last name</label>
+											<div class="col-sm-10">
+												<input type="text" name="anotherelem" id="anotherelem" class="form-control">
 											</div>
 										</div>
-										<div class="control-group">
-											<label for="additionalfield" class="control-label">Additional information</label>
-											<div class="controls">
-												<input type="text" name="additionalfield" id="additionalfield" class="input-xlarge">
+										<div class="form-group">
+											<label for="additionalfield" class="control-label col-sm-2">Additional information</label>
+											<div class="col-sm-10">
+												<input type="text" name="additionalfield" id="additionalfield" class="form-control">
 											</div>
 										</div>
 									</div>
@@ -798,9 +849,9 @@
 												</div>
 											</li>
 										</ul>
-										<div class="control-group">
-											<label for="text" class="control-label">Gender</label>
-											<div class="controls">
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Gender</label>
+											<div class="col-sm-10">
 												<select name="gend" id="gend">
 													<option value="">-- Chose one --</option>
 													<option value="1">Male</option>
@@ -808,10 +859,13 @@
 												</select>
 											</div>
 										</div>
-										<div class="control-group">
-											<label for="text" class="control-label">Accept policy</label>
-											<div class="controls">
-												<label class="checkbox"><input type="checkbox" name="policy" value="agree"> I agree the policy.</label>
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Accept policy</label>
+											<div class="col-sm-10">
+												<div class="checkbox">
+													<label>
+														<input type="checkbox" name="policy" value="agree">I agree the policy.</label>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -852,10 +906,10 @@
 												</div>
 											</li>
 										</ul>
-										<div class="control-group">
-											<label for="text" class="control-label">Additional information</label>
-											<div class="controls">
-												<textarea name="textare" id="tt333" class="span12" rows="7" placeholder="You can provide additional information in here..."></textarea>
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Additional information</label>
+											<div class="col-sm-10">
+												<textarea name="textare" id="tt333" class="form-control" rows="7" placeholder="You can provide additional information in here..."></textarea>
 											</div>
 										</div>
 									</div>
@@ -868,12 +922,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box box-color box-bordered lightred">
 							<div class="box-title">
 								<h3>
-									<i class="icon-magic"></i>
+									<i class="fa fa-magic"></i>
 									Vertical steps
 								</h3>
 							</div>
@@ -914,22 +968,22 @@
 											</li>
 										</ul>
 										<div class="form-content">
-											<div class="control-group">
-												<label for="firstname" class="control-label">First name</label>
-												<div class="controls">
-													<input type="text" name="firstname" id="firstname" class="input-xlarge">
+											<div class="form-group">
+												<label for="firstname" class="control-label col-sm-2">First name</label>
+												<div class="col-sm-10">
+													<input type="text" name="firstname" id="firstname" class="form-control">
 												</div>
 											</div>
-											<div class="control-group">
-												<label for="anotherelem" class="control-label">Last name</label>
-												<div class="controls">
-													<input type="text" name="anotherelem" id="anotherelem" class="input-xlarge">
+											<div class="form-group">
+												<label for="anotherelem" class="control-label col-sm-2">Last name</label>
+												<div class="col-sm-10">
+													<input type="text" name="anotherelem" id="anotherelem" class="form-control">
 												</div>
 											</div>
-											<div class="control-group">
-												<label for="additionalfield" class="control-label">Additional information</label>
-												<div class="controls">
-													<input type="text" name="additionalfield" id="additionalfield" class="input-xlarge">
+											<div class="form-group">
+												<label for="additionalfield" class="control-label col-sm-2">Additional information</label>
+												<div class="col-sm-10">
+													<input type="text" name="additionalfield" id="additionalfield" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -971,30 +1025,33 @@
 											</li>
 										</ul>
 										<div class="form-content">
-										<div class="control-group">
-											<label for="text" class="control-label">Gender</label>
-											<div class="controls">
-												<select name="gend" id="gend">
-													<option value="">-- Chose one --</option>
-													<option value="1">Male</option>
-													<option value="2">Female</option>
-												</select>
+											<div class="form-group">
+												<label for="text" class="control-label col-sm-2">Gender</label>
+												<div class="col-sm-10">
+													<select name="gend" id="gend">
+														<option value="">-- Chose one --</option>
+														<option value="1">Male</option>
+														<option value="2">Female</option>
+													</select>
+												</div>
 											</div>
-										</div>
-										<div class="control-group">
-											<label for="text" class="control-label">Language</label>
-											<div class="controls">
-												<select name="gend" id="gend">
-													<option value="">-- Chose one --</option>
-													<option value="1">German</option>
-													<option value="2">English</option>
-												</select>
+											<div class="form-group">
+												<label for="text" class="control-label col-sm-2">Language</label>
+												<div class="col-sm-10">
+													<select name="gend" id="gend">
+														<option value="">-- Chose one --</option>
+														<option value="1">German</option>
+														<option value="2">English</option>
+													</select>
+												</div>
 											</div>
-										</div>
-											<div class="control-group">
-												<label for="text" class="control-label">Accept policy</label>
-												<div class="controls">
-													<label class="checkbox"><input type="checkbox" name="policy" value="agree"> I agree the policy.</label>
+											<div class="form-group">
+												<label for="text" class="control-label col-sm-2">Accept policy</label>
+												<div class="col-sm-10">
+													<div class="checkbox">
+														<label>
+															<input type="checkbox" name="policy" value="agree">I agree the policy.</label>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -1037,10 +1094,10 @@
 											</li>
 										</ul>
 										<div class="form-content">
-											<div class="control-group">
-												<label for="text" class="control-label">Additional information</label>
-												<div class="controls">
-													<textarea name="textare" id="tt333" class="span12" rows="10" placeholder="You can provide additional information in here..."></textarea>
+											<div class="form-group">
+												<label for="text" class="control-label col-sm-2">Additional information</label>
+												<div class="col-sm-10">
+													<textarea name="textare" id="tt333" class="form-control" rows="10" placeholder="You can provide additional information in here..."></textarea>
 												</div>
 											</div>
 										</div>
@@ -1054,12 +1111,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
+				<div class="row">
 					<div class="span12">
 						<div class="box">
 							<div class="box-title">
 								<h3>
-									<i class="icon-magic"></i>
+									<i class="fa fa-magic"></i>
 									Wizard with validation
 								</h3>
 							</div>
@@ -1114,22 +1171,22 @@
 											</li>
 										</ul>
 										<div class="step-forms">
-											<div class="control-group">
-												<label for="firstname" class="control-label">First name</label>
-												<div class="controls">
-													<input type="text" name="firstname" id="firstname" class="input-xlarge" data-rule-required="true">
+											<div class="form-group">
+												<label for="firstname" class="control-label col-sm-2">First name</label>
+												<div class="col-sm-10">
+													<input type="text" name="firstname" id="firstname" class="form-control" data-rule-required="true">
 												</div>
 											</div>
-											<div class="control-group">
-												<label for="anotherelem" class="control-label">Last name</label>
-												<div class="controls">
-													<input type="text" name="anotherelem" id="anotherelem" class="input-xlarge" data-rule-required="true">
+											<div class="form-group">
+												<label for="anotherelem" class="control-label col-sm-2">Last name</label>
+												<div class="col-sm-10">
+													<input type="text" name="anotherelem" id="anotherelem" class="form-control" data-rule-required="true">
 												</div>
 											</div>
-											<div class="control-group">
-												<label for="additionalfield" class="control-label">Additional information</label>
-												<div class="controls">
-													<input type="text" name="additionalfield" id="additionalfield" class="input-xlarge" data-rule-required="true" data-rule-minlength="10">
+											<div class="form-group">
+												<label for="additionalfield" class="control-label col-sm-2">Additional information</label>
+												<div class="col-sm-10">
+													<input type="text" name="additionalfield" id="additionalfield" class="form-control" data-rule-required="true" data-rule-minlength="10">
 												</div>
 											</div>
 										</div>
@@ -1141,7 +1198,7 @@
 													<span class="title">
 														1</span>
 													<span class="circle">
-														
+
 													</span>
 													<span class="description">
 														Basic information
@@ -1183,9 +1240,9 @@
 												</div>
 											</li>
 										</ul>
-										<div class="control-group">
-											<label for="text" class="control-label">Gender</label>
-											<div class="controls">
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Gender</label>
+											<div class="col-sm-10">
 												<select name="gend" id="gend" data-rule-required="true">
 													<option value="">-- Chose one --</option>
 													<option value="1">Male</option>
@@ -1193,10 +1250,13 @@
 												</select>
 											</div>
 										</div>
-										<div class="control-group">
-											<label for="text" class="control-label">Accept policy</label>
-											<div class="controls">
-												<label class="checkbox"><input type="checkbox" name="policy" value="agree" data-rule-required="true"> I agree the policy.</label>
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Accept policy</label>
+											<div class="col-sm-10">
+												<div class="checkbox">
+													<label>
+														<input type="checkbox" name="policy" value="agree" data-rule-required="true">I agree the policy.</label>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -1207,7 +1267,7 @@
 													<span class="title">
 														1</span>
 													<span class="circle">
-														
+
 													</span>
 													<span class="description">
 														Basic information
@@ -1219,7 +1279,7 @@
 													<span class="title">
 														2</span>
 													<span class="circle">
-														
+
 													</span>
 													<span class="description">
 														Advanced information
@@ -1250,10 +1310,10 @@
 												</div>
 											</li>
 										</ul>
-										<div class="control-group">
-											<label for="text" class="control-label">Additional information</label>
-											<div class="controls">
-												<textarea name="textare" id="tt333" class="span12" rows="7" placeholder="You can provide additional information in here..."></textarea>
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Additional information</label>
+											<div class="col-sm-10">
+												<textarea name="textare" id="tt333" class="form-control" rows="7" placeholder="You can provide additional information in here..."></textarea>
 											</div>
 										</div>
 									</div>
@@ -1264,7 +1324,7 @@
 													<span class="title">
 														1</span>
 													<span class="circle">
-														
+
 													</span>
 													<span class="description">
 														Basic information
@@ -1276,7 +1336,7 @@
 													<span class="title">
 														2</span>
 													<span class="circle">
-														
+
 													</span>
 													<span class="description">
 														Advanced information
@@ -1307,10 +1367,13 @@
 												</div>
 											</li>
 										</ul>
-										<div class="control-group">
-											<label for="text" class="control-label">Check again</label>
-											<div class="controls">
-												<label class="checkbox"><input type="checkbox" name="policy" value="agree" data-rule-required="true"> Everything is ok. Submit</label>
+										<div class="form-group">
+											<label for="text" class="control-label col-sm-2">Check again</label>
+											<div class="col-sm-10">
+												<div class="checkbox">
+													<label>
+														<input type="checkbox" name="okokok" value="agree" data-rule-required="true">Everything is ok?</label>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -1324,9 +1387,22 @@
 					</div>
 				</div>
 			</div>
-		</div></div>
-		
-	</body>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-38620714-4']);
+	_gaq.push(['_trackPageview']);
 
-	</html>
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+</body>
 
+</html>

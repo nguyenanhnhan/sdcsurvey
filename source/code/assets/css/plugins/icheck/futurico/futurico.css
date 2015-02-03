@@ -1,13 +1,15 @@
-/* iCheck.js Futurico skin
+/* iCheck plugin Futurico skin
 ----------------------------------- */
 .icheckbox_futurico,
 .iradio_futurico {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 16px;
     height: 17px;
-    background: url(../../../../img/plugins/icheck/futurico/futurico.png) no-repeat;
+    background: url(futurico.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -40,14 +42,11 @@
         background-position: -126px 0;
     }
 
-/* Retina support */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-       only screen and (-moz-min-device-pixel-ratio: 1.5),
-       only screen and (-o-min-device-pixel-ratio: 3/2),
-       only screen and (min-device-pixel-ratio: 1.5) {
+/* HiDPI support */
+@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_futurico,
     .iradio_futurico {
-        background-image: url(../../../../img/plugins/icheck/futurico/futurico@2x.png);
+        background-image: url(futurico@2x.png);
         -webkit-background-size: 144px 19px;
         background-size: 144px 19px;
     }

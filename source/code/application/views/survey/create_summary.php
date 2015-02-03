@@ -169,7 +169,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$("#doing_survey").change(function (){
+				$("#doing_survey").on('ifChanged',function (){
 					if ($("#doing_survey").is(":checked"))
 					{
 						$.ajax({
@@ -180,6 +180,7 @@
 							success: function(data){
 								if (data.status == true)
 								{
+
 									$("#edit_btn").prop( "href", "#modal-warning" );
 									$("#edit_btn").attr( "data-toggle", "modal");
 									

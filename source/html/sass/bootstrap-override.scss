@@ -1,3 +1,21 @@
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle) {
+	@include border-radius(0);
+}
+
+.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:first-child>.btn-group:not(:first-child)>.btn {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.form-control{
+	@include box-shadow(none);
+	@include border-radius(0);
+}
+
+.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
+	margin-right: -2px;
+}
+
 .dropdown-menu{
 	border:2px solid #666;
 	background:#fff;
@@ -88,6 +106,10 @@
 	form{
 		margin-bottom: 0;
 	}
+
+	.modal-footer{
+		margin-top: 0;
+	}
 }
 
 .input-append input, .input-append select, .input-append .uneditable-input {
@@ -109,6 +131,7 @@
 .btn-group{
 	&.text{
 		font-size:13px;
+		line-height:30px;
 	}
 	.dropdown,.pagination{
 		font-size:13px;
@@ -171,13 +194,14 @@
 	@include text-shadow(none);
 }
 
-input, textarea{
+input, textarea, input:focus{
 	-webkit-border-radius: 0 !important;
 	-moz-border-radius: 0 !important;
 	border-radius: 0 !important;
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
+	outline-width: 0;
 }
 
 .modal{
@@ -222,13 +246,13 @@ input, textarea{
 }
 
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
-	background: #f9f9f9;
+	background: #fff;
+	color: #333;
 }
 
 .form-horizontal{
 	.control-label{
 		text-align:left;
-		width:140px;
 	}
 
 	.controls{
@@ -309,6 +333,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 	color:#444;
 	padding:5px 9px;
 	filter:none;
+
+	&.btn--icon{
+		.fa{
+			margin-right: 5px;
+		}
+	}
 
 	&.btn-large{
 		padding:10px 16px;
@@ -429,14 +459,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 	padding: 0;
 }
 
-.accordion{
-	.accordion-group{
+.panel-group{
+	.panel{
 		@include border-radius(0);
-
-		.accordion-heading{
-			.accordion-toggle{
-				background: #f6f6f6;
-			}
+		.panel-heading, .panel-title > a {
+			@include border-radius(0);
 		}
 	}
 }
@@ -451,6 +478,10 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 
 .pagination-large ul>li:first-child>a, .pagination-large ul>li:first-child>span, .pagination-large ul>li:last-child>a, .pagination-large ul>li:last-child>span, .pagination ul>li:first-child>a, .pagination ul>li:first-child>span, .pagination-mini ul>li:first-child>a, .pagination-small ul>li:first-child>a, .pagination-mini ul>li:first-child>span, .pagination-small ul>li:first-child>span, .pagination ul>li:last-child>a, .pagination ul>li:last-child>span, .pagination-mini ul>li:last-child>a, .pagination-small ul>li:last-child>a, .pagination-mini ul>li:last-child>span, .pagination-small ul>li:last-child>span {
+	@include border-radius(0);
+}
+
+.modal-content{
 	@include border-radius(0);
 }
 

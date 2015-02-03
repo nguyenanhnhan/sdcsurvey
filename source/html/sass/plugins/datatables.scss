@@ -136,6 +136,7 @@ span.ColVis_radio {
 		float:left;
 		min-width:200px;
 		margin:10px 10px 5px 10px;
+		line-height: 29px;
 
 		.input-mini{
 			float:left;
@@ -152,6 +153,7 @@ span.ColVis_radio {
 		margin:10px 5px 10px 0;
 
 		.DTTT_button{
+			padding:8px 7px 7px 8px;
 			background: #eee;
 			@include box-shadow(none);
 			@include border-radius(0);
@@ -187,9 +189,7 @@ span.ColVis_radio {
 
 	.dataTables_paginate{
 		float:right;
-		margin-right:5px;
-		margin-top:10px;
-		margin-bottom: 10px;
+		margin: 17px 5px 10px 0;
 
 		&>a{
 			margin-right:5px;
@@ -198,6 +198,15 @@ span.ColVis_radio {
 			color:#333;
 			text-decoration:none;
 			cursor:pointer;
+
+			&.paginate_button_disabled{
+				color:#999;
+
+				&:hover{
+					background: #eee;
+					cursor:default;
+				}
+			}
 
 			&:hover{
 				background:#ddd;

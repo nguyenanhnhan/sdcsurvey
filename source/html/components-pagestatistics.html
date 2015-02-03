@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -7,15 +8,13 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<!-- Apple devices fullscreen -->
 	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	
+
+	<title>FLAT - Page statistics</title>
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap responsive -->
-	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 	<!-- jQuery UI -->
-	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+	<link rel="stylesheet" href="css/plugins/jquery-ui/jquery-ui.min.css">
 	<!-- Easy pie  -->
 	<link rel="stylesheet" href="css/plugins/easy-pie-chart/jquery.easy-pie-chart.css">
 	<!-- chosen -->
@@ -28,17 +27,13 @@
 
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
-	
+
 	<!-- Nice Scroll -->
 	<script src="js/plugins/nicescroll/jquery.nicescroll.min.js"></script>
 	<!-- imagesLoaded -->
 	<script src="js/plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
 	<!-- jQuery UI -->
-	<script src="js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
-	<script src="js/plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
+	<script src="js/plugins/jquery-ui/jquery-ui.js"></script>
 	<!-- slimScroll -->
 	<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- Bootstrap -->
@@ -75,7 +70,7 @@
 			});
 		</script>
 	<![endif]-->
-	
+
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="img/favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
@@ -87,7 +82,9 @@
 	<div id="navigation">
 		<div class="container-fluid">
 			<a href="#" id="brand">FLAT</a>
-			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
+			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
+				<i class="fa fa-bars"></i>
+			</a>
 			<ul class='main-nav'>
 				<li>
 					<a href="index.html">
@@ -165,7 +162,7 @@
 							<a href="tables-basic.html">Basic tables</a>
 						</li>
 						<li>
-							<a href="tables-dynamic.html">Dynamic tables</a>
+							<a href="tables-advanced.html">Advanced tables</a>
 						</li>
 						<li>
 							<a href="tables-large.html">Large tables</a>
@@ -199,7 +196,7 @@
 						<li>
 							<a href="plugins-dragdrop.html">Drag &amp; Drop widgets</a>
 						</li>
-						
+
 					</ul>
 				</li>
 				<li>
@@ -250,27 +247,16 @@
 							<a href="more-blank.html">Blank page</a>
 						</li>
 						<li class='dropdown-submenu'>
-							<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Another submenu</a>
+							<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Blog</a>
 							<ul class="dropdown-menu">
 								<li>
-									<a href="#">This is level 3</a>
+									<a href="more-blog-list.html">List big image</a>
 								</li>
 								<li>
-									<a href="#">Another page here</a>
+									<a href="more-blog-list-small.html">List small image</a>
 								</li>
-								<li class='dropdown-submenu'>
-									<a href="#" data-toggle="dropdown" class='dropdown-toggle'>Go to level 4</a>
-									<ul class="dropdown-menu">
-										<li>
-											<a href="#">This is level 4</a>
-										</li>
-										<li>
-											<a href="#">Unlimited levels</a>
-										</li>
-										<li>
-											<a href="#">Easy to use</a>
-										</li>
-									</ul>
+								<li>
+									<a href="more-blog-post.html">Post</a>
 								</li>
 							</ul>
 						</li>
@@ -284,6 +270,9 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a href="layouts-sidebar-hidden.html">Default hidden sidebar</a>
+						</li>
+						<li>
+							<a href="layouts-sidebar-right.html">Sidebar right side</a>
 						</li>
 						<li>
 							<a href="layouts-color.html">Different default color</a>
@@ -314,7 +303,10 @@
 			<div class="user">
 				<ul class="icon-nav">
 					<li class='dropdown'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-envelope-alt"></i><span class="label label-lightred">4</span></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-envelope"></i>
+							<span class="label label-lightred">4</span>
+						</a>
 						<ul class="dropdown-menu pull-right message-ul">
 							<li>
 								<a href="#">
@@ -337,7 +329,7 @@
 										</div>
 									</div>
 									<div class="count">
-										<i class="icon-comment"></i>
+										<i class="fa fa-comment"></i>
 										<span>3</span>
 									</div>
 								</a>
@@ -354,13 +346,17 @@
 								</a>
 							</li>
 							<li>
-								<a href="components-messages.html" class='more-messages'>Go to Message center <i class="icon-arrow-right"></i></a>
+								<a href="components-messages.html" class='more-messages'>Go to Message center
+									<i class="fa fa-arrow-right"></i>
+								</a>
 							</li>
 						</ul>
 					</li>
-					
+
 					<li class="dropdown sett">
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-cog"></i></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-cog"></i>
+						</a>
 						<ul class="dropdown-menu pull-right theme-settings">
 							<li>
 								<span>Layout-width</span>
@@ -386,7 +382,9 @@
 						</ul>
 					</li>
 					<li class='dropdown colo'>
-						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<i class="fa fa-tint"></i>
+						</a>
 						<ul class="dropdown-menu pull-right theme-colors">
 							<li class="subtitle">
 								Predefined colors
@@ -411,12 +409,43 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="more-locked.html" class='lock-screen' rel='tooltip' title="Lock screen" data-placement="bottom"><i class="icon-lock"></i></a>
+					<li class='dropdown language-select'>
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown">
+							<img src="img/demo/flags/us.gif" alt="">
+							<span>US</span>
+						</a>
+						<ul class="dropdown-menu pull-right">
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/br.gif" alt="">
+									<span>Brasil</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/de.gif" alt="">
+									<span>Deutschland</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/es.gif" alt="">
+									<span>España</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img src="img/demo/flags/fr.gif" alt="">
+									<span>France</span>
+								</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 				<div class="dropdown">
-					<a href="#" class='dropdown-toggle' data-toggle="dropdown">John Doe <img src="img/demo/user-avatar.jpg" alt=""></a>
+					<a href="#" class='dropdown-toggle' data-toggle="dropdown">John Doe
+						<img src="img/demo/user-avatar.jpg" alt="">
+					</a>
 					<ul class="dropdown-menu pull-right">
 						<li>
 							<a href="more-userprofile.html">Edit profile</a>
@@ -437,12 +466,17 @@
 			<form action="search-results.html" method="GET" class='search-form'>
 				<div class="search-pane">
 					<input type="text" name="search" placeholder="Search here...">
-					<button type="submit"><i class="icon-search"></i></button>
+					<button type="submit">
+						<i class="fa fa-search"></i>
+					</button>
 				</div>
 			</form>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Content</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Content</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li class='dropdown'>
@@ -483,7 +517,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Plugins</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Plugins</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -524,7 +561,10 @@
 			</div>
 			<div class="subnav">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Settings</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-down"></i>
+						<span>Settings</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -562,7 +602,10 @@
 			</div>
 			<div class="subnav subnav-hidden">
 				<div class="subnav-title">
-					<a href="#" class='toggle-subnav'><i class="icon-angle-right"></i><span>Default hidden</span></a>
+					<a href="#" class='toggle-subnav'>
+						<i class="fa fa-angle-right"></i>
+						<span>Default hidden</span>
+					</a>
 				</div>
 				<ul class="subnav-menu">
 					<li>
@@ -605,22 +648,26 @@
 					<div class="pull-right">
 						<ul class="minitiles">
 							<li class='grey'>
-								<a href="#"><i class="icon-cogs"></i></a>
+								<a href="#">
+									<i class="fa fa-cogs"></i>
+								</a>
 							</li>
 							<li class='lightgrey'>
-								<a href="#"><i class="icon-globe"></i></a>
+								<a href="#">
+									<i class="fa fa-globe"></i>
+								</a>
 							</li>
 						</ul>
 						<ul class="stats">
 							<li class='satgreen'>
-								<i class="icon-money"></i>
+								<i class="fa fa-money"></i>
 								<div class="details">
 									<span class="big">$324,12</span>
 									<span>Balance</span>
 								</div>
 							</li>
 							<li class='lightred'>
-								<i class="icon-calendar"></i>
+								<i class="fa fa-calendar"></i>
 								<div class="details">
 									<span class="big">February 22, 2013</span>
 									<span>Wednesday, 13:56</span>
@@ -633,26 +680,28 @@
 					<ul>
 						<li>
 							<a href="more-login.html">Home</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="components-messages.html">Components</a>
-							<i class="icon-angle-right"></i>
+							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="components-pagestatistics.html">Page statistics</a>
 						</li>
 					</ul>
 					<div class="close-bread">
-						<a href="#"><i class="icon-remove"></i></a>
+						<a href="#">
+							<i class="fa fa-times"></i>
+						</a>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span4">
+				<div class="row">
+					<div class="col-sm-4">
 						<div class="box box-color box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-bar-chart"></i>
+									<i class="fa fa-bar-chart-o"></i>
 									Audience Overview
 								</h3>
 							</div>
@@ -662,15 +711,18 @@
 										<div class="left">
 											<div class="input-medium">
 												<select name="category" class='chosen-select' data-nosearch="true">
-												<option value="1">Visits</option>
-												<option value="2">New Visits</option>
-												<option value="3">Unique Visits</option>
-												<option value="4">Pageviews</option>
-											</select>
+													<option value="1">Visits</option>
+													<option value="2">New Visits</option>
+													<option value="3">Unique Visits</option>
+													<option value="4">Pageviews</option>
+												</select>
 											</div>
 										</div>
 										<div class="right">
-											8,195 <span><i class="icon-circle-arrow-up"></i></span>
+											8,195
+											<span>
+												<i class="fa fa-arrow-circle-up"></i>
+											</span>
 										</div>
 									</div>
 									<div class="bottom">
@@ -680,11 +732,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="span4">
+					<div class="col-sm-4">
 						<div class="box box-color lightred box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-bar-chart"></i>
+									<i class="fa fa-bar-chart-o"></i>
 									HDD usage
 								</h3>
 							</div>
@@ -694,15 +746,18 @@
 										<div class="left">
 											<div class="input-medium">
 												<select name="category" class='chosen-select' data-nosearch="true">
-												<option value="1">Today</option>
-												<option value="2">Yesterday</option>
-												<option value="3">Last week</option>
-												<option value="4">Last month</option>
-											</select>
+													<option value="1">Today</option>
+													<option value="2">Yesterday</option>
+													<option value="3">Last week</option>
+													<option value="4">Last month</option>
+												</select>
 											</div>
 										</div>
 										<div class="right">
-											50% <span><i class="icon-circle-arrow-right"></i></span>
+											50%
+											<span>
+												<i class="fa fa-arrow-circle-right"></i>
+											</span>
 										</div>
 									</div>
 									<div class="bottom">
@@ -712,11 +767,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="span4">
+					<div class="col-sm-4">
 						<div class="box box-color satgreen box-bordered">
 							<div class="box-title">
 								<h3>
-									<i class="icon-bar-chart"></i>
+									<i class="fa fa-bar-chart-o"></i>
 									CPU usage
 								</h3>
 							</div>
@@ -726,15 +781,18 @@
 										<div class="left">
 											<div class="input-medium">
 												<select name="category" class='chosen-select' data-nosearch="true">
-												<option value="1">Today</option>
-												<option value="2">Yesterday</option>
-												<option value="3">Last week</option>
-												<option value="4">Last month</option>
-											</select>
+													<option value="1">Today</option>
+													<option value="2">Yesterday</option>
+													<option value="3">Last week</option>
+													<option value="4">Last month</option>
+												</select>
 											</div>
 										</div>
 										<div class="right">
-											80% <span><i class="icon-circle-arrow-down"></i></span>
+											80%
+											<span>
+												<i class="fa fa-arrow-circle-down"></i>
+											</span>
 										</div>
 									</div>
 									<div class="bottom">
@@ -745,18 +803,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box">
 							<div class="box-title">
 								<h3>
-									<i class="icon-bar-chart"></i>
+									<i class="fa fa-bar-chart-o"></i>
 									Mini charts
 								</h3>
 							</div>
 							<div class="box-content">
-								<div class="row-fluid">
-									<div class="span4">
+								<div class="row">
+									<div class="col-sm-4">
 										<ul class="pagestats style-4">
 											<li>
 												<div class="name">
@@ -771,7 +829,7 @@
 											</li>
 										</ul>
 									</div>
-									<div class="span4">
+									<div class="col-sm-4">
 										<ul class="pagestats style-2">
 											<li>
 												<div class="left">
@@ -784,7 +842,7 @@
 											</li>
 										</ul>
 									</div>
-									<div class="span4">
+									<div class="col-sm-4">
 										<ul class="pagestats style-3">
 											<li>
 												<div class="spark">
@@ -798,12 +856,12 @@
 										</ul>
 									</div>
 								</div>
-								<div class="row-fluid margin-top">
-									<div class="span4">
+								<div class="row margin-top">
+									<div class="col-sm-4">
 										<ul class="pagestats style-3">
 											<li>
 												<div class="spark">
-													<div class="chart" data-percent="73" data-color="#f96d6d" data-trackcolor="#fae2e2">73%</div>
+													<div class="chart easyPieChart" data-percent="73" data-color="#f96d6d" data-trackcolor="#fae2e2">73%</div>
 												</div>
 												<div class="bottom">
 													<span class="name">HDD usage</span>
@@ -811,11 +869,11 @@
 											</li>
 										</ul>
 									</div>
-									<div class="span4">
+									<div class="col-sm-4">
 										<ul class="pagestats style-3">
 											<li>
 												<div class="spark">
-													<div class="chart" data-percent="73" data-color="#368ee0" data-trackcolor="#d5e7f7">43%</div>
+													<div class="chart easyPieChart" data-percent="73" data-color="#368ee0" data-trackcolor="#d5e7f7">43%</div>
 												</div>
 												<div class="bottom">
 													<span class="name">CPU Usage</span>
@@ -823,11 +881,11 @@
 											</li>
 										</ul>
 									</div>
-									<div class="span4">
+									<div class="col-sm-4">
 										<ul class="pagestats style-3">
 											<li>
 												<div class="spark">
-													<div class="chart" data-percent="73" data-color="#56af45" data-trackcolor="#dcf8d7">73%</div>
+													<div class="chart easyPieChart" data-percent="73" data-color="#56af45" data-trackcolor="#dcf8d7">73%</div>
 												</div>
 												<div class="bottom">
 													<span class="name">Traffic used</span>
@@ -840,12 +898,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box">
 							<div class="box-title">
 								<h3>
-									<i class="icon-reorder"></i>
+									<i class="fa fa-bars"></i>
 									Tiles with badges
 								</h3>
 							</div>
@@ -853,76 +911,151 @@
 								<ul class="tiles tiles-center nomargin">
 									<li class="lightgrey">
 										<span class="label label-info">17</span>
-										<a href="#"><span><i class="icon-warning-sign"></i></span><span class='name'>Warnings</span></a>
+										<a href="#">
+											<span>
+												<i class="fa fa-warning"></i>
+											</span>
+											<span class='name'>Warnings</span>
+										</a>
 									</li>
 									<li class="lightred">
 										<span class="label label-info">284</span>
-										<a href="#"><span><i class="icon-bolt"></i></span><span class='name'>Cache</span></a>
+										<a href="#">
+											<span>
+												<i class="fa fa-bolt"></i>
+											</span>
+											<span class='name'>Cache</span>
+										</a>
 									</li>
 									<li class="blue">
-										<span class="label label-important">444</span>
-										<a href="#"><span><i class="icon-bar-chart"></i></span><span class='name'>Statistics</span></a>
+										<span class="label label-danger">444</span>
+										<a href="#">
+											<span>
+												<i class="fa fa-bar-chart-o"></i>
+											</span>
+											<span class='name'>Statistics</span>
+										</a>
 									</li>
 									<li class="satgreen">
-										<span class="label label-inverse">5</span>
-										<a href="#"><span><i class="icon-shopping-cart"></i></span><span class='name'>Open orders</span></a>
+										<span class="label label-default">5</span>
+										<a href="#">
+											<span>
+												<i class="fa fa-shopping-cart"></i>
+											</span>
+											<span class='name'>Open orders</span>
+										</a>
 									</li>
 									<li class="orange">
-										<span class="label label-inverse">15</span>
-										<a href="#"><span><i class="icon-comments"></i></span><span class='name'>Open tickets</span></a>
+										<span class="label label-primary">15</span>
+										<a href="#">
+											<span>
+												<i class="fa fa-comments"></i>
+											</span>
+											<span class='name'>Open tickets</span>
+										</a>
 									</li>
 								</ul>
 								<ul class="tiles tiles-center tiles-small">
 									<li class="lightgrey">
 										<span class="label label-info">17</span>
-										<a href="#"><span><i class="icon-warning-sign"></i></span><span class='name'>Warnings</span></a>
+										<a href="#">
+											<span>
+												<i class="fa fa-warning"></i>
+											</span>
+											<span class='name'>Warnings</span>
+										</a>
 									</li>
 									<li class="lightred">
 										<span class="label label-info">284</span>
-										<a href="#"><span><i class="icon-bolt"></i></span><span class='name'>Cache</span></a>
+										<a href="#">
+											<span>
+												<i class="fa fa-bolt"></i>
+											</span>
+											<span class='name'>Cache</span>
+										</a>
 									</li>
 									<li class="blue">
-										<span class="label label-important">444</span>
-										<a href="#"><span><i class="icon-bar-chart"></i></span><span class='name'>Statistics</span></a>
+										<span class="label label-danger">444</span>
+										<a href="#">
+											<span>
+												<i class="fa fa-bar-chart-o"></i>
+											</span>
+											<span class='name'>Statistics</span>
+										</a>
 									</li>
 									<li class="satgreen">
-										<span class="label label-inverse">5</span>
-										<a href="#"><span><i class="icon-shopping-cart"></i></span><span class='name'>Orders</span></a>
+										<span class="label label-default">5</span>
+										<a href="#">
+											<span>
+												<i class="fa fa-shopping-cart"></i>
+											</span>
+											<span class='name'>Orders</span>
+										</a>
 									</li>
 									<li class="orange">
-										<span class="label label-inverse">15</span>
-										<a href="#"><span><i class="icon-comments"></i></span><span class='name'>Tickets</span></a>
+										<span class="label label-default">15</span>
+										<a href="#">
+											<span>
+												<i class="fa fa-comments"></i>
+											</span>
+											<span class='name'>Tickets</span>
+										</a>
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<div class="row">
+					<div class="col-sm-12">
 						<div class="box">
 							<div class="box-title">
 								<h3>
-									<i class="icon-reorder"></i>
+									<i class="fa fa-bars"></i>
 									Tiles with statistics
 								</h3>
 							</div>
 							<div class="box-content">
 								<ul class="tiles tiles-center nomargin">
 									<li class="lightgrey has-chart">
-										<a href="#"><span><div class="chart" data-percent="73" data-color="#ffffff" data-trackcolor="#333333">73%</div></span><span class='name'>HDD Usage</span></a>
+										<a href="#">
+											<span>
+												<div class="chart" data-percent="73" data-color="#ffffff" data-trackcolor="#333333">73%</div>
+											</span>
+											<span class='name'>HDD Usage</span>
+										</a>
 									</li>
 									<li class="lightred has-chart">
-										<a href="#"><span><div class="chart" data-percent="73" data-color="#ffffff" data-trackcolor="#f96d6d">73%</div></span><span class='name'>Downloading</span></a>
+										<a href="#">
+											<span>
+												<div class="chart" data-percent="73" data-color="#ffffff" data-trackcolor="#f96d6d">73%</div>
+											</span>
+											<span class='name'>Downloading</span>
+										</a>
 									</li>
 									<li class="blue has-chart">
-										<a href="#"><span><div class="chart" data-percent="73" data-color="#ffffff" data-trackcolor="#5facf3">73%</div></span><span class='name'>Saving...</span></a>
+										<a href="#">
+											<span>
+												<div class="chart" data-percent="73" data-color="#ffffff" data-trackcolor="#5facf3">73%</div>
+											</span>
+											<span class='name'>Saving...</span>
+										</a>
 									</li>
 									<li class="satgreen has-chart-2">
-										<a href="#"><span><div class="spark-me" sparkType="bar" sparkBarWidth="4" sparkHeight="55" sparkBarColor="#ffffff">12,44,52,43,36,25,40,38,30,28,43,36,25,40,38,30,28</div></span><span class='name'>Balance</span></a>
+										<a href="#">
+											<span>
+												<div class="spark-me" sparkType="bar" sparkBarWidth="4" sparkHeight="55" sparkBarColor="#ffffff">12,44,52,43,36,25,40,38,30,28,43,36,25,40,38,30,28</div>
+											</span>
+											<span class='name'>Balance</span>
+										</a>
 									</li>
 									<li class="orange has-chart-2">
-										<a href="#"><span><div class="spark-me" sparkWidth="90" sparkHeight="55" sparkLineColor="#ffffff" sparkFillColor="#f2d09b">12,44,52,43,36,25,40,38,30,28</div></span><span class='name'>Balance</span></a>
+										<a href="#">
+											<span>
+												<div class="spark-me" sparkWidth="90" sparkHeight="55" sparkLineColor="#ffffff" sparkFillColor="#f2d09b">12,44,52,43,36,25,40,38,30,28</div>
+											</span>
+											<span class='name'>Balance</span>
+										</a>
 									</li>
 								</ul>
 							</div>
@@ -930,9 +1063,22 @@
 					</div>
 				</div>
 			</div>
-		</div></div>
-		
-	</body>
+		</div>
+	</div>
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-38620714-4']);
+	_gaq.push(['_trackPageview']);
 
-	</html>
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+	</script>
+</body>
 
+</html>

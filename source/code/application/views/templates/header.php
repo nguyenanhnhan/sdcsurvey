@@ -13,8 +13,9 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>bootstrap.min.css">
 	<!-- jQuery UI -->
-	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/jquery-ui/smoothness/jquery-ui.css">
-	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/jquery-ui/jquery-ui.min.css">
+	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/jquery-ui/jquery-ui.structure.min.css">
+	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/jquery-ui/jquery-ui.theme.min.css">
 	<!-- PageGuide -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/pageguide/pageguide.css">
 	<!-- Fullcalendar -->
@@ -47,7 +48,7 @@
 	<!-- Notify -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>plugins/gritter/jquery.gritter.css">
 	<!-- Pace CSS -->
-	<link rel="stylesheet" type="text/css" href="<?php echo css_url() ?>plugins/pace/pace.min.css">
+
 
 	<!-- jQuery -->
 	<!-- <script src="<?php echo js_url() ?>jquery.min.js"></script> -->
@@ -58,13 +59,7 @@
 	<!-- imagesLoaded -->
 	<script src="<?php echo js_url() ?>plugins/imagesLoaded/jquery.imagesloaded.min.js"></script>
 	<!-- jQuery UI -->
-	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery.ui.core.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery.ui.widget.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery.ui.sortable.min.js"></script>
-	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery.ui.spinner.js"></script>
-	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery.ui.slider.js"></script>
+	<script src="<?php echo js_url() ?>plugins/jquery-ui/jquery-ui.js"></script>
 	<!-- dataTables -->
 	<script src="<?php echo js_url() ?>plugins/datatable/jquery.dataTables.min.js"></script>
 	<script src="<?php echo js_url() ?>plugins/datatable/TableTools.min.js"></script>
@@ -93,8 +88,8 @@
 	<!-- CKEditor -->
 	<script src="<?php echo js_url() ?>plugins/ckeditor/ckeditor.js"></script>
 	<!-- PLUpload -->
-	<script src="<?php echo js_url() ?>plugins/plupload/plupload.full.js"></script>
-	<script src="<?php echo js_url() ?>plugins/plupload/jquery.plupload.queue.js"></script>
+	<script src="<?php echo js_url() ?>plugins/plupload/plupload.full.min.js"></script>
+	<script src="<?php echo js_url() ?>plugins/plupload/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
 	<!-- Custom file upload -->
 	<script src="<?php echo js_url() ?>plugins/fileupload/bootstrap-fileupload.min.js"></script>
 	<script src="<?php echo js_url() ?>plugins/mockjax/jquery.mockjax.js"></script>
@@ -122,7 +117,7 @@
 	<script src="<?php echo js_url() ?>plugins/highcharts/themes/grid.js"></script>
 
 	<!-- pace (page progress loading) -->
-	<script src="<?php echo js_url() ?>plugins/pace/pace.min.js"></script>
+
 
 	<!-- Theme framework -->
 	<!-- <script src="<?php echo js_url() ?>eakroko.min.js"></script> -->
@@ -186,7 +181,6 @@
 			
 			$("#date").text(currentDateString);
 		}
-
 	</script>
 	<!--End of Zopim Live Chat Script-->
 </head>

@@ -215,9 +215,5 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			paceOptions = {
-				ajax: false, // disabled
-	  			document: false, // disabled
-	  			eventLag: false, // disabled
-			}
+			
 		</script>

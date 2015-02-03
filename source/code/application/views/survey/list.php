@@ -40,7 +40,7 @@
 									Danh sách Phiếu khảo sát
 								</h3>
 								<div class="actions">
-									<a href="<?php echo base_url('survey/create_step_1/'.$survey_type['survey_type_id'])?>" rel="tooltip" title="Tạo phiếu khảo sát" class="btn btn-mini"><i class="fa fa-plus"></i></a>
+									<a href="<?php echo base_url('survey/create_step_1/'.$survey_type['survey_type_id'])?>" rel="tooltip" title="Tạo phiếu khảo sát" class="btn btn-mini"><i class="fa fa-plus"></i> Tạo phiếu khảo sát </a>
 									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
 								</div>
 							</div>
