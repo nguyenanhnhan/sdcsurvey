@@ -2,6 +2,48 @@ SDCSurvey
 =========
 
 Ứng dụng Khảo sát sinh viên dành riêng cho Trường ĐH Văn Lang
+Phiên bản 4.2.4
+------------------
+* Cập nhật Flat UI 2.2
+	+Updated Flat UI 2.2
+	+ Fixed Form button bug
+	+ Fixed Tiles hover overlay bug
+	+ Fixed IE9 Login screen bug
+	+ Fixed IE search-input bug
+	+ Fixed icon position in buttons
+	+ Fixed icon position in tabs
+	+ Fixed Task Modal bug
+	+ Fixed label bugs
+	+ Fixed easy-pie plugin bugs
+	+ Fixed sparklines bug
+	+ Fixed error page bugs
+	+ Fixed login screen "remember me" vertical positioning
+	+ Updated jQuery
+	+ Updated jQuery-UI
+	+ Updated PLUpload to v2
+	+ Updated dataTables to new Version
+	+ Updated fontAwesome
+	+ Updated iCheck plugin
+	+ Updated Chosen plugin
+	+ Updated CKEditor plugin
+	+ Updated jQuery Validation plugin
+	+ Updated Colorbox plugin
+	+ Updated Complexify plugin
+	+ Updated Daterange plugin
+	+ Updated easy-pie-charts plugin
+	+ Updated fullcalendar plugin
+	+ Updated imagesloaded plugin
+	+ Updated masonry plugin
+	+ Updated multi-select plugin
+	+ Updated select2 plugin
+	+ Updated changes in documentation
+	+ Changed input form color to match with textarea/select
+* Xoá plugin Pace
+* Sửa lỗi Edit Step 2 (Calendar)
+* Sửa lỗi Edit Question (UI)
+* Sửa lỗi Survey Summary
+
+
 Phiên bản 4.2.3
 ------------------
 * Chặn các trình duyệt IE 8 trở xuống sử dụng
