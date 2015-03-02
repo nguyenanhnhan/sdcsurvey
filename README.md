@@ -2,8 +2,15 @@ SDCSurvey
 =========
 
 Ứng dụng Khảo sát sinh viên dành riêng cho Trường ĐH Văn Lang
+Phiên bản 4.2.5
+-------------------
+* Thay dấu + thành chữ "Thêm phiếu khảo sát"
+* Cập nhật hiển thị sai khoá học 16-20 (18-22 Sai)
+* Cập nhật lại lỗi không hoạt động của các trạng thái **Đã tốt nghiệp** và **Đang khảo sát**
+* Cập nhật **Lọc các dữ liệu sinh viên còn thiếu** không hoạt động
+
 Phiên bản 4.2.4
-------------------
+-------------------
 * Cập nhật Flat UI 2.2
 	+Updated Flat UI 2.2
 	+ Fixed Form button bug
