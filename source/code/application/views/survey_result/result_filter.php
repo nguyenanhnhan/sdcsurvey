@@ -39,6 +39,9 @@
 									<i class="fa fa-plus"></i>
 									Danh sách sinh viên tham gia khảo sát
 								</h3>
+								<div class="actions">
+									<a href="<?php echo base_url('survey_result/index/')?>" class="btn btn--icon" rel="tooltip" title="Quay lại trang lọc DSSV"><i class="fa fa-arrow-circle-left"></i>Quay lại</a>
+								</div>
 							</div>
 							<div class="box-content nopadding">
 								<table id="student_list" class="table table-hover table-nomargin table-bordered dataTable dataTable-nosort dataTable-custom" data-nosort="0,1,5">
@@ -118,8 +121,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="row-fluid">
-					<div class="span12">
+				<!-- <div class="row">
+					<div class="col-sm-12">
 						<div class="box">
 							<div class="box-content nopadding">
 								<div class="pull-right">
@@ -134,57 +137,57 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			if ($('.dataTable').length > 0) {
-		        $('.dataTable').each(function() {
-		            if ($(this).hasClass("dataTable-custom")) {
-		                var opt = {
-		                    "sPaginationType": "full_numbers",
-		                    "oLanguage": {
-		                        "sSearch": "<span>Tìm kiếm:</span> ",
-		                        "sInfo": "Đang xem <span>_START_</span> đến <span>_END_</span> trong tổng số <span>_TOTAL_</span> nội dung",
-		                        "sLengthMenu": "<span>Hiển thị </span>_MENU_ <span>nội dung trong một trang</span>",
-		                        "oPaginate": {
-							        "sFirst":      "Đầu",
-							        "sLast":       "Cuối",
-							        "sNext":       "Sau",
-							        "sPrevious":   "Trước"
-							    },
-		                    },
-		                    'sDom': "lfrtip"
-		                };
-		                if ($(this).hasClass("dataTable-noheader")) {
-		                    opt.bFilter = false;
-		                    opt.bLengthChange = false;
-		                }
-		                if ($(this).hasClass("dataTable-nofooter")) {
-		                    opt.bInfo = false;
-		                    opt.bPaginate = false;
-		                }
-		                if ($(this).hasClass("dataTable-nosort")) {
-		                    var column = $(this).attr('data-nosort');
-		                    column = column.split(',');
-		                    for (var i = 0; i < column.length; i++) {
-		                        column[i] = parseInt(column[i]);
-		                    };
-		                    opt.aoColumnDefs = [{
-		                        'bSortable': false,
-		                        'aTargets': column
-		                    }];
-		                }
+			$(document).ready(function(){
+				if ($('.dataTable').length > 0) {
+			        $('.dataTable').each(function() {
+			            if ($(this).hasClass("dataTable-custom")) {
+			                var opt = {
+			                    "sPaginationType": "full_numbers",
+			                    "oLanguage": {
+			                        "sSearch": "<span>Tìm kiếm:</span> ",
+			                        "sInfo": "Đang xem <span>_START_</span> đến <span>_END_</span> trong tổng số <span>_TOTAL_</span> nội dung",
+			                        "sLengthMenu": "<span>Hiển thị </span>_MENU_ <span>nội dung trong một trang</span>",
+			                        "oPaginate": {
+								        "sFirst":      "Đầu",
+								        "sLast":       "Cuối",
+								        "sNext":       "Sau",
+								        "sPrevious":   "Trước"
+								    },
+			                    },
+			                    'sDom': "lfrtip"
+			                };
+			                if ($(this).hasClass("dataTable-noheader")) {
+			                    opt.bFilter = false;
+			                    opt.bLengthChange = false;
+			                }
+			                if ($(this).hasClass("dataTable-nofooter")) {
+			                    opt.bInfo = false;
+			                    opt.bPaginate = false;
+			                }
+			                if ($(this).hasClass("dataTable-nosort")) {
+			                    var column = $(this).attr('data-nosort');
+			                    column = column.split(',');
+			                    for (var i = 0; i < column.length; i++) {
+			                        column[i] = parseInt(column[i]);
+			                    };
+			                    opt.aoColumnDefs = [{
+			                        'bSortable': false,
+			                        'aTargets': column
+			                    }];
+			                }
 
-		                var oTable = $(this).dataTable(opt);
-		                $(this).css("width", '100%');
-		                $('.dataTables_filter input').attr("placeholder", "nội dung...").addClass("form-control input-medium");
-		                $(".dataTables_length select").wrap("<div class='input-mini'></div>").chosen({
-		                    disable_search_threshold: 9999999
-		                });
-		            }
-		        });
-		    }
-		});
+			                var oTable = $(this).dataTable(opt);
+			                $(this).css("width", '100%');
+			                $('.dataTables_filter input').attr("placeholder", "nội dung...").addClass("form-control input-medium");
+			                $(".dataTables_length select").wrap("<div class='input-mini'></div>").chosen({
+			                    disable_search_threshold: 9999999
+			                });
+			            }
+			        });
+			    }
+			});
 		</script>

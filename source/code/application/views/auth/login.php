@@ -19,10 +19,6 @@
 	<link rel="stylesheet" href="<?php echo css_url() ?>style.css">
 	<!-- Color CSS -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>themes.css">
-	<!-- Pace CSS -->
-	<link rel="stylesheet" type="text/css" href="<?php echo css_url() ?>plugins/pace/pace.min.css">
-
-
 	<!-- jQuery -->
 	<script src="<?php echo js_url() ?>jquery.min.js"></script>
 	
@@ -33,8 +29,6 @@
 	<script src="<?php echo js_url() ?>plugins/validation/additional-methods.min.js"></script>
 	<!-- icheck -->
 	<script src="<?php echo js_url() ?>plugins/icheck/jquery.icheck.min.js"></script>
-	<!-- pace (page progress loading) -->
-	<script src="<?php echo js_url() ?>plugins/pace/pace.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="<?php echo js_url() ?>bootstrap.min.js"></script>
 	<script src="<?php echo js_url() ?>eakroko.js"></script>
@@ -55,14 +49,6 @@
 	<link rel="apple-touch-icon-precomposed" href="<?php echo img_url() ?>apple-touch-icon-precomposed.png" />
 
 	<script type="text/javascript">
-		paceOptions = {
-		  // Disable the 'elements' source
-		  elements: false,
-
-		  // Only show the progress on regular and ajax-y page navigation,
-		  // not every request
-		  restartOnRequestAfter: false
-		}
 		$(document).ready(function (){
 			$("#identity").focus();
 		});

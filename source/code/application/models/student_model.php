@@ -12,10 +12,7 @@ class Student_model extends CI_Model
 	{
 		$query = $this->db->query("SELECT * 
 								   FROM sur_student 
-								   WHERE survey_id='".$survey_id."' AND faculty_id='".$faculty_id."'
-								   									AND student_id NOT IN (SELECT student_id 
-								   														   FROM sur_infor 
-								   														   WHERE survey_id='".$survey_id."' AND faculty_id='".$faculty_id."' )");
+								   WHERE survey_id='".$survey_id."' AND faculty_id='".$faculty_id."' AND student_id NOT IN (SELECT student_id FROM sur_infor WHERE survey_id='".$survey_id."')");
 		return $query->result_array();
 	}
 	
