@@ -218,11 +218,11 @@ class Admin extends CI_Controller {
 	{
 		if ($this->ion_auth->logged_in())
 		{
-			$this->load->model(array('infor_model'));
+			$this->load->model(array('infor_model','student_model'));
 			
 			$this->excel->setActiveSheetIndex(0);
 			//name the worksheet
-			$this->excel->getActiveSheet()->setTitle('Danh_sach_sv_da_ks');
+			$this->excel->getActiveSheet()->setTitle('danh_sach_sv');
 			
 			// TIEU DE BAO CAO //
 			
@@ -255,21 +255,29 @@ class Admin extends CI_Controller {
 			// Dia chi email
 			$this->excel->getActiveSheet()->setCellValue("J3", "Địa chỉ email");
 			
-			$survey_type_id  = $this->input->post("survey_type");
-			$survey_id       = $this->input->post("survey");
-			$faculties       = $this->input->post("faculty");
-			$data_missing    = $this->input->post("data_missing");
+			$survey_type_id = $this->input->post("survey_type");
+			$survey_id      = $this->input->post("survey");
+			$faculties      = $this->input->post("faculty");
+			$data_missing   = $this->input->post("data_missing");
+			$student        = $this->input->post("radio_student_option");
 			
 			if (!empty($survey_id))
 			{
 				if(!empty($faculties))
 				{
+					// echo ($student); die;
 					$start_row = 4;
 					foreach($faculties as $faculty_item)
 					{
+						$data_export = null;
+
 						if (empty($data_missing))
 						{
-							$data_export = $this->infor_model->gets_of_faculty($faculty_item, $survey_id);
+							if ($student == 1)
+								$data_export = $this->infor_model->gets_of_faculty($faculty_item, $survey_id);
+							else 
+								$data_export = $this->student_model->get_student_of_faculty($faculty_item, $survey_id);
+
 							foreach($data_export as $data_export_item)
 							{
 								$this->excel->getActiveSheet()->setCellValue("A".$start_row,$data_export_item["student_id"]);
@@ -292,7 +300,10 @@ class Admin extends CI_Controller {
 						}
 						else
 						{
-							$data_export = $this->infor_model->gets_students_infor_missing_infor_of_faculty($faculty_item, $survey_id, $data_missing);
+							if ($student == 1)
+								$data_export = $this->infor_model->gets_students_infor_missing_infor_of_faculty($faculty_item, $survey_id, $data_missing);
+							else
+								$data_export = $this->student_model->gets_students_infor_missing_infor_of_faculty($faculty_item, $survey_id, $data_missing);
 							
 							foreach($data_export as $data_export_item)
 							{

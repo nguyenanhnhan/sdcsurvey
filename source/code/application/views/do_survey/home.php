@@ -227,7 +227,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		alert (bowser);
+		// alert (bowser);
 
 		$("#my_form").validate({
 			rules: {

@@ -2,17 +2,39 @@ SDCSurvey
 =========
 
 Ứng dụng Khảo sát sinh viên dành riêng cho Trường ĐH Văn Lang
+
+Phiên bản 4.2.6
+---------------
+* Xoá thư viện Pace (bị lỗi không mở web Socket)
+* Cập nhật file:
+	- *application/views/***login.php**
+	- *assets/css/***style.css**
+	- *application/models/***student_model.php**
+		+ get_student_of_faculty function
+	- *application/controllers/***do_survey.php**
+	- *application/models/***survey_faculty_model.php**
+	- *application/views/survey_result/***index.php**
+	- *application/models/***student_model.php**
+		+ gets_students_infor_missing_infor_of_faculty
+	- *application/views/admin***export_student.php**
+	- *application/controllers/***admin.php**
+	- *application/views/do_survey/***index.php**
+	- *application/controllers/***do_survey.php**
+* Thêm font Open Sans vào thư mục font
+* Thêm field **template_link_lock** trong table **sur_design_template**
+* Thêm *assets/template/design_template/***lock_graduated_student.html**
+
 Phiên bản 4.2.5
--------------------
-* Thay dấu + thành chữ "Thêm phiếu khảo sát"
+---------------
+* Thay dấu **[+]** thành chữ "Thêm phiếu khảo sát"
 * Cập nhật hiển thị sai khoá học 16-20 (18-22 Sai)
 * Cập nhật lại lỗi không hoạt động của các trạng thái **Đã tốt nghiệp** và **Đang khảo sát**
 * Cập nhật **Lọc các dữ liệu sinh viên còn thiếu** không hoạt động
 
 Phiên bản 4.2.4
--------------------
+---------------
 * Cập nhật Flat UI 2.2
-	+Updated Flat UI 2.2
+	+ Updated Flat UI 2.2
 	+ Fixed Form button bug
 	+ Fixed Tiles hover overlay bug
 	+ Fixed IE9 Login screen bug
@@ -70,7 +92,7 @@ Phiên bản 4.2.2
 
 
 Phiên bản 4.2.1
-------------------
+---------------
 * Cập nhật CodeIgniter Framework 2.2.0 (16/6/2014)
 * Cập nhật  lại các thư viện JQuery 2.x, Bootrap, Highchart 3.0.10, và một số thư viện khác
 * Cập nhật lại giao diện (UI) các trang:
@@ -92,7 +114,7 @@ Phiên bản 4.2.1
 
 
 Phiên bản 4.1.0.x
-------------------
+-----------------
 * Thêm tính năng xác định câu hỏi có việc làm / chưa có việc làm trong phần thêm câu hỏi
 * Thêm tính năng cập nhật có việc làm / chưa có việc làm trong phần cập nhật câu hỏi
 * Cập nhật thư viện jquery 1.11.0

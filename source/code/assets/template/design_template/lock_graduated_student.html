@@ -1,0 +1,57 @@
+	<h2>Thông tin về Sinh viên</h2>
+	<p class="explain">Bạn vui lòng nhập thông tin vào chỗ trống (cần điền đầy đủ thông tin những chỗ có đánh dấu *), gõ Tiếng Việt có dấu, font Unicode. </p>
+	<p>
+	 Mã sinh viên:<span class="star">*</span> <input type="text" name="student_id" id="student_id"  title="Mã sinh viên" required />
+	 <span style="cursor: pointer;-moz-background-clip:border;-moz-background-inline-policy:continuous;-moz-background-origin:padding; color:#ff0000;" id="search">Không nhớ mã</span>
+	 <span class="submit"><input type="button" id="check_student_id" value="Kiểm tra" /></span>
+	 <span class="explain2"> (Nhập mã SV rồi nhấn vào nút kiểm tra để hiển thị thông tin cá nhân)</span>
+	</p>
+	<table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>Họ và tên <span class="star">*</span></td>
+	    <td>Chuyên ngành tốt nghiệp <span class="star">*</span></td>
+	    <td>Lớp </td>
+	    <td>Năm tốt nghiệp </td>
+	</tr>
+	<tr>
+		<td class="name"> <input type="text" name="name" id="name" title="Họ và tên" required readonly /></td>
+	    <td class="major">
+	    <select id="faculty" name="faculty" required> 
+	    	<option value=""></option>
+			<option value="M">Công nghệ môi trường</option>
+			<option value="S">Công nghệ sinh học</option>
+			<option value="T">Công nghệ thông tin</option>
+			<option value="D">Du lịch</option>
+			<option value="K">Kế toán - Kiểm toán</option>
+			<option value="A">Kiến trúc</option>
+			<option value="C">Kinh tế thương mại</option>
+			<option value="H">Mỹ thuật công nghiệp</option>
+			<option value="N">Ngoại ngữ</option>
+			<option value="I">Nhiệt lạnh</option>
+			<option value="P">Quan hệ công chúng</option>
+			<option value="Q">Quản trị kinh doanh</option>
+			<option value="F">Tài chính ngân hàng</option>
+			<option value="X">Xây dựng</option>
+	        </select>
+	    </td>
+	    <td><input type="text" name="class" id="class"  title="Lớp" readonly /></td>
+	    <td><input type="text" name="graduated_year" id="graduated_year"  title="Năm tốt nghiệp" readonly /></td>
+	</tr>
+	</table>
+	
+	<p class="text">
+		Địa chỉ liên hệ: <span class="star">*</span><br/><br/>
+			<textarea name="address" id="address" title="Địa chỉ liên hệ" required></textarea>
+	</p>
+	<table cellpadding="0" cellspacing="0">
+		<tr>
+	    	<td> Số điện thoại gia đình:</td>
+	    	<td class="mobile"> Số điện thoại di động:<span class="star">*</span></td>
+	    	<td class="email">Địa chỉ email:<span class="star">*</span></td>
+	    </tr>
+	    <tr>
+	    	<td class="homephone"> <input type="text" name="home_phone" id="home_phone" title="Điện thoại bàn"/></td>
+	        <td class="mobile"> <input type="text" name="hand_phone" id="hand_phone" title="Điện thoại di động" required /></td>
+	        <td class="email"> <input type="text" name="email_address" id="email_address" title="Email" required/></td>
+	    </tr>
+	</table>

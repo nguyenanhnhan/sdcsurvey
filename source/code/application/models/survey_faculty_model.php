@@ -41,14 +41,19 @@ $query = $this->db->get_where('sur_survey_faculty', array('survey_id'=>$survey_i
 	// Lay danh sach phieu khao sat theo khoa
 	function get_survey($faculty_id)
 	{	
-		$this->db->select(array('sur_survey_faculty.survey_id', 'survey_name'));
-		$this->db->from('sur_survey_faculty');
-		$this->db->join('sur_survey', 'sur_survey.survey_id = sur_survey_faculty.survey_id');
-		$this->db->where('sur_survey_faculty.faculty_id',$faculty_id);
+		$query = "SELECT sur_survey_faculty.survey_id, sur_survey.survey_name, sur_survey.status
+				  FROM sur_survey_faculty JOIN sur_survey ON sur_survey_faculty.survey_id = sur_survey.survey_id
+				  WHERE sur_survey_faculty.faculty_id = '".$faculty_id."' ORDER BY sur_survey.status DESC";
+
+		// $this->db->select(array('sur_survey_faculty.survey_id', 'survey_name', 'sur_survey.status'));
+		// $this->db->from('sur_survey_faculty');
+		// $this->db->join('sur_survey', 'sur_survey.survey_id = sur_survey_faculty.survey_id');
+		// $this->db->where('sur_survey_faculty.faculty_id',$faculty_id);
+		// $this->$this->db->order_by('sur_survey.status', 'desc');
 		
-		$query = $this->db->get();
+		// $query = $this->db->get();
 		
-		return $query->result_array();
+		return $this->db->query($query)->result_array();
 	}
 	
 	// delete row

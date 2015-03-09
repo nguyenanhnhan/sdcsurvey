@@ -122,7 +122,7 @@ class Do_survey extends CI_Controller
 		
 		// Lay mau design nhap thong tin
 		$template             = $this->design_template_model->get_design_template($data['survey']['design_template_id']);
-		$read_content         = read_file($template['template_link']);
+		$read_content         = read_file($template['template_link_lock']);
 		$data['read_content'] = $read_content;
 		
 		// Ma sinh vien
@@ -203,7 +203,7 @@ class Do_survey extends CI_Controller
 		
 		// Lay mau design nhap thong tin
 		$template             = $this->design_template_model->get_design_template($data['survey']['design_template_id']);
-		$read_content         = read_file($template['template_link']);
+		$read_content         = read_file($template['template_link_lock']);
 		$data['read_content'] = $read_content;
 		
 		$this->load->view('do_survey/home', $data);
@@ -222,7 +222,8 @@ class Do_survey extends CI_Controller
 			
 			// LAY THONG TIN NHAP
 			$data['student_infor']['student_id'] = $this->input->post('student_id');
-			$data['student_infor']['type_id']    = '0334bd35-9ae4-4922-948b-65354ad2fe1e'; // Set cung: Khao sat qua dien thoai
+			$data['student_infor']['type_id'] = $this->input->post('survey_type');
+			// $data['student_infor']['type_id']    = '0334bd35-9ae4-4922-948b-65354ad2fe1e'; // Set cung: Khao sat qua dien thoai
 			
 			// Tach ho va ten
 			$full_name                           = explode(" ",trim($this->input->post('name')));
@@ -603,6 +604,20 @@ if ($answr_temp['option_type']=='ct')
 	////////////////////
 	function get_student_infor($survey_id,$student_id)
 	{
+		$this->load->model(array('student_model', 'infor_model'));
+		
+		$data['student_infor'] = NULL;
+		// Uu tien lay thong tin sinh vien tren bang sur_infor truoc
+		$data['student_infor'] = $this->infor_model->get_student_infor($survey_id, $student_id);
+		if (empty($data['student_infor'])) $data['student_infor'] = $this->student_model->get_student_infor($survey_id, $student_id);
+		
+		echo json_encode($data['student_infor']);
+	}
+
+	function get_student_test()
+	{
+		$survey_id = $this->input->post('survey_id');
+		$student_id = 'F104485';
 		$this->load->model(array('student_model', 'infor_model'));
 		
 		$data['student_infor'] = NULL;

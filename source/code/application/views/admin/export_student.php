@@ -33,7 +33,7 @@
 							<div class="box-title">
 								<h3>
 									<i class="fa fa-cloud-download"></i>
-									Xuất danh sách sinh viên đã khảo sát
+									Xuất danh sách sinh viên khảo sát
 								</h3>
 								<div class="actions">
 									<a href="#" class="btn btn-mini content-slideUp"><i class="fa fa-angle-down"></i></a>
@@ -91,7 +91,16 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-actions">
+									<div class="form-group">
+										<label class="control-label col-sm-2">Sinh viên</label>
+										<div class="col-sm-10">
+											<input type="radio" id="radio_student" class='icheck-me' data-skin="square" data-color="blue" name="radio_student_option" value="0" checked>
+											<label class='inline' for="radio_student">Chưa khảo sát</label>&nbsp;&nbsp;
+											<input type="radio" id="radio_student_surveyed" name="radio_student_option" class='icheck-me' data-skin="square" data-color="blue" value="1">
+											<label class='inline' for="radio_student_surveyed">Đã khảo sát</label>
+										</div>
+									</div>
+									<div class="form-actions col-sm-offset-2 col-sm-10">
 										<button type="submit" class="btn btn-primary">Kết xuất dữ liệu theo chuẩn excel (.xls)</button>
 									</div>
 								</form>

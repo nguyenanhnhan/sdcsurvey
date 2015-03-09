@@ -68,8 +68,8 @@
 									  	<tr>
 											<td><a target="_self" href="<?php echo base_url('do_survey/index/'.$faculty['faculty_id'].'/'.$survey['survey_id'].'/'.$student_no_survey_item['student_id']).'/'.$type_id ?>" class="btn btn-success"><i class="fa fa-eye"></i></a></td>
 											<td style="vertical-align:middle"><?php echo strtoupper($student_no_survey_item['student_id']) ?></td>
-											<td style="vertical-align:middle" nowrap><?php echo  strtoupper($student_no_survey_item['first_name']) ?></td>
-											<td style="vertical-align:middle"><?php echo strtoupper($student_no_survey_item['last_name']) ?></td>
+											<td style="vertical-align:middle" nowrap><?php echo mb_strtoupper($student_no_survey_item['first_name'], "UTF8") ?></td>
+											<td style="vertical-align:middle"><?php echo mb_strtoupper($student_no_survey_item['last_name'], "UTF8") ?></td>
 											<td style="vertical-align:middle"><?php echo $student_no_survey_item['class_id']?></td>
 											<td style="text-align:center; vertical-align:middle"><i class="fa fa-circle-o" style="font-size:20px"></i></td>
 											<td style="vertical-align:middle"></td>

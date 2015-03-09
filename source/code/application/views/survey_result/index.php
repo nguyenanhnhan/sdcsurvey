@@ -127,14 +127,14 @@
 						
 						for (var i=0, len=data.surveys_faculty.length; i<len; i++)
 						{
-							if (data.surveys_faculty[i].survey_id == '412cb43b-9efd-4557-9c22-07a935d12c09')
-							{
-								$("#survey").append("<option value='"+data.surveys_faculty[i].survey_id+"' selected>"+data.surveys_faculty[i].survey_name+"</option>");
-							}
-							else
-							{
+							// if (data.surveys_faculty[i].survey_id == '412cb43b-9efd-4557-9c22-07a935d12c09')
+							// {
+							// 	$("#survey").append("<option value='"+data.surveys_faculty[i].survey_id+"' selected>"+data.surveys_faculty[i].survey_name+"</option>");
+							// }
+							// else
+							// {
 								$("#survey").append("<option value='"+data.surveys_faculty[i].survey_id+"'>"+data.surveys_faculty[i].survey_name+"</option>");
-							}
+							// }
 						}
 					}
 				});
@@ -153,14 +153,14 @@
 							
 							for (var i=0, len=data.surveys_faculty.length; i<len; i++)
 							{
-								if (data.surveys_faculty[i].survey_id = '412cb43b-9efd-4557-9c22-07a935d12c09')
-								{
-									$("#survey").append("<option value='"+data.surveys_faculty[i].survey_id+"' selected>"+data.surveys_faculty[i].survey_name+"</option>");
-								}
-								else
-								{
+								// if (data.surveys_faculty[i].survey_id = '412cb43b-9efd-4557-9c22-07a935d12c09')
+								// {
+								// 	$("#survey").append("<option value='"+data.surveys_faculty[i].survey_id+"' selected>"+data.surveys_faculty[i].survey_name+"</option>");
+								// }
+								// else
+								// {
 									$("#survey").append("<option value='"+data.surveys_faculty[i].survey_id+"'>"+data.surveys_faculty[i].survey_name+"</option>");
-								}
+								// }
 							}
 						}
 					});

@@ -2,6 +2,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<!--[if lt IE 9]> 
+			<script>	
+				window.location = "<?php echo base_url('do_survey/browser') ?>";
+			</script>
+		<![endif]-->
 		<meta content="text/html; charset=utf-8" http-equiv="content-type" />
 		<title>Phiếu khảo sát</title>
 		<link href="<?php echo css_url() ?>StyleSheet.css" rel="stylesheet" type="text/css" />
@@ -29,6 +34,28 @@
 		<!-- TEN PHIEU KHAO SAT -->
 		<div class="title" style="text-transform: uppercase;"> <?php echo $survey['survey_name'] ?> </div>
 	</div>
+
+	<div class="roundcont">
+		<div class="roundtop" style="background: url(<?php echo img_url();?>do_survey/tr.gif) no-repeat top right;"> 
+			<img src="<?php echo img_url() ?>do_survey/tl.gif" alt="" width="15" height="15" class="corner"> 
+		</div>
+		
+		<div class="Container">
+			<h2>Hình thức khảo sát</h2>
+			<select id="select_survey_type" name="survey_type" required> 
+				<option value="0334BD35-9AE4-4922-948B-65354AD2FE1E">Khảo sát qua điện thoại</option>
+				<option value="4DB02701-CE28-43C0-8741-29E5CA83245F">Khảo sát qua email</option>
+				<option value="E1764151-3EEA-4C20-9902-B326A2FB014E">Khảo sát qua thư bưu điện</option>
+				<option value="454C9866-22D2-486B-A79D-FF8C0A293746">Khảo sát trực tiếp</option>
+				<option value="8325D43B-355C-4B74-8ED5-BC9C631F6ED4">Khảo sát qua fax</option>
+	        </select>
+		</div>
+
+		<div class="roundbottom" style="background: url(<?php echo img_url();?>do_survey/br.gif) no-repeat top right;">
+			<img src="<?php echo img_url();?>do_survey/bl.gif" alt="" width="15" height="15" class="corner"/>
+		</div>
+	</div>
+
 	<div class="roundcont">
 		<div class="roundtop" style="background: url(<?php echo img_url();?>do_survey/tr.gif) no-repeat top right;"> 
 			<img src="<?php echo img_url() ?>do_survey/tl.gif" alt="" width="15" height="15" class="corner"> 
@@ -515,6 +542,9 @@
 					$("#hand_phone").val(data['hand_phone']);
 					$("#email_address").val(data['email']);
 					$("#note_text").val(data['note']);
+
+					if (<?php echo $flag_update ?>)
+						$("#select_survey_type").val(data['type_id']);
 				}
 			}
 		});

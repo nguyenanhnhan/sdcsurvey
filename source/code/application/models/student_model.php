@@ -16,6 +16,27 @@ class Student_model extends CI_Model
 		return $query->result_array();
 	}
 	
+	//get students list with missing information of faculty
+	function gets_students_infor_missing_infor_of_faculty($faid, $survey_id, $missinfor)
+	{
+		$str = "SELECT * 
+				FROM sur_student 
+				WHERE survey_id = '".$survey_id."' AND faculty_id = '".$faid."' AND (";
+		$i=0; 
+		foreach($missinfor as $infor)
+		{
+			if($i == 0)
+				$str = $str . $infor . " = ''";
+			else
+				$str = $str . " OR " . $infor . " = ''";
+			$i++;
+		}
+		$str = $str . ")";
+		//echo $str;
+		$query = $this->db->query($str);
+		return $query->result_array();
+	}
+
 	function search_student($survey_id, $first_name, $last_name, $faculty_id, $class_id)
 	{
 		$query = "SELECT sur_student.student_id, 
