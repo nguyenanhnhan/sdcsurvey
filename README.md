@@ -2,7 +2,7 @@ SDCSurvey
 =========
 
 Ứng dụng Khảo sát sinh viên dành riêng cho Trường ĐH Văn Lang
-
+[![Build Status](https://travis-ci.org/nguyenanhnhan/sdcsurvey.svg)](https://travis-ci.org/nguyenanhnhan/sdcsurvey)
 Phiên bản 4.2.6
 ---------------
 * Xoá thư viện Pace (bị lỗi không mở web Socket)
