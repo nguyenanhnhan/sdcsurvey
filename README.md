@@ -2,24 +2,25 @@ SDCSurvey
 =========
 
 Ứng dụng Khảo sát sinh viên dành riêng cho Trường ĐH Văn Lang
+
 [![Build Status](https://travis-ci.org/nguyenanhnhan/sdcsurvey.svg)](https://travis-ci.org/nguyenanhnhan/sdcsurvey)
+
 Phiên bản 4.2.6
 ---------------
 * Xoá thư viện Pace (bị lỗi không mở web Socket)
 * Cập nhật file:
-	- *application/views/***login.php**
-	- *assets/css/***style.css**
+	- *application/views/auth/***login.php**
+	- *application/views/survey_result/***index.php**
+	- *application/views/survey_result/***result_filter.php**
+	- *application/views/admin***export_student.php**
+	- *application/views/do_survey/***index.php**
 	- *application/models/***student_model.php**
 		+ get_student_of_faculty function
-	- *application/controllers/***do_survey.php**
-	- *application/models/***survey_faculty_model.php**
-	- *application/views/survey_result/***index.php**
-	- *application/models/***student_model.php**
 		+ gets_students_infor_missing_infor_of_faculty
-	- *application/views/admin***export_student.php**
+	- *application/models/***survey_faculty_model.php**
 	- *application/controllers/***admin.php**
-	- *application/views/do_survey/***index.php**
-	- *application/controllers/***do_survey.php**
+	- *application/controllers/***do_survey.php**	
+	- *assets/css/***style.css**
 * Thêm font Open Sans vào thư mục font
 * Thêm field **template_link_lock** trong table **sur_design_template**
 * Thêm *assets/template/design_template/***lock_graduated_student.html**
