@@ -66,7 +66,7 @@ class Survey_result extends CI_Controller
 			$survey_id  = $this->input->post('survey');
 			$type_id    = $this->input->post('filter');
 			
-			redirect ('survey_result/result_filter/'.$faculty_id.'/'.$survey_id.'/'.$type_id);
+			redirect ('survey_result/result_filter/'.$faculty_id.'/'.strtoupper($survey_id).'/'.strtoupper($type_id));
 		}
 		else
 		{

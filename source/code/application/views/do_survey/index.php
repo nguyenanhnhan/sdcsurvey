@@ -544,7 +544,7 @@
 					$("#note_text").val(data['note']);
 
 					if (<?php echo $flag_update ?>)
-						$("#select_survey_type").val(data['type_id']);
+						$("#select_survey_type").val(data['type_id'].toUpperCase());
 				}
 			}
 		});

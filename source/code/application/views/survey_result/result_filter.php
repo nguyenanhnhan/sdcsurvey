@@ -83,7 +83,7 @@
 									  	if ($students_surveyed!=NULL){	
 									  		foreach ($students_surveyed as $student_surveyed_item){ ?>
 									  	<tr valign="middle">
-											<td style="vertical-align:middle"><a target="_self" href="<?php echo base_url('do_survey/index/'.$faculty['faculty_id'].'/'.$survey['survey_id'].'/'.$student_surveyed_item['student_id']).'/'.$type_id ?>" class="btn btn-success"><i class="fa fa-eye"></i></a></td>
+											<td style="vertical-align:middle"><a target="_self" href="<?php echo base_url('do_survey/index/'.$faculty['faculty_id'].'/'.strtoupper($survey['survey_id']).'/'.strtoupper($student_surveyed_item['student_id'])).'/'.$type_id ?>" class="btn btn-success"><i class="fa fa-eye"></i></a></td>
 											<td style="vertical-align:middle"><?php echo strtoupper($student_surveyed_item['student_id']) ?></td>
 											<td style="vertical-align:middle" nowrap><?php echo mb_strtoupper($student_surveyed_item['first_name']) ?></td>
 											<td style="vertical-align:middle"><?php echo mb_strtoupper($student_surveyed_item['last_name']) ?></td>
