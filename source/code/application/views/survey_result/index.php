@@ -68,11 +68,11 @@
 													<select id="filter" name="filter" class="input-block-level form-control">
 														<option value="0">Tất cả</option>
 														<option value="1">Đã khảo sát</option>
-														<option value="0334bd35-9ae4-4922-948b-65354ad2fe1e">--- Khảo sát qua điện thoại</option>
-														<option value="4db02701-ce28-43c0-8741-29e5ca83245f">--- Khảo sát qua email</option>
-														<option value="e1764151-3eea-4c20-9902-b326a2fb014e">--- Khảo sát qua thư bưu điện</option>
-														<option value="454c9866-22d2-486b-a79d-ff8c0a293746">--- Khảo sát trực tiếp</option>
-														<option value="8325d43b-355c-4b74-8ed5-bc9c631f6ed4">--- Khảo sát qua fax</option>
+														<option value="0334BD35-9AE4-4922-948B-65354AD2FE1E">--- Khảo sát qua điện thoại</option>
+														<option value="4DB02701-CE28-43C0-8741-29E5CA83245F">--- Khảo sát qua email</option>
+														<option value="E1764151-3EEA-4C20-9902-B326A2FB014E">--- Khảo sát qua thư bưu điện</option>
+														<option value="454C9866-22D2-486B-A79D-FF8C0A293746">--- Khảo sát trực tiếp</option>
+														<option value="8325D43B-355C-4B74-8ED5-BC9C631F6ED4">--- Khảo sát qua fax</option>
 														<option value="2">Chưa khảo sát</option>
 													</select>
 												</div>
