@@ -13,7 +13,7 @@
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>bootstrap.min.css">
 	<!-- Bootstrap responsive -->
-	<link rel="stylesheet" href="<?php echo css_url() ?>bootstrap-responsive.min.css">
+	<!-- <link rel="stylesheet" href="<?php echo css_url() ?>bootstrap-responsive.min.css"> -->
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="<?php echo css_url() ?>style.css">
 	<!-- Color CSS -->
@@ -50,7 +50,11 @@
 	<link rel="shortcut icon" href="<?php echo img_url() ?>favicon.ico" />
 	<!-- Apple devices Homescreen icon -->
 	<link rel="apple-touch-icon-precomposed" href="<?php echo img_url() ?>apple-touch-icon-precomposed.png" />
-
+	<style>
+		td {
+    padding: 5px;
+}
+	</style>
 </head>
 
 <body>
@@ -61,26 +65,26 @@
 	</div
 	<div class="roundcont">
 		<div class="Container">
-			<div style="padding-left:5px"><h2>Tìm Mã sinh viên</h2></div>
+			<div style="padding-left:5px; padding-top:10px"><h2>Tìm Mã sinh viên</h2></div>
 			<div style="padding-left:5px">
 				<form method="post" action="<?php echo base_url("do_survey/search_student/".$survey_id) ?>">
 					<table border="0">
 						<tr>
 							<td>Họ và tên đệm</td>
-							<td><input class="span4" name="first_name"></td>
+							<td style="width:300px"><input class="span4 form-control" name="first_name"></td>
 						</tr>
 						<tr>
 							<td>Tên</td>
-							<td><input class="span4" name="last_name"></td>
+							<td><input class="span4 form-control" name="last_name"></td>
 						</tr>
 						<tr>
 							<td>Lớp</td>
-							<td><input class="span4" name="class"></td>
+							<td><input class="span4 form-control" name="class"></td>
 						</tr>
 						<tr>
 							<td>Khoa</td>
 							<td>
-								<select name="faculty" class="span6">
+								<select name="faculty" class="span6 form-control">
 									<option value=""></option>
 									<option value="M">Công nghệ môi trường</option>
 									<option value="S">Công nghệ sinh học</option>
