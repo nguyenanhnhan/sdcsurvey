@@ -124,9 +124,10 @@ class Inform extends CI_Controller
 					// Thay token [Student|FullName] = Ten sinh vien
 					$content = str_replace('[Student|FullName]',trim($student['first_name']).' '.trim($student['last_name']),$content);
 					// Thay token [Survey|Link] = Duong dan den trang khao sat
-					$content = str_replace('[Survey|Link]',
-						"<a href='".base_url('do_survey/student/'.$faculty_id.'/'.$survey_id.'/'.$student['student_id'])."'>".base_url('do_survey/student/'.$faculty_id.'/'.$survey_id.'/'.$student['student_id'])."</a>",
-						$content);
+					// $content = str_replace('[Survey|Link]',
+					// 	"<a href='".base_url('do_survey/student/'.$faculty_id.'/'.$survey_id.'/'.$student['student_id'])."'>".base_url('do_survey/student/'.$faculty_id.'/'.$survey_id.'/'.$student['student_id'])."</a>",
+					// 	$content);
+					$content = str_replace('[Survey|Link]', base_url('do_survey/student/'.$faculty_id.'/'.$survey_id.'/'.$student['student_id']), $content);
 					// In trang xem truoc
 					if ($preview=='on') 
 					{
@@ -161,8 +162,8 @@ class Inform extends CI_Controller
 						$this->email->initialize($config);
 				
 						$this->email->from(trim($from_email));
-						/* $this->email->to($student['email']); */
-						$this->email->to($to_email);
+						 $this->email->to($student['email']); 
+						// $this->email->to($to_email);
 						$this->email->subject($title);
 						$this->email->message($content);
 						
