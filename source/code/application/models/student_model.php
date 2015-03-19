@@ -72,13 +72,28 @@ class Student_model extends CI_Model
 	}
 	
 	// Lay danh sach sinh vien co email
-	function get_student_with_email($faculty_id,$survey_id)
+	function get_student_with_email($faculty_id, $survey_id)
 	{
 		$this->db->where('email !=',"");
 		$query=$this->db->get_where('sur_student',array('survey_id'=>$survey_id,'faculty_id'=>$faculty_id));
 		return $query->result_array();
 	}
 	
+	// Lay danh sasch sinh vien co email va chua duoc gui
+	function get_student_with_email_not_sended($faculty_id, $survey_id)
+	{
+		$query = $this->db->query("SELECT *
+								    FROM sur_student
+									WHERE survey_id = '".$survey_id."' 
+											AND faculty_id = '".$faculty_id."' 
+											AND email != '' 
+											AND student_id NOT IN (SELECT student_id 
+																   	FROM sur_mail 
+																   	WHERE survey_id = '".$survey_id."'
+																			AND status = 1)");
+		return $query->result_array();
+	}
+
 	// So luong sinh vien cua khoa tham gia khao sat
 	function count_student_survey($survey_id, $faculty_id)
 	{

@@ -81,7 +81,7 @@ class Inform extends CI_Controller
 	{
 		if ($this->ion_auth->logged_in())
 		{
-			$this->load->model(array('survey_type_model', 'survey_model', 'faculty_model', 'student_model', 'infor_model', 'survey_faculty_model'));
+			$this->load->model(array('survey_type_model', 'survey_model', 'faculty_model', 'student_model', 'infor_model', 'survey_faculty_model', 'survey_mail_model'));
 			
 			// LAY THONG TIN NGUOI PHU TRACH KHAO SAT
 			$user                 = $this->ion_auth->user()->row();
@@ -105,8 +105,10 @@ class Inform extends CI_Controller
 			
 			$data['survey']         = $this->survey_model->get(FALSE,$survey_id);
 			
-			$data['students']       = $this->student_model->get_student_with_email($faculty_id,$survey_id);
-			
+			// $data['students']       = $this->student_model->get_student_with_email($faculty_id,$survey_id);
+
+			$data['students']		= $this->student_model->get_student_with_email_not_sended($faculty_id,$survey_id);
+
 			$data['student_sended'] = "";
 			$data['error']          = "";
 			$data['preview']        = "";
@@ -137,33 +139,33 @@ class Inform extends CI_Controller
 					else // Gui di
 					{	
 						// SMTP Van Lang					
-						$config = Array(
-							'protocol'  => 'smtp',
-							'smtp_host' => 'mail.vanlanguni.edu.vn',
-							'smtp_port' => 25,
-							'smtp_user' => trim($from_email),
-							'smtp_pass' => trim($password),
-							'charset'   => 'utf-8',
-							'mailtype'  => 'html'
-						);
+						// $config = Array(
+						// 	'protocol'  => 'smtp',
+						// 	'smtp_host' => 'mail.vanlanguni.edu.vn',
+						// 	'smtp_port' => 25,
+						// 	'smtp_user' => trim($from_email),
+						// 	'smtp_pass' => trim($password),
+						// 	'charset'   => 'utf-8',
+						// 	'mailtype'  => 'html'
+						// );
 						
 						// SMTP Gmail
-						// $config = Array(
-						// 	'protocol' => 'smtp',
-						// 	'smtp_host' => 'ssl://smtp.googlemail.com',
-						// 	'smtp_port' => 465,
-						// 	'smtp_user' => 'nguyenanhnhan@gmail.com',
-						// 	'smtp_pass' => 'TrucTram68265',
-						// 	'charset' => 'utf-8',
-						// 	'mailtype' => 'html',
-						// 	'crlf' => '\r\n'
-						// );
+						$config = Array(
+							'protocol'  => 'smtp',
+							'smtp_host' => 'ssl://smtp.googlemail.com',
+							'smtp_port' => 465,
+							'smtp_user' => 'nguyenanhnhan@gmail.com',
+							'smtp_pass' => 'TrucTram68265',
+							'charset'   => 'utf-8',
+							'mailtype'  => 'html',
+							'crlf'      => '\r\n'
+						);
 
 						$this->email->initialize($config);
 				
 						$this->email->from(trim($from_email));
-						 $this->email->to($student['email']); 
-						// $this->email->to($to_email);
+						 // $this->email->to($student['email']); 
+						$this->email->to($to_email);
 						$this->email->subject($title);
 						$this->email->message($content);
 						
@@ -172,10 +174,25 @@ class Inform extends CI_Controller
 						if ( ! $this->email->send())
 						{
 							$data['error'][$send_counter]=$this->email->print_debugger();
+							// Them sinh vien tham gia khao sat da duoc gui mail vao db de quan ly
+							$this->survey_mail_model->insert(array(
+								'survey_id'          => $survey_id,
+								'student_id'         => $student['student_id'],
+								'status'             => 0, // Gui mail khong thanh cong
+								'created_by_user_id' => $user->user_id,
+								'created_on_date'    => mdate('%Y/%m/%d %H:%i:%s',now())));
 						}
 						else
 						{
 							$data['student_sended'][$send_counter] = $student;
+							
+							// Them sinh vien tham gia khao sat da duoc gui mail vao db de quan ly
+							$this->survey_mail_model->insert(array(
+								'survey_id'          => $survey_id,
+								'student_id'         => $student['student_id'],
+								'status'             => 1, // Gui mail thanh cong
+								'created_by_user_id' => $user->user_id,
+								'created_on_date'    => mdate('%Y/%m/%d %H:%i:%s',now())));
 						}						
 						$data['student_sended'][$send_counter] = $student; // HANG NAY DUNG DE TEST
 					}

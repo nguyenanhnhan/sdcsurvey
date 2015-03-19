@@ -69,13 +69,13 @@
 											<span class="help-block">Chỉ hỗ trợ địa chỉ e-mail của Trường ĐH Văn Lang</span>
 										</div>
 									</div>
-									<!-- <div class="form-group">
+									<div class="form-group">
 										<label class="control-label col-sm-2">Đến địa chỉ</label>
 										<div class="col-sm-10">
 											<input type="text" class="form-control" id="to_email_address" name="to_email_address" />
 											<span class="help-block">Các mail thông báo sẽ gửi đến địa chỉ này. Chỉ có hiệu lực trong quá trình test.</span>
 										</div>
-									</div> -->
+									</div>
 									<div class="form-group">
 										<label class="control-label col-sm-2">Mật khẩu</label>
 										<div class="col-sm-10">
